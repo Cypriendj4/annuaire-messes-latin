@@ -320,12 +320,20 @@ def send_telegram(message: str) -> bool:
     return False
 
 
+def default_sources() -> List[str]:
+    """Sources qui peuvent ajouter des lieux (amdg + portelatine).
+    Les sources de vérification (trouverunemesse, messes_info) ne sont
+    utilisées que si demandées explicitement — elles ne listent pas
+    spécifiquement les messes en latin et pollueraient l'annuaire."""
+    return [code for code, info in SOURCES.items() if info.get("ajout_lieux", False)]
+
+
 def main(sources: Optional[List[str]] = None):
     start = time.time()
     report = {"nouveaux": 0, "modifies": 0, "desactives": 0, "erreurs": [], "duree_ms": 0}
 
     if sources is None:
-        sources = list(SOURCES.keys())
+        sources = default_sources()
 
     logger.info(f"=== Mise à jour annuaire (sources: {', '.join(sources)}) ===")
 

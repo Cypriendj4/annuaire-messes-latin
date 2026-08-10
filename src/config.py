@@ -14,6 +14,9 @@ DB_PATH = DATA_DIR / "messes.db"
 HTML_OUTPUT = OUTPUT_DIR / "index.html"
 
 # ── Sources ────────────────────────────────────────────────────────────
+# ajout_lieux=True : source qui PEUT ajouter des lieux à l'annuaire.
+# ajout_lieux=False : source de VÉRIFICATION (horaires, croisement) qui
+#                     n'ajoute pas de lieux par défaut (évite le bruit).
 SOURCES = {
     "amdg": {
         "name": "AMDG — Association Ad Majorem Dei Gloriam",
@@ -23,6 +26,7 @@ SOURCES = {
         "frequency": "weekly",
         "reliability": 5,
         "parser": "AMDGParser",
+        "ajout_lieux": True,
         "notes": "Source de référence pour messes tridentin (forme extraordinaire). MAJ chaque vendredi.",
     },
     "portelatine": {
@@ -33,6 +37,7 @@ SOURCES = {
         "frequency": "dynamic",
         "reliability": 4,
         "parser": "PorteLatineParser",
+        "ajout_lieux": True,
         "notes": "WordPress + Elementor. CPT 'lieux' paginé. FSSPX + Fraternité Transfiguration, Capucins Morgon, Dominicaines Avrillé.",
     },
     "trouverunemesse": {
@@ -43,7 +48,8 @@ SOURCES = {
         "frequency": "daily",
         "reliability": 3,
         "parser": "TrouverUneMesseParser",
-        "notes": "Requêtage par ville. Données dérivées de messes.info. Utile pour Paul VI en latin + vérification croisée.",
+        "ajout_lieux": False,
+        "notes": "VÉRIFICATION uniquement : ne liste pas les messes en latin, toutes messes confondues. Utile pour croiser les horaires Paul VI.",
     },
     "messes_info": {
         "name": "Messes.info (CEF) — fallback HTML",
@@ -54,7 +60,8 @@ SOURCES = {
         "frequency": "daily",
         "reliability": 4,
         "parser": "MessesInfoParser",
-        "notes": "GWT inutilisable. Fallback HTML (#htmlversion) exploitable. Donne GPS précis + horaires Paul VI + date MAJ par lieu.",
+        "ajout_lieux": False,
+        "notes": "VÉRIFICATION uniquement : donne GPS précis + horaires. GWT inutilisable, fallback HTML (#htmlversion) exploitable.",
     },
 }
 

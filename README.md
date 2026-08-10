@@ -97,8 +97,9 @@ Dans `Settings → Secrets and variables → Actions → New repository secret` 
 ### Règles de fusion
 - **Déduplication** : fuzzy matching (rapidfuzz, seuil 85) sur ville + lieu + rite + communauté
 - **Confiance** : 5 = 3+ sources · 4 = 2 sources · 3 = source fiable unique · 2 = source faible unique
-- **Désactivation** : lieu absent de ≥ 2 sources sur 4 → `actif=0`
+- **Désactivation** : lieu absent de ≥ 2 sources sur 4 → `actif=0` (les lieux d'origine manuelle sont protégés)
 - **Priorité champs** : AMDG > Porte Latine > messes.info > trouverunemesse
+- **Ajout de lieux** : seuls **AMDG** (tridentin) et **Porte Latine** (FSSPX) ajoutent des lieux. `trouverunemesse` et `messes.info` sont des sources de **vérification** (horaires, GPS) — elles ne listent pas spécifiquement les messes en latin et pollueraient l'annuaire si leurs résultats étaient ajoutés tels quels.
 
 ## 🔔 Notifications Telegram
 

@@ -46,16 +46,20 @@ jobs:
           cd src
           python update_manager.py --weekly
 
-      - name: Génération du HTML + data.js
+      - name: Génération du HTML + data.js + pages SEO
         run: |
           cd src
           python generate_html.py
+          python generate_dept_pages.py
           cd ..
 
       - name: Copie des fichiers statiques à la racine
         run: |
           cp output/index.html index.html
           cp output/data.js data.js
+          cp -r output/departements ./departements
+          cp output/sitemap.xml sitemap.xml
+          cp output/robots.txt robots.txt
 
       - name: Commit et push automatique
         run: |

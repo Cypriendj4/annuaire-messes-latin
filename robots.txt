@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cypriendj4.github.io/annuaire-messes-latin/sitemap.xml

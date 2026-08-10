@@ -749,7 +749,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <strong>Diocèse</strong> : prêtre incardiné dans le diocèse · <strong>Paroisse</strong> : église paroissiale générale ·
   <strong>FSSPX</strong> : Fraternité Sacerdotale Saint-Pie X (hors pleine communion canonique — voir note en en-tête) ·
   <strong>Fraternité de la Transfiguration</strong>, <strong>Capucins de Morgon</strong>,
-  <strong>Dominicaines contemplatives</strong> : communautés proches de la FSSPX.
+  <strong>Dominicaines contemplatives</strong> : communautés proches de la FSSPX.<br><br>
+  <strong>Annuaire gratuit et sans publicité intrusive.</strong> Quelques liens partenaires
+  (<a href="https://www.arteg.fr/" rel="nofollow sponsored">Artège</a> ·
+  <a href="https://www.lelivrechretien.fr/" rel="nofollow sponsored">Le Livre Chrétien</a> ·
+  <a href="https://www.amazon.fr/s?k=missel+1962" rel="nofollow sponsored">missels &amp; livres de prière</a>)
+  et un <a href="https://ko-fi.com/" rel="nofollow">bouton de soutien</a> aident à couvrir les coûts —
+  merci de votre fidélité 🙏
 </footer>
 
 <!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo -->

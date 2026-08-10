@@ -153,6 +153,9 @@ class AMDGParser(Scraper):
         anchors = list(re.finditer(r'<a name="(\d{1,3}[AB]?)">', self.html))
         for i, m in enumerate(anchors):
             dept_num = m.group(1)
+            # Normalise le code département : "1" → "01", "2A" → "2A"
+            if len(dept_num) == 1 and dept_num.isdigit():
+                dept_num = "0" + dept_num
             start = m.end()
             end = anchors[i + 1].start() if i + 1 < len(anchors) else len(self.html)
             block = self.html[start:end]

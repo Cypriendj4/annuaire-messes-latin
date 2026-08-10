@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos et sources — Annuaire des messes en France</title>
+<meta name="description" content="Sources des données de l'annuaire des messes en France : messes.info (CEF), AMDG, La Porte Latine. Méthodologie, note FSSPX, contact.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="a-propos.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
+  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
+  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
+  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
+  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="index.html" class="brand">🕯️ Messes en France</a>
+  <div class="nav-links">
+    <a href="messes-en-latin.html">Messes en latin</a>
+    <a href="rites-orientaux.html">Rites orientaux</a>
+    <a href="departements/index.html">Départements</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+</nav>
+<div class="wrap">
+  
+    <a class="back" href="index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">À propos</div>
+    <h1>À propos de cet annuaire</h1>
+    <div class="prose">
+      <h2>Sources des données</h2>
+      <ul>
+        <li><strong>messes.info</strong> (Conférence des Évêques de France) — annuaire national des églises, avec adresses et coordonnées GPS.</li>
+        <li><strong>AMDG</strong> (amdg.asso.fr) — messes tridentines (forme extraordinaire), mise à jour hebdomadaire.</li>
+        <li><strong>La Porte Latine</strong> (laportelatine.org/lieux) — lieux desservis par la FSSPX et communautés amies.</li>
+      </ul>
+      <p>Liste <strong>non exhaustive</strong>, mise à jour automatiquement. Pour chaque lieu, un lien « Horaires sur messes.info » donne les célébrations à jour.</p>
+
+      <h2>⚠️ Vérifiez toujours les horaires</h2>
+      <p>Les horaires changent en été, à Noël, à Pâques, et évoluent au fil des affectations de prêtres. Confirmez toujours avant de vous déplacer.</p>
+
+      <h2>Note sur la FSSPX</h2>
+      <p>La Fraternité Sacerdotale Saint-Pie X et les « communautés amies » qui lui sont proches ne sont pas en pleine communion canonique avec Rome — à la différence de FSSP, ICRSP, IBP et des prêtres diocésains listés ailleurs sur ce site. Cet annuaire les signale toutes les deux pour être exhaustif sur l'offre de messes, sans prendre position.</p>
+
+      <h2>Comment sont classés les lieux ?</h2>
+      <ul>
+        <li><strong>Tridentin</strong> — forme extraordinaire du rite romain (missel 1962), toujours en latin.</li>
+        <li><strong>Paul VI en latin</strong> — forme ordinaire (missel 1969/1970) célébrée en latin.</li>
+        <li><strong>Paul VI en français</strong> — forme ordinaire célébrée en français (la grande majorité des paroisses).</li>
+        <li><strong>Rites orientaux catholiques</strong> — byzantin, maronite, syriaque, chaldéen, arménien, etc.</li>
+      </ul>
+
+      <h2>Une erreur, un lieu manquant ?</h2>
+      <p>Écrivez-nous à <a href="mailto:contact@exemple.fr?subject=Correction%20annuaire%20messes">contact@exemple.fr</a> — chaque correction est intégrée à la prochaine mise à jour automatique.</p>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="a-propos.html">À propos et sources</a>
+</footer>
+</body>
+</html>

@@ -51,6 +51,7 @@ jobs:
           cd src
           python generate_html.py
           python generate_dept_pages.py
+          python generate_pages.py
           cd ..
 
       - name: Copie des fichiers statiques à la racine
@@ -60,6 +61,9 @@ jobs:
           cp -r output/departements ./departements
           cp output/sitemap.xml sitemap.xml
           cp output/robots.txt robots.txt
+          cp output/messes-en-latin.html messes-en-latin.html
+          cp output/rites-orientaux.html rites-orientaux.html
+          cp output/a-propos.html a-propos.html
 
       - name: Commit et push automatique
         run: |

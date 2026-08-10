@@ -92,6 +92,45 @@
   }
   .source-note strong{color:var(--ink);}
 
+  /* ---------- navigation principale sticky ---------- */
+  .main-nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    background:var(--parchment);
+    border-bottom:2px solid var(--ink);
+    padding:0.7rem 1.5rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .main-nav .brand{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--burgundy);
+    text-decoration:none;
+    font-size:1.05rem;
+    white-space:nowrap;
+  }
+  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
+  .nav-links a{
+    font-size:0.8rem;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+    padding:0.35rem 0.7rem;
+    border:1px solid var(--ink);
+    background:var(--card);
+  }
+  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
+  @media (max-width:640px){
+    .main-nav{flex-direction:column;align-items:flex-start;}
+    .nav-links{width:100%;}
+  }
+
   /* ---------- filters ---------- */
   .filters-wrap{
     position:sticky;
@@ -535,8 +574,14 @@
 </head>
 <body>
 
-<nav class="breadcrumb" aria-label="Fil d'Ariane">
-  <span aria-current="page">Accueil · Messes en France</span>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="index.html" class="brand">🕯️ Messes en France</a>
+  <div class="nav-links">
+    <a href="messes-en-latin.html">Messes en latin</a>
+    <a href="rites-orientaux.html">Rites orientaux</a>
+    <a href="departements/index.html">Départements</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
 </nav>
 
 <header>
@@ -553,18 +598,6 @@
   <div class="cta-row">
     <button class="btn-primary" id="geoBtn">📍 Trouver la messe la plus proche de moi</button>
     <span id="geoStatus"></span>
-  </div>
-
-  <div class="source-note">
-    <strong>Sources des données :</strong> messes.info (Conférence des Évêques de France — annuaire national),
-    AMDG (amdg.asso.fr, messes tridentin, mise à jour hebdomadaire),
-    La Porte Latine (laportelatine.org/lieux, lieux desservis par la FSSPX et communautés amies).
-    Liste <strong>non exhaustive</strong>, mise à jour automatiquement. Pour chaque lieu, un lien
-    <strong>« Horaires sur messes.info »</strong> donne les célébrations à jour.<br><br>
-    <strong>Vérifiez toujours les horaires avant de vous déplacer</strong> — ils changent en été, à Noël, à Pâques.<br><br>
-    <strong>Note sur la FSSPX :</strong> la Fraternité Sacerdotale Saint-Pie X et les « communautés amies » qui lui
-    sont proches ne sont pas en pleine communion canonique avec Rome — à la différence de FSSP, ICRSP, IBP et des prêtres diocésains
-    listés ailleurs sur cette page. Ce site les signale toutes les deux pour être exhaustif, sans prendre position.
   </div>
 </header>
 
@@ -764,7 +797,8 @@
   <strong>Annuaire gratuit et sans publicité.</strong> Pour aller plus loin :
   <a href="https://www.arteg.fr/">Librairie Artège</a> ·
   <a href="https://www.lelivrechretien.fr/">Le Livre Chrétien</a> ·
-  <a href="https://www.amazon.fr/s?k=missel+1962">missels &amp; livres de prière</a>.
+  <a href="https://www.amazon.fr/s?k=missel+1962">missels &amp; livres de prière</a>.<br><br>
+  <a href="a-propos.html">À propos, sources des données et note FSSPX →</a>
 </footer>
 
 <!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo -->
@@ -772,7 +806,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 10/08/2026 21:54
+// Dernière génération : 10/08/2026 22:15
 // ---------------------------------------------------------------
 const DATA = window.ANNUAIRE_DATA || [];
 
@@ -1112,10 +1146,17 @@ document.getElementById('moreBtn').addEventListener('click', ()=>{
 
 document.getElementById('geoBtn').addEventListener('click', locateMe);
 
-// Ombre du bandeau de filtres quand il est collé en haut (sticky)
+// Ombre du bandeau de filtres + calage sous le menu sticky
 (function(){
+  const nav = document.querySelector('.main-nav');
   const wrap = document.querySelector('.filters-wrap');
   if(!wrap) return;
+  const setTop = () => {
+    // Cale les filtres juste sous le menu sticky (hauteur dynamique)
+    wrap.style.top = (nav ? nav.offsetHeight : 0) + 'px';
+  };
+  setTop();
+  window.addEventListener('resize', setTop);
   const update = () => wrap.classList.toggle('stuck', window.scrollY > 30);
   window.addEventListener('scroll', update, {passive:true});
   update();

@@ -53,6 +53,7 @@ jobs:
           cd src
           python generate_html.py
           python generate_dept_pages.py
+          python generate_pages.py
           cd ..
 
       - name: Copie des fichiers statiques à la racine (pour GitHub Pages)
@@ -62,7 +63,10 @@ jobs:
           cp -r output/departements ./departements
           cp output/sitemap.xml sitemap.xml
           cp output/robots.txt robots.txt
-          echo "index.html + data.js + pages départements + sitemap copiés"
+          cp output/messes-en-latin.html messes-en-latin.html
+          cp output/rites-orientaux.html rites-orientaux.html
+          cp output/a-propos.html a-propos.html
+          echo "index.html + data.js + pages départements + pages SEO + sitemap copiés"
 
       - name: Vérification du HTML généré
         run: |
@@ -72,6 +76,9 @@ jobs:
           test -s data.js
           test -d output/departements
           test -s output/sitemap.xml
+          test -s output/messes-en-latin.html
+          test -s output/rites-orientaux.html
+          test -s output/a-propos.html
           echo "HTML + données + pages SEO vérifiés"
 
       - name: Commit et push automatique

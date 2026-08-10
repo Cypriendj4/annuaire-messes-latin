@@ -13,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS
-from utils import setup_logging
+from utils import setup_logging, slugify
 
 logger = setup_logging("generate_html")
 
@@ -126,6 +126,67 @@ def compute_stats(lieux: list[dict]) -> tuple:
     depts = len({l["dept_code"] for l in lieux if l["dept_code"]})
     dioceses = len({l["diocese"] for l in lieux if l["diocese"]})
     return nb, depts, dioceses
+
+
+# ── Noms des départements (pour la navigation) ─────────────────────────
+DEPT_NAMES = {
+    "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence",
+    "05": "Hautes-Alpes", "06": "Alpes-Maritimes", "07": "Ardèche", "08": "Ardennes",
+    "09": "Ariège", "10": "Aube", "11": "Aude", "12": "Aveyron", "13": "Bouches-du-Rhône",
+    "14": "Calvados", "15": "Cantal", "16": "Charente", "17": "Charente-Maritime",
+    "18": "Cher", "19": "Corrèze", "2A": "Corse-du-Sud", "2B": "Haute-Corse",
+    "21": "Côte-d'Or", "22": "Côtes-d'Armor", "23": "Creuse", "24": "Dordogne",
+    "25": "Doubs", "26": "Drôme", "27": "Eure", "28": "Eure-et-Loir", "29": "Finistère",
+    "30": "Gard", "31": "Haute-Garonne", "32": "Gers", "33": "Gironde", "34": "Hérault",
+    "35": "Ille-et-Vilaine", "36": "Indre", "37": "Indre-et-Loire", "38": "Isère",
+    "39": "Jura", "40": "Landes", "41": "Loir-et-Cher", "42": "Loire", "43": "Haute-Loire",
+    "44": "Loire-Atlantique", "45": "Loiret", "46": "Lot", "47": "Lot-et-Garonne",
+    "48": "Lozère", "49": "Maine-et-Loire", "50": "Manche", "51": "Marne", "52": "Haute-Marne",
+    "53": "Mayenne", "54": "Meurthe-et-Moselle", "55": "Meuse", "56": "Morbihan",
+    "57": "Moselle", "58": "Nièvre", "59": "Nord", "60": "Oise", "61": "Orne",
+    "62": "Pas-de-Calais", "63": "Puy-de-Dôme", "64": "Pyrénées-Atlantiques",
+    "65": "Hautes-Pyrénées", "66": "Pyrénées-Orientales", "67": "Bas-Rhin", "68": "Haut-Rhin",
+    "69": "Rhône", "70": "Haute-Saône", "71": "Saône-et-Loire", "72": "Sarthe",
+    "73": "Savoie", "74": "Haute-Savoie", "75": "Paris", "76": "Seine-Maritime",
+    "77": "Seine-et-Marne", "78": "Yvelines", "79": "Deux-Sèvres", "80": "Somme",
+    "81": "Tarn", "82": "Tarn-et-Garonne", "83": "Var", "84": "Vaucluse",
+    "85": "Vendée", "86": "Vienne", "87": "Haute-Vienne", "88": "Vosges",
+    "89": "Yonne", "90": "Territoire de Belfort", "91": "Essonne", "92": "Hauts-de-Seine",
+    "93": "Seine-Saint-Denis", "94": "Val-de-Marne", "95": "Val-d'Oise",
+    "971": "Guadeloupe", "972": "Martinique", "973": "Guyane", "974": "La Réunion", "976": "Mayotte",
+    "20": "Corse", "97": "Outre-mer", "98": "Outre-mer", "987": "Polynésie française",
+    "988": "Nouvelle-Calédonie", "975": "Saint-Pierre-et-Miquelon", "986": "Wallis-et-Futuna",
+}
+
+
+def build_dept_nav(conn: sqlite3.Connection) -> str:
+    """Génère le bloc de navigation 'Explorer par département'
+    (liens vers les 101 pages SEO + sélecteur rapide)."""
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT dept_code, COUNT(*) FROM lieux
+        WHERE actif = 1 AND dept_code != ''
+        GROUP BY dept_code ORDER BY dept_code
+    """)
+    rows = cur.fetchall()
+    if not rows:
+        return ""
+
+    # Liste de liens (maillage interne + navigation directe)
+    links = []
+    for code, count in rows:
+        nom = DEPT_NAMES.get(code, code)
+        slug = slugify(nom)
+        links.append(f'<a href="departements/{code}-{slug}/">{code} · {nom}</a>')
+
+    nav = (
+        '<div class="dept-nav">'
+        '<h2>Explorer par département</h2>'
+        '<p class="dept-nav-sub">Pages dédiées avec la liste complète des lieux de culte et messes — utiles pour le référencement et la navigation directe.</p>'
+        '<div class="dept-nav-links">' + "\n".join(f"    {l}" for l in links) + "</div>"
+        "</div>"
+    )
+    return nav
 
 
 # ── Template HTML ──────────────────────────────────────────────────────
@@ -455,6 +516,40 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .breadcrumb a{color:var(--slate); text-decoration:underline;}
   .breadcrumb span[aria-current]{color:var(--ink); font-weight:600;}
 
+  /* ---------- navigation par départements ---------- */
+  .dept-nav{
+    max-width:1100px;
+    margin:0 auto;
+    padding:2rem 1.5rem 1rem;
+  }
+  .dept-nav h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0 0 0.4rem;
+  }
+  .dept-nav-sub{
+    font-family:'Inter',sans-serif;
+    font-size:0.82rem;
+    color:var(--slate);
+    margin:0 0 1rem;
+    max-width:700px;
+  }
+  .dept-nav-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:0.35rem 1rem;
+  }
+  .dept-nav-links a{
+    font-family:'Inter',sans-serif;
+    font-size:0.8rem;
+    color:var(--burgundy);
+    text-decoration:none;
+    padding:0.3rem 0.4rem;
+    border-bottom:1px solid var(--line);
+  }
+  .dept-nav-links a:hover{background:var(--card); text-decoration:underline;}
+
   /* ---------- trust bar ---------- */
   .trust-bar{
     display:flex;
@@ -627,7 +722,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <body>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane">
-  <a href="#">Accueil</a> › <span aria-current="page">Messes en France</span>
+  <span aria-current="page">Accueil · Messes en France</span>
 </nav>
 
 <header>
@@ -712,6 +807,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </div>
   <div class="empty" id="emptyState" style="display:none;">Aucun lieu ne correspond à ces filtres.</div>
 </main>
+
+{{DEPT_NAV}}
 
 <section class="faq" aria-labelledby="faqTitle">
   <h2 id="faqTitle">Questions fréquentes</h2>
@@ -1051,6 +1148,7 @@ def main():
         html = html.replace("{{DEPT_COORDS_JS}}", dept_coords_js)
         html = html.replace("{{LAST_UPDATE}}", last_update)
         html = html.replace("{{DEPT_COUNT}}", str(depts))
+        html = html.replace("{{DEPT_NAV}}", build_dept_nav(conn))
         html = html.replace("{{GENERATED_AT}}", generated_at)
 
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

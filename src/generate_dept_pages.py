@@ -172,7 +172,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="../">← Retour à l'annuaire interactif</a>
+  <a class="back" href="../../">← Retour à l'annuaire interactif</a>
   <header>
     <div class="eyebrow">Annuaire national · France</div>
     <h1>Messes en {dept_nom} ({dept_code})</h1>

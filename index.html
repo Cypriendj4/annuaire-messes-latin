@@ -324,6 +324,40 @@
   .breadcrumb a{color:var(--slate); text-decoration:underline;}
   .breadcrumb span[aria-current]{color:var(--ink); font-weight:600;}
 
+  /* ---------- navigation par départements ---------- */
+  .dept-nav{
+    max-width:1100px;
+    margin:0 auto;
+    padding:2rem 1.5rem 1rem;
+  }
+  .dept-nav h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0 0 0.4rem;
+  }
+  .dept-nav-sub{
+    font-family:'Inter',sans-serif;
+    font-size:0.82rem;
+    color:var(--slate);
+    margin:0 0 1rem;
+    max-width:700px;
+  }
+  .dept-nav-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:0.35rem 1rem;
+  }
+  .dept-nav-links a{
+    font-family:'Inter',sans-serif;
+    font-size:0.8rem;
+    color:var(--burgundy);
+    text-decoration:none;
+    padding:0.3rem 0.4rem;
+    border-bottom:1px solid var(--line);
+  }
+  .dept-nav-links a:hover{background:var(--card); text-decoration:underline;}
+
   /* ---------- trust bar ---------- */
   .trust-bar{
     display:flex;
@@ -496,7 +530,7 @@
 <body>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane">
-  <a href="#">Accueil</a> › <span aria-current="page">Messes en France</span>
+  <span aria-current="page">Accueil · Messes en France</span>
 </nav>
 
 <header>
@@ -582,6 +616,108 @@
   <div class="empty" id="emptyState" style="display:none;">Aucun lieu ne correspond à ces filtres.</div>
 </main>
 
+<div class="dept-nav"><h2>Explorer par département</h2><p class="dept-nav-sub">Pages dédiées avec la liste complète des lieux de culte et messes — utiles pour le référencement et la navigation directe.</p><div class="dept-nav-links">    <a href="departements/01-ain/">01 · Ain</a>
+    <a href="departements/02-aisne/">02 · Aisne</a>
+    <a href="departements/03-allier/">03 · Allier</a>
+    <a href="departements/04-alpes-de-haute-provence/">04 · Alpes-de-Haute-Provence</a>
+    <a href="departements/05-hautes-alpes/">05 · Hautes-Alpes</a>
+    <a href="departements/06-alpes-maritimes/">06 · Alpes-Maritimes</a>
+    <a href="departements/07-ardeche/">07 · Ardèche</a>
+    <a href="departements/08-ardennes/">08 · Ardennes</a>
+    <a href="departements/09-ariege/">09 · Ariège</a>
+    <a href="departements/10-aube/">10 · Aube</a>
+    <a href="departements/11-aude/">11 · Aude</a>
+    <a href="departements/12-aveyron/">12 · Aveyron</a>
+    <a href="departements/13-bouches-du-rhone/">13 · Bouches-du-Rhône</a>
+    <a href="departements/14-calvados/">14 · Calvados</a>
+    <a href="departements/15-cantal/">15 · Cantal</a>
+    <a href="departements/16-charente/">16 · Charente</a>
+    <a href="departements/17-charente-maritime/">17 · Charente-Maritime</a>
+    <a href="departements/18-cher/">18 · Cher</a>
+    <a href="departements/19-correze/">19 · Corrèze</a>
+    <a href="departements/20-corse/">20 · Corse</a>
+    <a href="departements/21-cote-d-or/">21 · Côte-d'Or</a>
+    <a href="departements/22-cotes-d-armor/">22 · Côtes-d'Armor</a>
+    <a href="departements/23-creuse/">23 · Creuse</a>
+    <a href="departements/24-dordogne/">24 · Dordogne</a>
+    <a href="departements/25-doubs/">25 · Doubs</a>
+    <a href="departements/26-drome/">26 · Drôme</a>
+    <a href="departements/27-eure/">27 · Eure</a>
+    <a href="departements/28-eure-et-loir/">28 · Eure-et-Loir</a>
+    <a href="departements/29-finistere/">29 · Finistère</a>
+    <a href="departements/2A-corse-du-sud/">2A · Corse-du-Sud</a>
+    <a href="departements/2B-haute-corse/">2B · Haute-Corse</a>
+    <a href="departements/30-gard/">30 · Gard</a>
+    <a href="departements/31-haute-garonne/">31 · Haute-Garonne</a>
+    <a href="departements/32-gers/">32 · Gers</a>
+    <a href="departements/33-gironde/">33 · Gironde</a>
+    <a href="departements/34-herault/">34 · Hérault</a>
+    <a href="departements/35-ille-et-vilaine/">35 · Ille-et-Vilaine</a>
+    <a href="departements/36-indre/">36 · Indre</a>
+    <a href="departements/37-indre-et-loire/">37 · Indre-et-Loire</a>
+    <a href="departements/38-isere/">38 · Isère</a>
+    <a href="departements/39-jura/">39 · Jura</a>
+    <a href="departements/40-landes/">40 · Landes</a>
+    <a href="departements/41-loir-et-cher/">41 · Loir-et-Cher</a>
+    <a href="departements/42-loire/">42 · Loire</a>
+    <a href="departements/43-haute-loire/">43 · Haute-Loire</a>
+    <a href="departements/44-loire-atlantique/">44 · Loire-Atlantique</a>
+    <a href="departements/45-loiret/">45 · Loiret</a>
+    <a href="departements/46-lot/">46 · Lot</a>
+    <a href="departements/47-lot-et-garonne/">47 · Lot-et-Garonne</a>
+    <a href="departements/48-lozere/">48 · Lozère</a>
+    <a href="departements/49-maine-et-loire/">49 · Maine-et-Loire</a>
+    <a href="departements/50-manche/">50 · Manche</a>
+    <a href="departements/51-marne/">51 · Marne</a>
+    <a href="departements/52-haute-marne/">52 · Haute-Marne</a>
+    <a href="departements/53-mayenne/">53 · Mayenne</a>
+    <a href="departements/54-meurthe-et-moselle/">54 · Meurthe-et-Moselle</a>
+    <a href="departements/55-meuse/">55 · Meuse</a>
+    <a href="departements/56-morbihan/">56 · Morbihan</a>
+    <a href="departements/57-moselle/">57 · Moselle</a>
+    <a href="departements/58-nievre/">58 · Nièvre</a>
+    <a href="departements/59-nord/">59 · Nord</a>
+    <a href="departements/60-oise/">60 · Oise</a>
+    <a href="departements/61-orne/">61 · Orne</a>
+    <a href="departements/62-pas-de-calais/">62 · Pas-de-Calais</a>
+    <a href="departements/63-puy-de-dome/">63 · Puy-de-Dôme</a>
+    <a href="departements/64-pyrenees-atlantiques/">64 · Pyrénées-Atlantiques</a>
+    <a href="departements/65-hautes-pyrenees/">65 · Hautes-Pyrénées</a>
+    <a href="departements/66-pyrenees-orientales/">66 · Pyrénées-Orientales</a>
+    <a href="departements/67-bas-rhin/">67 · Bas-Rhin</a>
+    <a href="departements/68-haut-rhin/">68 · Haut-Rhin</a>
+    <a href="departements/69-rhone/">69 · Rhône</a>
+    <a href="departements/70-haute-saone/">70 · Haute-Saône</a>
+    <a href="departements/71-saone-et-loire/">71 · Saône-et-Loire</a>
+    <a href="departements/72-sarthe/">72 · Sarthe</a>
+    <a href="departements/73-savoie/">73 · Savoie</a>
+    <a href="departements/74-haute-savoie/">74 · Haute-Savoie</a>
+    <a href="departements/75-paris/">75 · Paris</a>
+    <a href="departements/76-seine-maritime/">76 · Seine-Maritime</a>
+    <a href="departements/77-seine-et-marne/">77 · Seine-et-Marne</a>
+    <a href="departements/78-yvelines/">78 · Yvelines</a>
+    <a href="departements/79-deux-sevres/">79 · Deux-Sèvres</a>
+    <a href="departements/80-somme/">80 · Somme</a>
+    <a href="departements/81-tarn/">81 · Tarn</a>
+    <a href="departements/82-tarn-et-garonne/">82 · Tarn-et-Garonne</a>
+    <a href="departements/83-var/">83 · Var</a>
+    <a href="departements/84-vaucluse/">84 · Vaucluse</a>
+    <a href="departements/85-vendee/">85 · Vendée</a>
+    <a href="departements/86-vienne/">86 · Vienne</a>
+    <a href="departements/87-haute-vienne/">87 · Haute-Vienne</a>
+    <a href="departements/88-vosges/">88 · Vosges</a>
+    <a href="departements/89-yonne/">89 · Yonne</a>
+    <a href="departements/90-territoire-de-belfort/">90 · Territoire de Belfort</a>
+    <a href="departements/91-essonne/">91 · Essonne</a>
+    <a href="departements/92-hauts-de-seine/">92 · Hauts-de-Seine</a>
+    <a href="departements/93-seine-saint-denis/">93 · Seine-Saint-Denis</a>
+    <a href="departements/94-val-de-marne/">94 · Val-de-Marne</a>
+    <a href="departements/95-val-d-oise/">95 · Val-d'Oise</a>
+    <a href="departements/97-outre-mer/">97 · Outre-mer</a>
+    <a href="departements/972-martinique/">972 · Martinique</a>
+    <a href="departements/98-outre-mer/">98 · Outre-mer</a>
+    <a href="departements/987-polynesie-francaise/">987 · Polynésie française</a></div></div>
+
 <section class="faq" aria-labelledby="faqTitle">
   <h2 id="faqTitle">Questions fréquentes</h2>
   <details>
@@ -630,7 +766,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 10/08/2026 21:42
+// Dernière génération : 10/08/2026 21:48
 // ---------------------------------------------------------------
 const DATA = window.ANNUAIRE_DATA || [];
 

@@ -52,11 +52,18 @@ jobs:
         run: |
           cd src
           python generate_html.py
+          cd ..
+
+      - name: Copie index.html à la racine (pour GitHub Pages)
+        run: |
+          cp output/index.html index.html
+          echo "index.html copié à la racine ($(wc -c < index.html) octets)"
 
       - name: Vérification du HTML généré
         run: |
           test -s output/index.html
-          echo "index.html généré ($(wc -c < output/index.html) octets)"
+          test -s index.html
+          echo "HTML vérifié"
 
       - name: Commit et push automatique
         run: |

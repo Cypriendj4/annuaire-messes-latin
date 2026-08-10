@@ -71,10 +71,8 @@ Dans `Settings → Secrets and variables → Actions → New repository secret` 
 
 1. `Settings → Pages`
 2. **Source** : `Deploy from a branch`
-3. **Branch** : `main`, dossier `/` (racine) — ou `/output` si tu préfères n'exposer que le site
+3. **Branch** : `main`, dossier `/` (racine — `index.html` y est copié automatiquement par le workflow)
 4. Save
-
-> 💡 Si le dossier `/` est choisi, seul `output/index.html` sert de page d'accueil — les autres fichiers du repo restent accessibles. Recommandé : dossier `/output` pour n'exposer que le site, ou copier `index.html` à la racine.
 
 ### 4. Lancer manuellement le workflow
 

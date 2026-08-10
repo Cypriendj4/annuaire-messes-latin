@@ -286,15 +286,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---------- filters ---------- */
   .filters-wrap{
-    max-width:1100px;
-    margin:0 auto;
-    padding:1.4rem 1.5rem 0;
     position:sticky;
     top:0;
     z-index:10;
     background:var(--parchment);
+    padding-top:1.4rem;
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .filters-wrap.stuck{
+    border-bottom-color:var(--line);
+    box-shadow:0 4px 14px rgba(34,31,43,0.14);
   }
   .filters{
+    max-width:1100px;
+    margin:0 auto;
     background:var(--card);
     border:1px solid var(--ink);
     box-shadow:5px 5px 0 rgba(34,31,43,0.9);
@@ -1080,6 +1086,15 @@ document.getElementById('moreBtn').addEventListener('click', ()=>{
 });
 
 document.getElementById('geoBtn').addEventListener('click', locateMe);
+
+// Ombre du bandeau de filtres quand il est collé en haut (sticky)
+(function(){
+  const wrap = document.querySelector('.filters-wrap');
+  if(!wrap) return;
+  const update = () => wrap.classList.toggle('stuck', window.scrollY > 30);
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
 
 document.getElementById('rite').addEventListener('change', e=>{state.rite=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});

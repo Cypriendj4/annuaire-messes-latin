@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe en latin près de chez vous : rite tridentin &amp; Paul VI — Annuaire France</title>
+<meta name="description" content="Trouvez une messe traditionnelle (rite tridentin, missel 1962) ou une messe Paul VI en latin près de chez vous. Filtrez par diocèse, communauté (FSSP, ICRSP, IBP, FSSPX…) et langue. Horaires vérifiés, sources citées.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#6d2438">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Messes traditionnelles en France">
+<meta property="og:title" content="Messe en latin près de chez vous : rite tridentin &amp; Paul VI">
+<meta property="og:description" content="Annuaire filtrable des messes en latin en France — rite, langue, diocèse, communauté. Horaires vérifiés, sources citées.">
+<meta property="og:locale" content="fr_FR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221f2b;
+    --parchment:#efe7d6;
+    --parchment-deep:#e4d9bf;
+    --burgundy:#6d2438;
+    --burgundy-deep:#4f1729;
+    --gold:#a9822f;
+    --gold-light:#cfae63;
+    --slate:#5b5847;
+    --card:#faf6ec;
+    --line: rgba(34,31,43,0.14);
+    --radius:3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    background-image:
+      radial-gradient(rgba(109,36,56,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    min-height:100vh;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    border-bottom:2px solid var(--ink);
+    padding:2.6rem 1.5rem 1.8rem;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--burgundy);
+    font-weight:600;
+    margin-bottom:0.6rem;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(2rem, 4.2vw, 3.1rem);
+    margin:0 0 0.5rem;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--burgundy);
+  }
+  .subtitle{
+    font-family:'Inter',sans-serif;
+    font-size:0.95rem;
+    color:var(--slate);
+    max-width:640px;
+    line-height:1.5;
+  }
+  .source-note{
+    font-family:'Inter',sans-serif;
+    font-size:0.78rem;
+    color:var(--slate);
+    margin-top:1rem;
+    padding-top:0.9rem;
+    border-top:1px solid var(--line);
+    max-width:760px;
+    line-height:1.55;
+  }
+  .source-note strong{color:var(--ink);}
+
+  /* ---------- filters ---------- */
+  .filters-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:1.4rem 1.5rem 0;
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--parchment);
+  }
+  .filters{
+    background:var(--card);
+    border:1px solid var(--ink);
+    box-shadow:5px 5px 0 rgba(34,31,43,0.9);
+    padding:1.3rem 1.4rem 1.5rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:1rem 1.2rem;
+    font-family:'Inter',sans-serif;
+  }
+  .field label{
+    display:block;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--burgundy);
+    margin-bottom:0.4rem;
+  }
+  .field select, .field input[type="text"]{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:0.9rem;
+    padding:0.5rem 0.6rem;
+    border:1px solid var(--ink);
+    background:#fff;
+    color:var(--ink);
+    border-radius:var(--radius);
+    appearance:none;
+  }
+  .field select{
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position: calc(100% - 16px) center, calc(100% - 11px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat:no-repeat;
+    padding-right:2rem;
+  }
+  .field select:focus, .field input:focus{
+    outline:2px solid var(--burgundy);
+    outline-offset:1px;
+  }
+  .rite-toggle{
+    display:flex;
+    gap:0.4rem;
+  }
+  .rite-toggle button{
+    flex:1;
+    font-family:'Inter',sans-serif;
+    font-size:0.82rem;
+    font-weight:600;
+    padding:0.5rem 0.4rem;
+    border:1px solid var(--ink);
+    background:#fff;
+    color:var(--ink);
+    cursor:pointer;
+    border-radius:var(--radius);
+  }
+  .rite-toggle button.active{
+    background:var(--ink);
+    color:var(--parchment);
+  }
+  .reset-row{
+    grid-column:1/-1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:0.2rem;
+    padding-top:0.9rem;
+    border-top:1px solid var(--line);
+  }
+  #resultCount{
+    font-family:'Inter',sans-serif;
+    font-size:0.84rem;
+    color:var(--slate);
+  }
+  #resultCount strong{color:var(--ink); font-size:1rem;}
+  #resetBtn{
+    font-family:'Inter',sans-serif;
+    font-size:0.78rem;
+    background:none;
+    border:none;
+    color:var(--burgundy);
+    text-decoration:underline;
+    cursor:pointer;
+    padding:0;
+  }
+
+  /* ---------- legend ---------- */
+  .legend{
+    max-width:1100px;
+    margin:1.1rem auto 0;
+    padding:0 1.5rem;
+    font-family:'Inter',sans-serif;
+    font-size:0.74rem;
+    color:var(--slate);
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem 1.1rem;
+  }
+  .legend b{color:var(--ink);}
+
+  /* ---------- results ---------- */
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:1.6rem 1.5rem 4rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
+    gap:1rem;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:1.1rem 1.15rem 1.2rem;
+    position:relative;
+    border-left:6px solid var(--gold);
+  }
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:0.6rem;
+    margin-bottom:0.35rem;
+  }
+  .card-ville{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.22rem;
+    line-height:1.15;
+  }
+  .card-dept{
+    font-family:'Inter',sans-serif;
+    font-size:0.7rem;
+    color:var(--slate);
+    white-space:nowrap;
+    padding-top:0.2rem;
+  }
+  .card-lieu{
+    font-family:'Inter',sans-serif;
+    font-size:0.85rem;
+    color:var(--ink);
+    margin-bottom:0.15rem;
+  }
+  .card-adresse{
+    font-family:'Inter',sans-serif;
+    font-size:0.78rem;
+    color:var(--slate);
+    margin-bottom:0.7rem;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.35rem;
+    margin-bottom:0.7rem;
+  }
+  .tag{
+    font-family:'Inter',sans-serif;
+    font-size:0.68rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+    padding:0.2rem 0.5rem;
+    border-radius:20px;
+    border:1px solid var(--ink);
+  }
+  .tag.rite-t{background:var(--burgundy); color:#fff; border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold); color:#221f2b; border-color:var(--gold);}
+  .tag.lang{background:#fff;}
+  .tag.diocese{background:#fff;}
+  .tag.comm{background:var(--ink); color:var(--parchment); border-color:var(--ink);}
+  .tag.src{background:transparent; color:var(--slate); border-style:dashed;}
+
+  .card-detail{
+    font-family:'Inter',sans-serif;
+    font-size:0.82rem;
+    line-height:1.55;
+    border-top:1px dashed var(--line);
+    padding-top:0.6rem;
+  }
+  .card-detail .row{margin-bottom:0.15rem;}
+  .card-detail .label{color:var(--burgundy); font-weight:600;}
+  .card-detail a{color:var(--burgundy);}
+
+  .empty{
+    font-family:'Inter',sans-serif;
+    text-align:center;
+    padding:3rem 1rem;
+    color:var(--slate);
+  }
+
+  footer{
+    max-width:1100px;
+    margin:0 auto;
+    padding:1.5rem 1.5rem 3rem;
+    font-family:'Inter',sans-serif;
+    font-size:0.75rem;
+    color:var(--slate);
+    border-top:1px solid var(--line);
+    line-height:1.6;
+  }
+
+  @media (max-width:560px){
+    .filters{grid-template-columns:1fr 1fr;}
+    .reset-row{flex-direction:column; align-items:flex-start; gap:0.5rem;}
+  }
+
+  /* ---------- breadcrumb ---------- */
+  .breadcrumb{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0.9rem 1.5rem 0;
+    font-family:'Inter',sans-serif;
+    font-size:0.74rem;
+    color:var(--slate);
+  }
+  .breadcrumb a{color:var(--slate); text-decoration:underline;}
+  .breadcrumb span[aria-current]{color:var(--ink); font-weight:600;}
+
+  /* ---------- trust bar ---------- */
+  .trust-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1.3rem;
+    margin-top:1.2rem;
+    font-family:'Inter',sans-serif;
+    font-size:0.78rem;
+    color:var(--slate);
+  }
+  .trust-bar b{color:var(--ink); font-family:'Fraunces',serif; font-size:1.05rem;}
+
+  /* ---------- CTA / geoloc ---------- */
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+    margin-top:1.3rem;
+  }
+  .btn-primary{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:0.86rem;
+    background:var(--burgundy);
+    color:#fff;
+    border:1px solid var(--ink);
+    padding:0.7rem 1.1rem;
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(34,31,43,0.9);
+    display:inline-flex;
+    align-items:center;
+    gap:0.45rem;
+  }
+  .btn-primary:hover{background:var(--burgundy-deep);}
+  .btn-primary:active{box-shadow:1px 1px 0 rgba(34,31,43,0.9); transform:translate(2px,2px);}
+  .btn-primary[disabled]{opacity:0.55; cursor:default;}
+  #geoStatus{
+    font-family:'Inter',sans-serif;
+    font-size:0.76rem;
+    color:var(--slate);
+    align-self:center;
+  }
+
+  /* ---------- share button on cards ---------- */
+  .card-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:0.5rem;
+  }
+  .share-btn{
+    font-family:'Inter',sans-serif;
+    font-size:0.7rem;
+    font-weight:600;
+    background:none;
+    border:1px solid var(--ink);
+    padding:0.28rem 0.55rem;
+    cursor:pointer;
+    color:var(--ink);
+    border-radius:20px;
+  }
+  .share-btn:hover{background:var(--ink); color:var(--parchment);}
+  .card-distance{
+    font-family:'Inter',sans-serif;
+    font-size:0.68rem;
+    font-weight:600;
+    color:var(--burgundy);
+    white-space:nowrap;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 1.5rem 2rem;
+  }
+  .faq h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0 0 1rem;
+  }
+  .faq details{
+    border-bottom:1px solid var(--line);
+    padding:0.9rem 0;
+    font-family:'Inter',sans-serif;
+  }
+  .faq summary{
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .faq p{
+    font-size:0.86rem;
+    color:var(--slate);
+    line-height:1.6;
+    margin:0.6rem 0 0;
+  }
+
+  .report-cta{
+    font-family:'Inter',sans-serif;
+    font-size:0.78rem;
+    margin-top:0.6rem;
+  }
+  .report-cta a{color:var(--burgundy); font-weight:600;}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Messes traditionnelles en France",
+  "description":"Annuaire filtrable des messes en latin en France : rite tridentin (1962) et Paul VI, par diocèse, langue et communauté.",
+  "inLanguage":"fr-FR"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Qu'est-ce que la messe tridentine ?",
+      "acceptedAnswer":{"@type":"Answer","text":"La messe tridentine, ou forme extraordinaire du rite romain, est célébrée selon le missel romain de 1962, en latin. Elle a été confirmée comme légitime par le motu proprio Summorum Pontificum de Benoît XVI en 2007, avec des conditions révisées depuis par Traditionis Custodes (2021)."}
+    },
+    {
+      "@type":"Question",
+      "name":"Quelle différence entre le rite tridentin et une messe Paul VI en latin ?",
+      "acceptedAnswer":{"@type":"Answer","text":"Le rite tridentin suit le missel de 1962. La messe Paul VI, elle, suit le missel de 1969/1970 issu du concile Vatican II (forme ordinaire) : elle peut être célébrée en français ou en latin selon les paroisses, avec la même structure liturgique que la messe habituelle."}
+    },
+    {
+      "@type":"Question",
+      "name":"Quelle est la différence entre FSSP, ICRSP, IBP et FSSPX ?",
+      "acceptedAnswer":{"@type":"Answer","text":"FSSP, ICRSP et IBP sont des instituts de droit pontifical en pleine communion avec Rome, dont les prêtres célèbrent la forme extraordinaire avec l'accord de l'évêque du lieu. La FSSPX (Fraternité Sacerdotale Saint-Pie X) n'est pas en pleine communion canonique avec Rome ; ses lieux de culte sont signalés séparément sur cet annuaire."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <a href="#">Accueil</a> › <span aria-current="page">Messes traditionnelles en France</span>
+</nav>
+
+<header>
+  <div class="eyebrow">Annuaire liturgique · France</div>
+  <h1>Messe en latin <em>près de chez vous</em></h1>
+  <p class="subtitle">Rite tridentin (missel 1962) et messe Paul VI en latin — filtrez par diocèse, langue et communauté célébrante.</p>
+
+  <div class="trust-bar">
+    <div><b id="trustCount">—</b> lieux référencés</div>
+    <div><b>104</b> diocèses couverts</div>
+    <div><b>08/08/2026</b> dernière mise à jour des sources</div>
+  </div>
+
+  <div class="cta-row">
+    <button class="btn-primary" id="geoBtn">📍 Trouver la messe la plus proche de moi</button>
+    <span id="geoStatus"></span>
+  </div>
+
+  <div class="source-note">
+    <strong>Sources des données :</strong> AMDG (amdg.asso.fr, mise à jour hebdomadaire),
+    La Porte Latine (laportelatine.org/lieux, lieux desservis par la FSSPX et communautés amies),
+    trouverunemesse.fr / horairesmesses.com (agrégateurs croisés avec messes.info pour vérifier les messes Paul VI en latin).
+    Liste <strong>non exhaustive</strong>, mise à jour automatiquement chaque jour.
+    <strong>Vérifiez toujours les horaires avant de vous déplacer</strong> — ils changent en été, à Noël, à Pâques.<br><br>
+    <strong>Note sur la FSSPX :</strong> la Fraternité Sacerdotale Saint-Pie X et les « communautés amies » qui lui
+    sont proches ne sont pas en pleine communion canonique avec Rome — à la différence de FSSP, ICRSP, IBP et des prêtres diocésains
+    listés ailleurs sur cette page. Ce site les signale toutes les deux pour être exhaustif sur l'offre de messes en latin, sans prendre position.
+  </div>
+</header>
+
+<div class="filters-wrap">
+  <div class="filters">
+    <div class="field" style="grid-column:1/-1;">
+      <label for="q">Recherche (ville, lieu, célébrant)</label>
+      <input type="text" id="q" placeholder="Ex. Toulouse, Saint-Eugène, ICRSP…">
+    </div>
+
+    <div class="field">
+      <label>Rite</label>
+      <div class="rite-toggle" id="riteToggle">
+        <button data-val="all" class="active">Tous</button>
+        <button data-val="tridentin">Tridentin</button>
+        <button data-val="paulvi">Paul VI</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="langue">Langue</label>
+      <select id="langue">
+        <option value="all">Toutes</option>
+        <option value="latin">Latin</option>
+        <option value="francais">Français</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="diocese">Diocèse</label>
+      <select id="diocese"><option value="all">Tous</option></select>
+    </div>
+
+    <div class="field">
+      <label for="communaute">Communauté</label>
+      <select id="communaute"><option value="all">Toutes</option></select>
+    </div>
+
+    <div class="reset-row">
+      <div id="resultCount"></div>
+      <button id="resetBtn">Réinitialiser les filtres</button>
+    </div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none;">Aucun lieu ne correspond à ces filtres.</div>
+</main>
+
+<section class="faq" aria-labelledby="faqTitle">
+  <h2 id="faqTitle">Questions fréquentes</h2>
+  <details>
+    <summary>Qu'est-ce que la messe tridentine ?</summary>
+    <p>La messe tridentine, ou forme extraordinaire du rite romain, est célébrée selon le missel romain de 1962, en latin. Elle a été confirmée comme légitime par le motu proprio Summorum Pontificum de Benoît XVI en 2007, avec des conditions révisées depuis par Traditionis Custodes (2021).</p>
+  </details>
+  <details>
+    <summary>Quelle différence entre le rite tridentin et une messe Paul VI en latin ?</summary>
+    <p>Le rite tridentin suit le missel de 1962. La messe Paul VI suit le missel de 1969/1970 issu du concile Vatican II (forme ordinaire) : elle peut être célébrée en français ou en latin selon les paroisses, avec la même structure liturgique que la messe habituelle.</p>
+  </details>
+  <details>
+    <summary>Quelle est la différence entre FSSP, ICRSP, IBP et FSSPX ?</summary>
+    <p>FSSP, ICRSP et IBP sont des instituts de droit pontifical en pleine communion avec Rome, dont les prêtres célèbrent la forme extraordinaire avec l'accord de l'évêque du lieu. La FSSPX n'est pas en pleine communion canonique avec Rome ; ses lieux sont signalés séparément sur cet annuaire, sans prise de position.</p>
+  </details>
+  <div class="report-cta">
+    Une erreur, un horaire changé, un lieu manquant ? <a href="mailto:contact@exemple.fr?subject=Correction%20annuaire%20messes">Signalez-le en un mail →</a>
+  </div>
+</section>
+
+<footer>
+  Rite <strong>Tridentin</strong> = forme extraordinaire du rite romain, célébrée selon le missel de 1962
+  (motu proprio Summorum Pontificum / Ecclesia Dei) — toujours en latin.<br>
+  Rite <strong>Paul VI</strong> = forme ordinaire du rite romain (missel de 1969/1970), qui peut être célébrée en
+  latin ou en français selon les paroisses.<br><br>
+  Communautés représentées — <strong>FSSP</strong> : Fraternité Sacerdotale Saint-Pierre ·
+  <strong>ICRSP</strong> : Institut du Christ-Roi Souverain-Prêtre · <strong>IBP</strong> : Institut du Bon Pasteur ·
+  <strong>FSTB</strong> : Fraternité Saint-Thomas-Becket · <strong>CRMD</strong> : Chanoines Réguliers de la Mère de
+  Dieu · <strong>FSVF</strong> : Fraternité Saint-Vincent-Ferrier · <strong>MMD</strong> : Missionnaires de la
+  Miséricorde Divine · <strong>Bénédictins</strong> : moines/moniales de l'ordre de Saint-Benoît ·
+  <strong>Diocèse</strong> : prêtre incardiné dans le diocèse, hors institut ou fraternité dédiée ·
+  <strong>FSSPX</strong> : Fraternité Sacerdotale Saint-Pie X (hors pleine communion canonique — voir note en en-tête) ·
+  <strong>Fraternité de la Transfiguration</strong>, <strong>Capucins de Morgon</strong>,
+  <strong>Dominicaines contemplatives</strong> : communautés proches de la FSSPX.
+</footer>
+
+<script>
+// ---------------------------------------------------------------
+// Données générées automatiquement depuis la base SQLite
+// Dernière génération : 08/08/2026 07:03
+// ---------------------------------------------------------------
+const DATA = [
+{ville:"Aix En Provence",dept:"",diocese:"",lieu:"Chapelle de l'Immaculée Conception",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ales",dept:"",diocese:"",lieu:"Chapelle Saint Gilles",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Amiens",dept:"",diocese:"",lieu:"Chapelle Saint Vincent de Paul",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Angers",dept:"",diocese:"",lieu:"Chapelle Saint-Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Angers 2",dept:"",diocese:"",lieu:"Oratoire Bienheureux Noël Pinot",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Angouleme",dept:"",diocese:"",lieu:"Chapelle Saint-Aptone",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Anse",dept:"",diocese:"",lieu:"Église Saint-Cyr",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ars Sur Moselle",dept:"",diocese:"",lieu:"Chapelle Saint-Roch",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Aumonerie Montpellier",dept:"",diocese:"",lieu:"Aumônerie Saint-Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Avignon",dept:"",diocese:"",lieu:"Chapelle des Pénitents Noirs",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Avrille Dominicaines",dept:"",diocese:"",lieu:"Monastère Saint-Joseph",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Besancon 2",dept:"",diocese:"",lieu:"Chapelle de la Visitation",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Boulogne",dept:"",diocese:"",lieu:"Église Saint-Louis",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Bourges",dept:"",diocese:"",lieu:"École Sainte Jeanne-de-France",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Brest",dept:"",diocese:"",lieu:"Chapelle Sainte-Anne",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Brignolles",dept:"",diocese:"",lieu:"Cours Saint-Dominique",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Cabanous",dept:"",diocese:"",lieu:"Chapelle Saint Georges de Lodève",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Caen",dept:"",diocese:"",lieu:"Chapelle Saint-Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Cannes",dept:"",diocese:"",lieu:"Chapelle Saint-François d'Assise",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Castres",dept:"",diocese:"",lieu:"Chapelle du Sacré Cœur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chamont",dept:"",diocese:"",lieu:"Église Saint-Barthélemy",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chantemerle",dept:"",diocese:"",lieu:"Sanctuaire saint Joseph du Saint Sauveur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chapelle Fort De France",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-de-la-Délivrande",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chapelle Saint Irenee",dept:"",diocese:"",lieu:"Chapelle Saint-Irénée",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Charleville Mezieres",dept:"",diocese:"",lieu:"Chapelle Saint-Walfroy",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chartres",dept:"",diocese:"",lieu:"Chapelle Saint-Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chatillon Sur Chalaronne",dept:"",diocese:"",lieu:"Chapelle du sacré-Coeur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chemille",dept:"",diocese:"",lieu:"Chapelle Saint-Joseph",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Chenimenil",dept:"",diocese:"",lieu:"Chapelle du Sacré-Cœur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Clermont Ferrand",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-de-la-Merci",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Colmar",dept:"",diocese:"",lieu:"Oratoire Saint-Joseph",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Compiegne",dept:"",diocese:"",lieu:"Église sainte-Thérèse",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Conflans",dept:"",diocese:"",lieu:"Chapelle Sainte-Honorine",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Corse Afa",dept:"",diocese:"",lieu:"Chapelle de ND de l’Assomption",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Cravanche",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-de-la-Sainte-Espérance",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Domezain",dept:"",diocese:"",lieu:"Cours l'Immaculée Conception",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Drucourt",dept:"",diocese:"",lieu:"Église Saint-Robert",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Aurenque",dept:"",diocese:"",lieu:"École Notre-Dame Divine Bergère",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Bergerac",dept:"",diocese:"",lieu:"École Sainte Jeanne d'Arc",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Brest",dept:"",diocese:"",lieu:"École Stella Maris",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Brout Vernet",dept:"",diocese:"",lieu:"Cours Notre-Dame de France",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Bruges",dept:"",diocese:"",lieu:"École Saint-Georges",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Camblain",dept:"",diocese:"",lieu:"École Saint-Jean-Baptiste-de-la-Salle",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Chartres",dept:"",diocese:"",lieu:"École Saint Joseph",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Eguelshardt",dept:"",diocese:"",lieu:"École Étoile-du-Matin",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Etcharry",dept:"",diocese:"",lieu:"École Saint-Michel Garicoïtz",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Fabregues",dept:"",diocese:"",lieu:"École Saint-Dominique Savio",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Gavrus",dept:"",diocese:"",lieu:"École Saint Jean-Eudes",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Marlieux",dept:"",diocese:"",lieu:"École Saint-Jean-Bosco",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Marseille",dept:"",diocese:"",lieu:"École Saint-Ferréol",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Martinique",dept:"",diocese:"",lieu:"École Saint Dominique Savio",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Meylan",dept:"",diocese:"",lieu:"École Saint-Pierre-Julien-Eymard",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Morgon",dept:"",diocese:"",lieu:"École de la Providence",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Nancy",dept:"",diocese:"",lieu:"Cours Sainte Philomène",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Nice",dept:"",diocese:"",lieu:"Ecole Maris Stella",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Perpignan",dept:"",diocese:"",lieu:"École Primaire Notre-Dame du Mont Carmel",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Philibert Vrau",dept:"",diocese:"",lieu:"Ecole professionnelle Philibert Vrau",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Prunay",dept:"",diocese:"",lieu:"École Saint-Rémi",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Saint Jean De La Ruelle",dept:"",diocese:"",lieu:"École des Saints-Anges-Gardiens",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Saint Nolff",dept:"",diocese:"",lieu:"École Sainte Philomène",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Toulouse",dept:"",diocese:"",lieu:"École Saint Jean-Bosco",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Tours",dept:"",diocese:"",lieu:"École de la Sainte Face",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Unieux",dept:"",diocese:"",lieu:"École Sainte-Catherine-de-Sienne",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Verdelais",dept:"",diocese:"",lieu:"École Notre-Dame de Verdelais",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ecole Villepreux",dept:"",diocese:"",lieu:"École Saint-Bernard",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Eglise Toulon",dept:"",diocese:"",lieu:"Église Sainte-Philomène",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Eynesse",dept:"",diocese:"",lieu:"Carmel du Cœur Immaculé de Marie",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Farfaret",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de Citeaux (Farfaret)",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Flers",dept:"",diocese:"",lieu:"Chapelle Saint-Jean-Eudes",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Font Romeu",dept:"",diocese:"",lieu:"Sainte-Colombe de Vià",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Goussonville",dept:"",diocese:"",lieu:"Cours Notre-Dame-de-la-Sablonnière",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Grasse",dept:"",diocese:"",lieu:"Chapelle Saint-Louis",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Grenoble",dept:"",diocese:"",lieu:"Chapelle Sainte-Marie-Saint-Michel",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Guer",dept:"",diocese:"",lieu:"Chapelle Saint-Yves",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Guines",dept:"",diocese:"",lieu:"Chapelle Sainte-Victoire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Guyane",dept:"",diocese:"",lieu:"Guyane",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Huez",dept:"",diocese:"",lieu:"Eglise Notre-Dame des Neiges",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ile De Re",dept:"",diocese:"",lieu:"Chapelle de l'Île de Ré",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Issoire",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-de-France",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Iuspx",dept:"",diocese:"",lieu:"Institut Universitaire Saint-Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Joinville",dept:"",diocese:"",lieu:"Couvent des Annonciades",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Jouy Mauvoisin",dept:"",diocese:"",lieu:"Église Sainte-Foy",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"La Chapelle Dangillon",dept:"",diocese:"",lieu:"Chapelle Saint-Jacques de Saxeau",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"La Martinerie",dept:"",diocese:"",lieu:"École Saint Michel - La Martinerie",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"La Roche Sur Yon",dept:"",diocese:"",lieu:"Chapelle Saint-Michel",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"La Rochelle",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de l'Espérance",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lamaire",dept:"",diocese:"",lieu:"Maison Notre-Dame du bon conseil",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lannedern",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de Coat ar Roch",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lattes",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de la Médaille Miraculeuse",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Laval",dept:"",diocese:"",lieu:"Chapelle Saint-Joseph",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Bremien",dept:"",diocese:"",lieu:"Maison de retraite \"Le Brémien Notre-Dame\"",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Havre",dept:"",diocese:"",lieu:"Chapelle Saint-Grégoire-le-Grand",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Laus",dept:"",diocese:"",lieu:"Chapelle Notre-Dame du Rosaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Mans",dept:"",diocese:"",lieu:"Chapelle Saint Raphaël",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Mullerhof",dept:"",diocese:"",lieu:"Cours Saint-Thomas-d'Aquin, Le Mullerhof",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Le Puy En Velay",dept:"",diocese:"",lieu:"Chapelle de la Visitation",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lens Nd",dept:"",diocese:"",lieu:"École Notre-Dame",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Les Eparges",dept:"",diocese:"",lieu:"Église Saint-Martin",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Les Essarts",dept:"",diocese:"",lieu:"Chapelle Saint-Hubert",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lille",dept:"",diocese:"",lieu:"Chapelle Notre-Dame du Rosaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Limoges",dept:"",diocese:"",lieu:"Chapelle Saint-Martial",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Lizy Sur Ourcq",dept:"",diocese:"",lieu:"Chapelle Sainte-Marcelle et Sainte-Cécile",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Maligny",dept:"",diocese:"",lieu:"Chapelle Saint-Antoine",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Marseille Immaculee",dept:"",diocese:"",lieu:"Chapelle de l'Immaculée Conception",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Marseille Saint Pie X",dept:"",diocese:"",lieu:"Église de la Mission de France - St Pie X",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Mauleon",dept:"",diocese:"",lieu:"École Saint Louis-Marie Grignion de Montfort",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Merigny",dept:"",diocese:"",lieu:"Maison Saint-Jean",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Montauban",dept:"",diocese:"",lieu:"Cours Notre-Dame de l'Assomption",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Montlucon",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de Fatima",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Morgon Clarisses",dept:"",diocese:"",lieu:"Monastère Sainte-Claire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Morlaix",dept:"",diocese:"",lieu:"Monastère Notre-Dame des Fontaines",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Moyrazes",dept:"",diocese:"",lieu:"Chapelle Sainte-Emilie-de-Rodat",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Narbonne",dept:"",diocese:"",lieu:"Église Notre-Dame de Grâces",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Nd Des Millieres",dept:"",diocese:"",lieu:"Chapelle de la Sainte-Famille",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Niort",dept:"",diocese:"",lieu:"Chapelle et école Saint-Martin",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Noisy Le Grand",dept:"",diocese:"",lieu:"Église Saint-Martin-des-Gaules",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Paray",dept:"",diocese:"",lieu:"Chapelle Sainte-Marguerite-Marie du Sacré-Coeur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Paris Rue Gerbert",dept:"",diocese:"",lieu:"Chapelle de Jésus, Roi de France",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Parthenay",dept:"",diocese:"",lieu:"Cours Notre-Dame du Sacré-Cœur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pau",dept:"",diocese:"",lieu:"Chapelle saint-Maurice",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Perigueux",dept:"",diocese:"",lieu:"Église Notre-Dame-de-Toutes-Grâces",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Perpignan",dept:"",diocese:"",lieu:"Prieuré du Christ-Roi",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Petit Musc",dept:"",diocese:"",lieu:"École Saint Louis",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pierremont",dept:"",diocese:"",lieu:"Chapelle Notre-Dame du Saint Rosaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Plouigneau",dept:"",diocese:"",lieu:"Chapelle Notre-Dame du Mur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pointe A Pitre",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-de-Guadeloupe",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Poitiers",dept:"",diocese:"",lieu:"Chapelle de l'Immaculée Conception",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pontmain",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de Pontmain",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pontoise",dept:"",diocese:"",lieu:"Chapelle Saint-Mathias",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pornichet",dept:"",diocese:"",lieu:"Chapelle Notre-Dame des Grèves",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Pouilly En Auxois",dept:"",diocese:"",lieu:"Cours Saint-Dominique",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Puybelliard",dept:"",diocese:"",lieu:"École de l'Épiphanie",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Reims",dept:"",diocese:"",lieu:"Église Notre-Dame de France",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Rennes",dept:"",diocese:"",lieu:"Chapelle Saint-Pierre-et-Saint-Paul",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Reville",dept:"",diocese:"",lieu:"Chapelle Saint-Eloi",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Roanne",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-du-Rosaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Baldoph",dept:"",diocese:"",lieu:"Chapelle Saint-Anthelme",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Brieuc",dept:"",diocese:"",lieu:"Chapelle saint-Hilaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Clement",dept:"",diocese:"",lieu:"Chapelle Saint-Loup",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Etienne",dept:"",diocese:"",lieu:"Chapelle du Cœur-Immaculé-de-Marie",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Gregoire Tours",dept:"",diocese:"",lieu:"Église Saint-Grégoire des Minimes",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Hilaire De Villefranche",dept:"",diocese:"",lieu:"Chapelle Saint-Martin",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Jean De La Ruelle",dept:"",diocese:"",lieu:"Chapelle de l'Immaculée",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Joseph Des Carmes",dept:"",diocese:"",lieu:"École Saint-Joseph-des-Carmes",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Malo",dept:"",diocese:"",lieu:"Chapelle Sainte-Anne",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Manvieu",dept:"",diocese:"",lieu:"Cours Sainte-Catherine de Sienne",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Quentin",dept:"",diocese:"",lieu:"Chapelle de l'Immaculée Conception",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saint Ursin",dept:"",diocese:"",lieu:"Chapelle de la Sainte Famille",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saintes",dept:"",diocese:"",lieu:"Église Sainte Colombe",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Samoreau",dept:"",diocese:"",lieu:"Chapelle Saint-Jean-Marie-Vianney",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saumur",dept:"",diocese:"",lieu:"Chapelle Sainte-Jeanne-Delanoue",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Saze",dept:"",diocese:"",lieu:"Cours Saint Pierre de Provence",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Strasbourg",dept:"",diocese:"",lieu:"Chapelle Notre-Dame-du-Rosaire",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ternay",dept:"",diocese:"",lieu:"Cours Sainte-Clotilde",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Thouars",dept:"",diocese:"",lieu:"Église collégiale Notre-Dame",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Toulouse",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de Férétra",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Troyes",dept:"",diocese:"",lieu:"Chapelle Saint-Bernard",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Tursac",dept:"",diocese:"",lieu:"Sanctuaire Notre-Dame-de-Fontpeyrine",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Vannes",dept:"",diocese:"",lieu:"Chapelle Sainte-Anne",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Verac",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de la Mongie",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Versailles",dept:"",diocese:"",lieu:"Chapelle Notre-Dame de l'Espérance",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Vichy",dept:"",diocese:"",lieu:"Chapelle du Sacré-Coeur",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Ville Di Paraso",dept:"",diocese:"",lieu:"Chapelle saint Pierre et Saint Louis de Gonzague",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Villefranque",dept:"",diocese:"",lieu:"Chapelle Notre-Dame des Naufragés",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"",horaires:"Voir site",contact:"",source:"portelatine"},
+{ville:"Coligny",dept:"01 – Ain",diocese:"Belley-Ars",lieu:"Église Saint-Martin",adresse:"25 km NE de Bourg-en-Bresse",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Laurent Goy",horaires:"Dim. 11h00 · semaine 8h30",contact:"04 74 30 10 88",source:"initial_manual"},
+{ville:"Acy-le-Haut",dept:"02 – Aisne",diocese:"Soissons, Laon, Saint-Quentin",lieu:"Église Saint-Médard",adresse:"9 km de Soissons",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbé Loïc Cassiope",horaires:"2 dimanches/mois 10h30",contact:"03 23 53 08 77",source:"initial_manual"},
+{ville:"Bressolles",dept:"03 – Allier",diocese:"Moulins",lieu:"Église du Sacré-Cœur",adresse:"5 place de l'église",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Christian Mahlberg",horaires:"Dim. 11h15 (grand-messe) · ven. 18h30 · sam. 9h00",contact:"07 88 03 78 52",source:"initial_manual"},
+{ville:"Vichy",dept:"03 – Allier",diocese:"Moulins",lieu:"Église Saint-Louis",adresse:"Place Saint-Louis",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Christian Mahlberg",horaires:"Dim. 8h45 · 1er sam. du mois 18h15",contact:"07 88 03 78 52",source:"initial_manual"},
+{ville:"Digne-les-Bains",dept:"04 – Alpes-de-Haute-Provence",diocese:"Digne, Riez et Sisteron",lieu:"Chapelle du Saint-Esprit",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Charles Honoré",horaires:"1er et 3e dim. 9h30",contact:"06 77 90 53 01",source:"initial_manual"},
+{ville:"Gap",dept:"05 – Hautes-Alpes",diocese:"Gap et Embrun",lieu:"Église Saint-André des Cordeliers",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Luc Pecha",horaires:"Dim. 10h00 · semaine 8h30",contact:"04 92 22 33 95",source:"initial_manual"},
+{ville:"Rosans",dept:"05 – Hautes-Alpes",diocese:"Gap et Embrun",lieu:"Abbaye Notre-Dame-de-Miséricorde",adresse:"Baudon, 66 km à l'ouest de Gap",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"RP Walter Perin, osb",horaires:"Dim. 11h00 · semaine 11h00",contact:"04 92 66 63 98",source:"initial_manual"},
+{ville:"Cannes",dept:"06 – Alpes-Maritimes",diocese:"Nice",lieu:"Chapelle de la Miséricorde",adresse:"Près du Marché Forville",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Frédéric De Martin",horaires:"Dim. 10h00",contact:"07 50 85 34 60",source:"initial_manual"},
+{ville:"Nice",dept:"06 – Alpes-Maritimes",diocese:"Nice",lieu:"Église Saint-Jacques (dite du Gesù)",adresse:"12 rue Droite, Vieux Nice",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoines Rodié et De Martin",horaires:"Dim. 9h00 et 18h00",contact:"06 46 41 18 96",source:"initial_manual"},
+{ville:"La Bastide-de-Lordat",dept:"09 – Ariège",diocese:"Pamiers",lieu:"Église Saint-Étienne",adresse:"10 km à l'est de Pamiers",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Jean-Marcel Jordana",horaires:"1er dim. du mois 18h00",contact:"",source:"initial_manual"},
+{ville:"COLIGNY",dept:"1",diocese:"Belley-Ars",lieu:"01270 - Eglise\nSaint Martin - 25\nkm au\nnord-est de Bourg-en-Bresse SP\n- depuis 10/2007 Messes : dimanche 11h00 ; semaine",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"01270 - Eglise\nSaint Martin - 25\nkm au\nnord-est de Bourg-en-Bresse SP\n- depuis 10/2007 Messes : dimanche 11h00 ; semaine 8h30 Confessions : samedi 11h\nà 12h Adoration du Saint-Sacrement : vendredi de ",contact:"",source:"amdg"},
+{ville:"TROYES",dept:"10",diocese:"Troyes",lieu:"10000 - Eglise\nSaint Rémy :\nrue Pithou. Derrière les halles,\nà l'angle de la Pithou et de la rue du\nGénéral de Gaulle Me",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"10000 - Eglise\nSaint Rémy :\nrue Pithou. Derrière les halles,\nà l'angle de la Pithou et de la rue du\nGénéral de Gaulle Messes : dimanche et fêtes 10h30\n; lundi 10h30, mardi et jeudi 19h00, mercredi\n7h0",contact:"",source:"amdg"},
+{ville:"Troyes",dept:"10 – Aube",diocese:"Troyes",lieu:"Église Saint-Rémy",adresse:"Rue Pithou",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Alexis d'Abbadie",horaires:"Dim. et fêtes 10h30",contact:"06 95 69 43 94",source:"initial_manual"},
+{ville:"Azille",dept:"11 – Aude",diocese:"Carcassonne",lieu:"Monastère Mater Dei",adresse:"6 rue du Monastère",rite:"tridentin",langue:"latin",communaute:"CRMD",celebrant:"Chanoines Réguliers de la Mère de Dieu",horaires:"Dim. 10h00 · semaine 9h30",contact:"04 68 49 54 27",source:"initial_manual"},
+{ville:"CARCASSONNE",dept:"11",diocese:"Carcassonne",lieu:"11000 - Basilique Saints\nNazaire et Celse : dans la\ncité médiévale SP\n- depuis 06/2008 Messes : dimanche et\nfêtes 9h30 C",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"11000 - Basilique Saints\nNazaire et Celse : dans la\ncité médiévale SP\n- depuis 06/2008 Messes : dimanche et\nfêtes 9h30 Célébrant : Mgr Bertrand de la Soujeole (diocèse) Renseignements : 04 68 47 29 30",contact:"",source:"amdg"},
+{ville:"Carcassonne",dept:"11 – Aude",diocese:"Carcassonne",lieu:"Basilique Saints-Nazaire-et-Celse",adresse:"Cité médiévale",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Mgr Bertrand de la Soujeole",horaires:"Dim. et fêtes 9h30",contact:"04 68 47 29 30",source:"initial_manual"},
+{ville:"Lagrasse",dept:"11 – Aude",diocese:"Carcassonne",lieu:"Abbaye Canoniale Sainte-Marie",adresse:"",rite:"tridentin",langue:"latin",communaute:"CRMD",celebrant:"Chanoines Réguliers de la Mère de Dieu",horaires:"Dim. 8h30 et 10h00",contact:"04 68 58 11 58",source:"initial_manual"},
+{ville:"Narbonne",dept:"11 – Aude",diocese:"Carcassonne",lieu:"Église Saint-Sébastien",adresse:"Rue Michelet",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Prêtres de la Fraternité Saint-Pierre",horaires:"Dim. et fêtes 9h30",contact:"04 68 34 74 62",source:"initial_manual"},
+{ville:"RODEZ",dept:"12",diocese:"Rodez",lieu:"12000 - Eglise du\nSacré-Coeur (Chapelle\ndu Sacré-Coeur) :\n24, avenue\nTarayre. Centre\nde Rodez Messes : dimanche 10h45 (s",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"12000 - Eglise du\nSacré-Coeur (Chapelle\ndu Sacré-Coeur) :\n24, avenue\nTarayre. Centre\nde Rodez Messes : dimanche 10h45 (sauf\nsolennités et quelques exceptions). Pas de messe du\n2è dimanche de juillet à",contact:"",source:"amdg"},
+{ville:"Rodez",dept:"12 – Aveyron",diocese:"Rodez",lieu:"Chapelle du Sacré-Cœur",adresse:"24 avenue Tarayre",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Alexandre Garcia",horaires:"Dim. 10h45 (sauf été)",contact:"06 42 62 60 34",source:"initial_manual"},
+{ville:"Aix-en-Provence",dept:"13 – Bouches-du-Rhône",diocese:"Aix-en-Provence",lieu:"Chapelle des Pénitents Gris",adresse:"15 rue Lieutaud",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Thierry Gallay",horaires:"Dim. et fêtes 10h00",contact:"04 42 26 26 72",source:"initial_manual"},
+{ville:"Aix-en-Provence",dept:"13 – Bouches-du-Rhône",diocese:"Aix-en-Provence",lieu:"Chapelle de l'Immaculée Conception",adresse:"11 bis cours Gambetta",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré Saint-Ferréol",contact:"04 91 87 00 50",source:"initial_manual"},
+{ville:"Alleins",dept:"13 – Bouches-du-Rhône",diocese:"Aix-en-Provence",lieu:"Chapelle Notre-Dame des Sept-Douleurs des Pénitents Blancs",adresse:"Rue Frédéric Mistral",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"04 91 87 00 50",source:"portelatine"},
+{ville:"MARSEILLE",dept:"13",diocese:"Provence",lieu:"13001 - Eglise\nSaint Charles : 64, rue Grignan .\nMétro 1\n: Préfecture Messes : dimanche et fêtes\n9h00 (lue) et 10h30 (ch",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"13001 - Eglise\nSaint Charles : 64, rue Grignan .\nMétro 1\n: Préfecture Messes : dimanche et fêtes\n9h00 (lue) et 10h30 (chantée) [Juillet et\naoût une seule messe 10h00 chantée ];\nlundi 18h30*, mardi 9h0",contact:"",source:"amdg"},
+{ville:"Marseille",dept:"13 – Bouches-du-Rhône",diocese:"Marseille",lieu:"Église Saint-Charles",adresse:"64 rue Grignan",rite:"tridentin",langue:"latin",communaute:"MMD",celebrant:"Abbés Gillet et Marie-Jeanne",horaires:"Dim. 9h00 et 10h30",contact:"06 74 65 73 51",source:"initial_manual"},
+{ville:"Marseille",dept:"13 – Bouches-du-Rhône",diocese:"Marseille",lieu:"Chapelle du Bon Jésus",adresse:"1 rue du Bon Jésus",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbé Christophe Héry",horaires:"Dim. 11h00",contact:"09 53 22 91 96",source:"initial_manual"},
+{ville:"CAEN",dept:"14",diocese:"Bayeux et Lisieux",lieu:"14000 - Eglise Saint-Michel\nde Vaucelles : 1 rue Brainville Messes : dimanche et fêtes\nd'obligation 10h30, mardi 19h00, ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"14000 - Eglise Saint-Michel\nde Vaucelles : 1 rue Brainville Messes : dimanche et fêtes\nd'obligation 10h30, mardi 19h00, mercredi 11h00 et 19h00, jeudi 9h00 et\n19h00, vendredi\n11h00 et 19h00 et samedi ",contact:"",source:"amdg"},
+{ville:"Caen",dept:"14 – Calvados",diocese:"Bayeux et Lisieux",lieu:"Église Saint-Michel de Vaucelles",adresse:"1 rue Brainville",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Bonechi et Proust",horaires:"Dim. et fêtes 10h30",contact:"09 83 73 87 37",source:"initial_manual"},
+{ville:"AURILLAC",dept:"15",diocese:"Saint-Flour",lieu:"15000 - Chapelle\nde la Sainte Famille : 22, rue du Monastère : à proximité\nde l'abbatiale Saint-Géraud SP\n- depuis 09/20",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"15000 - Chapelle\nde la Sainte Famille : 22, rue du Monastère : à proximité\nde l'abbatiale Saint-Géraud SP\n- depuis 09/2007 Messes : 2 ème et 3 ème dimanche du mois 9h30 Célébrant : C hanoine Dupuis ( ",contact:"",source:"amdg"},
+{ville:"Aurillac",dept:"15 – Cantal",diocese:"Saint-Flour",lieu:"Chapelle de la Sainte-Famille",adresse:"22 rue du Monastère",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Chanoine Dupuis",horaires:"2e et 3e dim. du mois 9h30",contact:"04 71 48 27 16",source:"initial_manual"},
+{ville:"ANGOULEME",dept:"16",diocese:"Angoulême",lieu:"16000 - Eglise Notre-Dame\nd'Obézine : rue du Père Deval SP\n- depuis 09/2007 Messes : dimanche et fêtes 10h00 ; lundi\nà v",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"16000 - Eglise Notre-Dame\nd'Obézine : rue du Père Deval SP\n- depuis 09/2007 Messes : dimanche et fêtes 10h00 ; lundi\nà vendredi 18h30 (vérifier\navant) , samedi 11h00 Célébrant : Abbé Jean-Baptiste Tex",contact:"",source:"amdg"},
+{ville:"Angoulême",dept:"16 – Charente",diocese:"Angoulême",lieu:"Église Notre-Dame d'Obézine",adresse:"Rue du Père Deval",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Jean-Baptiste Texier",horaires:"Dim. et fêtes 10h00",contact:"06 99 09 09 41",source:"initial_manual"},
+{ville:"Angoulême",dept:"16 – Charente",diocese:"Angoulême",lieu:"Chapelle Saint-Aptone",adresse:"355-357 rue de Périgueux / 6 bd Chanzy",rite:"tridentin",langue:"latin",communaute:"Fraternité de la Transfiguration",celebrant:"Fraternité de la Transfiguration",horaires:"Voir site",contact:"05 45 92 81 55",source:"initial_manual"},
+{ville:"LA ROCHELLE",dept:"17",diocese:"La Rochelle et Saintes",lieu:"17000 - Chapelle\nSaint-Maurice : 150 avenue Carnot SP\n- depuis 11/2018 Messes : dimanche et fêtes 18h00 Confessions : av",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"17000 - Chapelle\nSaint-Maurice : 150 avenue Carnot SP\n- depuis 11/2018 Messes : dimanche et fêtes 18h00 Confessions : avant\net après la messe Célébrant : Chanoine Laurent Jestin (ICRSP) Renseignements",contact:"",source:"amdg"},
+{ville:"La Rochelle",dept:"17 – Charente-Maritime",diocese:"La Rochelle et Saintes",lieu:"Chapelle Saint-Maurice",adresse:"150 avenue Carnot",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Laurent Jestin",horaires:"Dim. et fêtes 18h00",contact:"06 20 78 34 80",source:"initial_manual"},
+{ville:"BOURGES",dept:"18",diocese:"Bourges",lieu:"18000 - Eglise\nNotre-Dame -\nrue Notre-Dame : à côté du\nTribunal de Commerce (Dimanche et fête : parking gratuit aux '3\nP",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"18000 - Eglise\nNotre-Dame -\nrue Notre-Dame : à côté du\nTribunal de Commerce (Dimanche et fête : parking gratuit aux '3\nP'tits Cochons' 29 avenue Jean Jaurés) Messes : dimanche et\nfêtes 9h00 (basse) et",contact:"",source:"amdg"},
+{ville:"Bourges",dept:"18 – Cher",diocese:"Bourges",lieu:"Église Notre-Dame",adresse:"Rue Notre-Dame",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Jouachim et Le Morvan",horaires:"Dim. 9h00 et 10h30",contact:"09 87 77 61 13",source:"initial_manual"},
+{ville:"BRIVE LA GAILLARDE",dept:"19",diocese:"Tulle",lieu:"19100 - Église\nSaint Paul du Rivet : impasse des Arcades Messes : dimanche et\nfêtes 11h00 (chantée) Confessions : dimanc",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"19100 - Église\nSaint Paul du Rivet : impasse des Arcades Messes : dimanche et\nfêtes 11h00 (chantée) Confessions : dimanche à partir de 10h30 Célébrant : Chanoine\nThibault Pérez ( ICRSP ) Renseignement",contact:"",source:"amdg"},
+{ville:"Brive-la-Gaillarde",dept:"19 – Corrèze",diocese:"Tulle",lieu:"Église Saint-Paul du Rivet",adresse:"Impasse des Arcades",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Thibault Pérez",horaires:"Dim. et fêtes 11h00",contact:"06 95 49 45 46",source:"initial_manual"},
+{ville:"ACY LE HAUT",dept:"2",diocese:"Soisson, Laon, Saint-Quentin",lieu:"02280 - Eglise\nparoissiale Saint-Médard : à 9 km de Soisson, 51\nkm de Château-Thierry SP\n- depuis 11/2010 Messes : deux ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"02280 - Eglise\nparoissiale Saint-Médard : à 9 km de Soisson, 51\nkm de Château-Thierry SP\n- depuis 11/2010 Messes : deux dimanches par mois 10h30 [ Agenda sur le site du diocèse ] Association de fidèle",contact:"",source:"amdg"},
+{ville:"DIJON",dept:"21",diocese:"Dijon",lieu:"21000 - Chapelle\nSaint-André : 5 place Saint-Michel Messes :  lundi 18h30, mardi 7h00, mercredi\n18h30, jeudi 7h30 Activi",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"21000 - Chapelle\nSaint-André : 5 place Saint-Michel Messes :  lundi 18h30, mardi 7h00, mercredi\n18h30, jeudi 7h30 Activités : Schola\ngrégorienne, chorale polyphonique, catéchisme pour tous\nles âges, p",contact:"",source:"amdg"},
+{ville:"Dijon",dept:"21 – Côte-d'Or",diocese:"Dijon",lieu:"Chapelle Saint-André",adresse:"5 place Saint-Michel",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Thibaut de Ternay",horaires:"En semaine",contact:"06 72 77 15 06",source:"initial_manual"},
+{ville:"Flavigny-sur-Ozerain",dept:"21 – Côte-d'Or",diocese:"Dijon",lieu:"Abbaye Saint-Joseph de Clairval",adresse:"60 km au NO de Dijon",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"Communauté bénédictine",horaires:"Dim. 6h20, 8h00 et 9h00 (2e/4e dim.)",contact:"03 80 96 22 31",source:"initial_manual"},
+{ville:"Fontaines-lès-Dijon",dept:"21 – Côte-d'Or",diocese:"Dijon",lieu:"Sanctuaire Notre-Dame de Miséricorde",adresse:"Place des Feuillants",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Thibaut de Ternay",horaires:"Dim. et fêtes 10h00",contact:"06 72 77 15 06",source:"initial_manual"},
+{ville:"SAINT",dept:"22",diocese:"Tréguier - Saint Brieuc",lieu:"BRIEUC - 22000 - Eglise Saint Vincent\nde Paul : 6 rue\nThéodore Botrel SP - depuis\n09/2007 Messes : dimanche et fêtes\n10h",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"BRIEUC - 22000 - Eglise Saint Vincent\nde Paul : 6 rue\nThéodore Botrel SP - depuis\n09/2007 Messes : dimanche et fêtes\n10h30 ; vendredi 12h15 (de Requiem) ,\nsamedi 11h30 (pour le Salut de\nFrance et pour",contact:"",source:"amdg"},
+{ville:"Saint-Brieuc",dept:"22 – Côtes-d'Armor",diocese:"Tréguier–Saint-Brieuc",lieu:"Église Saint-Vincent-de-Paul",adresse:"6 rue Théodore Botrel",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Damien de la Pintière",horaires:"Dim. et fêtes 10h30",contact:"06 38 91 04 28",source:"initial_manual"},
+{ville:"Bergerac",dept:"24 – Dordogne",diocese:"Périgueux",lieu:"Chapelle Notre-Dame-de-la-Paix",adresse:"Rue Albert Thomas",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Prêtre de la Fraternité Saint-Pierre",horaires:"Dim. et fêtes 9h00",contact:"05 57 81 83 30",source:"initial_manual"},
+{ville:"Bergerac",dept:"24 – Dordogne",diocese:"Périgueux",lieu:"Prieuré Sainte-Jeanne-d'Arc — Église Saint-Jean-des-Cordeliers",adresse:"2 rue Clairat",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"05 53 22 56 89",source:"initial_manual"},
+{ville:"PÉRIGUEUX",dept:"24",diocese:"Périgueux",lieu:"24000 - Eglise\nSaint Jean\n- Saint Charles de Toulon : rue de\nl'Abîme : quartier du Toulon Messes : dimanche et fêtes 11h",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"24000 - Eglise\nSaint Jean\n- Saint Charles de Toulon : rue de\nl'Abîme : quartier du Toulon Messes : dimanche et fêtes 11h00\n; lundi, mardi, jeudi, vendredi (sauf 1 er vendredi) et\nsamedi 11h30 Confessi",contact:"",source:"amdg"},
+{ville:"Périgueux",dept:"24 – Dordogne",diocese:"Périgueux",lieu:"Église Saint-Jean–Saint-Charles",adresse:"Rue de l'Abîme, quartier du Toulon",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Lino Ferreira",horaires:"Dim. et fêtes 11h00",contact:"05 53 53 30 34",source:"initial_manual"},
+{ville:"Thiviers",dept:"24 – Dordogne",diocese:"Périgueux",lieu:"Chapelle du Couvent Saint-Paul",adresse:"6 rue Bertran-de-Born",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbés Touche et Quinquis",horaires:"Dim. et fêtes 10h30",contact:"",source:"initial_manual"},
+{ville:"BESANÇON",dept:"25",diocese:"Besançon",lieu:"25000 - Eglise\nSainte Madeleine - 1, rue de la Madeleine : Quartier\nBattant Messes : dimanche et fêtes\n10h00 (chantée) e",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"25000 - Eglise\nSainte Madeleine - 1, rue de la Madeleine : Quartier\nBattant Messes : dimanche et fêtes\n10h00 (chantée) et 19h00 ( sauf\nexceptions, vérifier sur le site ), lundi 19h00, mardi 9h00 , mer",contact:"",source:"amdg"},
+{ville:"Besancon",dept:"25 – Doubs",diocese:"Besançon",lieu:"Chapelle Saint-Ferréol-et-Saint-Ferjeux",adresse:"14 rue Lyautey",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"03 80 63 73 75",source:"portelatine"},
+{ville:"Besançon",dept:"25 – Doubs",diocese:"Besançon",lieu:"Église Sainte-Madeleine",adresse:"1 rue de la Madeleine, quartier Battant",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Moreau et Sallé",horaires:"Dim. 10h00 et 19h00",contact:"03 81 53 73 76",source:"initial_manual"},
+{ville:"Châtillon-Saint-Jean",dept:"26 – Drôme",diocese:"Valence",lieu:"Abbaye Notre-Dame-de-Triors",adresse:"8 km NE de Romans-sur-Isère",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"Communauté bénédictine",horaires:"Dim. 7h10 et 10h15",contact:"04 75 71 43 39",source:"initial_manual"},
+{ville:"Montélimar",dept:"26 – Drôme",diocese:"Valence",lieu:"Chapelle Notre-Dame-de-la-Rose",adresse:"36 avenue Saint-Martin",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Martin Daniélou",horaires:"Dim. et fêtes 10h00",contact:"07 83 44 53 97",source:"initial_manual"},
+{ville:"VALENCE",dept:"26",diocese:"Valence",lieu:"26000 - Eglise\nNotre-Dame : 43 rue Berthelot SP\n- depuis 05/2011 Messes : dimanche et\nfêtes 11h00 Activités : Schola gré",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"26000 - Eglise\nNotre-Dame : 43 rue Berthelot SP\n- depuis 05/2011 Messes : dimanche et\nfêtes 11h00 Activités : Schola grégorienne et polyphonique Célébrant : Prêtres du diocèse Renseignements : - Site\n",contact:"",source:"amdg"},
+{ville:"Valence",dept:"26 – Drôme",diocese:"Valence",lieu:"Église Notre-Dame",adresse:"43 rue Berthelot",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Prêtres du diocèse",horaires:"Dim. et fêtes 11h00",contact:"",source:"initial_manual"},
+{ville:"LES BAUX DE BRETEUIL",dept:"27",diocese:"Evreux",lieu:"27160 - Chapelle\nde la Maison Notre-Dame des Familles : 7, rue de la Mare aux Loups, Le\nHamelet : à 20 km au nord-est\nde",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"27160 - Chapelle\nde la Maison Notre-Dame des Familles : 7, rue de la Mare aux Loups, Le\nHamelet : à 20 km au nord-est\nde L'Aigle SP\n- depuis 11/2012 Messes : dimanche\net fêtes 11h00 (il peut y\navoir d",contact:"",source:"amdg"},
+{ville:"Vernon",dept:"27 – Eure",diocese:"Évreux",lieu:"Collégiale Notre-Dame",adresse:"Rue du Chapitre",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés d'Harcourt et Laurant",horaires:"Dim. 9h15",contact:"06 02 71 94 03",source:"initial_manual"},
+{ville:"CHARTRES",dept:"28",diocese:"Chartres",lieu:"28000 - Eglise\nSaint Aignan :\nplace Saint-Aignan [Dimanches et fêtes : sonner à la borne\nd'accès au coeur de ville en pr",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"28000 - Eglise\nSaint Aignan :\nplace Saint-Aignan [Dimanches et fêtes : sonner à la borne\nd'accès au coeur de ville en précisant que vous vous\nrendez à la messe à Saint-Aignan. En semaine,\nprivilégier ",contact:"",source:"amdg"},
+{ville:"Chartres",dept:"28 – Eure-et-Loir",diocese:"Chartres",lieu:"Église Saint-Aignan",adresse:"Place Saint-Aignan",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Louis-Dominique Kegelin",horaires:"Dim. et fêtes 10h00",contact:"06 41 16 04 34",source:"initial_manual"},
+{ville:"Courtalain",dept:"28 – Eure-et-Loir",diocese:"Chartres",lieu:"Séminaire Saint-Vincent-de-Paul (IBP)",adresse:"20 place Alexandre-Rillié",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbés du séminaire de l'IBP",horaires:"Dim. 7h20 et 18h30",contact:"02 37 98 82 58",source:"initial_manual"},
+{ville:"Manou",dept:"28 – Eure-et-Loir",diocese:"Chartres",lieu:"Église paroissiale Saint-Pierre-et-Saint-Paul",adresse:"7 km au nord de La Loupe",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbé Arnaud Forestier",horaires:"Dim. et fêtes 10h30",contact:"07 68 72 55 24",source:"initial_manual"},
+{ville:"Brest",dept:"29 – Finistère",diocese:"Quimper",lieu:"Église Saint-Michel",adresse:"6 rue d'Aboville",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Gérald de Servigny",horaires:"Dim. et fêtes 10h45",contact:"06 67 23 27 72",source:"initial_manual"},
+{ville:"QUIMPER",dept:"29",diocese:"Quimper",lieu:"29000 - Eglise\nSaint-Mathieu SP\n- depuis 09/2016 Messes : dimanche et fêtes\nd'obligation 10h30 (chantée) Activtés\n: Scho",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"29000 - Eglise\nSaint-Mathieu SP\n- depuis 09/2016 Messes : dimanche et fêtes\nd'obligation 10h30 (chantée) Activtés\n: Schola\ngrégorienne\net polyphonique, catéchisme pour les enfants,\ncollégiens, lycéens",contact:"",source:"amdg"},
+{ville:"Quimper",dept:"29 – Finistère",diocese:"Quimper",lieu:"Église Saint-Mathieu",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Prêtres du diocèse",horaires:"Dim. et fêtes 10h30",contact:"02 98 92 00 50",source:"initial_manual"},
+{ville:"Ajaccio",dept:"2A – Corse-du-Sud",diocese:"Ajaccio",lieu:"Chapelle Notre-Dame de Lorette",adresse:"Chemin du Loreto",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Hervé Mercury",horaires:"Dim. et fêtes 10h00",contact:"06 08 18 15 64",source:"initial_manual"},
+{ville:"Bastia",dept:"2B – Haute-Corse",diocese:"Ajaccio",lieu:"Chapelle Notre-Dame de Monserrato",adresse:"73 chemin de Scala Santa",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Sébastien Dufour",horaires:"Dim. et fêtes 10h30",contact:"06 87 65 84 47",source:"initial_manual"},
+{ville:"BRESSOLLES",dept:"3",diocese:"Moulins",lieu:"03000 - Eglise du\nSacré-Coeur : 5 place\nde l'église SP\n- depuis 10/2007 Messes : dimanche et fêtes 11h15 (Grand'messe), ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"03000 - Eglise du\nSacré-Coeur : 5 place\nde l'église SP\n- depuis 10/2007 Messes : dimanche et fêtes 11h15 (Grand'messe), vendredi\n18h30, samedi 9h00 Confessions : samedi 9h30\nà 10h30 Adoration : chaque",contact:"",source:"amdg"},
+{ville:"Alès",dept:"30 – Gard",diocese:"Nîmes",lieu:"Chapelle Saint-Gilles",adresse:"1353 ancien chemin de Mons",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré Saint-Bénezet, Sorgues",contact:"09 83 96 69 63",source:"initial_manual"},
+{ville:"Diocèse de Nîmes",dept:"30",diocese:"Nîmes",lieu:"Chapelle\nSainte-Eugénie | à\ncôté de la Cathédrale | SP - depuis\n12/2012 | Messes | (chantée) | Confessions : | Activités",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Chapelle\nSainte-Eugénie | à\ncôté de la Cathédrale | SP - depuis\n12/2012 | Messes | (chantée) | Confessions : | Activités : | Cercle\nSaint Louis | Célébrant\n: | (ICRSP) | (diocèse) | Renseignements : |",contact:"",source:"amdg"},
+{ville:"Nîmes",dept:"30 – Gard",diocese:"Nîmes",lieu:"Chapelle Sainte-Eugénie",adresse:"3 rue Sainte-Eugénie",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine de Dainville et abbé Gentil",horaires:"Dim. 9h00 et 10h15",contact:"06 45 86 99 76",source:"initial_manual"},
+{ville:"TOULOUSE",dept:"31",diocese:"Toulouse",lieu:"31000 - Chapelle\nSaint-Jean-Baptiste : 7 rue\nAntonin Mercié :\nangle de la rue d'Alsace et du musée des Augustins Messes ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"31000 - Chapelle\nSaint-Jean-Baptiste : 7 rue\nAntonin Mercié :\nangle de la rue d'Alsace et du musée des Augustins Messes : dimanche et fêtes\n8h15, 10h00 (chantée) et 18h00, lundi 19h00, mardi et mercre",contact:"",source:"amdg"},
+{ville:"Toulouse",dept:"31 – Haute-Garonne",diocese:"Toulouse",lieu:"Chapelle Saint-Jean-Baptiste",adresse:"7 rue Antonin-Mercié",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoines Colomb et Jantaud",horaires:"Dim. 8h15, 10h00 et 18h00",contact:"07 65 70 98 56",source:"initial_manual"},
+{ville:"AUCH",dept:"32",diocese:"d’Auch",lieu:"32000 - Chapelle\nSaint Joseph - Maison diocésaine - rue du 4\nseptembre : à droite dans la cour puis 1er\nétage de la Mais",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"32000 - Chapelle\nSaint Joseph - Maison diocésaine - rue du 4\nseptembre : à droite dans la cour puis 1er\nétage de la Maison\ndiocésaine Messes : dimanches et fêtes 10h30 ou 17h30 (vérifier avant) Associ",contact:"",source:"amdg"},
+{ville:"Auch",dept:"32 – Gers",diocese:"Auch",lieu:"Chapelle Saint-Joseph (Maison diocésaine)",adresse:"Rue du 4-Septembre",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbés Cenzon, Sarniguet, Mgr Maigné",horaires:"Dim. 10h30 ou 17h30 (variable)",contact:"06 75 08 01 46",source:"initial_manual"},
+{ville:"Arcachon",dept:"33 – Gironde",diocese:"Bordeaux",lieu:"Basilique Notre-Dame",adresse:"Centre d'Arcachon",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Prêtres de la Fraternité Saint-Pierre",horaires:"Dim. et fêtes 18h00 (saison)",contact:"05 57 81 83 30",source:"initial_manual"},
+{ville:"BORDEAUX",dept:"33",diocese:"Bordeaux",lieu:"33000 - Eglise\nSaint Bruno : place du 11 novembre ED\n- depuis 09/2005 Messes : dimanche et\nfêtes d'obligation 8h30, 10h3",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"33000 - Eglise\nSaint Bruno : place du 11 novembre ED\n- depuis 09/2005 Messes : dimanche et\nfêtes d'obligation 8h30, 10h30 ( chantée ),\n12h15 et 18h30 ; lundi à vendredi 9h00 et 19h00, samedi\n12h00 [ V",contact:"",source:"amdg"},
+{ville:"Bordeaux",dept:"33 – Gironde",diocese:"Bordeaux",lieu:"Église Saint-Bruno",adresse:"Place du 11-Novembre",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Le Coq, Comby-Vincent, Damaggio, Girard-Bon",horaires:"Dim. 8h30, 10h30, 12h15, 18h30",contact:"05 57 81 83 30",source:"initial_manual"},
+{ville:"Bordeaux",dept:"33 – Gironde",diocese:"Bordeaux",lieu:"Église Saint-Éloi (paroisse personnelle)",adresse:"Rue Saint-James",rite:"tridentin",langue:"latin",communaute:"IBP",celebrant:"Abbés Lutz-Wiest, Cartier, Touche",horaires:"Dim. 8h30, 10h00, 19h00",contact:"06 52 36 56 15",source:"initial_manual"},
+{ville:"Bordeaux",dept:"33 – Gironde",diocese:"Bordeaux",lieu:"Chapelle Notre-Dame-du-Bon-Conseil",adresse:"62 rue de l'Isle-Ferme",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"05 56 57 93 93",source:"portelatine"},
+{ville:"Béziers",dept:"34 – Hérault",diocese:"Montpellier",lieu:"Église Saint-Jacques",adresse:"51 rue Saint-Jacques",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Paul Le Berthon",horaires:"Dim. et fêtes 10h30",contact:"06 52 49 26 90",source:"initial_manual"},
+{ville:"Diocèse de Montpellier",dept:"34",diocese:"Montpellier",lieu:"Eglise Sainte-Eulalie | Messes | (chantée) | Activités : | Europa-Scouts | Célébrant : | ICRSP | Renseignements : | (Cha",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise Sainte-Eulalie | Messes | (chantée) | Activités : | Europa-Scouts | Célébrant : | ICRSP | Renseignements : | (Chanoine\nWaché de Corbie) | Institut\ndu Christ-Roi | Site : | https://icrspfrance.f",contact:"",source:"amdg"},
+{ville:"Montpellier",dept:"34 – Hérault",diocese:"Montpellier",lieu:"Église Sainte-Eulalie",adresse:"12 rue de la Merci",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Similien Waché de Corbie",horaires:"Dim. et fêtes 10h30",contact:"06 30 70 77 53",source:"initial_manual"},
+{ville:"RENNES",dept:"35",diocese:"Rennes",lieu:"35000 - Chapelle\nSaint-François : 43\nrue de Redon Messes : dimanche et fêtes d'obligation 9h00 (basse) ,\n10h30 (chantée)",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"35000 - Chapelle\nSaint-François : 43\nrue de Redon Messes : dimanche et fêtes d'obligation 9h00 (basse) ,\n10h30 (chantée) et 18h30 (basse) ; lundi, mardi, jeudi et vendredi 19h00, samedi 11h00 Adoratio",contact:"",source:"amdg"},
+{ville:"Rennes",dept:"35 – Ille-et-Vilaine",diocese:"Rennes",lieu:"Chapelle Saint-François",adresse:"43 rue de Redon",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoines Maïdanatz, de la Pintière",horaires:"Dim. 9h00, 10h30, 18h30",contact:"06 80 41 06 46",source:"initial_manual"},
+{ville:"CHATEAUROUX",dept:"36",diocese:"Bourges",lieu:"36000 - Eglise\nSaint-Christophe -\nPlace Saint-Christophe SP\n- depuis 02/2012 Messes : dimanche et fêtes 10h30 Confession",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"36000 - Eglise\nSaint-Christophe -\nPlace Saint-Christophe SP\n- depuis 02/2012 Messes : dimanche et fêtes 10h30 Confession : 9h45 à 10h20 les jours de messe Activités : Scola\ngrégorienne, instruction re",contact:"",source:"amdg"},
+{ville:"Châteauroux",dept:"36 – Indre",diocese:"Bourges",lieu:"Église Saint-Christophe",adresse:"Place Saint-Christophe",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Manuel Vaz Guedes",horaires:"Dim. et fêtes 10h30",contact:"02 48 67 01 44",source:"initial_manual"},
+{ville:"Fontgombault",dept:"36 – Indre",diocese:"Bourges",lieu:"Abbaye Notre-Dame de Fontgombault",adresse:"69 km à l'ouest de Châteauroux",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"Communauté bénédictine",horaires:"Quotidien 7h00, 7h30, 10h00",contact:"02 54 37 12 03",source:"initial_manual"},
+{ville:"PARCAY",dept:"37",diocese:"Tours",lieu:"MESLAY - 37290 - Eglise\nSaint-Pierre : place de l'église : sortie 20 sur l'A10 \"Tours Nord\" Messes : dimanche et fêtes 8",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"MESLAY - 37290 - Eglise\nSaint-Pierre : place de l'église : sortie 20 sur l'A10 \"Tours Nord\" Messes : dimanche et fêtes 8h30, 10h00 (chantée) , 11h45 et 18h15 ;\nlundi\n19h00,\nmardi 9h00, mercredi 6h45, ",contact:"",source:"amdg"},
+{ville:"Parçay-Meslay",dept:"37 – Indre-et-Loire",diocese:"Tours",lieu:"Église Saint-Pierre",adresse:"Sortie 20 A10 « Tours Nord »",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Lion et de Maillard-Taillefer",horaires:"Dim. 8h30, 10h00, 11h45, 18h15",contact:"",source:"initial_manual"},
+{ville:"GRENOBLE",dept:"38",diocese:"Grenoble",lieu:"38000 - Collégiale\nSaint-André : place\nSaint-André Messes : dimanche et fêtes\n8h30 et 10h30 (chantée) [Pas de messe trad",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"38000 - Collégiale\nSaint-André : place\nSaint-André Messes : dimanche et fêtes\n8h30 et 10h30 (chantée) [Pas de messe traditionnelle le 1er dimanche du mois à 10h30] ; lundi à vendredi 18h30,\nsamedi\n9h3",contact:"",source:"amdg"},
+{ville:"Grenoble",dept:"38 – Isère",diocese:"Grenoble",lieu:"Collégiale Saint-André",adresse:"Place Saint-André",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Patrick Faure",horaires:"Dim. 8h30 et 10h30",contact:"",source:"initial_manual"},
+{ville:"DOLE",dept:"39",diocese:"Saint Claude",lieu:"39100 - Eglise\nParoissiale : rue de l'église, Quartier d'Azans SP\n- depuis 10/2008 Messes : 2 ème et 4 ème dimanche du m",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"39100 - Eglise\nParoissiale : rue de l'église, Quartier d'Azans SP\n- depuis 10/2008 Messes : 2 ème et 4 ème dimanche du mois\n10h00 Célébrant : Abbé Louis-Marie Sallé (FSSP) Renseignements : 03 81 53 73",contact:"",source:"amdg"},
+{ville:"Dole",dept:"39 – Jura",diocese:"Saint-Claude",lieu:"Église paroissiale (quartier d'Azans)",adresse:"",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Louis-Marie Sallé",horaires:"2e et 4e dim. du mois 10h00",contact:"03 84 72 20 25",source:"initial_manual"},
+{ville:"DIGNE LES BAINS",dept:"4",diocese:"Digne, Riez et Sisteron",lieu:"04000 - Chapelle du\nSaint-Esprit SP\n- depuis 09/2009 Messes : 1 er et 3 ème dimanche du\nmois 9h30 Célébrant : Abbé Charl",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"04000 - Chapelle du\nSaint-Esprit SP\n- depuis 09/2009 Messes : 1 er et 3 ème dimanche du\nmois 9h30 Célébrant : Abbé Charles Honoré (diocèse) Renseignements : 06 68 42 75 77 (M. Mme Aupetit) ou 06 77 90",contact:"",source:"amdg"},
+{ville:"CLERMONT",dept:"40",diocese:"d’Aire et Dax",lieu:"40180 - Eglise Sainte\nMadeleine :\nà Dax, prendre la route\nd'Orthez, puis à 10 km prendre Pomarez-Amou ; Clermont est\nind",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"40180 - Eglise Sainte\nMadeleine :\nà Dax, prendre la route\nd'Orthez, puis à 10 km prendre Pomarez-Amou ; Clermont est\nindiqué au carrefour\nmême Messes : dimanche et fêtes 10h00 (chantée) et 18h30 (bass",contact:"",source:"amdg"},
+{ville:"Clermont (Dax)",dept:"40 – Landes",diocese:"Aire et Dax",lieu:"Église Sainte-Madeleine",adresse:"Route d'Orthez",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Reyes-Barrios et Matschek",horaires:"Dim. 10h00 (chantée) et 18h30",contact:"05 58 89 84 41",source:"initial_manual"},
+{ville:"BLOIS",dept:"41",diocese:"Blois",lieu:"41000 - Eglise\nparoissiale Notre Dame\ndes Grouëts :\nroute de Tours, à la sortie ouest de Blois SP\n- depuis 12/2008 Messe",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"41000 - Eglise\nparoissiale Notre Dame\ndes Grouëts :\nroute de Tours, à la sortie ouest de Blois SP\n- depuis 12/2008 Messes : dimanche et fêtes 10h00 Célébrant : Abbé\nJean-Pierre Gac ( FSTB ) Renseignem",contact:"",source:"amdg"},
+{ville:"Blois",dept:"41 – Loir-et-Cher",diocese:"Blois",lieu:"Église Notre-Dame-des-Grouëts",adresse:"Route de Tours",rite:"tridentin",langue:"latin",communaute:"FSTB",celebrant:"Abbé Jean-Pierre Gac",horaires:"Dim. et fêtes 10h00",contact:"02 54 20 91 58",source:"initial_manual"},
+{ville:"SAINT",dept:"42",diocese:"Saint-Étienne",lieu:"ÉTIENNE - 42000 - Chapelle\nSaint-Bernard : 9 rue Buisson Messes : dimanche et fêtes 10h45 (chantée) et\n19h00* ; lundi 18",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"ÉTIENNE - 42000 - Chapelle\nSaint-Bernard : 9 rue Buisson Messes : dimanche et fêtes 10h45 (chantée) et\n19h00* ; lundi 18h30, mardi 8h00* et 18h30, mercredi 8h00* et\n18h30, jeudi 18h30, vendredi 8h00* ",contact:"",source:"amdg"},
+{ville:"Saint-Étienne",dept:"42 – Loire",diocese:"Saint-Étienne",lieu:"Chapelle Saint-Bernard",adresse:"9 rue Buisson",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Marchand, Chassagne, Daniélou",horaires:"Dim. 10h45 et 19h00",contact:"04 77 41 79 62",source:"initial_manual"},
+{ville:"LE PUY EN VELAY",dept:"43",diocese:"du Puy en Velay",lieu:"43000 - Chapelle de l'ancien\nMonastère des Clarisses : 2 rue Sainte Claire Messes : dimanche et fêtes 10h30 Célébrant : ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"43000 - Chapelle de l'ancien\nMonastère des Clarisses : 2 rue Sainte Claire Messes : dimanche et fêtes 10h30 Célébrant : Abbé Gabriele Steylaers ( diocèse ) Renseignements : 04 71 00 60 43 (Paroisse)",contact:"",source:"amdg"},
+{ville:"Le Puy-en-Velay",dept:"43 – Haute-Loire",diocese:"Le Puy-en-Velay",lieu:"Chapelle de l'ancien Monastère des Clarisses",adresse:"2 rue Sainte-Claire",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Gabriele Steylaers",horaires:"Dim. et fêtes 10h30",contact:"04 71 00 60 43",source:"initial_manual"},
+{ville:"NANTES",dept:"44",diocese:"Nantes",lieu:"44000 - Eglise\nSainte-Elisabeth : 43 rue de Coulmiers Messes : dimanche et fêtes 9h30 (chantée) , 16h30 (Messe des unité",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"44000 - Eglise\nSainte-Elisabeth : 43 rue de Coulmiers Messes : dimanche et fêtes 9h30 (chantée) , 16h30 (Messe des unités scoutes,\nvérifier avant) et\n18h00, lundi et mercredi 18h30, mardi 9h00* et 18h",contact:"",source:"amdg"},
+{ville:"Nantes",dept:"44 – Loire-Atlantique",diocese:"Nantes",lieu:"Église Sainte-Élisabeth",adresse:"43 rue de Coulmiers",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Garnier, Guillaume, Cœurderoy",horaires:"Dim. 9h30 et 18h00",contact:"02 40 37 55 95",source:"initial_manual"},
+{ville:"Nantes",dept:"44 – Loire-Atlantique",diocese:"Nantes",lieu:"Église Saint-Similien",adresse:"Place Saint-Similien",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Garnier, Guillaume, Cœurderoy",horaires:"Dim. et fêtes 11h00",contact:"02 40 37 55 95",source:"initial_manual"},
+{ville:"ORLEANS",dept:"45",diocese:"Orléans",lieu:"45000 - Eglise\nNotre-Dame de\nRecouvrance - 10 rue de Recouvrance : Centre ville SP - depuis\n09/2008 Messes : dimanche et",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"45000 - Eglise\nNotre-Dame de\nRecouvrance - 10 rue de Recouvrance : Centre ville SP - depuis\n09/2008 Messes : dimanche et\nfêtes 10h30 ; lundi, mardi, jeudi et vendredi 19h00,\nmercredi 7h00, samedi 11h3",contact:"",source:"amdg"},
+{ville:"Orléans",dept:"45 – Loiret",diocese:"Orléans",lieu:"Église Notre-Dame-de-Recouvrance",adresse:"10 rue de Recouvrance",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoines de Salaberry et Mahlberg",horaires:"Dim. et fêtes 10h30",contact:"06 66 42 43 89",source:"initial_manual"},
+{ville:"Baladou",dept:"46 – Lot",diocese:"Cahors",lieu:"Église paroissiale de l'Assomption",adresse:"",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Thibault Pérez",horaires:"Dim. et fêtes 8h45",contact:"06 95 49 45 46",source:"initial_manual"},
+{ville:"MECHMONT",dept:"46",diocese:"Cahors",lieu:"46150 - Eglise\nParoissiale Saint-Caprais Messes : dimanche et fêtes 17h00 Confessions : dimanche\nà partir de 16h40 Céléb",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"46150 - Eglise\nParoissiale Saint-Caprais Messes : dimanche et fêtes 17h00 Confessions : dimanche\nà partir de 16h40 Célébrant : Chanoine\nAdam-Sébastian D'Oyen-Gebert (ICRSP) Renseignements : 06 27 56 6",contact:"",source:"amdg"},
+{ville:"Mechmont",dept:"46 – Lot",diocese:"Cahors",lieu:"Église paroissiale Saint-Caprais",adresse:"",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine D'Oyen-Gebert",horaires:"Dim. et fêtes 17h00",contact:"06 27 56 64 31",source:"initial_manual"},
+{ville:"AGEN",dept:"47",diocese:"d’Agen",lieu:"47000 - Eglise\nNotre-Dame du Bourg : rue Montesquieu - dans le centre ville SP - depuis 02/2008 Messes : dimanche et fêt",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"47000 - Eglise\nNotre-Dame du Bourg : rue Montesquieu - dans le centre ville SP - depuis 02/2008 Messes : dimanche et fêtes 10h00 Célébrant : Chanoine\nAdam-Sébastian D'Oyen-Gebert (ICRSP) Renseignement",contact:"",source:"amdg"},
+{ville:"Agen",dept:"47 – Lot-et-Garonne",diocese:"Agen",lieu:"Église Notre-Dame-du-Bourg",adresse:"Rue Montesquieu",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine D'Oyen-Gebert",horaires:"Dim. et fêtes 10h00",contact:"06 27 56 64 31",source:"initial_manual"},
+{ville:"MENDE",dept:"48",diocese:"Mende",lieu:"48000 - Chapelle\nSaint-Dominique Messes :  un dimanche par mois 9h00 Célébrant : Abbé François de\nFroberville (diocèse) ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"48000 - Chapelle\nSaint-Dominique Messes :  un dimanche par mois 9h00 Célébrant : Abbé François de\nFroberville (diocèse) Renseignements : 04 66 49 13 99 (Paroisse) !\nProchaines messes : < Eté 2026 > : ",contact:"",source:"amdg"},
+{ville:"Mende",dept:"48 – Lozère",diocese:"Mende",lieu:"Chapelle Saint-Dominique",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé François de Froberville",horaires:"Un dimanche par mois 9h00",contact:"04 66 49 13 99",source:"initial_manual"},
+{ville:"Angers",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Église Notre-Dame-des-Victoires",adresse:"Place Imbach",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbé Hugues de Montjoye, Mgr Amiot",horaires:"Dim. 10h30",contact:"02 41 19 56 41",source:"initial_manual"},
+{ville:"Angers",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Chapelle Saint-Pie-X",adresse:"109 bis rue Jean-Jaurès",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré de Gastines",contact:"02 41 74 12 78",source:"initial_manual"},
+{ville:"Angers",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Oratoire Bienheureux-Noël-Pinot",adresse:"54 rue Delaâge",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"Association Noël Pinot",horaires:"Voir site",contact:"02 41 87 81 20",source:"initial_manual"},
+{ville:"Avrillé",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Monastère Saint-Joseph",adresse:"10 avenue Jeanne-de-Laval",rite:"tridentin",langue:"latin",communaute:"Dominicaines contemplatives",celebrant:"Dominicaines contemplatives d'Avrillé",horaires:"Voir site",contact:"02 41 74 12 78",source:"initial_manual"},
+{ville:"Bellevigne-en-Layon",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Prieuré Saint-Louis-Marie-Grignion-de-Montfort (Gastines)",adresse:"1 chemin de Gastines, Faye-d'Anjou",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"02 41 74 12 78",source:"initial_manual"},
+{ville:"Diocèse d’Angers",dept:"49",diocese:"d’Angers",lieu:"Eglise\nNotre-Dame des Victoires | Messes | Adoration du Saint-Sacrement : | Confessions : | Vêpres : | Activités : | Cél",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise\nNotre-Dame des Victoires | Messes | Adoration du Saint-Sacrement : | Confessions : | Vêpres : | Activités : | Célébrant : | (diocèse) | Renseignements : | (Presbytère) | 2. BEGROLLES-EN-MAUGES ",contact:"",source:"amdg"},
+{ville:"Saumur",dept:"49 – Maine-et-Loire",diocese:"Angers",lieu:"Église Saint-Lambert",adresse:"32 avenue de la Croix-de-Guerre",rite:"tridentin",langue:"latin",communaute:"FSTB",celebrant:"Abbés Veillon et Renoul",horaires:"Dim. et fêtes 10h00",contact:"06 83 79 57 97",source:"initial_manual"},
+{ville:"GAP",dept:"5",diocese:"Gap et Embrun",lieu:"05000 - Eglise\nSaint André dite des\nCordeliers Messes : dimanche et fêtes 10h00 ; semaine 8h30 Célébrant : Abbé\nLuc Pech",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"05000 - Eglise\nSaint André dite des\nCordeliers Messes : dimanche et fêtes 10h00 ; semaine 8h30 Célébrant : Abbé\nLuc Pecha et RP Thierry Forteleoni ( diocèse ) Renseignements : 04 92 22 33 95 (Presbytè",contact:"",source:"amdg"},
+{ville:"SAVIGNY",dept:"50",diocese:"Coutances",lieu:"50210 - Eglise\nNotre-Dame : à 11\nkm à l'est de Coutances et 23 km au sud-ouest\nde Saint-Lô SP - depuis\n01/2009 Messes : ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"50210 - Eglise\nNotre-Dame : à 11\nkm à l'est de Coutances et 23 km au sud-ouest\nde Saint-Lô SP - depuis\n01/2009 Messes : dimanche\net fêtes 10h30 (vérifier\navant) <!> La\nmesse n'est plus célébrée à Savi",contact:"",source:"amdg"},
+{ville:"Valognes",dept:"50 – Manche",diocese:"Coutances",lieu:"Chapelle de l'hôpital",adresse:"Avenue du 8-Mai-1945",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Michael McCowen",horaires:"Dim. et fêtes 10h30",contact:"06 56 67 76 10",source:"initial_manual"},
+{ville:"REIMS",dept:"51",diocese:"Reims",lieu:"51000 - Eglise\nSainte Jeanne d'Arc : rue\nde Verdun SP\n- depuis 10/2007 Messes : dimanche et fêtes 10h30 ;\nsamedi 10h30 C",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"51000 - Eglise\nSainte Jeanne d'Arc : rue\nde Verdun SP\n- depuis 10/2007 Messes : dimanche et fêtes 10h30 ;\nsamedi 10h30 Confessions : samedi\n11h45 à 12h15, dimanche 9h30\nà 10h15 Adoration du Saint-Sacr",contact:"",source:"amdg"},
+{ville:"Reims",dept:"51 – Marne",diocese:"Reims",lieu:"Église Sainte-Jeanne-d'Arc",adresse:"Rue de Verdun",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine François Journé",horaires:"Dim. et fêtes 10h30",contact:"06 52 55 77 31",source:"initial_manual"},
+{ville:"Beaumont-Pied-de-Bœuf",dept:"53 – Mayenne",diocese:"Laval",lieu:"Prieuré Notre-Dame-du-Sacré-Cœur (Moulin du Pin)",adresse:"Moulin du Pin",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"02 43 98 74 63",source:"initial_manual"},
+{ville:"Chémeré-le-Roi",dept:"53 – Mayenne",diocese:"Laval",lieu:"Couvent Saint-Thomas-d'Aquin",adresse:"2 route de Ballée",rite:"tridentin",langue:"latin",communaute:"FSVF",celebrant:"Fraternité Saint-Vincent-Ferrier",horaires:"Dim. 7h15 et 10h30",contact:"02 43 98 64 25",source:"initial_manual"},
+{ville:"LAVAL",dept:"53",diocese:"Laval",lieu:"53000 - Eglise\nParoissiale Notre-Dame\ndes Cordeliers : 4 place Notre-Dame ED\n- depuis 07/2007 Messes : dimanche et\nfêtes",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"53000 - Eglise\nParoissiale Notre-Dame\ndes Cordeliers : 4 place Notre-Dame ED\n- depuis 07/2007 Messes : dimanche et\nfêtes 10h30, vendredi 19h00, samedi 12h00 Confessions : samedi\n10h30 à 11h30, dimanch",contact:"",source:"amdg"},
+{ville:"La Roë",dept:"53 – Mayenne",diocese:"Laval",lieu:"Abbatiale Notre-Dame-de-la-Roë",adresse:"Entre Craon et La Guerche-de-Bretagne",rite:"tridentin",langue:"latin",communaute:"FSVF",celebrant:"Père Bernard-Marie Laisney",horaires:"Dim. 9h00 et 10h30",contact:"02 43 98 79 95",source:"initial_manual"},
+{ville:"Laval",dept:"53 – Mayenne",diocese:"Laval",lieu:"Église Notre-Dame-des-Cordeliers",adresse:"4 place Notre-Dame",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"RP Favelin (FSVF) et abbé du Faÿ (FSSP)",horaires:"Dim. 10h30 · ven. 19h00 · sam. 12h00",contact:"02 43 66 86 12",source:"initial_manual"},
+{ville:"NANCY",dept:"54",diocese:"Nancy et Toul",lieu:"54000 - Eglise\nMarie-Immaculée : 33 avenue du\nGénéral Leclerc SP\n- depuis 09/2007 Messes : dimanche et\nfêtes 9h00 (messe",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"54000 - Eglise\nMarie-Immaculée : 33 avenue du\nGénéral Leclerc SP\n- depuis 09/2007 Messes : dimanche et\nfêtes 9h00 (messe lue, vérifier avant sur le site) et\n10h30 (chantée) , lundi,\nmardi, mercredi, v",contact:"",source:"amdg"},
+{ville:"Nancy",dept:"54 – Meurthe-et-Moselle",diocese:"Nancy et Toul",lieu:"Église Marie-Immaculée",adresse:"33 avenue du Général-Leclerc",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Prêtre du diocèse",horaires:"Dim. 9h00 et 10h30",contact:"09 64 40 39 33",source:"initial_manual"},
+{ville:"Diocèse de Verdun",dept:"55",diocese:"Verdun",lieu:"Eglise Saint\nJean-Baptiste | SP\n- depuis 01/2008 Messes | Célébrant : | (FSSP) | Renseignements : | Abbé Garban | - Site",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise Saint\nJean-Baptiste | SP\n- depuis 01/2008 Messes | Célébrant : | (FSSP) | Renseignements : | Abbé Garban | - Site : | https://fssp-epinal.com/verdun/",contact:"",source:"amdg"},
+{ville:"Verdun",dept:"55 – Meuse",diocese:"Verdun",lieu:"Église Saint-Jean-Baptiste",adresse:"Avenue de la 42e-Division",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Xavier Garban",horaires:"2e dim. du mois 10h30",contact:"06 80 95 12 72",source:"initial_manual"},
+{ville:"VANNES",dept:"56",diocese:"Vannes",lieu:"56000 - Eglise\nSaint-Patern - rue Saint Patern Messes : dimanche et fêtes 9h15 ; mardi,\nmercredi,\njeudi\net vendredi\n18h3",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"56000 - Eglise\nSaint-Patern - rue Saint Patern Messes : dimanche et fêtes 9h15 ; mardi,\nmercredi,\njeudi\net vendredi\n18h30, 1 er samedi du mois 12h00 Activités : Chorale grégorienne et polyphonique,\nca",contact:"",source:"amdg"},
+{ville:"Vannes",dept:"56 – Morbihan",diocese:"Vannes",lieu:"Église Saint-Patern",adresse:"Rue Saint-Patern",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Abbés Fagot, Renoult, Portalis",horaires:"Dim. 9h15",contact:"02 97 47 16 84",source:"initial_manual"},
+{ville:"Ars-sur-Moselle",dept:"57 – Moselle",diocese:"Metz",lieu:"Chapelle Saint-Roch",adresse:"94 rue du Maréchal-Foch",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré de Nancy",contact:"09 75 64 56 83",source:"initial_manual"},
+{ville:"METZ",dept:"57",diocese:"Metz",lieu:"57000 - Eglise\nSaint Simon Saint Jude : 6, place de\nFrance SP\n- depuis 12/2008 Messes : dimanche\net fêtes d'obligation 1",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"57000 - Eglise\nSaint Simon Saint Jude : 6, place de\nFrance SP\n- depuis 12/2008 Messes : dimanche\net fêtes d'obligation 10h00 Confessions : dimanche à partir de 9h30 Activités : chorale polyphonique et",contact:"",source:"amdg"},
+{ville:"Metz",dept:"57 – Moselle",diocese:"Metz",lieu:"Église Saint-Simon-Saint-Jude",adresse:"6 place de France",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Mgr Kruijen, abbés Cerecki et Sauvonnet (FSSP)",horaires:"Dim. et fêtes 10h00",contact:"",source:"initial_manual"},
+{ville:"LILLE",dept:"59",diocese:"Lille et Diocèse de Cambrai",lieu:"59000 - Eglise Saint-Etienne : 46 rue de l'Hôpital Militaire Messes : dimanche 10h30 (chantée) et 18h30 ; mardi 12h30 et",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"59000 - Eglise Saint-Etienne : 46 rue de l'Hôpital Militaire Messes : dimanche 10h30 (chantée) et 18h30 ; mardi 12h30 et 19h00, mercredi 7h00 et 9h10, jeudi 9h00\net 12h30, vendredi 12h15 et 19h00, sam",contact:"",source:"amdg"},
+{ville:"La Chapelle-d'Armentières",dept:"59 – Nord",diocese:"Lille",lieu:"Maison Notre-Dame-de-Fatima",adresse:"201 chemin de la Pattinerie",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Pol Lecerf",horaires:"Dim. 8h30 et 10h30",contact:"03 20 44 17 41",source:"initial_manual"},
+{ville:"Lille",dept:"59 – Nord",diocese:"Lille",lieu:"Église Saint-Étienne",adresse:"46 rue de l'Hôpital-Militaire",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoines de Beaurepaire et Marchadier",horaires:"Dim. 10h30 et 18h30",contact:"06 32 42 35 80",source:"initial_manual"},
+{ville:"NICE",dept:"6",diocese:"Nice",lieu:"06300 - Eglise\nSaint Jacques le Majeur dite du Gesù :\n12, rue Droite / Place du Gésù dans le vieux Nice SP\n- depuis 09/2",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"06300 - Eglise\nSaint Jacques le Majeur dite du Gesù :\n12, rue Droite / Place du Gésù dans le vieux Nice SP\n- depuis 09/2012 Messes : dimanche et fêtes 9h00 (basse avec orgue) et 18h00 (basse) ;\nmardi,",contact:"",source:"amdg"},
+{ville:"BEAUVAIS",dept:"60",diocese:"Beauvais",lieu:"60000 - Eglise\nNotre-Dame\nde Marissel - rue Aimée\nBesnard SP\n- depuis 09/2006 Messes : dimanche\net fêtes\n11h00 ; jeudi 1",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"60000 - Eglise\nNotre-Dame\nde Marissel - rue Aimée\nBesnard SP\n- depuis 09/2006 Messes : dimanche\net fêtes\n11h00 ; jeudi 18h30, vendredi 18h30 et samedi 9h00 Confessions : avant et après les messes Ador",contact:"",source:"amdg"},
+{ville:"Beauvais",dept:"60 – Oise",diocese:"Beauvais",lieu:"Église Notre-Dame-de-Marissel",adresse:"Rue Aimée-Besnard",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Éric Boinet",horaires:"Dim. et fêtes 11h00",contact:"06 23 53 63 14",source:"initial_manual"},
+{ville:"Senlis",dept:"60 – Oise",diocese:"Beauvais",lieu:"Cathédrale Notre-Dame",adresse:"Place Notre-Dame",rite:"tridentin",langue:"latin",communaute:"ICRSP",celebrant:"Chanoine Adrien Mesureur",horaires:"1er dim. du mois 18h00",contact:"03 44 53 15 38",source:"initial_manual"},
+{ville:"Alencon",dept:"61 – Orne",diocese:"Séez",lieu:"Chapelle Notre-Dame du Sacré-Cœur",adresse:"15 avenue Rhin et Danube",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"02 43 98 74 63",source:"portelatine"},
+{ville:"CUISSAI",dept:"61",diocese:"Séez",lieu:"61250 - Chapelle\ndu Carmel - 31, rue de la Pérelle : 8 km au nord-ouest du centre\nd'Alençon SP\n- depuis 12/2007 Messes :",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"61250 - Chapelle\ndu Carmel - 31, rue de la Pérelle : 8 km au nord-ouest du centre\nd'Alençon SP\n- depuis 12/2007 Messes : dimanche et fêtes 10h00 ; lundi à samedi\n8h00 Célébrant : Abbé Bruno Deguisne (",contact:"",source:"amdg"},
+{ville:"Cuissai",dept:"61 – Orne",diocese:"Séez",lieu:"Chapelle du Carmel",adresse:"31 rue de la Pérelle",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Bruno Deguisne",horaires:"Dim. 10h00",contact:"02 33 26 15 66",source:"initial_manual"},
+{ville:"Sées",dept:"61 – Orne",diocese:"Séez",lieu:"Chapelle de l'Institut Croix des Vents",adresse:"55 rue d'Argentré",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Thomas Souville",horaires:"Dim. 9h00 et 10h00",contact:"02 33 28 43 80",source:"initial_manual"},
+{ville:"Boulogne-sur-Mer",dept:"62 – Pas-de-Calais",diocese:"Arras",lieu:"Église Saint-Louis",adresse:"56 rue Félix-Adam",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré de Croix",contact:"03 20 89 95 22",source:"initial_manual"},
+{ville:"WISQUES",dept:"62",diocese:"d’Arras",lieu:"62219 - Abbaye\nSaint-Paul de Wisques :\nrue de l'école : entre\nCalais et Béthune SP\n- depuis 10/2013 Messes : tous\nles jo",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"62219 - Abbaye\nSaint-Paul de Wisques :\nrue de l'école : entre\nCalais et Béthune SP\n- depuis 10/2013 Messes : tous\nles jours 7h00 (messe basse) , 10h00 (messe conventuelle) Vêpres : dimanche et grandes",contact:"",source:"amdg"},
+{ville:"Wisques",dept:"62 – Pas-de-Calais",diocese:"Arras",lieu:"Abbaye Saint-Paul",adresse:"Rue de l'École, entre Calais et Béthune",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"Communauté bénédictine",horaires:"Quotidien 7h00 et 10h00",contact:"03 21 12 28 50",source:"initial_manual"},
+{ville:"CLERMONT",dept:"63",diocese:"Clermont",lieu:"FERRAND - 63000 - Eglise\nSainte-Bernadette - 2, rue de la Parlette Messes : dimanche et fêtes 10h00 ; mardi 19h00,\nmercr",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"FERRAND - 63000 - Eglise\nSainte-Bernadette - 2, rue de la Parlette Messes : dimanche et fêtes 10h00 ; mardi 19h00,\nmercredi 9h00, jeudi et vendredi 19h00, samedi 9h00 Confessions : dimanche\n9h15 à 9h4",contact:"",source:"amdg"},
+{ville:"Clermont-Ferrand",dept:"63 – Puy-de-Dôme",diocese:"Clermont",lieu:"Église Sainte-Bernadette",adresse:"2 rue de la Parlette",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbé Arnaud Moura",horaires:"Dim. et fêtes 10h00",contact:"06 48 07 54 37",source:"initial_manual"},
+{ville:"Cournols",dept:"63 – Puy-de-Dôme",diocese:"Clermont",lieu:"Abbaye Notre-Dame de Randol",adresse:"20 km au sud de Clermont-Ferrand",rite:"tridentin",langue:"latin",communaute:"Bénédictins",celebrant:"Communauté bénédictine",horaires:"Quotidien 6h55 et 10h00",contact:"04 73 39 31 00",source:"initial_manual"},
+{ville:"Bayonne",dept:"64 – Pyrénées-Atlantiques",diocese:"Bayonne",lieu:"Église Saint-Amand",adresse:"52 avenue du Maréchal-Soult",rite:"tridentin",langue:"latin",communaute:"FSTB",celebrant:"Abbés d'Aigremont, Mehrkens, Mehrkens",horaires:"Dim. et fêtes 10h30",contact:"05 35 46 73 02",source:"initial_manual"},
+{ville:"PAU",dept:"64",diocese:"Bayonne",lieu:"64000 - Eglise\nSaint Louis de Gonzague - place Saint Louis de Gonzague SP\n- depuis 12/2009 Messes :\ndimanche et fêtes 8h",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"64000 - Eglise\nSaint Louis de Gonzague - place Saint Louis de Gonzague SP\n- depuis 12/2009 Messes :\ndimanche et fêtes 8h45 ( basse,\nhors vacances scolaires ) et 10h30 ; lundi 18h30, mardi 11h00,\nmercr",contact:"",source:"amdg"},
+{ville:"Pau",dept:"64 – Pyrénées-Atlantiques",diocese:"Bayonne",lieu:"Église Saint-Louis-de-Gonzague",adresse:"Place Saint-Louis-de-Gonzague",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Courtois, Rakoto, Roy",horaires:"Dim. 8h45 et 10h30",contact:"06 61 36 00 13",source:"initial_manual"},
+{ville:"Lourdes",dept:"65 – Hautes-Pyrénées",diocese:"Tarbes et Lourdes",lieu:"Église de l'Hospitalet (sanctuaire)",adresse:"3 route de Pau",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Cayla et Lefert",horaires:"Dim. 9h30",contact:"05 67 45 86 54",source:"initial_manual"},
+{ville:"TARBES",dept:"65",diocese:"Tarbes et Lourdes",lieu:"65000 - Chapelle\nSainte-Bernadette -\nMaison Saint-Paul (Maison diocésaine) - 51 rue\nde Traynes Messes : dimanche et fête",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"65000 - Chapelle\nSainte-Bernadette -\nMaison Saint-Paul (Maison diocésaine) - 51 rue\nde Traynes Messes : dimanche et fêtes 10h30 ;\nlundi 18h30, mardi 18h15, mercredi 11h15, 1 er jeudi du mois\n18h30, ve",contact:"",source:"amdg"},
+{ville:"Tarbes",dept:"65 – Hautes-Pyrénées",diocese:"Tarbes et Lourdes",lieu:"Chapelle Sainte-Bernadette (Maison Saint-Paul)",adresse:"51 rue de Traynes",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Luisier et Lefert",horaires:"Dim. et fêtes 10h30",contact:"05 67 45 86 54",source:"initial_manual"},
+{ville:"PERPIGNAN",dept:"66",diocese:"Perpignan",lieu:"66100 - Eglise\nSaint-Matthieu : 12,\nrue Grande La Monnaie SP\n- depuis 09/1988 Messes : dimanche et fêtes 10h30\n(grand-me",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"66100 - Eglise\nSaint-Matthieu : 12,\nrue Grande La Monnaie SP\n- depuis 09/1988 Messes : dimanche et fêtes 10h30\n(grand-messe), lundi 11h00, mardi et jeudi 9h00 et 11h00, mercredi 7h30\net 11h00, vendred",contact:"",source:"amdg"},
+{ville:"Perpignan",dept:"66 – Pyrénées-Orientales",diocese:"Perpignan",lieu:"Église Saint-Matthieu",adresse:"12 rue Grande-la-Monnaie",rite:"tridentin",langue:"latin",communaute:"FSSP",celebrant:"Abbés Cuchet, Déjean, Gaillard",horaires:"Dim. et fêtes 10h30",contact:"04 68 34 74 62",source:"initial_manual"},
+{ville:"STRASBOURG",dept:"67",diocese:"Strasbourg",lieu:"67000 - Eglise\nSaint Louis : 2, quai Charles Frey Messes : dimanche et fêtes 9h00 (chantée), 10h30 (chantée) et 19h00 (s",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"67000 - Eglise\nSaint Louis : 2, quai Charles Frey Messes : dimanche et fêtes 9h00 (chantée), 10h30 (chantée) et 19h00 (sauf\nété, Noël et Pâques) ; mardi à vendredi  18h30, samedi 9h00 Confessions : ma",contact:"",source:"amdg"},
+{ville:"Strasbourg",dept:"67 – Bas-Rhin",diocese:"Strasbourg",lieu:"Église Saint-Louis",adresse:"2 quai Charles-Frey",rite:"tridentin",langue:"latin",communaute:"MMD",celebrant:"Abbé Florent Molin",horaires:"Dim. 9h00, 10h30, 19h00",contact:"03 88 36 08 42",source:"initial_manual"},
+{ville:"COLMAR",dept:"68",diocese:"Strasbourg",lieu:"68000 - Eglise\nSaint Joseph : place Saint Joseph Messes : dimanche et fêtes 10h30\n; mardi 19h00 ( à confirmer ),\nmercred",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"68000 - Eglise\nSaint Joseph : place Saint Joseph Messes : dimanche et fêtes 10h30\n; mardi 19h00 ( à confirmer ),\nmercredi 9h45 (messe du catéchisme), jeudi 18h30, vendredi 7h00,\nsamedi 9h00 Adoration ",contact:"",source:"amdg"},
+{ville:"Anse",dept:"69 – Rhône",diocese:"Lyon",lieu:"Église Saint-Cyr",adresse:"Ambérieux-d'Azergues",rite:"tridentin",langue:"latin",communaute:"Capucins de Morgon",celebrant:"Capucins de Morgon",horaires:"Voir site",contact:"04 27 01 70 77",source:"initial_manual"},
+{ville:"LYON",dept:"69",diocese:"Lyon",lieu:"69005 - Collégiale\nSaint-Just : 41 rue des Farges - arrêt Funiculaire F1 les Minimes ou\nSaint-Just SP\n- depuis 12/2007 M",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"69005 - Collégiale\nSaint-Just : 41 rue des Farges - arrêt Funiculaire F1 les Minimes ou\nSaint-Just SP\n- depuis 12/2007 Messes : dimanche et\nfêtes 8h30 (rit lyonnais) ,\n10h00 et 19h30 ; lundi à jeudi 1",contact:"",source:"amdg"},
+{ville:"Reprise des horaires habituels le 31 août | 2. LYON",dept:"69",diocese:"Lyon",lieu:"69005 - Eglise\nSaint-Georges : 21, quai\nFulchiron - Métro\nCathédrale Saint-Jean - Vieux Lyon ED\n- depuis 09/1989 Messes ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"69005 - Eglise\nSaint-Georges : 21, quai\nFulchiron - Métro\nCathédrale Saint-Jean - Vieux Lyon ED\n- depuis 09/1989 Messes : dimanche et\nfêtes 8h30 (lue, rit\nlyonnais) ,\n10h00 (grand-messe), 12h00 (lue\na",contact:"",source:"amdg"},
+{ville:"CHALON SUR SAÔNE",dept:"71",diocese:"d’Autun, Chalon et Mâcon",lieu:"71100 - Chapelle\nNotre-Dame de la Citadelle : 15, rue Doneau Messes : dimanche et fêtes 8h45 ( sauf vacances scolaires )",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"71100 - Chapelle\nNotre-Dame de la Citadelle : 15, rue Doneau Messes : dimanche et fêtes 8h45 ( sauf vacances scolaires ) et 10h30 ( chantée ) ; lundi, mardi et vendredi 18h30,\nmercredi 9h15, jeudi 7h0",contact:"",source:"amdg"},
+{ville:"LE MANS",dept:"72",diocese:"du Mans",lieu:"72000 - Eglise\nSaint-Benoit - rue Saint\nBenoit Messes : dimanche et fêtes\n9h00 et 10h30 (chantée) ; mardi et mercredi 18",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"72000 - Eglise\nSaint-Benoit - rue Saint\nBenoit Messes : dimanche et fêtes\n9h00 et 10h30 (chantée) ; mardi et mercredi 18h30, jeudi 8h45, vendredi 18h30, samedi\n11h00 Confessions : 30 minutes avant\nles",contact:"",source:"amdg"},
+{ville:"CHAMBERY",dept:"73",diocese:"Chambéry",lieu:"73000 - Eglise Notre-Dame - 48 rue Macornet SP - depuis\n12/2007 Messes : 2 ème , 4 ème et 5 ème dimanches du mois 9h30 C",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"73000 - Eglise Notre-Dame - 48 rue Macornet SP - depuis\n12/2007 Messes : 2 ème , 4 ème et 5 ème dimanches du mois 9h30 Célébrant : Abbé Thibault Paris (FSSP) Association de fidèles : Association pour\n",contact:"",source:"amdg"},
+{ville:"Chambéry",dept:"73 – Savoie",diocese:"Chambéry, Maurienne, Tarentaise",lieu:"Église Notre-Dame (paroisse Saint-François-de-Sales – Cathédrale)",adresse:"Rue Saint-Antoine",rite:"paulvi",langue:"latin",communaute:"Diocèse",celebrant:"Prêtres de la paroisse cathédrale",horaires:"Dim. 9h30 (messe dominicale en latin) · sam. 17h30",contact:"04 79 70 58 15",source:"initial_manual"},
+{ville:"Annecy",dept:"74 – Haute-Savoie",diocese:"Annecy",lieu:"Chapelle Saint-François-de-Sales",adresse:"16 bis avenue du Rhône",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site",contact:"09 53 61 02 96",source:"portelatine"},
+{ville:"DUINGT",dept:"74",diocese:"d’Annecy",lieu:"74410 - Eglise\nParoissiale :\nau bord du lac d'Annecy SP\n- depuis 09/2007 Messes : dimanche et\nfêtes d'obligation 9h00 (c",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"74410 - Eglise\nParoissiale :\nau bord du lac d'Annecy SP\n- depuis 09/2007 Messes : dimanche et\nfêtes d'obligation 9h00 (chantée) et 10h30 (chantée) Confessions : dimanche avant les messes Célébrants : ",contact:"",source:"amdg"},
+{ville:"Diocèse de Paris",dept:"75",diocese:"Paris",lieu:"0. Reprise\ndes horaires habituels le 01/09",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"0. Reprise\ndes horaires habituels le 01/09",contact:"",source:"amdg"},
+{ville:"PARIS",dept:"75",diocese:"Paris",lieu:"75001 - Eglise\nSaint-Roch - 296 rue du Saint-Honoré - Métro\n: Tuileries, Pyramides SP\n- depuis 12/2007 Messes : dimanche",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"75001 - Eglise\nSaint-Roch - 296 rue du Saint-Honoré - Métro\n: Tuileries, Pyramides SP\n- depuis 12/2007 Messes : dimanche et\nfêtes 9h30 ( chantée )\net 20h00 ( chantée ) ;\nlundi 8h00, mardi, mercredi et",contact:"",source:"amdg"},
+{ville:"Paris",dept:"75 – Paris",diocese:"Paris",lieu:"Saint-Eugène–Sainte-Cécile — messe en forme extraordinaire",adresse:"4 bis rue Sainte-Cécile",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"Prêtres de la paroisse",horaires:"Plusieurs messes dominicales — voir site",contact:"01 48 24 70 25",source:"initial_manual"},
+{ville:"Paris",dept:"75 – Paris",diocese:"Paris",lieu:"Saint-Eugène–Sainte-Cécile — messe en forme ordinaire",adresse:"4 bis rue Sainte-Cécile",rite:"paulvi",langue:"francais",communaute:"Diocèse",celebrant:"Prêtres de la paroisse",horaires:"Dim. 9h30",contact:"01 48 24 70 25",source:"initial_manual"},
+{ville:"Reprise des\nhoraires habituels le 30/08 | Eglise Notre",dept:"75",diocese:"Paris",lieu:"Dame de\nla Nativité du Val-de-Grâce | Métro-RER\n: Port-Royal | Diocèse\naux Armées | SP\n- depuis 11/2025 Messes : dimanch",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Dame de\nla Nativité du Val-de-Grâce | Métro-RER\n: Port-Royal | Diocèse\naux Armées | SP\n- depuis 11/2025 Messes : dimanche 20h30 ( pas\nde messe en août), 1er mardi du mois 18h30 (en l'honneur de Saint-",contact:"",source:"amdg"},
+{ville:"Reprise des horaires habituels le 29/08 | 2. PARIS",dept:"75",diocese:"Paris",lieu:"75002 - Chapelle\nSaint-Joseph - Centre Saint Paul :\n12, rue Saint\nJoseph - Métro : Bourse, Bonne-Nouvelle, Grands\nboulev",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"75002 - Chapelle\nSaint-Joseph - Centre Saint Paul :\n12, rue Saint\nJoseph - Métro : Bourse, Bonne-Nouvelle, Grands\nboulevards, Sentier Messes : dimanche et fêtes\nd'obligation 9h00, 10h00, 11h15 (chanté",contact:"",source:"amdg"},
+{ville:"Diocèse de Rouen – Diocèse du Havre",dept:"76",diocese:"Rouen – Diocèse du Havre",lieu:"Eglise\nSaint Patrice | Messes | (chantée) | Adoration du Saint\nSacrement : | Vêpres et salut du Saint\nSacrement : | Conf",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise\nSaint Patrice | Messes | (chantée) | Adoration du Saint\nSacrement : | Vêpres et salut du Saint\nSacrement : | Confessions : | Célébrant : | Chanoine\nJean-Guillaume de la Crochais | ( ICRSP | Ren",contact:"",source:"amdg"},
+{ville:"MEAUX",dept:"77",diocese:"Meaux",lieu:"77100 - Chapelle Notre-Dame-du-Carmel - 112 rue de Chaage SP\n- 03/2008 Messes : dimanche 18h00 (sauf\njuillet et août) Cé",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"77100 - Chapelle Notre-Dame-du-Carmel - 112 rue de Chaage SP\n- 03/2008 Messes : dimanche 18h00 (sauf\njuillet et août) Célébrant : Abbés Benoît Maître et Stanislas de La Rochefoudauld\n( FSSP ) Renseign",contact:"",source:"amdg"},
+{ville:"Aucune messe du 20\njuillet au 29 août. | 6. LE CHESNAY",dept:"78",diocese:"Versailles",lieu:"78150 - Eglise\nSaint-Antoine de Padoue Messes : mercredi 7h00 Célébrant : Abbé\nGonzague Babinet ( diocèse ) Renseignemen",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"78150 - Eglise\nSaint-Antoine de Padoue Messes : mercredi 7h00 Célébrant : Abbé\nGonzague Babinet ( diocèse ) Renseignements : 01 39 66 95 06 ( Presbytère )\n- Site : www.communautesaintcharles.org | 7. ",contact:"",source:"amdg"},
+{ville:"Diocèse de Versailles",dept:"78",diocese:"Versailles",lieu:"0. Reprise des horaires habituels le 30 août | 1",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"0. Reprise des horaires habituels le 30 août | 1",contact:"",source:"amdg"},
+{ville:"LE PORT",dept:"78",diocese:"Versailles",lieu:"MARLY - 78560 - Chapelle\nde l'Ecole Sainte-Geneviève : 1 route de\nVersailles ED\n- depuis 09/1989 Messes : lundi, jeudi, ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"MARLY - 78560 - Chapelle\nde l'Ecole Sainte-Geneviève : 1 route de\nVersailles ED\n- depuis 09/1989 Messes : lundi, jeudi, vendredi et samedi\n8h45 ; mardi 19h00 et mercredi 7h00 Célébrant\n: R.P. Bruno de",contact:"",source:"amdg"},
+{ville:"PRUNAY",dept:"78",diocese:"Versailles",lieu:"EN YVELINES - 78660 - Oratoire de la\nMaison Saint-Martin : lieu dit La Chapelle - 3 chemin\nd'Ablis : ouest d'Ablis, 20 k",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"EN YVELINES - 78660 - Oratoire de la\nMaison Saint-Martin : lieu dit La Chapelle - 3 chemin\nd'Ablis : ouest d'Ablis, 20 km au sud-est de Rambouillet Messes : mercredi et vendredi 7h00 (vérifier\nvancanc",contact:"",source:"amdg"},
+{ville:"Reprise des horaires habituels\nle 30 août | 3. SAINT",dept:"78",diocese:"Versailles",lieu:"GERMAIN-EN-LAYE - 78100 - Chapelle des\nFranciscaines : 89 avenue du Maréchal Foch TC\n- depuis 03/2023 Messes : dimanche ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"GERMAIN-EN-LAYE - 78100 - Chapelle des\nFranciscaines : 89 avenue du Maréchal Foch TC\n- depuis 03/2023 Messes : dimanche et fêtes 10h30 (sauf\nJuillet et Août) Célébrant : Prêtre de la paroisse ( diocès",contact:"",source:"amdg"},
+{ville:"Reprise des horaires habituels le 30 août | 2. VERSAILLES",dept:"78",diocese:"Versailles",lieu:"78000 - Chapelle\nNotre-Dame-des-Armées : 4 impasse des\nGendarmes : à côté de la\nMairie et du Château de Versailles Messe",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"78000 - Chapelle\nNotre-Dame-des-Armées : 4 impasse des\nGendarmes : à côté de la\nMairie et du Château de Versailles Messes : dimanche et fêtes 8h00,\n9h00, 10h30, 12h00 et 19h00 ( juillet\net août pas de",contact:"",source:"amdg"},
+{ville:"SAINT",dept:"78",diocese:"Versailles",lieu:"MARTIN DE BRETHENCOURT - 78660 - Eglise\nparoissiale\nSaint-Pierre-et-Saint-Paul : 10 km au sud-ouest\nde Dourdan, , 20 km ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"MARTIN DE BRETHENCOURT - 78660 - Eglise\nparoissiale\nSaint-Pierre-et-Saint-Paul : 10 km au sud-ouest\nde Dourdan, , 20 km au sud-est de Rambouillet Messes : dimanche et fêtes 9h00 (basse) et 10h30 , mar",contact:"",source:"amdg"},
+{ville:"SAINT",dept:"78",diocese:"Versailles",lieu:"NOM LA BRETÈCHE - 78860 - Eglise\nparoissiale SP\n- depuis 12/2007 Messes : mardi 9h00 (sauf vacances d'été) Célébrant : A",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"NOM LA BRETÈCHE - 78860 - Eglise\nparoissiale SP\n- depuis 12/2007 Messes : mardi 9h00 (sauf vacances d'été) Célébrant : Abbé\nJean-Michel Prouteau ( diocèse ) Renseignements : 01 34 62 81 62 ( Presbytèr",contact:"",source:"amdg"},
+{ville:"VERSAILLES",dept:"78",diocese:"Versailles",lieu:"78000 - Chapelle\nde l'Immaculée-Conception (dite des Clarisses) : 8 bis rue Mgr Gibier : à\ncôté de l'évêché,\nquartier Sa",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"78000 - Chapelle\nde l'Immaculée-Conception (dite des Clarisses) : 8 bis rue Mgr Gibier : à\ncôté de l'évêché,\nquartier Saint Louis SP\n- depuis 10/2008 Messes : dimanche et\nfêtes 8h45 (basse ),\n10h00\n(G",contact:"",source:"amdg"},
+{ville:"Assais-les-Jumeaux",dept:"79 – Deux-Sèvres",diocese:"Poitiers",lieu:"Chapelle Notre-Dame-des-Anges",adresse:"10 place des Tilleuls",rite:"tridentin",langue:"latin",communaute:"Fraternité de la Transfiguration",celebrant:"Fraternité de la Transfiguration",horaires:"Voir site",contact:"05 49 64 80 20",source:"initial_manual"},
+{ville:"Diocèse de Poitiers",dept:"79",diocese:"Poitiers",lieu:"Eglise\nSaint-Pierre-ès-Liens | à\n14 km au nord de Thouars | SP\n- depuis 01/2012 | Messes | (vérifier\navant, quelques exc",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise\nSaint-Pierre-ès-Liens | à\n14 km au nord de Thouars | SP\n- depuis 01/2012 | Messes | (vérifier\navant, quelques exceptions), | Célébrant | (diocèse) | Renseignements | (Presbytère) | (Abbé Métais",contact:"",source:"amdg"},
+{ville:"Amiens",dept:"80 – Somme",diocese:"Amiens",lieu:"Chapelle Saint-Vincent-de-Paul",adresse:"54 ter rue Jules Barni",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré de Croix",contact:"03 20 89 95 22",source:"initial_manual"},
+{ville:"ALBI",dept:"81",diocese:"d’Albi",lieu:"81000 - Eglise\nSaint Genieys : Route de Castres - Puygouzon - à la sortie d'Albi SP\n- depuis 02/2011 Messes : dimanche e",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"81000 - Eglise\nSaint Genieys : Route de Castres - Puygouzon - à la sortie d'Albi SP\n- depuis 02/2011 Messes : dimanche et fêtes 11h15 , 1 er vendredi du mois\n18h30 et 1 er samedi du mois 11h00 Célébra",contact:"",source:"amdg"},
+{ville:"MONTAUBAN",dept:"82",diocese:"Montauban",lieu:"82000 - Eglise de la\nNativité de Notre-Dame - Paroisse Personnelle - : Gasseras - 5 rue de\nl'abbé Justin Mercadier Messe",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"82000 - Eglise de la\nNativité de Notre-Dame - Paroisse Personnelle - : Gasseras - 5 rue de\nl'abbé Justin Mercadier Messes : dimanche et fêtes\nd'obligation 10h30 ; vendredi 18h00 et samedi 11h30 Confes",contact:"",source:"amdg"},
+{ville:"TOULON",dept:"83",diocese:"Fréjus-Toulon",lieu:"83000 - Eglise\nSaint-François-de-Paule : cours Lafayette :\nà\ncôté du Port de Marchand et du Centre Mayol Messes : dimanc",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"83000 - Eglise\nSaint-François-de-Paule : cours Lafayette :\nà\ncôté du Port de Marchand et du Centre Mayol Messes : dimanche et fêtes\nd'obligation 9h00 et 10h30 (chantée)\n; lundi et mardi 18h30, mercred",contact:"",source:"amdg"},
+{ville:"Avignon",dept:"84 – Vaucluse",diocese:"Avignon",lieu:"Chapelle des Pénitents-Noirs",adresse:"57 rue Banasterie",rite:"tridentin",langue:"latin",communaute:"FSSPX",celebrant:"FSSPX District de France",horaires:"Voir site — desservie par le prieuré Saint-Bénezet",contact:"09 83 96 69 63",source:"initial_manual"},
+{ville:"Diocèse d’Avignon",dept:"84",diocese:"d’Avignon",lieu:"Chapelle\ndes Pénitents Gris | :\nProche de la Porte Thiers | Messes | Adoration du Saint Sacrement | Célébrant : | Associ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Chapelle\ndes Pénitents Gris | :\nProche de la Porte Thiers | Messes | Adoration du Saint Sacrement | Célébrant : | Association de fidèles : | - Site : | www.penitentsgris.fr | Renseignements : | (Confr",contact:"",source:"amdg"},
+{ville:"LA ROCHE SUR YON",dept:"85",diocese:"Luçon",lieu:"85000 - Eglise\nNotre-Dame : rue Lazare\nCarnot SP\n- depuis 01/2008 Messes : dimanche et fêtes\n10h00 ; semaine plusieurs f",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"85000 - Eglise\nNotre-Dame : rue Lazare\nCarnot SP\n- depuis 01/2008 Messes : dimanche et fêtes\n10h00 ; semaine plusieurs fois par mois (se renseigner) Confessions : dimanche de 9h15 à 9h45 Célébrant : P",contact:"",source:"amdg"},
+{ville:"BUXEROLLES",dept:"86",diocese:"Poitiers",lieu:"86180 - Eglise paroissial\nSaint Philippe et Saint Jacques : 1 rue Omer Bernier : au nord-est de Poitiers Messes : dimanc",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"86180 - Eglise paroissial\nSaint Philippe et Saint Jacques : 1 rue Omer Bernier : au nord-est de Poitiers Messes : dimanche et fêtes 11h00 ; fêtes\nen semaine (non férié) 18h30 Célébrant : Abbés\nRoland-",contact:"",source:"amdg"},
+{ville:"LIMOGES",dept:"87",diocese:"Limoges",lieu:"87000 - Chapelle\nSaint Antoine dite \"des\npapillons\" : 28\nrue des Papillons : proche de la Gare Messes : dimanche et fête",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"87000 - Chapelle\nSaint Antoine dite \"des\npapillons\" : 28\nrue des Papillons : proche de la Gare Messes : dimanche et fêtes 10h30 ; lundi 18h30,\nmardi à vendredi 8h30 et 18h30 (hors\nvacances scolaires) ",contact:"",source:"amdg"},
+{ville:"ÉPINAL",dept:"88",diocese:"Saint-Dié",lieu:"88000 - Eglise\nSaint-Laurent : 3 place du Souvenir Messes : dimanche et fêtes 8h45, 10h00 et 18h00\n; lundi et mercredi 1",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"88000 - Eglise\nSaint-Laurent : 3 place du Souvenir Messes : dimanche et fêtes 8h45, 10h00 et 18h00\n; lundi et mercredi 11h00 et 18h30 ; mardi et jeudi 9h00 et 18h30 ;\nvendredi 18h30 ; samedi 11h00 (Va",contact:"",source:"amdg"},
+{ville:"AUXERRE",dept:"89",diocese:"Sens et Auxerre",lieu:"89000 - Chapelle\nNotre-Dame-de-Lorette : 4 avenue\ndu Général De\nGaulle : au nord d'Auxerre Messes : dimanche et fêtes 11",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"89000 - Chapelle\nNotre-Dame-de-Lorette : 4 avenue\ndu Général De\nGaulle : au nord d'Auxerre Messes : dimanche et fêtes 11h15 Célébrants : Abbé Grégoire\nVilleminoz (FSSP ) Renseignements : 06 95 32 51 1",contact:"",source:"amdg"},
+{ville:"LA BASTIDE DE LORDAT",dept:"9",diocese:"Pamiers",lieu:"09700 - Eglise Saint-Etienne : à 10 km à l'est de Pamiers SP\n- depuis 12/2019 Messes : 1 er dimanche du mois\n18h00 Céléb",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"09700 - Eglise Saint-Etienne : à 10 km à l'est de Pamiers SP\n- depuis 12/2019 Messes : 1 er dimanche du mois\n18h00 Célébrant : Abbé Jean-Marcel Jordana ( diocèse ) Renseignements : (Paroisse) < Eté 20",contact:"",source:"amdg"},
+{ville:"BELFORT",dept:"90",diocese:"Belfort - Montbéliard",lieu:"90000 - Chapelle Notre-Dame\nde la Brasse : rue Célestin Champion - centre de\nBelfort Messes : dimanche et fêtes 10h00 ; ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"90000 - Chapelle Notre-Dame\nde la Brasse : rue Célestin Champion - centre de\nBelfort Messes : dimanche et fêtes 10h00 ; vendredi\n11h00 et\nsamedi 9h00 (Oratoire du\nPresbytère 7 rue Voltaire en semaine ",contact:"",source:"amdg"},
+{ville:"VIRY CHATILLON",dept:"91",diocese:"Évry - Corbeil",lieu:"91170 - Eglise\nNotre-Dame des Cités : angle avenue d'Artois et avenue de\nMarseille ED\n- depuis 09/2005 Messes : dimanche",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"91170 - Eglise\nNotre-Dame des Cités : angle avenue d'Artois et avenue de\nMarseille ED\n- depuis 09/2005 Messes : dimanche et\nfêtes 10h00 ; 1 er samedi du mois 11h00 Confessions : dimanche\nde 9h15 à 9h5",contact:"",source:"amdg"},
+{ville:"Diocèse de Nanterre",dept:"92",diocese:"Nanterre",lieu:"Eglise Saint-Martin | ED\n- depuis 01/2021 | Messes | (sauf vacances scolaires) | Célébrants : | Renseignements : | Presb",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise Saint-Martin | ED\n- depuis 01/2021 | Messes | (sauf vacances scolaires) | Célébrants : | Renseignements : | Presbytère ) | Site : | https://sites.google.com/site/paroissesaintmartindemeudon/ | ",contact:"",source:"amdg"},
+{ville:"VILLEMOMBLE",dept:"93",diocese:"Saint-Denis",lieu:"93250 - Eglise\nSaint-Louis - 18, place de la République ED\n- depuis 09/2010 Messes : samedi\n9h00 (vérifier\npendant les v",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"93250 - Eglise\nSaint-Louis - 18, place de la République ED\n- depuis 09/2010 Messes : samedi\n9h00 (vérifier\npendant les vacances scolaires) Célébrants : Prêtres\ndu diocèse Renseignements : 01 45 28 71 ",contact:"",source:"amdg"},
+{ville:"SAINT",dept:"94",diocese:"Créteil",lieu:"MAUR DES FOSSES - 94100 - Eglise\nNotre-Dame du Rosaire : Place des Marronniers Messes : dimanche et fêtes 9h00 (chantée)",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"MAUR DES FOSSES - 94100 - Eglise\nNotre-Dame du Rosaire : Place des Marronniers Messes : dimanche et fêtes 9h00 (chantée) ; mercredi 9h15 et\nvendredi 19h00, 1 er samedi du mois 8h30 Activités : Schola ",contact:"",source:"amdg"},
+{ville:"Diocèse de Pontoise",dept:"95",diocese:"Pontoise",lieu:"Eglise\nSaint-Georges | : à 31 km de Paris et\nà 3,5 km de Villiers-le-Sec | Messes | Célébrant : | diocèse | Renseignemen",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Eglise\nSaint-Georges | : à 31 km de Paris et\nà 3,5 km de Villiers-le-Sec | Messes | Célébrant : | diocèse | Renseignements : | Presbytère | Site : | www.belloy-en-france.org | 2. BUTRY SUR OISE - 9543",contact:"",source:"amdg"},
+{ville:"Diocèse de Fort de France",dept:"972",diocese:"Fort de France",lieu:"Chapelle du Foyer de\nl'Espérance | SP\n- depuis 09/2019 Messes | se\nrenseigner ou consulter le groupe Telegram \"Missa Tri",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"Chapelle du Foyer de\nl'Espérance | SP\n- depuis 09/2019 Messes | se\nrenseigner ou consulter le groupe Telegram \"Missa Tridentina 972\" | Célébrant : | ICRSP | Renseignements : | Abbé Challan\nBelval | mi",contact:"",source:"amdg"},
+{ville:"ARUE",dept:"987",diocese:"Papeete",lieu:"98701 - Chapelle Militaire\nSaint-Louis - Caserne LCL Broche : à l'est de Papeete Diocèse\naux Armées SP\n- depuis 03/2016 ",adresse:"",rite:"tridentin",langue:"latin",communaute:"Diocèse",celebrant:"",horaires:"98701 - Chapelle Militaire\nSaint-Louis - Caserne LCL Broche : à l'est de Papeete Diocèse\naux Armées SP\n- depuis 03/2016 Messes : deux dimanches\npar mois 17h00, certaines fêtes de 1ère classe Célébrant",contact:"",source:"amdg"},
+];
+
+// ---------------------------------------------------------------
+// Mapping communautés → labels complets
+// ---------------------------------------------------------------
+const communeLabels = {
+  "FSSP": "FSSP — Fraternité Sacerdotale Saint-Pierre",
+  "ICRSP": "ICRSP — Institut du Christ-Roi Souverain-Prêtre",
+  "IBP": "IBP — Institut du Bon Pasteur",
+  "FSTB": "FSTB — Fraternité Saint-Thomas-Becket",
+  "CRMD": "CRMD — Chanoines Réguliers de la Mère de Dieu",
+  "FSVF": "FSVF — Fraternité Saint-Vincent-Ferrier",
+  "MMD": "MMD — Missionnaires de la Miséricorde Divine",
+  "Bénédictins": "Bénédictins",
+  "Diocèse": "Diocèse (clergé diocésain)",
+  "FSSPX": "FSSPX — Fraternité Sacerdotale Saint-Pie X",
+  "Fraternité de la Transfiguration": "Fraternité de la Transfiguration (proche FSSPX)",
+  "Capucins de Morgon": "Capucins de Morgon (proche FSSPX)",
+  "Dominicaines contemplatives": "Dominicaines contemplatives d'Avrillé (proche FSSPX)"
+};
+
+// Centroïdes approximatifs des préfectures de département — utilisés
+// uniquement pour un tri "par proximité" indicatif.
+const DEPT_COORDS = {
+  "01":[46.2058,5.2259],
+  "02":[49.5641,3.6208],
+  "03":[46.5654,3.3327],
+  "04":[44.0919,6.2356],
+  "05":[44.5594,6.0819],
+  "06":[43.7102,7.2620],
+  "07":[44.9334,4.8924],
+  "08":[49.7667,4.7167],
+  "09":[42.9647,1.6053],
+  "10":[48.2973,4.0744],
+  "11":[43.2130,2.3491],
+  "12":[44.3506,2.5754],
+  "13":[43.2965,5.3698],
+  "14":[49.1829,-0.3707],
+  "15":[44.9282,2.4441],
+  "16":[45.6484,0.1562],
+  "17":[46.1603,-1.1511],
+  "18":[47.0810,2.3987],
+  "19":[45.2649,1.7719],
+  "21":[47.3220,5.0415],
+  "22":[48.5142,-2.7653],
+  "23":[45.8333,1.9333],
+  "24":[45.1848,0.7213],
+  "25":[47.2378,6.0241],
+  "26":[44.9334,4.8924],
+  "27":[49.0270,1.1510],
+  "28":[48.4439,1.4894],
+  "29":[47.9960,-4.1023],
+  "2A":[41.9192,8.7386],
+  "2B":[42.6886,9.4478],
+  "30":[43.8367,4.3601],
+  "31":[43.6047,1.4442],
+  "32":[43.6455,0.5857],
+  "33":[44.8378,-0.5792],
+  "34":[43.6108,3.8767],
+  "35":[48.1173,-1.6778],
+  "36":[46.8107,1.6911],
+  "37":[47.3941,0.6848],
+  "38":[45.1885,5.7245],
+  "39":[46.6743,5.5523],
+  "40":[43.8905,-0.4995],
+  "41":[47.5861,1.3359],
+  "42":[45.4397,4.3872],
+  "43":[45.0432,3.8845],
+  "44":[47.2184,-1.5536],
+  "45":[47.9029,1.9093],
+  "46":[44.4479,1.4353],
+  "47":[44.2049,0.6212],
+  "48":[44.5178,3.5000],
+  "49":[47.4784,-0.5632],
+  "50":[49.1147,-1.0900],
+  "51":[48.9563,4.3650],
+  "52":[48.1147,5.3348],
+  "53":[48.0730,-0.7688],
+  "54":[48.6921,6.1844],
+  "55":[48.7706,5.1614],
+  "56":[47.6582,-2.7603],
+  "57":[49.1193,6.1757],
+  "58":[46.9897,3.1590],
+  "59":[50.6292,3.0573],
+  "60":[49.4295,2.0808],
+  "61":[48.4322,0.0913],
+  "62":[50.2926,2.7773],
+  "63":[45.7772,3.0870],
+  "64":[43.2951,-0.3708],
+  "65":[43.2327,0.0781],
+  "66":[42.6886,2.8948],
+  "67":[48.5734,7.7521],
+  "68":[47.7500,7.3333],
+  "69":[45.7640,4.8357],
+  "70":[47.6379,6.1563],
+  "71":[46.7833,4.8500],
+  "72":[48.0061,0.1996],
+  "73":[45.5646,5.9178],
+  "74":[45.8992,6.1294],
+  "75":[48.8566,2.3522],
+  "76":[49.4432,1.0993],
+  "77":[48.5582,2.6984],
+  "78":[48.8049,2.1204],
+  "79":[46.3238,-0.4577],
+  "80":[49.8941,2.2957],
+  "81":[43.9289,2.1457],
+  "82":[44.0167,1.3500],
+  "83":[43.1242,5.9280],
+  "84":[43.9493,4.8055],
+  "85":[46.6667,-1.4167],
+  "86":[46.5833,0.3333],
+  "87":[45.8333,1.2500],
+  "88":[48.1703,6.4493],
+  "89":[47.7955,3.5694],
+  "90":[47.6386,6.8634],
+  "91":[48.6815,2.3356],
+  "92":[48.8333,2.2500],
+  "93":[48.9167,2.4167],
+  "94":[48.7969,2.3820],
+  "95":[49.0142,2.0808],
+  "971":[16.2383,-61.5344],
+  "972":[14.6415,-61.0242],
+  "973":[4.9333,-52.3300],
+  "974":[-20.8807,55.4500],
+  "976":[-12.7823,45.2278]
+};
+
+function haversine(lat1,lon1,lat2,lon2){
+  const R=6371, toRad=x=>x*Math.PI/180;
+  const dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
+  const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+let userPos = null; // {lat, lon}
+
+function locateMe(){
+  const btn=document.getElementById('geoBtn');
+  const status=document.getElementById('geoStatus');
+  if(!navigator.geolocation){
+    status.textContent="Géolocalisation non disponible sur ce navigateur.";
+    return;
+  }
+  btn.disabled=true;
+  status.textContent="Localisation en cours…";
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      userPos = {lat:pos.coords.latitude, lon:pos.coords.longitude};
+      status.textContent="Trié par proximité (approximatif, au niveau du département).";
+      btn.disabled=false;
+      render();
+      document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+    },
+    err=>{
+      status.textContent="Localisation refusée ou indisponible — utilisez plutôt les filtres.";
+      btn.disabled=false;
+    },
+    {timeout:8000}
+  );
+}
+
+let state = {rite:"all", langue:"all", diocese:"all", communaute:"all", q:""};
+
+function uniqueSorted(arr){return [...new Set(arr)].sort((a,b)=>a.localeCompare(b,'fr'));}
+
+// --------- synchro état <-> URL (partage / retour arrière) ---------
+function stateFromURL(){
+  const p = new URLSearchParams(location.search);
+  ['rite','langue','diocese','communaute','q'].forEach(k=>{
+    if(p.has(k)) state[k]=p.get(k);
+  });
+}
+function urlFromState(){
+  const p = new URLSearchParams();
+  Object.entries(state).forEach(([k,v])=>{ if(v && v!=='all') p.set(k,v); });
+  const qs = p.toString();
+  history.replaceState(null,'', qs ? ('?'+qs) : location.pathname);
+}
+
+function populateSelects(){
+  const dioceseSel = document.getElementById('diocese');
+  uniqueSorted(DATA.map(d=>d.diocese)).forEach(d=>{
+    const o=document.createElement('option'); o.value=d; o.textContent=d; dioceseSel.appendChild(o);
+  });
+  const commSel = document.getElementById('communaute');
+  uniqueSorted(DATA.map(d=>d.communaute)).forEach(c=>{
+    const o=document.createElement('option'); o.value=c; o.textContent=communeLabels[c]||c; commSel.appendChild(o);
+  });
+}
+
+function buildLegend(){
+  const legend=document.getElementById('legend');
+  const counts={};
+  DATA.forEach(d=>{counts[d.communaute]=(counts[d.communaute]||0)+1;});
+  legend.innerHTML = Object.keys(counts).sort().map(c=>
+    `<span><b>${c}</b> · ${counts[c]} lieu${counts[c]>1?'x':''}</span>`
+  ).join('');
+}
+
+function matches(d){
+  if(state.rite!=='all' && d.rite!==state.rite) return false;
+  if(state.langue!=='all' && d.langue!==state.langue) return false;
+  if(state.diocese!=='all' && d.diocese!==state.diocese) return false;
+  if(state.communaute!=='all' && d.communaute!==state.communaute) return false;
+  if(state.q){
+    const hay = (d.ville+' '+d.lieu+' '+d.celebrant+' '+d.diocese+' '+d.dept).toLowerCase();
+    if(!hay.includes(state.q.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function slugify(s){
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+function render(){
+  let results = DATA.filter(matches);
+
+  if(userPos){
+    results = results.map(d=>{
+      const code = d.dept.split(' ')[0];
+      const coord = DEPT_COORDS[code];
+      const dist = coord ? haversine(userPos.lat,userPos.lon,coord[0],coord[1]) : null;
+      return {...d, _dist:dist};
+    }).sort((a,b)=>{
+      if(a._dist==null) return 1;
+      if(b._dist==null) return -1;
+      return a._dist-b._dist;
+    });
+  } else {
+    results = results.sort((a,b)=>a.dept.localeCompare(b.dept,'fr'));
+  }
+
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('emptyState');
+  document.getElementById('resultCount').innerHTML = `<strong>${results.length}</strong> lieu${results.length>1?'x':''} de culte`;
+
+  if(results.length===0){
+    grid.innerHTML='';
+    empty.style.display='block';
+    return;
+  }
+  empty.style.display='none';
+
+  grid.innerHTML = results.map(d=>{
+    const cardId = slugify(d.ville+'-'+d.lieu);
+    return `
+    <article class="card ${d.rite}" id="${cardId}" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">${d.ville}</div>
+        <div class="card-dept">${d.dept}${d._dist!=null?` · <span class="card-distance">~${Math.round(d._dist)} km</span>`:''}</div>
+      </div>
+      <div class="card-lieu">${d.lieu}</div>
+      ${d.adresse?`<div class="card-adresse" itemprop="address">${d.adresse}</div>`:''}
+      <div class="tags">
+        <span class="tag ${d.rite==='tridentin'?'rite-t':'rite-p'}">${d.rite==='tridentin'?'Tridentin · 1962':'Paul VI'}</span>
+        <span class="tag lang">${d.langue==='latin'?'Latin':'Français'}</span>
+        <span class="tag comm">${d.communaute}</span>
+        <span class="tag diocese">${d.diocese}</span>
+        ${d.source?`<span class="tag src">${d.source}</span>`:''}
+      </div>
+      <div class="card-detail">
+        <div class="row"><span class="label">Horaires</span> — ${d.horaires}</div>
+        <div class="row"><span class="label">Célébrant</span> — ${d.celebrant}</div>
+        ${d.contact?`<div class="row"><span class="label">Contact</span> — ${d.contact}</div>`:''}
+      </div>
+      <div class="card-actions">
+        <button class="share-btn" data-share="${cardId}">🔗 Copier le lien</button>
+      </div>
+    </article>
+  `;}).join('');
+
+  document.getElementById('trustCount').textContent = DATA.length;
+}
+
+document.getElementById('grid').addEventListener('click', e=>{
+  const btn = e.target.closest('.share-btn');
+  if(!btn) return;
+  const url = location.origin + location.pathname + location.search + '#' + btn.dataset.share;
+  navigator.clipboard?.writeText(url).then(()=>{
+    const original = btn.textContent;
+    btn.textContent = '✓ Lien copié';
+    setTimeout(()=>btn.textContent=original, 1500);
+  }).catch(()=>{});
+});
+
+document.getElementById('geoBtn').addEventListener('click', locateMe);
+
+document.getElementById('riteToggle').addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  [...btn.parentElement.children].forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.rite = btn.dataset.val;
+  urlFromState(); render();
+});
+document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; urlFromState(); render();});
+document.getElementById('diocese').addEventListener('change', e=>{state.diocese=e.target.value; urlFromState(); render();});
+document.getElementById('communaute').addEventListener('change', e=>{state.communaute=e.target.value; urlFromState(); render();});
+document.getElementById('q').addEventListener('input', e=>{state.q=e.target.value; urlFromState(); render();});
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  state = {rite:"all", langue:"all", diocese:"all", communaute:"all", q:""};
+  userPos = null;
+  document.getElementById('geoStatus').textContent='';
+  document.getElementById('q').value='';
+  document.getElementById('langue').value='all';
+  document.getElementById('diocese').value='all';
+  document.getElementById('communaute').value='all';
+  [...document.getElementById('riteToggle').children].forEach(b=>b.classList.remove('active'));
+  document.getElementById('riteToggle').children[0].classList.add('active');
+  urlFromState(); render();
+});
+
+populateSelects();
+buildLegend();
+stateFromURL();
+document.getElementById('q').value = state.q;
+document.getElementById('langue').value = state.langue;
+document.getElementById('diocese').value = state.diocese;
+document.getElementById('communaute').value = state.communaute;
+[...document.getElementById('riteToggle').children].forEach(b=>{
+  b.classList.toggle('active', b.dataset.val===state.rite);
+});
+render();
+
+if(location.hash){
+  const target = document.getElementById(location.hash.slice(1));
+  if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 300);
+}
+</script>
+</body>
+</html>

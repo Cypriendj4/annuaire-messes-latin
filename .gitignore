@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Cache HTTP
+data/http_cache.sqlite
+data/http_cache.sqlite-journal
+
+# Logs
+*.log
+logs/
+
+# Environnement
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+*.orig
+*.rej
+
+# IDE
+.idea/
+.vscode/
+
+# Backup temporaires (restauration via historique git de data/messes.db)
+backups/

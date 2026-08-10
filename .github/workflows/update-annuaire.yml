@@ -1,0 +1,84 @@
+name: Mise à jour annuaire messes en latin
+
+on:
+  schedule:
+    - cron: '0 3 * * *'        # Tous les jours à 3h00 UTC
+  workflow_dispatch:           # Déclenchement manuel
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write              # Permet de committer le HTML généré
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55        # Garde-fou (2000 min/mois disponibles)
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Installation des dépendances
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Création de la base (si absente)
+        run: |
+          cd src
+          if [ ! -f ../data/messes.db ]; then
+            python create_db.py
+          fi
+          cd ..
+
+      - name: Exécution scraping + mise à jour
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          cd src
+          python update_manager.py
+
+      - name: Génération du HTML
+        run: |
+          cd src
+          python generate_html.py
+
+      - name: Vérification du HTML généré
+        run: |
+          test -s output/index.html
+          echo "index.html généré ($(wc -c < output/index.html) octets)"
+
+      - name: Commit et push automatique
+        run: |
+          git config user.name "Annuaire Bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          # Commit seulement si des fichiers ont changé
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: mise à jour automatique des messes [$(date +'%d/%m/%Y %H:%M')]"
+            git push
+            echo "✅ Commit poussé"
+          else
+            echo "ℹ️ Aucun changement à commiter"
+          fi
+
+      - name: Upload artifact (debug)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: annuaire-output
+          path: |
+            output/index.html
+            data/messes.db
+          retention-days: 7
+          if-no-files-found: ignore

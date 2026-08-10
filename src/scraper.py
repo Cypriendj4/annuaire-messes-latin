@@ -143,128 +143,108 @@ class AMDGParser(Scraper):
             self.soup = BeautifulSoup(html, "lxml")
 
     def parse(self) -> List[Dict]:
-        """Parse les tableaux Word par département (ancres #1..#95)."""
+        """Parse les blocs par département (ancres #1..#95) et extrait
+        tous les lieux au format 'N. VILLE - CP - Lieu...'."""
         results = []
-        if not self.soup:
+        if not self.html:
             return results
 
-        # AMDG structure : par département, un titre puis liste de lieux.
-        # Approche robuste : extraire le texte et segmenter par département.
-        # Stratégie : chercher les ancres <a name="1">, <a name="2">, ...
-        anchors = self.soup.find_all("a", attrs={"name": re.compile(r"^\d{1,3}$")})
-        for anchor in anchors:
-            dept_num = anchor.get("name")
-            dept_name = ""
-            # Le nom du département suit généralement l'ancre dans le même bloc
-            parent_p = anchor.find_parent("p")
-            if parent_p:
-                full = parent_p.get_text(" ", strip=True)
-                # Ex: "31 - Haute-Garonne" après le numéro
-                m = re.search(r"(?:-\s*|:?\s*)(.+)$", full)
-                if m and m.group(1).strip() and not m.group(1).strip().isdigit():
-                    dept_name = m.group(1).strip()
-                else:
-                    dept_name = full
-            # Collecte les paragraphes suivants jusqu'à la prochaine ancre
-            content_parts = []
-            node = anchor.find_parent("p")
-            if node:
-                sibling = node.find_next_sibling()
-                guard = 0
-                while sibling and guard < 30:
-                    if sibling.find("a", attrs={"name": re.compile(r"^\d{1,3}$")}):
-                        break
-                    text = sibling.get_text(" ", strip=True)
-                    if text and len(text) > 3:
-                        content_parts.append(text)
-                    sibling = sibling.find_next_sibling()
-                    guard += 1
-            results.append({
-                "dept_num": dept_num,
-                "dept_name": dept_name,
-                "content": " | ".join(content_parts),
-            })
+        # Découpe le HTML en blocs par ancre de département
+        anchors = list(re.finditer(r'<a name="(\d{1,3}[AB]?)">', self.html))
+        for i, m in enumerate(anchors):
+            dept_num = m.group(1)
+            start = m.end()
+            end = anchors[i + 1].start() if i + 1 < len(anchors) else len(self.html)
+            block = self.html[start:end]
+
+            # Texte du bloc (titre département + lieux)
+            text = re.sub(r'<[^>]+>', ' ', block)
+            text = text.replace('&egrave;', 'è').replace('&Eacute;', 'É').replace('&eacute;', 'é').replace('&agrave;', 'à').replace('&acirc;', 'â').replace('&ecirc;', 'ê').replace('&icirc;', 'î').replace('&ocirc;', 'ô').replace('&ucirc;', 'û').replace('&ccedil;', 'ç').replace('&ntilde;', 'ñ').replace('&ndash;', '-').replace('&nbsp;', ' ')
+            text = re.sub(r'\s+', ' ', text).strip()
+
+            # Titre : "– Ain – Diocèse de Belley-Ars 1. COLIGNY..."
+            title = text.split('1.')[0].strip() if '1.' in text else text[:80]
+            # Département et diocèse depuis le titre
+            m_title = re.search(r'(?:–|-)\s*([^–-]+?)\s*(?:–|-)\s*Dioc[èe]se\s*(?:de\s+|d\')?\s*(.+)', title)
+            if m_title:
+                dept_nom = m_title.group(1).strip()
+                diocese = m_title.group(2).strip()
+            else:
+                dept_nom = title
+                diocese = title
+
+            # Lieux : "N. VILLE - CP - Lieu..."
+            for lm in re.finditer(r'(\d{1,3})\.\s*([A-ZÀ-ÖØ-Þ][A-ZÀ-ÖØ-Þ\s\-]{2,60}?)\s*[-–]\s*(\d{5})\s*[-–]\s*([^0-9].{5,900}?)(?=\s\d{1,3}\.\s|$)', text):
+                ville = lm.group(2).strip()
+                cp = lm.group(3)
+                lieu_rest = lm.group(4).strip()
+                results.append({
+                    "dept_num": dept_num,
+                    "dept_nom": dept_nom,
+                    "diocese": diocese,
+                    "ville": ville,
+                    "cp": cp,
+                    "lieu": lieu_rest,
+                })
         return results
 
     def normalize(self, raw: Dict) -> Optional[Dict]:
-        """Transforme le contenu brut d'un département en lieux individuels."""
-        dept_num = raw["dept_num"]
-        dept_name = raw["dept_name"]
-        content = raw.get("content", "")
+        """Transforme un lieu AMDG en dict conforme.
+        Format : 'Eglise Saint Martin - 25 km au nord-est de Bourg-en-Bresse
+        SP - depuis 10/2007 Messes : dimanche 11h00 ; semaine 8h30
+        Confessions : ... Célébrant : ... Renseignements : ...'"""
+        lieu_txt = raw["lieu"]
+        lieu_txt = re.sub(r'<[^>]+>', ' ', lieu_txt)
+        lieu_txt = re.sub(r'\s+', ' ', lieu_txt).strip()
+        # Nettoie les marqueurs de fin de tableau Word
+        lieu_txt = re.sub(r'\s*\^\^\^.*$', '', lieu_txt).strip()
 
-        # Extrait le diocèse depuis le nom de département
-        # ex: "Diocèse de Belley-Ars" → "Belley-Ars"
-        diocese = ""
-        if dept_name:
-            diocese = re.sub(r'^(Dioc[èe]se|Dioc[èe]se de|dioc[èe]se)\s+(de\s+|d\'|d\')?', '', dept_name).strip()
-            if not diocese or diocese.lower() == dept_name.lower():
-                diocese = dept_name
+        # 1. Nom de l'église : jusqu'au premier séparateur (distance, SP, depuis, :)
+        m = re.match(r'^(.*?)(?:\s*-\s*\d+\s*km\b|\s*SP\b|\s*-\s*depuis\b|\s*:\s*Messes|\s*Messes\s*:)', lieu_txt)
+        nom_lieu = m.group(1).strip() if m else lieu_txt[:120]
+        reste = lieu_txt[len(nom_lieu):].strip()
 
-        # Format AMDG typique : "1. VILLE - 01270 - Lieu ..." ou "1. VILLE (01) ..."
-        # Segmentation par numérotation "N." au début
-        segments = re.split(r'(?<=\d)\s*(?=\d+\.\s)', content)
-        entries = []
-        for seg in segments:
-            seg = seg.strip()
-            if len(seg) < 10:
-                continue
-            # Extrait ville et lieu du premier segment
-            m = re.match(r'^\d+\.\s*([A-ZÀ-ÖØ-Þ][^\-]{2,60}?)\s*[-–]\s*(.+)$', seg, re.S)
-            if m:
-                ville = m.group(1).strip()
-                lieu_rest = m.group(2).strip()
-                # Nettoie le CP si présent après la ville
-                ville = re.sub(r'\s+\d{5}$', '', ville)
-                entries.append({"ville": ville, "lieu": lieu_rest})
-            else:
-                entries.append({"ville": dept_name, "lieu": seg})
+        # 2. Adresse / descriptif : entre le nom et 'SP' / 'Messes'
+        adresse = ""
+        m_a = re.match(r'^(?:-\s*)?(.*?)(?:\s*SP\b|\s*-\s*depuis\b|\s*Messes\s*:|\s*$)', reste)
+        if m_a and m_a.group(1).strip():
+            adresse = m_a.group(1).strip().lstrip('- ')
 
-        if not entries:
-            return None
+        # 3. Horaires : après 'Messes :' jusqu'à 'Confessions'/'Célébrant'
+        horaires = ""
+        m_h = re.search(r'Messes\s*:\s*(.*?)(?:\s*(?:Confessions|Célébrant|Renseignements)\s*:|\s*$)', lieu_txt, re.I)
+        if m_h:
+            horaires = m_h.group(1).strip()
+        # 4. Célébrant
+        celebrant = ""
+        m_c = re.search(r'Célébrant\s*:\s*(.*?)(?:\s*(?:Confessions|Renseignements)\s*:|\s*$)', lieu_txt, re.I)
+        if m_c:
+            celebrant = m_c.group(1).strip()
+        # 5. Contact
+        contact = ""
+        m_r = re.search(r'Renseignements\s*:\s*(.*?)(?:\s*(?:Célébrant|Confessions)\s*:|\s*$)', lieu_txt, re.I)
+        if m_r:
+            contact = m_r.group(1).strip()
 
-        # On ne retourne qu'un seul dict par normalize() — la boucle run()
-        # traite chaque entrée. On stocke les suivantes dans _extra.
-        if len(entries) > 1:
-            self._pending = getattr(self, "_pending", [])
-            self._pending.extend(entries[1:])
-
-        first = entries[0]
         return {
-            "ville": first["ville"],
-            "dept": f"{dept_num} – {dept_name}",
-            "diocese": diocese,
-            "lieu": first["lieu"][:120],
-            "adresse": "",
+            "ville": raw["ville"],
+            "dept": f"{raw['dept_num']} – {raw['dept_nom']}",
+            "dept_code": raw["dept_num"],
+            "dept_nom": raw["dept_nom"],
+            "diocese": raw["diocese"],
+            "lieu": nom_lieu[:120],
+            "adresse": adresse[:120],
             "rite": "tridentin",
             "langue": "latin",
             "communaute": "Diocèse",
-            "celebrant": "",
-            "horaires": first["lieu"][:200],
-            "contact": "",
+            "celebrant": celebrant[:120],
+            "horaires": horaires[:200],
+            "contact": contact[:100],
         }
 
     def normalize_extra(self, extra_raw: Dict, parent_raw: Dict) -> Optional[Dict]:
-        """Normalise les lieux supplémentaires d'un même département AMDG."""
-        dept_num = parent_raw["dept_num"]
-        dept_name = parent_raw["dept_name"]
-        diocese = ""
-        if dept_name:
-            diocese = re.sub(r'^(Dioc[èe]se|Dioc[èe]se de|dioc[èe]se)\s+(de\s+|d\'|d\')?', '', dept_name).strip()
-            if not diocese or diocese.lower() == dept_name.lower():
-                diocese = dept_name
-        return {
-            "ville": extra_raw["ville"],
-            "dept": f"{dept_num} – {dept_name}",
-            "diocese": diocese,
-            "lieu": extra_raw["lieu"][:120],
-            "adresse": "",
-            "rite": "tridentin",
-            "langue": "latin",
-            "communaute": "Diocèse",
-            "celebrant": "",
-            "horaires": extra_raw["lieu"][:200],
-            "contact": "",
-        }
+        """Non utilisé — AMDG produit un dict par lieu directement."""
+        return None
 
 
 # ─────────────────────────────────────────────────────────────────────

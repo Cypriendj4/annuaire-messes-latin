@@ -168,11 +168,17 @@ def group_candidates(candidates: List[Dict]) -> Dict[str, List[Dict]]:
 
 
 def apply_updates(conn: sqlite3.Connection, candidates: List[Dict],
-                  report: Dict) -> Tuple[int, int, int]:
-    """Applique les changements. Retourne (nouveaux, modifiés, désactivés)."""
+                  report: Dict, sources_actives: Optional[List[str]] = None) -> Tuple[int, int, int]:
+    """Applique les changements. Retourne (nouveaux, modifiés, désactivés).
+
+    sources_actives : sources exécutées dans CE run. La désactivation ne
+    concerne que les lieux dont la source principale a tourné — un lieu
+    portelatine n'est jamais jugé "absent" lors d'un run amdg seul."""
     cur = conn.cursor()
     existing = load_existing(conn)
     groups = group_candidates(candidates)
+    if sources_actives is None:
+        sources_actives = list(SOURCES.keys())
 
     # 1. Nouveaux + modifications
     nouveaux = 0
@@ -256,6 +262,8 @@ def apply_updates(conn: sqlite3.Connection, candidates: List[Dict],
             continue  # déjà inactif
         if ex.get("source_principale") in ("initial_manual",) or ex.get("source_principale") in protected_sources:
             continue  # protégé : vérifié manuellement ou source non désactivable
+        if ex.get("source_principale") not in sources_actives:
+            continue  # sa source n'a pas tourné ce run → on ne juge pas
         if key not in active_keys:
             # Absent des scrapers → potentiellement disparu
             # Règle : on désactive si absent de 2+ sources.
@@ -362,7 +370,7 @@ def main(sources: Optional[List[str]] = None):
     # Applique les changements
     conn = sqlite3.connect(DB_PATH)
     try:
-        nouveaux, modifies, desactives = apply_updates(conn, candidates, report)
+        nouveaux, modifies, desactives = apply_updates(conn, candidates, report, sources_actives=sources)
         report["nouveaux"] = nouveaux
         report["modifies"] = modifies
         report["desactives"] = desactives

@@ -272,6 +272,7 @@
   }
   .tag.rite-t{background:var(--burgundy); color:#fff; border-color:var(--burgundy);}
   .tag.rite-p{background:var(--gold); color:#221f2b; border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40; color:#fff; border-color:#3a5a40;}
   .tag.lang{background:#fff;}
   .tag.diocese{background:#fff;}
   .tag.comm{background:var(--ink); color:var(--parchment); border-color:var(--ink);}
@@ -535,12 +536,14 @@
     </div>
 
     <div class="field">
-      <label>Rite</label>
-      <div class="rite-toggle" id="riteToggle">
-        <button data-val="all" class="active">Tous</button>
-        <button data-val="tridentin">Tridentin</button>
-        <button data-val="paulvi">Paul VI</button>
-      </div>
+      <label for="rite">Rite</label>
+      <select id="rite">
+        <option value="all">Tous les rites</option>
+        <option value="tridentin">Tridentin (missel 1962)</option>
+        <option value="paulvi-latin">Paul VI — Latin</option>
+        <option value="paulvi-francais">Paul VI — Français</option>
+        <option value="oriental">Rites orientaux catholiques</option>
+      </select>
     </div>
 
     <div class="field">
@@ -623,7 +626,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 10/08/2026 12:54
+// Dernière génération : 10/08/2026 14:11
 // ---------------------------------------------------------------
 const DATA = window.ANNUAIRE_DATA || [];
 
@@ -834,8 +837,17 @@ function buildLegend(){
   legend.innerHTML = html;
 }
 
+function riteMatches(d, riteVal){
+  if(riteVal==='all') return true;
+  if(riteVal==='tridentin') return d.rite==='tridentin';
+  if(riteVal==='paulvi-latin') return d.rite==='paulvi' && d.lang==='latin';
+  if(riteVal==='paulvi-francais') return d.rite==='paulvi' && d.lang==='francais';
+  if(riteVal==='oriental') return d.rite==='oriental';
+  return true;
+}
+
 function matches(d){
-  if(state.rite!=='all' && d.rite!==state.rite) return false;
+  if(!riteMatches(d, state.rite)) return false;
   if(state.langue!=='all' && d.lang!==state.langue) return false;
   if(state.diocese!=='all' && d.dioc!==state.diocese) return false;
   if(state.communaute!=='all' && d.comm!==state.communaute) return false;
@@ -890,11 +902,12 @@ function render(){
   const slice = results.slice(0, visibleCount);
   grid.innerHTML = slice.map(d=>{
     const cardId = slugify((d.ville||'')+'-'+(d.lieu||''));
-    const riteTag = d.rite==='tridentin'
-      ? `<span class="tag rite-t">Tridentin · 1962</span>`
-      : d.rite==='paulvi'
-        ? `<span class="tag rite-p">Paul VI</span>`
-        : `<span class="tag lang">Messe</span>`;
+    let riteTag;
+    if(d.rite==='tridentin') riteTag = `<span class="tag rite-t">Tridentin · 1962</span>`;
+    else if(d.rite==='oriental') riteTag = `<span class="tag rite-o">Rite oriental</span>`;
+    else if(d.rite==='paulvi' && d.lang==='latin') riteTag = `<span class="tag rite-p">Paul VI · Latin</span>`;
+    else if(d.rite==='paulvi' && d.lang==='francais') riteTag = `<span class="tag rite-p">Paul VI · Français</span>`;
+    else riteTag = `<span class="tag lang">Messe</span>`;
     const langTag = d.lang ? `<span class="tag lang">${d.lang==='latin'?'Latin':'Français'}</span>` : '';
     const commTag = d.comm ? `<span class="tag comm">${d.comm}</span>` : '';
     const diocTag = d.dioc ? `<span class="tag diocese">${d.dioc}</span>` : '';
@@ -953,15 +966,7 @@ document.getElementById('moreBtn').addEventListener('click', ()=>{
 
 document.getElementById('geoBtn').addEventListener('click', locateMe);
 
-document.getElementById('riteToggle').addEventListener('click', e=>{
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  [...btn.parentElement.children].forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  state.rite = btn.dataset.val;
-  visibleCount = PAGE_SIZE;
-  urlFromState(); render();
-});
+document.getElementById('rite').addEventListener('change', e=>{state.rite=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('diocese').addEventListener('change', e=>{state.diocese=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('communaute').addEventListener('change', e=>{state.communaute=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
@@ -972,11 +977,10 @@ document.getElementById('resetBtn').addEventListener('click', ()=>{
   visibleCount = PAGE_SIZE;
   document.getElementById('geoStatus').textContent='';
   document.getElementById('q').value='';
+  document.getElementById('rite').value='all';
   document.getElementById('langue').value='all';
   document.getElementById('diocese').value='all';
   document.getElementById('communaute').value='all';
-  [...document.getElementById('riteToggle').children].forEach(b=>b.classList.remove('active'));
-  document.getElementById('riteToggle').children[0].classList.add('active');
   urlFromState(); render();
 });
 
@@ -984,12 +988,10 @@ populateSelects();
 buildLegend();
 stateFromURL();
 document.getElementById('q').value = state.q;
+document.getElementById('rite').value = state.rite;
 document.getElementById('langue').value = state.langue;
 document.getElementById('diocese').value = state.diocese;
 document.getElementById('communaute').value = state.communaute;
-[...document.getElementById('riteToggle').children].forEach(b=>{
-  b.classList.toggle('active', b.dataset.val===state.rite);
-});
 render();
 
 if(location.hash){

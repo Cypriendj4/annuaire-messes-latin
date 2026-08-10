@@ -155,6 +155,25 @@ def is_fsspX(communaute: str) -> bool:
     return communaute in FSSPX_COMMUNITIES
 
 
+def is_oriental(nom: str) -> bool:
+    """Détecte si un nom de lieu correspond à un rite oriental catholique.
+    - Exclut les églises orthodoxes (pas catholiques)
+    - Mots-clés forts → détection directe
+    - Mots-clés faibles → uniquement si précédés de "rite" (ex: "(rite syriaque)")
+    """
+    from config import ORIENTAL_KEYWORDS_FORT, ORIENTAL_KEYWORDS_FAIBLE
+    nom_l = normalize_text(nom)
+    if "orthodoxe" in nom_l:
+        return False
+    for kw in ORIENTAL_KEYWORDS_FORT:
+        if kw in nom_l:
+            return True
+    for kw in ORIENTAL_KEYWORDS_FAIBLE:
+        if kw in nom_l and "rite" in nom_l:
+            return True
+    return False
+
+
 # ── Cache helpers ──────────────────────────────────────────────────────
 def cache_key(url: str, params: dict = None) -> str:
     """Clé de cache stable pour requests-cache."""

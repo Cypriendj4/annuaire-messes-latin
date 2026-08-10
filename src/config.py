@@ -143,8 +143,23 @@ FSSPX_COMMUNITIES = {
 }
 
 # ── Rites & langues (valeurs canoniques) ──────────────────────────────
-RITES = ("tridentin", "paulvi")
+RITES = ("tridentin", "paulvi", "oriental")
 LANGUES = ("latin", "francais")
+
+# Mots-clés de détection des rites orientaux catholiques dans les noms de lieux
+# FORTS : détection directe (rite oriental quasi certain)
+ORIENTAL_KEYWORDS_FORT = [
+    "byzantin", "maronite", "melkite", "chaldéen", "chaldeen", "chaldéenne",
+    "assyrien", "assyro", "syro-malabar", "syro-malankar",
+    "grec-catholique", "grec catholique",
+]
+# FAIBLES : détection uniquement si précédé de "rite" (ex: "(rite syriaque")
+# ou s'il s'agit d'une communauté ethnique catholique (ukrainien, roumain…)
+ORIENTAL_KEYWORDS_FAIBLE = [
+    "syriaque", "copte", "ukrainien", "arménien", "armenien", "roumain",
+    "slovaque", "hongrois", "lituanien", "géorgien", "georgien",
+    "ethiopien", "éthiopien", "eritre", "érythréen",
+]
 
 # ── Centroïdes départements (pour tri proximité approximatif) ──────────
 DEPT_COORDS = {

@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS lieux (
     diocese TEXT,
     lieu TEXT NOT NULL,
     adresse TEXT,
-    rite TEXT CHECK (rite IN ('tridentin','paulvi') OR rite IS NULL),
+    rite TEXT CHECK (rite IN ('tridentin','paulvi','oriental') OR rite IS NULL),
     langue TEXT CHECK (langue IN ('latin','francais') OR langue IS NULL),
     communaute TEXT,
     celebrant TEXT,

@@ -563,6 +563,16 @@ class AnnuaireCEFParser(Scraper):
             lon_f = float(lon) if lon else None
         except ValueError:
             lat_f = lon_f = None
+
+        # Classification du rite :
+        #   - nom contenant un mot-clé oriental → rite oriental
+        #   - sinon église paroissiale générale → Paul VI en français (défaut)
+        from utils import is_oriental
+        if is_oriental(nom):
+            rite, langue = "oriental", None
+        else:
+            rite, langue = "paulvi", "francais"
+
         return {
             "ville": ville,
             "dept": dept_code,
@@ -571,8 +581,8 @@ class AnnuaireCEFParser(Scraper):
             "diocese": None,
             "lieu": nom,
             "adresse": adresse,
-            "rite": None,
-            "langue": None,
+            "rite": rite,
+            "langue": langue,
             "communaute": "Paroisse",
             "celebrant": "",
             "horaires": "",

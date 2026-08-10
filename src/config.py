@@ -40,6 +40,18 @@ SOURCES = {
         "ajout_lieux": True,
         "notes": "WordPress + Elementor. CPT 'lieux' paginé. FSSPX + Fraternité Transfiguration, Capucins Morgon, Dominicaines Avrillé.",
     },
+    "annuaire_cef": {
+        "name": "Annuaire national messes.info (CEF) — grille géographique",
+        "base_url": "https://messes.info",
+        "annuaire_url": "https://messes.info/annuaire/",
+        "encoding": "utf-8",
+        "frequency": "weekly",
+        "reliability": 4,
+        "parser": "AnnuaireCEFParser",
+        "ajout_lieux": True,
+        "jamais_desactiver": True,
+        "notes": "Toutes les églises de France (messes.info CEF). Crawl par grille géographique /annuaire/{lat}:{lon} paginé. GPS précis. Ne JAMAIS désactiver automatiquement.",
+    },
     "trouverunemesse": {
         "name": "Trouver une messe (agrégateur messes.info)",
         "base_url": "https://trouverunemesse.com",
@@ -64,6 +76,32 @@ SOURCES = {
         "notes": "VÉRIFICATION uniquement : donne GPS précis + horaires. GWT inutilisable, fallback HTML (#htmlversion) exploitable.",
     },
 }
+
+# ── Grille géographique pour l'annuaire CEF ────────────────────────────
+# Points de la grille pour couvrir toute la France métropolitaine + DOM.
+# Espacement ~0.35° lat / ~0.5° lon (~39 km) — le rayon utile par point
+# est de ~11-24 km selon la densité, donc une grille trop lâche laisse
+# des trous. ~800 points, les points en mer renvoient 0 résultats.
+GEO_GRID = []
+_LAT = 41.4
+while _LAT <= 51.2:
+    _LON = -5.2
+    while _LON <= 9.8:
+        GEO_GRID.append((round(_LAT, 2), round(_LON, 2)))
+        _LON += 0.5
+    _LAT += 0.35
+# DOM-TOM (points manuels, grille fine)
+GEO_GRID += [
+    (14.6415, -61.0242),   # Martinique
+    (16.2383, -61.5344),   # Guadeloupe
+    (4.9333, -52.3300),    # Guyane
+    (4.8, -52.6), (4.6, -53.0), (5.2, -52.4),
+    (-20.8807, 55.4500),   # La Réunion
+    (-21.3419, 55.4774),   # La Réunion sud
+    (-12.7823, 45.2278),   # Mayotte
+]
+GRID_MAX_PAGES = 50      # garde-fou pagination par point
+GRID_PAGE_SIZE = 25      # lieux par page annuaire
 
 # ── Scraping params ────────────────────────────────────────────────────
 REQUEST_TIMEOUT = 30
@@ -90,6 +128,7 @@ COMMUNE_LABELS = {
     "MMD": "MMD — Missionnaires de la Miséricorde Divine",
     "Bénédictins": "Bénédictins",
     "Diocèse": "Diocèse (clergé diocésain)",
+    "Paroisse": "Paroisse (église générale)",
     "FSSPX": "FSSPX — Fraternité Sacerdotale Saint-Pie X",
     "Fraternité de la Transfiguration": "Fraternité de la Transfiguration (proche FSSPX)",
     "Capucins de Morgon": "Capucins de Morgon (proche FSSPX)",

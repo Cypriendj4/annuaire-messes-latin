@@ -22,7 +22,7 @@ from bs4 import BeautifulSoup
 
 from config import (
     REQUEST_TIMEOUT, REQUEST_DELAY, MAX_RETRIES, USER_AGENT,
-    CACHE_EXPIRE_DAYS, VILLES_PRINCIPALES,
+    CACHE_EXPIRE_DAYS, VILLES_PRINCIPALES, GEO_GRID, GRID_MAX_PAGES,
 )
 from utils import setup_logging, extract_dept_code, normalize_text, slugify, compute_hash
 
@@ -84,10 +84,10 @@ class Scraper(ABC):
         """Transforme un dict brut en dict conforme au schéma. Retourne None si invalide."""
 
     def validate(self, data: Dict) -> bool:
-        """Valide les champs obligatoires. dept/diocese peuvent être vides
-        si la source ne les fournit pas (ex: liste Porte Latine)."""
-        required = ("ville", "lieu", "rite", "langue", "communaute")
-        return all(data.get(k) for k in required)
+        """Valide les champs obligatoires : ville + lieu.
+        rite/langue/communaute/dept/diocese peuvent être NULL ou vides
+        (églises générales de l'annuaire national, sources partielles)."""
+        return bool(data.get("ville")) and bool(data.get("lieu"))
 
     def run(self) -> List[Dict]:
         """Pipeline complet : fetch → parse → normalize → validate."""
@@ -487,9 +487,114 @@ class MessesInfoParser(Scraper):
         }
 
 
+# ─────────────────────────────────────────────────────────────────────
+# Annuaire national messes.info (CEF) — grille géographique
+# Crawl /annuaire/{lat}:{lon}?page=N sur une grille couvrant la France.
+# ─────────────────────────────────────────────────────────────────────
+class AnnuaireCEFParser(Scraper):
+    source_code = "annuaire_cef"
+
+    def __init__(self):
+        self.annuaire_url = "https://messes.info/annuaire/"
+        self.grid = GEO_GRID
+        self.results = []
+
+    def fetch(self) -> None:
+        """Crawl la grille : pour chaque point, pagine jusqu'à épuisement.
+        Extrait directement chaque article (nom, adresse, GPS, url)."""
+        seen_urls = set()
+        total_pages = 0
+        for lat, lon in self.grid:
+            point_urls = 0
+            for page in range(1, GRID_MAX_PAGES + 1):
+                url = f"{self.annuaire_url}{lat}:{lon}"
+                if page > 1:
+                    url += f"?page={page}"
+                html = fetch_url(url, timeout=20)
+                if not html:
+                    break
+                articles = re.findall(r'<article[^>]*>.*?</article>', html, re.S)
+                if not articles:
+                    break  # fin de la pagination pour ce point
+                total_pages += 1
+                new_count = 0
+                for art in articles:
+                    m_url = re.search(r'href="(/lieu/[^"]*)"', art)
+                    if not m_url:
+                        continue
+                    path = m_url.group(1)
+                    if path in seen_urls:
+                        continue
+                    seen_urls.add(path)
+                    new_count += 1
+                    self.results.append(self._parse_article(art, path))
+                point_urls += new_count
+                if new_count == 0 and page > 3:
+                    break  # plus de nouveautés → point épuisé
+                time.sleep(REQUEST_DELAY)
+        logger.info(f"[annuaire_cef] {len(self.results)} lieux uniques, {total_pages} pages crawlées")
+
+    def _parse_article(self, art: str, path: str) -> Dict:
+        """Extrait les champs d'un article schema.org d'une page annuaire."""
+        def _prop(prop: str) -> str:
+            for pattern in (
+                rf'itemprop="{prop}"[^>]*>([^<]*)<',
+                rf'itemprop="{prop}" content="([^"]*)"',
+            ):
+                m2 = re.search(pattern, art)
+                if m2 and m2.group(1).strip():
+                    return m2.group(1).strip()
+            return ""
+
+        names = re.findall(r'itemprop="name">([^<]*)<', art)
+        nom = names[0].strip() if names else ""
+        adresse = _prop("streetAddress")
+        cp = _prop("postalCode")
+        ville = _prop("addressLocality")
+        lat = _prop("latitude")
+        lon = _prop("longitude")
+        m_dept = re.search(r'/lieu/(\d{1,3}[AB]?)/', path)
+        dept_code = m_dept.group(1) if m_dept else ""
+        if not ville:
+            m_ville = re.search(r'/lieu/\d+/([^/]+)/', path)
+            ville = m_ville.group(1).replace("-", " ").title() if m_ville else ""
+        try:
+            lat_f = float(lat) if lat else None
+            lon_f = float(lon) if lon else None
+        except ValueError:
+            lat_f = lon_f = None
+        return {
+            "ville": ville,
+            "dept": dept_code,
+            "dept_code": dept_code,
+            "dept_nom": "",
+            "diocese": None,
+            "lieu": nom,
+            "adresse": adresse,
+            "rite": None,
+            "langue": None,
+            "communaute": "Paroisse",
+            "celebrant": "",
+            "horaires": "",
+            "contact": "",
+            "url_detail": f"https://messes.info{path}",
+            "coord_lat": lat_f,
+            "coord_lon": lon_f,
+        }
+
+    def parse(self) -> List[Dict]:
+        """Les articles sont déjà extraits dans fetch()."""
+        return self.results
+
+    def normalize(self, raw: Dict) -> Optional[Dict]:
+        """Les données sont déjà normalisées par _parse_article."""
+        return raw
+
+
 PARSERS = {
     "amdg": AMDGParser,
     "portelatine": PorteLatineParser,
+    "annuaire_cef": AnnuaireCEFParser,
     "trouverunemesse": TrouverUneMesseParser,
     "messes_info": MessesInfoParser,
 }

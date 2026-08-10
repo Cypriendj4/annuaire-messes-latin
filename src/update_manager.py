@@ -30,7 +30,7 @@ from utils import (
 logger = setup_logging("update_manager")
 
 # Ordre de priorité des sources pour les champs (le premier qui a une valeur gagne)
-SOURCE_PRIORITY = ["amdg", "portelatine", "messes_info", "trouverunemesse"]
+SOURCE_PRIORITY = ["amdg", "portelatine", "annuaire_cef", "messes_info", "trouverunemesse"]
 
 FIELD_PRIORITY = ["horaires", "adresse", "celebrant", "contact", "diocese", "lieu"]
 
@@ -92,9 +92,9 @@ def merge_sources(existing: Optional[Dict], new_candidates: List[Dict]) -> Dict:
     # Rite/langue/communaute : valeur de la source la plus fiable (première dans la liste)
     for field in ("ville", "dept", "dept_code", "dept_nom", "diocese", "lieu",
                   "rite", "langue", "communaute", "celebrant", "horaires",
-                  "contact", "adresse"):
+                  "contact", "adresse", "url_detail"):
         for src in SOURCE_PRIORITY:
-            if src in source_by_priority and source_by_priority[src].get(field):
+            if src in source_by_priority and source_by_priority[src].get(field) is not None:
                 merged[field] = source_by_priority[src][field]
                 break
         # Sinon garde la valeur existante
@@ -126,7 +126,7 @@ def load_existing(conn: sqlite3.Connection) -> Dict[str, Dict]:
     cur = conn.cursor()
     cur.execute("""
         SELECT id, ville, dept_code, dept_nom, diocese, lieu, adresse, rite,
-               langue, communaute, celebrant, horaires, contact,
+               langue, communaute, celebrant, horaires, contact, url_detail,
                source_principale, source_secondaire, derniere_maj,
                coord_lat, coord_lon, actif, confiance, hash_contenu
         FROM lieux
@@ -137,10 +137,10 @@ def load_existing(conn: sqlite3.Connection) -> Dict[str, Dict]:
             "id": row[0], "ville": row[1], "dept_code": row[2], "dept_nom": row[3],
             "diocese": row[4], "lieu": row[5], "adresse": row[6], "rite": row[7],
             "langue": row[8], "communaute": row[9], "celebrant": row[10],
-            "horaires": row[11], "contact": row[12], "source_principale": row[13],
-            "source_secondaire": row[14], "derniere_maj": row[15],
-            "coord_lat": row[16], "coord_lon": row[17], "actif": row[18],
-            "confiance": row[19], "hash_contenu": row[20],
+            "horaires": row[11], "contact": row[12], "url_detail": row[13],
+            "source_principale": row[14], "source_secondaire": row[15],
+            "derniere_maj": row[16], "coord_lat": row[17], "coord_lon": row[18],
+            "actif": row[19], "confiance": row[20], "hash_contenu": row[21],
         }
         key = canonical_key(d)
         existing[key] = d
@@ -148,12 +148,13 @@ def load_existing(conn: sqlite3.Connection) -> Dict[str, Dict]:
 
 
 def canonical_key(d: Dict) -> str:
-    """Clé canonique : ville normalisée + lieu normalisé + communaute + rite."""
+    """Clé canonique : ville normalisée + lieu normalisé + communaute + rite.
+    (rite/communaute peuvent être NULL pour les églises générales → "")."""
     return "|".join([
-        normalize_ville(d.get("ville", "")),
-        normalize_lieu(d.get("lieu", "")),
-        d.get("communaute", ""),
-        d.get("rite", ""),
+        normalize_ville(d.get("ville") or ""),
+        normalize_lieu(d.get("lieu") or ""),
+        d.get("communaute") or "",
+        d.get("rite") or "",
     ])
 
 
@@ -195,17 +196,17 @@ def apply_updates(conn: sqlite3.Connection, candidates: List[Dict],
             cur.execute("""
                 INSERT INTO lieux (
                     ville, dept_code, dept_nom, diocese, lieu, adresse, rite,
-                    langue, communaute, celebrant, horaires, contact,
+                    langue, communaute, celebrant, horaires, contact, url_detail,
                     source_principale, source_secondaire, derniere_maj,
                     coord_lat, coord_lon, actif, confiance, hash_contenu
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 merged.get("ville", ""), merged.get("dept_code", ""),
-                merged.get("dept_nom", ""), merged.get("diocese", ""),
+                merged.get("dept_nom", ""), merged.get("diocese"),
                 merged.get("lieu", ""), merged.get("adresse"),
-                merged.get("rite", "tridentin"), merged.get("langue", "latin"),
-                merged.get("communaute", ""), merged.get("celebrant"),
-                merged.get("horaires"), merged.get("contact"),
+                merged.get("rite"), merged.get("langue"),
+                merged.get("communaute"), merged.get("celebrant"),
+                merged.get("horaires"), merged.get("contact"), merged.get("url_detail"),
                 merged.get("source_principale", ""),
                 merged.get("source_secondaire", "[]"),
                 merged.get("derniere_maj", now_iso()),
@@ -221,17 +222,17 @@ def apply_updates(conn: sqlite3.Connection, candidates: List[Dict],
                     UPDATE lieux SET
                         ville=?, dept_code=?, dept_nom=?, diocese=?, lieu=?,
                         adresse=?, rite=?, langue=?, communaute=?, celebrant=?,
-                        horaires=?, contact=?, source_principale=?,
+                        horaires=?, contact=?, url_detail=?, source_principale=?,
                         source_secondaire=?, derniere_maj=?, coord_lat=?,
                         coord_lon=?, actif=?, confiance=?, hash_contenu=?
                     WHERE id=?
                 """, (
                     merged.get("ville", ""), merged.get("dept_code", ""),
-                    merged.get("dept_nom", ""), merged.get("diocese", ""),
+                    merged.get("dept_nom", ""), merged.get("diocese"),
                     merged.get("lieu", ""), merged.get("adresse"),
-                    merged.get("rite", "tridentin"), merged.get("langue", "latin"),
-                    merged.get("communaute", ""), merged.get("celebrant"),
-                    merged.get("horaires"), merged.get("contact"),
+                    merged.get("rite"), merged.get("langue"),
+                    merged.get("communaute"), merged.get("celebrant"),
+                    merged.get("horaires"), merged.get("contact"), merged.get("url_detail"),
                     merged.get("source_principale", ""),
                     merged.get("source_secondaire", "[]"),
                     merged.get("derniere_maj", now_iso()),
@@ -243,15 +244,18 @@ def apply_updates(conn: sqlite3.Connection, candidates: List[Dict],
     conn.commit()
 
     # 2. Désactivation : lieu absent d'au moins 2 sources sur 4
-    # Règle de sécurité : les lieux d'origine manuelle (initial_manual) sont
-    # vérifiés à la main et ne sont JAMAIS désactivés automatiquement.
+    # Règles de sécurité :
+    #   - lieux d'origine manuelle (initial_manual) : JAMAIS désactivés
+    #   - lieux de sources "jamais_desactiver" (annuaire_cef) : JAMAIS désactivés
+    #     (ce sont des milliers d'églises générales, pas jugées par les 4 sources spécialisées)
     desactives = 0
     active_keys = set(groups.keys())
+    protected_sources = {code for code, info in SOURCES.items() if info.get("jamais_desactiver")}
     for key, ex in existing.items():
         if ex.get("actif") == 0:
             continue  # déjà inactif
-        if ex.get("source_principale") == "initial_manual":
-            continue  # protégé : vérifié manuellement
+        if ex.get("source_principale") in ("initial_manual",) or ex.get("source_principale") in protected_sources:
+            continue  # protégé : vérifié manuellement ou source non désactivable
         if key not in active_keys:
             # Absent des scrapers → potentiellement disparu
             # Règle : on désactive si absent de 2+ sources.
@@ -321,11 +325,18 @@ def send_telegram(message: str) -> bool:
 
 
 def default_sources() -> List[str]:
-    """Sources qui peuvent ajouter des lieux (amdg + portelatine).
-    Les sources de vérification (trouverunemesse, messes_info) ne sont
-    utilisées que si demandées explicitement — elles ne listent pas
-    spécifiquement les messes en latin et pollueraient l'annuaire."""
-    return [code for code, info in SOURCES.items() if info.get("ajout_lieux", False)]
+    """Sources quotidiennes qui ajoutent des lieux (amdg + portelatine).
+    annuaire_cef (grille nationale ~45k églises) est déclenchée par un
+    workflow hebdomadaire séparé (update-annuaire-cef.yml) — trop lourd
+    pour un run quotidien. Les sources de vérification (trouverunemesse,
+    messes_info) ne sont utilisées que si demandées explicitement."""
+    return [code for code, info in SOURCES.items()
+            if info.get("ajout_lieux", False) and code != "annuaire_cef"]
+
+
+def weekly_sources() -> List[str]:
+    """Sources lourdes hebdomadaires (grille nationale CEF)."""
+    return ["annuaire_cef"]
 
 
 def main(sources: Optional[List[str]] = None):
@@ -380,4 +391,19 @@ def main(sources: Optional[List[str]] = None):
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description="Mise à jour de l'annuaire des messes")
+    parser.add_argument("--sources", type=str, default=None,
+                        help="Sources à exécuter, séparées par des virgules. "
+                             "Défaut : sources quotidiennes (amdg,portelatine). "
+                             "Hebdo : annuaire_cef.")
+    parser.add_argument("--weekly", action="store_true",
+                        help="Exécute les sources hebdomadaires (annuaire_cef)")
+    args = parser.parse_args()
+    if args.weekly:
+        sources = weekly_sources()
+    elif args.sources:
+        sources = [s.strip() for s in args.sources.split(",") if s.strip()]
+    else:
+        sources = None  # default_sources()
+    main(sources)

@@ -1,0 +1,71 @@
+name: Annuaire national (grille CEF hebdomadaire)
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'        # Tous les dimanches à 4h00 UTC
+  workflow_dispatch:           # Déclenchement manuel
+
+permissions:
+  contents: write
+
+jobs:
+  update-cef:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360       # Le crawl national peut prendre ~1-2h
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Installation des dépendances
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Création de la base (si absente)
+        run: |
+          cd src
+          if [ ! -f ../data/messes.db ]; then
+            python create_db.py
+          fi
+          cd ..
+
+      - name: Scraping grille nationale (annuaire_cef)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          cd src
+          python update_manager.py --weekly
+
+      - name: Génération du HTML + data.js
+        run: |
+          cd src
+          python generate_html.py
+          cd ..
+
+      - name: Copie des fichiers statiques à la racine
+        run: |
+          cp output/index.html index.html
+          cp output/data.js data.js
+
+      - name: Commit et push automatique
+        run: |
+          git config user.name "Annuaire Bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: annuaire national CEF [$(date +'%d/%m/%Y %H:%M')]"
+            git push
+            echo "✅ Commit poussé"
+          else
+            echo "ℹ️ Aucun changement à commiter"
+          fi

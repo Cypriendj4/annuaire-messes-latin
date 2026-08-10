@@ -21,15 +21,16 @@ CREATE TABLE IF NOT EXISTS lieux (
     ville TEXT NOT NULL,
     dept_code TEXT NOT NULL,
     dept_nom TEXT NOT NULL,
-    diocese TEXT NOT NULL,
+    diocese TEXT,
     lieu TEXT NOT NULL,
     adresse TEXT,
-    rite TEXT NOT NULL CHECK (rite IN ('tridentin','paulvi')),
-    langue TEXT NOT NULL CHECK (langue IN ('latin','francais')),
-    communaute TEXT NOT NULL,
+    rite TEXT CHECK (rite IN ('tridentin','paulvi') OR rite IS NULL),
+    langue TEXT CHECK (langue IN ('latin','francais') OR langue IS NULL),
+    communaute TEXT,
     celebrant TEXT,
     horaires TEXT,
     contact TEXT,
+    url_detail TEXT,                  -- lien messes.info (annuaire national)
     source_principale TEXT NOT NULL,
     source_secondaire TEXT,           -- JSON array
     derniere_maj DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -47,6 +48,10 @@ CREATE INDEX IF NOT EXISTS idx_communaute ON lieux(communaute);
 CREATE INDEX IF NOT EXISTS idx_dept ON lieux(dept_code);
 CREATE INDEX IF NOT EXISTS idx_actif ON lieux(actif);
 CREATE INDEX IF NOT EXISTS idx_confiance ON lieux(confiance);
+
+-- Anti-doublon annuaire national : URL messes.info unique par église
+CREATE UNIQUE INDEX IF NOT EXISTS idx_url_detail
+    ON lieux(url_detail) WHERE url_detail IS NOT NULL;
 
 CREATE TABLE IF NOT EXISTS communes_labels (
     code TEXT PRIMARY KEY,

@@ -54,16 +54,19 @@ jobs:
           python generate_html.py
           cd ..
 
-      - name: Copie index.html à la racine (pour GitHub Pages)
+      - name: Copie des fichiers statiques à la racine (pour GitHub Pages)
         run: |
           cp output/index.html index.html
-          echo "index.html copié à la racine ($(wc -c < index.html) octets)"
+          cp output/data.js data.js
+          echo "index.html + data.js copiés à la racine"
 
       - name: Vérification du HTML généré
         run: |
           test -s output/index.html
+          test -s output/data.js
           test -s index.html
-          echo "HTML vérifié"
+          test -s data.js
+          echo "HTML + données vérifiés"
 
       - name: Commit et push automatique
         run: |

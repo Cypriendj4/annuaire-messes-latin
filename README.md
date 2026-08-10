@@ -1,18 +1,21 @@
-# 🕯️ Annuaire des Messes en Latin en France
+# 🕯️ Annuaire des Messes en France
 
-Annuaire autonome, gratuit et auto-maintenu des messes en latin (rite tridentin 1962 & Paul VI) en France.
+Annuaire autonome, gratuit et auto-maintenu des **églises catholiques et messes en France** :
+toutes les paroisses (messes.info / CEF), les messes en latin (rite tridentin 1962 & Paul VI) et les lieux FSSPX.
 
 **Site :** `https://[ton-utilisateur].github.io/[nom-du-repo]/`  
-**Mise à jour :** automatique, tous les jours à 3h00 UTC (GitHub Actions)
+**Mise à jour :** quotidienne (messes en latin) + hebdomadaire (annuaire national CEF)
 
 ---
 
 ## ✨ Fonctionnalités
 
-- **380+ lieux de culte** référencés (118 initiaux + enrichissement automatique par scraping AMDG/Porte Latine)
-- **Filtres** : rite (tridentin/Paul VI), langue, diocèse, communauté, recherche texte
-- **Géolocalisation** : tri par proximité (centroïde département)
-- **Sources citées** sur chaque carte (AMDG, La Porte Latine, messes.info, trouverunemesse)
+- **45 000+ églises** de France (annuaire national messes.info/CEF) avec **GPS précis**
+- **380+ messes en latin** référencées (tridentin + Paul VI) avec horaires détaillés
+- **Filtres** : rite (tridentin/Paul VI), langue, diocèse, communauté, recherche ville/CP
+- **Géolocalisation** : tri par proximité (GPS précis pour la quasi-totalité des lieux)
+- **Lien « Horaires sur messes.info »** sur chaque carte pour les célébrations à jour
+- **Sources citées** sur chaque carte (CEF, AMDG, La Porte Latine)
 - **SEO** : JSON-LD, meta description, HTML sémantique, responsive
 
 ## 🏗️ Architecture
@@ -34,19 +37,27 @@ Annuaire autonome, gratuit et auto-maintenu des messes en latin (rite tridentin 
 └── .gitignore
 ```
 
-## 🔄 Flux de mise à jour quotidien
+## 🔄 Flux de mise à jour
 
 ```
-3h00 UTC (cron GitHub Actions)
+Quotidien 3h00 UTC (workflow update-annuaire.yml)
     │
     ▼
-scraper.py (4 sources) ──► update_manager.py ──► generate_html.py ──► commit+push
-    │                         │                          │
-    │                         ├─ backup SQLite           └─ output/index.html
-    │                         ├─ fusion + dédup
-    │                         └─ notification Telegram
+scraper.py (amdg + portelatine) ──► update_manager.py ──► generate_html.py ──► commit+push
+    │                                 │                          │
+    │                                 ├─ backup SQLite           └─ output/index.html + data.js
+    │                                 ├─ fusion + dédup
+    │                                 └─ notification Telegram
     ▼
 GitHub Pages redéploie automatiquement (1-2 min)
+
+Hebdomadaire dimanche 4h00 UTC (workflow update-annuaire-cef.yml)
+    │
+    ▼
+AnnuaireCEFParser (grille géographique ~130 points, ~45k églises)
+    │
+    ▼
+update_manager.py ──► generate_html.py ──► commit+push
 ```
 
 ## 🚀 Démarrage rapide
@@ -89,17 +100,18 @@ Dans `Settings → Secrets and variables → Actions → New repository secret` 
 
 | Source | URL | Contenu | Fréquence | Fiabilité |
 |--------|-----|---------|-----------|-----------|
+| **Messes.info (CEF)** | messes.info/annuaire | **Annuaire national : toutes les églises de France + GPS précis** | Hebdo (grille géographique) | ★★★★☆ |
 | **AMDG** | amdg.asso.fr/lieux_messes_spv.htm | Messes tridentin (forme extraordinaire), toutes communautés en lien avec Rome | Hebdo (vendredi) | ★★★★★ |
 | **La Porte Latine** | laportelatine.org/lieux | FSSPX + communautés amies (Transfiguration, Capucins Morgon, Dominicaines Avrillé) | Dynamique | ★★★★☆ |
-| **Messes.info (CEF)** | messes.info | Horaires officiels par paroisse + GPS précis. Fallback HTML exploitable | Quotidien | ★★★★☆ |
-| **Trouver une messe** | trouverunemesse.com | Agrégateur basé sur messes.info, messes Paul VI en latin | Quotidien | ★★★☆☆ |
+| **Messes.info (horaires)** | messes.info/lieu | Horaires par date + GPS. Fallback HTML exploitable | Quotidien (vérification) | ★★★★☆ |
+| **Trouver une messe** | trouverunemesse.com | Agrégateur basé sur messes.info (vérification croisée) | Quotidien (vérification) | ★★★☆☆ |
 
 ### Règles de fusion
-- **Déduplication** : fuzzy matching (rapidfuzz, seuil 85) sur ville + lieu + rite + communauté
+- **Déduplication** : fuzzy matching (rapidfuzz, seuil 85) sur ville + lieu + rite + communauté ; URL messes.info unique pour l'annuaire national
 - **Confiance** : 5 = 3+ sources · 4 = 2 sources · 3 = source fiable unique · 2 = source faible unique
-- **Désactivation** : lieu absent de ≥ 2 sources sur 4 → `actif=0` (les lieux d'origine manuelle sont protégés)
-- **Priorité champs** : AMDG > Porte Latine > messes.info > trouverunemesse
-- **Ajout de lieux** : seuls **AMDG** (tridentin) et **Porte Latine** (FSSPX) ajoutent des lieux. `trouverunemesse` et `messes.info` sont des sources de **vérification** (horaires, GPS) — elles ne listent pas spécifiquement les messes en latin et pollueraient l'annuaire si leurs résultats étaient ajoutés tels quels.
+- **Désactivation** : lieu absent de ≥ 2 sources sur 4 → `actif=0` (les lieux d'origine manuelle et l'annuaire national CEF sont protégés)
+- **Priorité champs** : AMDG > Porte Latine > annuaire CEF > messes.info > trouverunemesse
+- **Ajout de lieux** : **AMDG** (tridentin), **Porte Latine** (FSSPX) et **annuaire CEF** (églises générales) ajoutent des lieux. `trouverunemesse` et `messes.info` (horaires) sont des sources de **vérification**.
 
 ## 🔔 Notifications Telegram
 

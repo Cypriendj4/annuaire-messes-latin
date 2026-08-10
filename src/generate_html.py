@@ -1,13 +1,10 @@
 """
-Génère le fichier index.html à partir de la base SQLite.
-Préserve le design original (palette, polices, layout) et injecte les données
-dans le tableau DATA JavaScript.
+Génère le site annuaire à partir de la base SQLite :
+- output/data.js  → toutes les églises (window.ANNUAIRE_DATA), chargé séparément
+  (45k+ lieux = trop lourd pour un HTML inline ; gzip ~1.5 Mo via GitHub Pages)
+- output/index.html → page légère avec les filtres, la carte et la pagination
 
-Le template HTML est identique à l'original, avec :
-- les données injectées depuis SQLite
-- la date de dernière mise à jour dynamique
-- la source affichée pour chaque lieu
-- les 4 communautés manquantes ajoutées au mapping
+Design original préservé (palette burgundy/parchment/gold, Fraunces/Source Serif 4/Inter).
 """
 import json
 import re
@@ -16,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS
-from utils import setup_logging, slugify
+from utils import setup_logging
 
 logger = setup_logging("generate_html")
 
@@ -27,7 +24,7 @@ def load_lieux(conn: sqlite3.Connection) -> list[dict]:
     cur = conn.cursor()
     cur.execute("""
         SELECT ville, dept_code, dept_nom, diocese, lieu, adresse, rite,
-               langue, communaute, celebrant, horaires, contact,
+               langue, communaute, celebrant, horaires, contact, url_detail,
                source_principale, coord_lat, coord_lon, derniere_maj
         FROM lieux
         WHERE actif = 1
@@ -39,48 +36,56 @@ def load_lieux(conn: sqlite3.Connection) -> list[dict]:
         lieux.append({
             "ville": row[0],
             "dept": f"{dept_code} – {dept_nom}" if dept_nom else dept_code,
-            "diocese": row[3],
+            "dept_code": dept_code,
+            "diocese": row[3] or "",
             "lieu": row[4],
             "adresse": row[5] or "",
-            "rite": row[6],
-            "langue": row[7],
-            "communaute": row[8],
+            "rite": row[6],           # None pour églises générales
+            "langue": row[7],         # None pour églises générales
+            "communaute": row[8] or "",
             "celebrant": row[9] or "",
             "horaires": row[10] or "",
             "contact": row[11] or "",
-            "source": row[12],
-            "coord_lat": row[13],
-            "coord_lon": row[14],
+            "url_detail": row[12] or "",
+            "source": row[13],
+            "lat": row[14],
+            "lon": row[15],
         })
     return lieux
 
 
 def build_data_js(lieux: list[dict]) -> str:
-    """Construit le tableau DATA JavaScript (format identique à l'original)."""
-    lines = []
+    """Construit le fichier data.js (window.ANNUAIRE_DATA) — format compact."""
+    lines = ["// Données annuaire générées automatiquement depuis la base SQLite.",
+             "window.ANNUAIRE_DATA = ["]
     for l in lieux:
-        def esc(v: str) -> str:
-            return json.dumps(v, ensure_ascii=False)
+        def esc(v) -> str:
+            return "null" if v is None else json.dumps(v, ensure_ascii=False)
         lines.append(
-            '{ville:' + esc(l['ville']) +
-            ',dept:' + esc(l['dept']) +
-            ',diocese:' + esc(l['diocese']) +
-            ',lieu:' + esc(l['lieu']) +
-            ',adresse:' + esc(l['adresse']) +
-            ',rite:' + esc(l['rite']) +
-            ',langue:' + esc(l['langue']) +
-            ',communaute:' + esc(l['communaute']) +
-            ',celebrant:' + esc(l['celebrant']) +
-            ',horaires:' + esc(l['horaires']) +
-            ',contact:' + esc(l['contact']) +
-            ',source:' + esc(l['source']) +
-            '},'
+            "{ville:" + esc(l['ville']) +
+            ",dept:" + esc(l['dept']) +
+            ",d:" + esc(l['dept_code']) +
+            ",dioc:" + esc(l['diocese']) +
+            ",lieu:" + esc(l['lieu']) +
+            ",adr:" + esc(l['adresse']) +
+            ",rite:" + esc(l['rite']) +
+            ",lang:" + esc(l['langue']) +
+            ",comm:" + esc(l['communaute']) +
+            ",cel:" + esc(l['celebrant']) +
+            ",horaire:" + esc(l['horaires']) +
+            ",tel:" + esc(l['contact']) +
+            ",url:" + esc(l['url_detail']) +
+            ",src:" + esc(l['source']) +
+            ",lat:" + ("null" if l['lat'] is None else repr(l['lat'])) +
+            ",lon:" + ("null" if l['lon'] is None else repr(l['lon'])) +
+            "},"
         )
-    return '\n'.join(lines)
+    lines.append("];")
+    return "\n".join(lines)
 
 
 def build_labels_js() -> str:
-    """Construit le mapping communeLabels (complété des 4 communautés manquantes)."""
+    """Construit le mapping communeLabels."""
     lines = []
     for code, label in COMMUNE_LABELS.items():
         lines.append(f'  {json.dumps(code, ensure_ascii=False)}: {json.dumps(label, ensure_ascii=False)}')
@@ -88,7 +93,7 @@ def build_labels_js() -> str:
 
 
 def build_dept_coords_js() -> str:
-    """Construit le mapping DEPT_COORDS (centroïdes départements)."""
+    """Construit le mapping DEPT_COORDS (centroïdes départements, fallback)."""
     lines = []
     for code, (lat, lon) in sorted(DEPT_COORDS.items()):
         lines.append(f'  "{code}":[{lat:.4f},{lon:.4f}]')
@@ -96,52 +101,49 @@ def build_dept_coords_js() -> str:
 
 
 def last_update_date(conn: sqlite3.Connection) -> str:
-    """Retourne la date de dernière mise à jour (du log ou des lieux)."""
+    """Retourne la date de dernière mise à jour."""
     cur = conn.cursor()
     cur.execute("SELECT MAX(date) FROM maj_log")
     row = cur.fetchone()
     if row and row[0]:
         try:
-            dt = datetime.fromisoformat(row[0])
-            return dt.strftime("%d/%m/%Y")
+            return datetime.fromisoformat(row[0]).strftime("%d/%m/%Y")
         except ValueError:
             pass
     cur.execute("SELECT MAX(derniere_maj) FROM lieux")
     row = cur.fetchone()
     if row and row[0]:
         try:
-            dt = datetime.fromisoformat(row[0])
-            return dt.strftime("%d/%m/%Y")
+            return datetime.fromisoformat(row[0]).strftime("%d/%m/%Y")
         except ValueError:
             pass
     return datetime.now().strftime("%d/%m/%Y")
 
 
-def compute_dioceses(lieux: list[dict]) -> int:
-    """Nombre de diocèses distincts (pour le trust-bar)."""
-    return len({l["diocese"] for l in lieux if l["diocese"]})
+def compute_stats(lieux: list[dict]) -> tuple:
+    """(nb_lieux, nb_departements, nb_dioceses)"""
+    nb = len(lieux)
+    depts = len({l["dept_code"] for l in lieux if l["dept_code"]})
+    dioceses = len({l["diocese"] for l in lieux if l["diocese"]})
+    return nb, depts, dioceses
 
 
 # ── Template HTML ──────────────────────────────────────────────────────
-# Le template reprend exactement le design original (voir fichier source).
-# Les parties dynamiques sont remplacées par des placeholders :
-#   {{DATA_JS}}, {{LABELS_JS}}, {{DEPT_COORDS_JS}}, {{TRUST_COUNT}},
-#   {{DIOCESE_COUNT}}, {{LAST_UPDATE}}
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Messe en latin près de chez vous : rite tridentin &amp; Paul VI — Annuaire France</title>
-<meta name="description" content="Trouvez une messe traditionnelle (rite tridentin, missel 1962) ou une messe Paul VI en latin près de chez vous. Filtrez par diocèse, communauté (FSSP, ICRSP, IBP, FSSPX…) et langue. Horaires vérifiés, sources citées.">
+<title>Trouver une messe en France : toutes les églises, messes en latin &amp; paroisses — Annuaire national</title>
+<meta name="description" content="Annuaire national des églises et messes catholiques en France : messes en latin (rite tridentin 1962 &amp; Paul VI) et célébrations paroissiales. Filtrez par ville, rite, langue, diocèse et communauté. Horaires vérifiés, sources citées.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#6d2438">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Messes traditionnelles en France">
-<meta property="og:title" content="Messe en latin près de chez vous : rite tridentin &amp; Paul VI">
-<meta property="og:description" content="Annuaire filtrable des messes en latin en France — rite, langue, diocèse, communauté. Horaires vérifiés, sources citées.">
+<meta property="og:site_name" content="Annuaire des messes en France">
+<meta property="og:title" content="Trouver une messe partout en France">
+<meta property="og:description" content="Toutes les églises catholiques de France — messes en latin (tridentin 1962 &amp; Paul VI) et paroisses. Recherche par ville, filtre par rite, langue, diocèse.">
 <meta property="og:locale" content="fr_FR">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,7 +208,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     font-family:'Inter',sans-serif;
     font-size:0.95rem;
     color:var(--slate);
-    max-width:640px;
+    max-width:700px;
     line-height:1.5;
   }
   .source-note{
@@ -351,6 +353,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     border-left:6px solid var(--gold);
   }
   .card.tridentin{border-left-color:var(--burgundy);}
+  .card.paulvi{border-left-color:var(--gold);}
   .card-top{
     display:flex;
     justify-content:space-between;
@@ -498,9 +501,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .card-actions{
     display:flex;
     justify-content:flex-end;
+    gap:0.5rem;
     margin-top:0.5rem;
+    flex-wrap:wrap;
   }
-  .share-btn{
+  .share-btn, .messes-btn{
     font-family:'Inter',sans-serif;
     font-size:0.7rem;
     font-weight:600;
@@ -510,8 +515,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     cursor:pointer;
     color:var(--ink);
     border-radius:20px;
+    text-decoration:none;
+    display:inline-block;
   }
-  .share-btn:hover{background:var(--ink); color:var(--parchment);}
+  .share-btn:hover, .messes-btn:hover{background:var(--ink); color:var(--parchment);}
+  .messes-btn{background:var(--burgundy); border-color:var(--burgundy); color:#fff;}
+  .messes-btn:hover{background:var(--burgundy-deep); color:#fff;}
   .card-distance{
     font-family:'Inter',sans-serif;
     font-size:0.68rem;
@@ -519,6 +528,24 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     color:var(--burgundy);
     white-space:nowrap;
   }
+
+  /* ---------- pagination ---------- */
+  .more-row{
+    text-align:center;
+    margin:1.5rem 0;
+  }
+  #moreBtn{
+    font-family:'Inter',sans-serif;
+    font-size:0.86rem;
+    font-weight:600;
+    background:var(--card);
+    color:var(--ink);
+    border:1px solid var(--ink);
+    padding:0.7rem 1.6rem;
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(34,31,43,0.9);
+  }
+  #moreBtn:hover{background:var(--parchment-deep);}
 
   /* ---------- FAQ ---------- */
   .faq{
@@ -562,8 +589,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 {
   "@context":"https://schema.org",
   "@type":"WebSite",
-  "name":"Messes traditionnelles en France",
-  "description":"Annuaire filtrable des messes en latin en France : rite tridentin (1962) et Paul VI, par diocèse, langue et communauté.",
+  "name":"Annuaire des messes en France",
+  "description":"Annuaire national des églises catholiques et messes en France : messes en latin (rite tridentin 1962 et Paul VI) et célébrations paroissiales.",
   "inLanguage":"fr-FR"
 }
 </script>
@@ -574,13 +601,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   "mainEntity":[
     {
       "@type":"Question",
+      "name":"Comment trouver une messe près de chez moi ?",
+      "acceptedAnswer":{"@type":"Answer","text":"Utilisez le bouton de géolocalisation pour trier les lieux par proximité, ou entrez votre ville / code postal dans la recherche. Vous pouvez affiner avec les filtres rite, langue, diocèse et communauté."}
+    },
+    {
+      "@type":"Question",
       "name":"Qu'est-ce que la messe tridentine ?",
       "acceptedAnswer":{"@type":"Answer","text":"La messe tridentine, ou forme extraordinaire du rite romain, est célébrée selon le missel romain de 1962, en latin. Elle a été confirmée comme légitime par le motu proprio Summorum Pontificum de Benoît XVI en 2007, avec des conditions révisées depuis par Traditionis Custodes (2021)."}
     },
     {
       "@type":"Question",
       "name":"Quelle différence entre le rite tridentin et une messe Paul VI en latin ?",
-      "acceptedAnswer":{"@type":"Answer","text":"Le rite tridentin suit le missel de 1962. La messe Paul VI, elle, suit le missel de 1969/1970 issu du concile Vatican II (forme ordinaire) : elle peut être célébrée en français ou en latin selon les paroisses, avec la même structure liturgique que la messe habituelle."}
+      "acceptedAnswer":{"@type":"Answer","text":"Le rite tridentin suit le missel de 1962. La messe Paul VI suit le missel de 1969/1970 issu du concile Vatican II (forme ordinaire) : elle peut être célébrée en français ou en latin selon les paroisses, avec la même structure liturgique que la messe habituelle."}
     },
     {
       "@type":"Question",
@@ -594,17 +626,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <body>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane">
-  <a href="#">Accueil</a> › <span aria-current="page">Messes traditionnelles en France</span>
+  <a href="#">Accueil</a> › <span aria-current="page">Messes en France</span>
 </nav>
 
 <header>
-  <div class="eyebrow">Annuaire liturgique · France</div>
-  <h1>Messe en latin <em>près de chez vous</em></h1>
-  <p class="subtitle">Rite tridentin (missel 1962) et messe Paul VI en latin — filtrez par diocèse, langue et communauté célébrante.</p>
+  <div class="eyebrow">Annuaire national · France</div>
+  <h1>Trouvez une messe <em>partout en France</em></h1>
+  <p class="subtitle">Toutes les églises catholiques de France — messes en latin (rite tridentin 1962 &amp; Paul VI) et célébrations paroissiales. Recherchez par ville ou code postal, filtrez par rite, langue, diocèse et communauté.</p>
 
   <div class="trust-bar">
     <div><b id="trustCount">—</b> lieux référencés</div>
-    <div><b>{{DIOCESE_COUNT}}</b> diocèses couverts</div>
+    <div><b id="trustDepts">{{DEPT_COUNT}}</b> départements couverts</div>
     <div><b>{{LAST_UPDATE}}</b> dernière mise à jour des sources</div>
   </div>
 
@@ -614,22 +646,23 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
   <div class="source-note">
-    <strong>Sources des données :</strong> AMDG (amdg.asso.fr, mise à jour hebdomadaire),
-    La Porte Latine (laportelatine.org/lieux, lieux desservis par la FSSPX et communautés amies),
-    trouverunemesse.fr / horairesmesses.com (agrégateurs croisés avec messes.info pour vérifier les messes Paul VI en latin).
-    Liste <strong>non exhaustive</strong>, mise à jour automatiquement chaque jour.
+    <strong>Sources des données :</strong> messes.info (Conférence des Évêques de France — annuaire national),
+    AMDG (amdg.asso.fr, messes tridentin, mise à jour hebdomadaire),
+    La Porte Latine (laportelatine.org/lieux, lieux desservis par la FSSPX et communautés amies).
+    Liste <strong>non exhaustive</strong>, mise à jour automatiquement. Pour chaque lieu, un lien
+    <strong>« Horaires sur messes.info »</strong> donne les célébrations à jour.<br><br>
     <strong>Vérifiez toujours les horaires avant de vous déplacer</strong> — ils changent en été, à Noël, à Pâques.<br><br>
     <strong>Note sur la FSSPX :</strong> la Fraternité Sacerdotale Saint-Pie X et les « communautés amies » qui lui
     sont proches ne sont pas en pleine communion canonique avec Rome — à la différence de FSSP, ICRSP, IBP et des prêtres diocésains
-    listés ailleurs sur cette page. Ce site les signale toutes les deux pour être exhaustif sur l'offre de messes en latin, sans prendre position.
+    listés ailleurs sur cette page. Ce site les signale toutes les deux pour être exhaustif, sans prendre position.
   </div>
 </header>
 
 <div class="filters-wrap">
   <div class="filters">
     <div class="field" style="grid-column:1/-1;">
-      <label for="q">Recherche (ville, lieu, célébrant)</label>
-      <input type="text" id="q" placeholder="Ex. Toulouse, Saint-Eugène, ICRSP…">
+      <label for="q">Recherche (ville, code postal, église, célébrant)</label>
+      <input type="text" id="q" placeholder="Ex. Toulouse, 75007, Saint-Eugène, ICRSP…">
     </div>
 
     <div class="field">
@@ -671,11 +704,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
 <main>
   <div class="grid" id="grid"></div>
+  <div class="more-row" id="moreRow" style="display:none;">
+    <button id="moreBtn">Afficher plus de lieux</button>
+  </div>
   <div class="empty" id="emptyState" style="display:none;">Aucun lieu ne correspond à ces filtres.</div>
 </main>
 
 <section class="faq" aria-labelledby="faqTitle">
   <h2 id="faqTitle">Questions fréquentes</h2>
+  <details>
+    <summary>Comment trouver une messe près de chez moi ?</summary>
+    <p>Utilisez le bouton de géolocalisation pour trier les lieux par proximité, ou entrez votre ville / code postal dans la recherche. Pour les horaires précis, cliquez sur « Horaires sur messes.info » sur la carte du lieu.</p>
+  </details>
   <details>
     <summary>Qu'est-ce que la messe tridentine ?</summary>
     <p>La messe tridentine, ou forme extraordinaire du rite romain, est célébrée selon le missel romain de 1962, en latin. Elle a été confirmée comme légitime par le motu proprio Summorum Pontificum de Benoît XVI en 2007, avec des conditions révisées depuis par Traditionis Custodes (2021).</p>
@@ -685,8 +725,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <p>Le rite tridentin suit le missel de 1962. La messe Paul VI suit le missel de 1969/1970 issu du concile Vatican II (forme ordinaire) : elle peut être célébrée en français ou en latin selon les paroisses, avec la même structure liturgique que la messe habituelle.</p>
   </details>
   <details>
-    <summary>Quelle est la différence entre FSSP, ICRSP, IBP et FSSPX ?</summary>
-    <p>FSSP, ICRSP et IBP sont des instituts de droit pontifical en pleine communion avec Rome, dont les prêtres célèbrent la forme extraordinaire avec l'accord de l'évêque du lieu. La FSSPX n'est pas en pleine communion canonique avec Rome ; ses lieux sont signalés séparément sur cet annuaire, sans prise de position.</p>
+    <summary>Comment signaler une erreur ou un lieu manquant ?</summary>
+    <p>Écrivez-nous via le lien en bas de page : chaque correction est intégrée à la prochaine mise à jour automatique.</p>
   </details>
   <div class="report-cta">
     Une erreur, un horaire changé, un lieu manquant ? <a href="mailto:contact@exemple.fr?subject=Correction%20annuaire%20messes">Signalez-le en un mail →</a>
@@ -703,20 +743,20 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <strong>FSTB</strong> : Fraternité Saint-Thomas-Becket · <strong>CRMD</strong> : Chanoines Réguliers de la Mère de
   Dieu · <strong>FSVF</strong> : Fraternité Saint-Vincent-Ferrier · <strong>MMD</strong> : Missionnaires de la
   Miséricorde Divine · <strong>Bénédictins</strong> : moines/moniales de l'ordre de Saint-Benoît ·
-  <strong>Diocèse</strong> : prêtre incardiné dans le diocèse, hors institut ou fraternité dédiée ·
+  <strong>Diocèse</strong> : prêtre incardiné dans le diocèse · <strong>Paroisse</strong> : église paroissiale générale ·
   <strong>FSSPX</strong> : Fraternité Sacerdotale Saint-Pie X (hors pleine communion canonique — voir note en en-tête) ·
   <strong>Fraternité de la Transfiguration</strong>, <strong>Capucins de Morgon</strong>,
   <strong>Dominicaines contemplatives</strong> : communautés proches de la FSSPX.
 </footer>
 
+<!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo -->
+<script src="data.js"></script>
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
 // Dernière génération : {{GENERATED_AT}}
 // ---------------------------------------------------------------
-const DATA = [
-{{DATA_JS}}
-];
+const DATA = window.ANNUAIRE_DATA || [];
 
 // ---------------------------------------------------------------
 // Mapping communautés → labels complets
@@ -724,7 +764,7 @@ const DATA = [
 const communeLabels = {{LABELS_JS}};
 
 // Centroïdes approximatifs des préfectures de département — utilisés
-// uniquement pour un tri "par proximité" indicatif.
+// uniquement pour les lieux sans GPS précis (fallback).
 const DEPT_COORDS = {{DEPT_COORDS_JS}};
 
 function haversine(lat1,lon1,lat2,lon2){
@@ -748,13 +788,14 @@ function locateMe(){
   navigator.geolocation.getCurrentPosition(
     pos=>{
       userPos = {lat:pos.coords.latitude, lon:pos.coords.longitude};
-      status.textContent="Trié par proximité (approximatif, au niveau du département).";
+      status.textContent="Trié par proximité (GPS précis pour la plupart des lieux).";
       btn.disabled=false;
+      visibleCount = PAGE_SIZE;
       render();
       document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
     },
     err=>{
-      status.textContent="Localisation refusée ou indisponible — utilisez plutôt les filtres.";
+      status.textContent="Localisation refusée ou indisponible — utilisez plutôt la recherche.";
       btn.disabled=false;
     },
     {timeout:8000}
@@ -762,8 +803,10 @@ function locateMe(){
 }
 
 let state = {rite:"all", langue:"all", diocese:"all", communaute:"all", q:""};
+const PAGE_SIZE = 100;
+let visibleCount = PAGE_SIZE;
 
-function uniqueSorted(arr){return [...new Set(arr)].sort((a,b)=>a.localeCompare(b,'fr'));}
+function uniqueSorted(arr){return [...new Set(arr.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr'));}
 
 // --------- synchro état <-> URL (partage / retour arrière) ---------
 function stateFromURL(){
@@ -781,11 +824,11 @@ function urlFromState(){
 
 function populateSelects(){
   const dioceseSel = document.getElementById('diocese');
-  uniqueSorted(DATA.map(d=>d.diocese)).forEach(d=>{
+  uniqueSorted(DATA.map(d=>d.dioc)).forEach(d=>{
     const o=document.createElement('option'); o.value=d; o.textContent=d; dioceseSel.appendChild(o);
   });
   const commSel = document.getElementById('communaute');
-  uniqueSorted(DATA.map(d=>d.communaute)).forEach(c=>{
+  uniqueSorted(DATA.map(d=>d.comm)).forEach(c=>{
     const o=document.createElement('option'); o.value=c; o.textContent=communeLabels[c]||c; commSel.appendChild(o);
   });
 }
@@ -793,85 +836,116 @@ function populateSelects(){
 function buildLegend(){
   const legend=document.getElementById('legend');
   const counts={};
-  DATA.forEach(d=>{counts[d.communaute]=(counts[d.communaute]||0)+1;});
-  legend.innerHTML = Object.keys(counts).sort().map(c=>
-    `<span><b>${c}</b> · ${counts[c]} lieu${counts[c]>1?'x':''}</span>`
-  ).join('');
+  DATA.forEach(d=>{counts[d.comm]=(counts[d.comm]||0)+1;});
+  // Légende : communautés spéciales d'abord, "Paroisse" compacte
+  const specials = Object.keys(counts).filter(c=>c!=='Paroisse').sort();
+  const paroisse = counts['Paroisse']||0;
+  let html = '';
+  if(paroisse) html += `<span><b>Paroisse</b> · ${paroisse} lieu${paroisse>1?'x':''}</span>`;
+  specials.forEach(c=>{
+    html += `<span><b>${c}</b> · ${counts[c]} lieu${counts[c]>1?'x':''}</span>`;
+  });
+  legend.innerHTML = html;
 }
 
 function matches(d){
   if(state.rite!=='all' && d.rite!==state.rite) return false;
-  if(state.langue!=='all' && d.langue!==state.langue) return false;
-  if(state.diocese!=='all' && d.diocese!==state.diocese) return false;
-  if(state.communaute!=='all' && d.communaute!==state.communaute) return false;
+  if(state.langue!=='all' && d.lang!==state.langue) return false;
+  if(state.diocese!=='all' && d.dioc!==state.diocese) return false;
+  if(state.communaute!=='all' && d.comm!==state.communaute) return false;
   if(state.q){
-    const hay = (d.ville+' '+d.lieu+' '+d.celebrant+' '+d.diocese+' '+d.dept).toLowerCase();
+    const hay = ((d.ville||'')+' '+(d.lieu||'')+' '+(d.cel||'')+' '+(d.dioc||'')+' '+(d.dept||'')+' '+(d.adr||'')).toLowerCase();
     if(!hay.includes(state.q.toLowerCase())) return false;
   }
   return true;
 }
 
 function slugify(s){
-  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+function distFor(d){
+  if(userPos && d.lat!=null && d.lon!=null){
+    return haversine(userPos.lat,userPos.lon,d.lat,d.lon);
+  }
+  if(userPos){
+    const coord = DEPT_COORDS[d.d];
+    return coord ? haversine(userPos.lat,userPos.lon,coord[0],coord[1]) : null;
+  }
+  return null;
 }
 
 function render(){
   let results = DATA.filter(matches);
 
   if(userPos){
-    results = results.map(d=>{
-      const code = d.dept.split(' ')[0];
-      const coord = DEPT_COORDS[code];
-      const dist = coord ? haversine(userPos.lat,userPos.lon,coord[0],coord[1]) : null;
-      return {...d, _dist:dist};
-    }).sort((a,b)=>{
+    results = results.map(d=>{ return {...d, _dist:distFor(d)}; }).sort((a,b)=>{
       if(a._dist==null) return 1;
       if(b._dist==null) return -1;
       return a._dist-b._dist;
     });
   } else {
-    results = results.sort((a,b)=>a.dept.localeCompare(b.dept,'fr'));
+    results = results.sort((a,b)=>((a.dept||'').localeCompare(b.dept||'','fr')) || (a.ville||'').localeCompare(b.ville||'','fr'));
   }
 
   const grid = document.getElementById('grid');
   const empty = document.getElementById('emptyState');
+  const moreRow = document.getElementById('moreRow');
   document.getElementById('resultCount').innerHTML = `<strong>${results.length}</strong> lieu${results.length>1?'x':''} de culte`;
 
   if(results.length===0){
     grid.innerHTML='';
     empty.style.display='block';
+    moreRow.style.display='none';
     return;
   }
   empty.style.display='none';
 
-  grid.innerHTML = results.map(d=>{
-    const cardId = slugify(d.ville+'-'+d.lieu);
+  const slice = results.slice(0, visibleCount);
+  grid.innerHTML = slice.map(d=>{
+    const cardId = slugify((d.ville||'')+'-'+(d.lieu||''));
+    const riteTag = d.rite==='tridentin'
+      ? `<span class="tag rite-t">Tridentin · 1962</span>`
+      : d.rite==='paulvi'
+        ? `<span class="tag rite-p">Paul VI</span>`
+        : `<span class="tag lang">Messe</span>`;
+    const langTag = d.lang ? `<span class="tag lang">${d.lang==='latin'?'Latin':'Français'}</span>` : '';
+    const commTag = d.comm ? `<span class="tag comm">${d.comm}</span>` : '';
+    const diocTag = d.dioc ? `<span class="tag diocese">${d.dioc}</span>` : '';
+    const srcTag = d.src ? `<span class="tag src">${d.src}</span>` : '';
+    const messesBtn = d.url ? `<a class="messes-btn" href="${d.url}" target="_blank" rel="noopener">Horaires sur messes.info</a>` : '';
     return `
-    <article class="card ${d.rite}" id="${cardId}" itemscope itemtype="https://schema.org/Church">
+    <article class="card ${d.rite||''}" id="${cardId}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
-        <div class="card-ville" itemprop="name">${d.ville}</div>
-        <div class="card-dept">${d.dept}${d._dist!=null?` · <span class="card-distance">~${Math.round(d._dist)} km</span>`:''}</div>
+        <div class="card-ville" itemprop="name">${d.ville||''}</div>
+        <div class="card-dept">${d.dept||''}${d._dist!=null?` · <span class="card-distance">~${Math.round(d._dist)} km</span>`:''}</div>
       </div>
-      <div class="card-lieu">${d.lieu}</div>
-      ${d.adresse?`<div class="card-adresse" itemprop="address">${d.adresse}</div>`:''}
+      <div class="card-lieu">${d.lieu||''}</div>
+      ${d.adr?`<div class="card-adresse" itemprop="address">${d.adr}</div>`:''}
       <div class="tags">
-        <span class="tag ${d.rite==='tridentin'?'rite-t':'rite-p'}">${d.rite==='tridentin'?'Tridentin · 1962':'Paul VI'}</span>
-        <span class="tag lang">${d.langue==='latin'?'Latin':'Français'}</span>
-        <span class="tag comm">${d.communaute}</span>
-        <span class="tag diocese">${d.diocese}</span>
-        ${d.source?`<span class="tag src">${d.source}</span>`:''}
+        ${riteTag}
+        ${langTag}
+        ${commTag}
+        ${diocTag}
+        ${srcTag}
       </div>
       <div class="card-detail">
-        <div class="row"><span class="label">Horaires</span> — ${d.horaires}</div>
-        <div class="row"><span class="label">Célébrant</span> — ${d.celebrant}</div>
-        ${d.contact?`<div class="row"><span class="label">Contact</span> — ${d.contact}</div>`:''}
+        ${d.horaire?`<div class="row"><span class="label">Horaires</span> — ${d.horaire}</div>`:''}
+        ${d.cel?`<div class="row"><span class="label">Célébrant</span> — ${d.cel}</div>`:''}
+        ${d.tel?`<div class="row"><span class="label">Contact</span> — ${d.tel}</div>`:''}
       </div>
       <div class="card-actions">
+        ${messesBtn}
         <button class="share-btn" data-share="${cardId}">🔗 Copier le lien</button>
       </div>
     </article>
   `;}).join('');
 
+  if(results.length > visibleCount){
+    moreRow.style.display='block';
+  } else {
+    moreRow.style.display='none';
+  }
   document.getElementById('trustCount').textContent = DATA.length;
 }
 
@@ -886,6 +960,11 @@ document.getElementById('grid').addEventListener('click', e=>{
   }).catch(()=>{});
 });
 
+document.getElementById('moreBtn').addEventListener('click', ()=>{
+  visibleCount += PAGE_SIZE;
+  render();
+});
+
 document.getElementById('geoBtn').addEventListener('click', locateMe);
 
 document.getElementById('riteToggle').addEventListener('click', e=>{
@@ -894,15 +973,17 @@ document.getElementById('riteToggle').addEventListener('click', e=>{
   [...btn.parentElement.children].forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   state.rite = btn.dataset.val;
+  visibleCount = PAGE_SIZE;
   urlFromState(); render();
 });
-document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; urlFromState(); render();});
-document.getElementById('diocese').addEventListener('change', e=>{state.diocese=e.target.value; urlFromState(); render();});
-document.getElementById('communaute').addEventListener('change', e=>{state.communaute=e.target.value; urlFromState(); render();});
-document.getElementById('q').addEventListener('input', e=>{state.q=e.target.value; urlFromState(); render();});
+document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
+document.getElementById('diocese').addEventListener('change', e=>{state.diocese=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
+document.getElementById('communaute').addEventListener('change', e=>{state.communaute=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
+document.getElementById('q').addEventListener('input', e=>{state.q=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('resetBtn').addEventListener('click', ()=>{
   state = {rite:"all", langue:"all", diocese:"all", communaute:"all", q:""};
   userPos = null;
+  visibleCount = PAGE_SIZE;
   document.getElementById('geoStatus').textContent='';
   document.getElementById('q').value='';
   document.getElementById('langue').value='all';
@@ -936,7 +1017,7 @@ if(location.hash){
 
 
 def main():
-    logger.info("=== Génération index.html ===")
+    logger.info("=== Génération du site annuaire ===")
     if not DB_PATH.exists():
         logger.error("Base SQLite absente. Lancez d'abord create_db.py")
         return 1
@@ -950,20 +1031,26 @@ def main():
         labels_js = build_labels_js()
         dept_coords_js = build_dept_coords_js()
         last_update = last_update_date(conn)
-        diocese_count = compute_dioceses(lieux)
+        nb, depts, dioceses = compute_stats(lieux)
         generated_at = datetime.now().strftime("%d/%m/%Y %H:%M")
 
+        # Écrit data.js
+        data_path = OUTPUT_DIR / "data.js"
+        data_path.write_text(data_js, encoding="utf-8")
+        logger.info(f"data.js écrit: {data_path} ({len(data_js)} octets, {nb} lieux)")
+
+        # Écrit index.html
         html = HTML_TEMPLATE
-        html = html.replace("{{DATA_JS}}", data_js)
         html = html.replace("{{LABELS_JS}}", labels_js)
         html = html.replace("{{DEPT_COORDS_JS}}", dept_coords_js)
         html = html.replace("{{LAST_UPDATE}}", last_update)
-        html = html.replace("{{DIOCESE_COUNT}}", str(diocese_count))
+        html = html.replace("{{DEPT_COUNT}}", str(depts))
         html = html.replace("{{GENERATED_AT}}", generated_at)
 
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         HTML_OUTPUT.write_text(html, encoding="utf-8")
-        logger.info(f"HTML généré: {HTML_OUTPUT} ({len(html)} octets, {len(lieux)} lieux)")
+        logger.info(f"index.html écrit: {HTML_OUTPUT} ({len(html)} octets)")
+        logger.info(f"Stats: {nb} lieux, {depts} départements, {dioceses} diocèses")
     finally:
         conn.close()
     return 0

@@ -795,18 +795,29 @@
   <a href="a-propos.html">À propos, sources des données et note FSSPX →</a>
 </footer>
 
-<!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo -->
-<script src="data.js"></script>
+<!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo.
+     async = la page s'affiche immédiatement, les données arrivent en arrière-plan -->
+<script src="data.js" async></script>
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-<<<<<<< HEAD
-// Dernière génération : 11/08/2026 15:17
-=======
-// Dernière génération : 11/08/2026 14:34
->>>>>>> origin/main
+// Dernière génération : 11/08/2026 15:34
 // ---------------------------------------------------------------
-const DATA = window.ANNUAIRE_DATA || [];
+let DATA = [];
+
+// Attend que data.js (async) soit chargé puis initialise l'application.
+function whenDataReady(cb){
+  if(window.ANNUAIRE_DATA && window.ANNUAIRE_DATA.length){
+    DATA = window.ANNUAIRE_DATA;
+    cb();
+  } else {
+    setTimeout(()=>whenDataReady(cb), 40);
+  }
+}
+function showLoading(){
+  const grid = document.getElementById('grid');
+  if(grid) grid.innerHTML = '<div class="empty" id="emptyState">Chargement des données…</div>';
+}
 
 // ---------------------------------------------------------------
 // Mapping communautés → labels complets
@@ -1052,6 +1063,7 @@ function distFor(d){
 }
 
 function render(){
+  if(!DATA.length){ showLoading(); return; } // données pas encore chargées
   let results = DATA.filter(matches);
 
   if(userPos){
@@ -1169,20 +1181,26 @@ document.getElementById('resetBtn').addEventListener('click', ()=>{
   urlFromState(); render();
 });
 
-populateSelects();
-buildLegend();
-stateFromURL();
-document.getElementById('q').value = state.q;
-document.getElementById('rite').value = state.rite;
-document.getElementById('langue').value = state.langue;
-document.getElementById('diocese').value = state.diocese;
-document.getElementById('communaute').value = state.communaute;
-render();
+// Affichage immédiat (avant le chargement des données)
+showLoading();
 
-if(location.hash){
-  const target = document.getElementById(location.hash.slice(1));
-  if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 300);
-}
+// Initialisation complète dès que les données sont prêtes
+whenDataReady(()=>{
+  populateSelects();
+  buildLegend();
+  stateFromURL();
+  document.getElementById('q').value = state.q;
+  document.getElementById('rite').value = state.rite;
+  document.getElementById('langue').value = state.langue;
+  document.getElementById('diocese').value = state.diocese;
+  document.getElementById('communaute').value = state.communaute;
+  render();
+
+  if(location.hash){
+    const target = document.getElementById(location.hash.slice(1));
+    if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 300);
+  }
+});
 </script>
 </body>
 </html>

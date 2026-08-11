@@ -587,6 +587,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   .dept-nav-links a:hover{background:var(--card); text-decoration:underline;}
 
+  /* ---------- intro éditoriale (SEO) ---------- */
+  .intro{
+    max-width:1100px;
+    margin:0 auto;
+    padding:1.2rem 1.5rem 0;
+    font-family:'Inter',sans-serif;
+    font-size:0.88rem;
+    color:var(--slate);
+  }
+  .intro p{margin:0; max-width:900px;}
+  .intro a{color:var(--burgundy); font-weight:600;}
+  .intro strong{color:var(--ink);}
+
   /* ---------- trust bar ---------- */
   .trust-bar{
     display:flex;
@@ -847,6 +860,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <span id="geoStatus"></span>
   </div>
 </header>
+
+<section class="intro" aria-label="Présentation">
+  <p><strong>L'annuaire des messes en France</strong> référence plus de <strong>31 000 églises et lieux de culte catholiques</strong> dans les 101 départements de métropole et d'outre-mer. Vous cherchez une <strong>messe en latin (rite tridentin 1962 ou forme ordinaire en latin)</strong>, une <strong>paroisse</strong> proche de chez vous, une église de <strong>rite oriental catholique</strong> (byzantin, maronite, chaldéen, arménien…) ? Entrez votre ville ou votre code postal, activez la géolocalisation, ou explorez les <a href="departements/index.html">pages par département</a> et les <a href="villes/75-paris/">pages par ville</a>. Chaque fiche donne l'adresse, les horaires (via messes.info), le téléphone et un itinéraire Google Maps, Waze ou Apple Maps. Les messes en latin célébrées selon le missel de 1962 sont signalées « Tridentin » ; la Fraternité Saint-Pie X (FSSPX) est référencée séparément, en toute transparence.</p>
+</section>
 
 <div class="filters-wrap">
   <div class="filters">

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe à Nice (06) — 56 églises et lieux de culte — Annuaire</title>
+<meta name="description" content="Trouvez une messe à Nice (Alpes-Maritimes) : 56 églises et lieux de culte, dont 3 messes en latin. Adresses, horaires, GPS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://messes-france.github.io/villes/06-nice/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
+  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
+  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
+  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
+  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="../index.html" class="brand">🕯️ Messes en France</a>
+  <div class="nav-links">
+    <a href="../messes-en-latin.html">Messes en latin</a>
+    <a href="../rites-orientaux.html">Rites orientaux</a>
+    <a href="../departements/index.html">Départements</a>
+    <a href="../a-propos.html">À propos</a>
+  </div>
+</nav>
+<div class="wrap">
+  
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · Alpes-Maritimes (06)</div>
+    <h1>Messe à Nice</h1>
+    <p class="subtitle">56 lieux de culte à Nice, dont 3 messes en latin (rite tridentin). Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Abbatiale Saint-Pons</div>
+      <div class="card-adresse" itemprop="address">Montée de l’abbatiale Saint-Pons</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/abbatiale-saint-pons" data-ville="NICE" data-lieu="Abbatiale Saint-Pons">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7289098,7.282044" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7289098,7.282044&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7289098,7.282044" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Basilique Notre-Dame-de-l'Assomption</div>
+      <div class="card-adresse" itemprop="address">2 rue d'Italie</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/basilique-notre-dame-de-l-assomption" data-ville="NICE" data-lieu="Basilique Notre-Dame-de-l'Assomption">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7202832,7.2786062" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7202832,7.2786062&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7202832,7.2786062" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Cathédrale Basilique-Cathédrale Sainte-Marie-Sainte-Réparate</div>
+      <div class="card-adresse" itemprop="address">3 place Sainte Réparate</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/cathedrale-basilique-sainte-marie-sainte-reparate" data-ville="NICE" data-lieu="Cathédrale Basilique-Cathédrale Sainte-Marie-Sainte-Réparate">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6968338,7.2759204" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6968338,7.2759204&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6968338,7.2759204" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Notre-Dame-de-la-Madonette</div>
+      <div class="card-adresse" itemprop="address">Avnue du Vallon Barla</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-notre-dame-de-la-madonette" data-ville="Nice" data-lieu="Chapelle Notre-Dame-de-la-Madonette">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6857215,7.229962" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6857215,7.229962&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6857215,7.229962" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Curé-d'Ars</div>
+      <div class="card-adresse" itemprop="address">84 bd Henri Sappia - Las Planas</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-saint-cure-d-ars" data-ville="NICE" data-lieu="Chapelle Saint-Curé-d'Ars">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7302366,7.247966" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7302366,7.247966&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7302366,7.247966" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Isidore</div>
+      <div class="card-adresse" itemprop="address">Ancien chemin de la Ginestière</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-saint-isidore" data-ville="Nice" data-lieu="Chapelle Saint-Isidore">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7087424,7.2009363" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7087424,7.2009363&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7087424,7.2009363" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Pierre-de-Féric</div>
+      <div class="card-adresse" itemprop="address">140 route de Saint-Pierre-de-Féric</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-saint-pierre-de-feric" data-ville="NICE" data-lieu="Chapelle Saint-Pierre-de-Féric">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7131512,7.2422991" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7131512,7.2422991&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7131512,7.2422991" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Roch-la-Sirole</div>
+      <div class="card-adresse" itemprop="address">Rue de la Chapelle - La Sirole</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-saint-roch-la-sirole" data-ville="NICE" data-lieu="Chapelle Saint-Roch-la-Sirole">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.752274,7.232566" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.752274,7.232566&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.752274,7.232566" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Sépulcre</div>
+      <div class="card-adresse" itemprop="address">7 place Garibaldi</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-saint-sepulcre" data-ville="NICE" data-lieu="Chapelle Saint-Sépulcre">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7004787,7.279891" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7004787,7.279891&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7004787,7.279891" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Sainte-Bernadette-de-Ventabrun</div>
+      <div class="card-adresse" itemprop="address">222 chemin de Bellet</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-sainte-bernadette-de-ventabrun" data-ville="NICE" data-lieu="Chapelle Sainte-Bernadette-de-Ventabrun">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.703027,7.228591" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.703027,7.228591&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.703027,7.228591" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Sainte-Croix</div>
+      <div class="card-adresse" itemprop="address">2, Rue Saint Joseph</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/sainte-croix-penitents-blancs" data-ville="NICE" data-lieu="Chapelle Sainte-Croix">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6977394,7.2778676" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6977394,7.2778676&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6977394,7.2778676" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Sainte-Marguerite</div>
+      <div class="card-adresse" itemprop="address">251 avenue Sainte Marguerite - Cimetière Caucade</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-sainte-marguerite" data-ville="NICE" data-lieu="Chapelle Sainte-Marguerite">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6872482,7.2024537" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6872482,7.2024537&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6872482,7.2024537" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle Sainte-Trinité</div>
+      <div class="card-adresse" itemprop="address">18 rue Jules Gilly</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-sainte-trinite" data-ville="NICE" data-lieu="Chapelle Sainte-Trinité">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6957322,7.2771961" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6957322,7.2771961&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6957322,7.2771961" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle cimetière de Caucade</div>
+      <div class="card-adresse" itemprop="address">Cimetière de Caucade</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-cimetiere-de-caucade" data-ville="Nice" data-lieu="Chapelle cimetière de Caucade">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.676246,7.216265" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.676246,7.216265&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.676246,7.216265" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle de la Miséricorde</div>
+      <div class="card-adresse" itemprop="address">Cours Saleya</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-de-la-misericorde" data-ville="NICE" data-lieu="Chapelle de la Miséricorde">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.69576796,7.27537331" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.69576796,7.27537331&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.69576796,7.27537331" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06 – Maritimes</div>
+      </div>
+      <div class="card-lieu">Chapelle du Saint-Suaire : Confrérie de la Très-Sainte-Trinité, 1 rue du Saint-Suaire</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes 10h30 ; lundi, vendredi et samedi 10h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.7009358:7.2683912" data-ville="NICE" data-lieu="Chapelle du Saint-Suaire : Confrérie de la Très-Sainte-Trinité, 1 rue du Saint-Suaire">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7009358,7.2683912" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7009358,7.2683912&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7009358,7.2683912" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0646411896">📞 06 46 41 18 96</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle hôpital Cimiez</div>
+      <div class="card-adresse" itemprop="address">Pavillon Mossa - 4 avenue Reine Victoria</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-hopital-cimiez" data-ville="NICE" data-lieu="Chapelle hôpital Cimiez">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7209844,7.2734062" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7209844,7.2734062&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7209844,7.2734062" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Chapelle hôpital Maison de retaite Cantazur</div>
+      <div class="card-adresse" itemprop="address">343 Rte de Bellet</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/chapelle-hopital-maison-de-retaite-cantazur" data-ville="NICE" data-lieu="Chapelle hôpital Maison de retaite Cantazur">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.720547,7.2166904" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.720547,7.2166904&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.720547,7.2166904" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06 – Maritimes</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Jacques le Majeur dite du Ges&ugrave; : 12, rue Droite / Place du Gés&ugrave; dans le vieux Nice</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes 9h00 (basse avec orgue) et 18h00 (basse) ; mardi, mecredi et jeudi 10h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.7009358:7.2683912" data-ville="NICE" data-lieu="Eglise Saint Jacques le Majeur dite du Ges&ugrave; : 12, rue Droite / Place du Gés&ugrave; dans le vieux Nice">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7009358,7.2683912" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7009358,7.2683912&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7009358,7.2683912" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0646411896">📞 06 46 41 18 96</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Monastère Sainte-Claire</div>
+      <div class="card-adresse" itemprop="address">30 avenue Sainte-Colette</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/monastere-sainte-claire" data-ville="NICE" data-lieu="Monastère Sainte-Claire">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7274588,7.2794875" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7274588,7.2794875&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7274588,7.2794875" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Sanctuaire Notre-Dame-du-Malonat</div>
+      <div class="card-adresse" itemprop="address">Rue du Malonat</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/sanctuaire-notre-dame-du-malonat" data-ville="Nice" data-lieu="Sanctuaire Notre-Dame-du-Malonat">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6962309,7.277626" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6962309,7.277626&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6962309,7.277626" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Sanctuaire Sacré-Coeur-de-Nice</div>
+      <div class="card-adresse" itemprop="address">22 rue de France</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/sanctuaire-sacre-coeur-de-nice" data-ville="NICE" data-lieu="Sanctuaire Sacré-Coeur-de-Nice">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6966723,7.2621671" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6966723,7.2621671&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6966723,7.2621671" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-Auxiliatrice</div>
+      <div class="card-adresse" itemprop="address">36 place Don Bosco</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-auxiliatrice" data-ville="NICE" data-lieu="Église Notre-Dame-Auxiliatrice">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.708903,7.280946" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.708903,7.280946&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.708903,7.280946" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-de-Bon-Conseil</div>
+      <div class="card-adresse" itemprop="address">19 rue Louis Garneray</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-de-bon-conseil" data-ville="NICE" data-lieu="Église Notre-Dame-de-Bon-Conseil">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7071834,7.2941548" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7071834,7.2941548&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7071834,7.2941548" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-de-Bon-Voyage</div>
+      <div class="card-adresse" itemprop="address">Place Abbé Egide Martelli - 159 route de Turin</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-de-bon-voyage" data-ville="NICE" data-lieu="Église Notre-Dame-de-Bon-Voyage">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7223882,7.2896657" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7223882,7.2896657&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7223882,7.2896657" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-de-Lourdes</div>
+      <div class="card-adresse" itemprop="address">91 Bd René Cassin</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-de-lourdes" data-ville="NICE" data-lieu="Église Notre-Dame-de-Lourdes">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6693804,7.220453" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6693804,7.220453&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6693804,7.220453" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-du-Perpétuel-Secours</div>
+      <div class="card-adresse" itemprop="address">35 bd du Mont-Boron</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-du-perpetuel-secours" data-ville="NICE" data-lieu="Église Notre-Dame-du-Perpétuel-Secours">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6917493,7.2958275" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6917493,7.2958275&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6917493,7.2958275" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-du-Port</div>
+      <div class="card-adresse" itemprop="address">Place de l'Ile de Beauté</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-du-port" data-ville="NICE" data-lieu="Église Notre-Dame-du-Port">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6986172,7.2849122" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6986172,7.2849122&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6986172,7.2849122" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-du-Rosaire</div>
+      <div class="card-adresse" itemprop="address">Place A Vérola - Saint-Isidore</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-du-rosaire" data-ville="NICE" data-lieu="Église Notre-Dame-du-Rosaire">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7106216,7.1921848" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7106216,7.1921848&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7106216,7.1921848" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Notre-Dame-du-Vallon-des-Fleurs</div>
+      <div class="card-adresse" itemprop="address">164 av. Henri-Dunant</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-notre-dame-du-vallon-des-fleurs" data-ville="NICE" data-lieu="Église Notre-Dame-du-Vallon-des-Fleurs">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7309969,7.271151" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7309969,7.271151&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7309969,7.271151" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Antoine</div>
+      <div class="card-adresse" itemprop="address">281 route de Saint-Antoine Ginestière</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-antoine" data-ville="NICE" data-lieu="Église Saint-Antoine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7080344,7.2156753" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7080344,7.2156753&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7080344,7.2156753" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Barthélemy</div>
+      <div class="card-adresse" itemprop="address">11 montée Claire Virenque</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-barthelemy" data-ville="NICE" data-lieu="Église Saint-Barthélemy">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7189066,7.2545816" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7189066,7.2545816&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7189066,7.2545816" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-François-d'Assise</div>
+      <div class="card-adresse" itemprop="address">16 bd Jean-Behra</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/saint-francois-d-assise" data-ville="NICE" data-lieu="Église Saint-François-d'Assise">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7260451,7.2472905" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7260451,7.2472905&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7260451,7.2472905" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-François-de-Paule</div>
+      <div class="card-adresse" itemprop="address">9 rue Saint-François-de-Paule</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-francois-de-paule" data-ville="NICE" data-lieu="Église Saint-François-de-Paule">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6958334,7.271919" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6958334,7.271919&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6958334,7.271919" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06 – Alpes-Maritimes</div>
+      </div>
+      <div class="card-lieu">Église Saint-Jacques (dite du Gesù)</div>
+      <div class="card-adresse" itemprop="address">12 rue Droite, Vieux Nice</div>
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">ICRSP</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — Dim. 9h00 et 18h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.6978824:7.2774734" data-ville="Nice" data-lieu="Église Saint-Jacques (dite du Gesù)">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6978824,7.2774734" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6978824,7.2774734&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6978824,7.2774734" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0646411896">📞 06 46 41 18 96</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Jacques-le-Majeur (Gésu)</div>
+      <div class="card-adresse" itemprop="address">Place du Gésu</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-jacques-le-majeur" data-ville="NICE" data-lieu="Église Saint-Jacques-le-Majeur (Gésu)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6968275,7.2770845" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6968275,7.2770845&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6968275,7.2770845" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Nice</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Jean-Baptiste-"le-Voeu"</div>
+      <div class="card-adresse" itemprop="address">25 rue Gioffredo</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-jean-baptiste--le-voeu-" data-ville="Nice" data-lieu="Église Saint-Jean-Baptiste-"le-Voeu"">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7006969,7.2758864" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7006969,7.2758864&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7006969,7.2758864" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Jean-l'Evangéliste</div>
+      <div class="card-adresse" itemprop="address">25 bd Comte de Falicon</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-jean-l-evangeliste" data-ville="NICE" data-lieu="Église Saint-Jean-l'Evangéliste">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.729207,7.2547923" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.729207,7.2547923&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.729207,7.2547923" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Joseph</div>
+      <div class="card-adresse" itemprop="address">21 rue Smolett</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-joseph" data-ville="NICE" data-lieu="Église Saint-Joseph">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.70387,7.2842709" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.70387,7.2842709&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.70387,7.2842709" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Marc</div>
+      <div class="card-adresse" itemprop="address">180 Bd Napoléon III</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-marc" data-ville="NICE" data-lieu="Église Saint-Marc">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6774804,7.2187343" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6774804,7.2187343&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6774804,7.2187343" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Martin-Saint-Augustin</div>
+      <div class="card-adresse" itemprop="address">1 place Sincaïre</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-martin-saint-augustin" data-ville="NICE" data-lieu="Église Saint-Martin-Saint-Augustin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6997012,7.2806065" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6997012,7.2806065&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6997012,7.2806065" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Pancrace</div>
+      <div class="card-adresse" itemprop="address">1 ch. de l’église-de-Saint-Pancrace</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-pancrace" data-ville="NICE" data-lieu="Église Saint-Pancrace">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7440028,7.2411712" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7440028,7.2411712&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7440028,7.2411712" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Paul</div>
+      <div class="card-adresse" itemprop="address">28 avenue de Pessicart</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-paul" data-ville="NICE" data-lieu="Église Saint-Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7092326,7.2526853" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7092326,7.2526853&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7092326,7.2526853" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Philippe-de-Néri</div>
+      <div class="card-adresse" itemprop="address">40 avenue d'Estienne d'Orves</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-philippe" data-ville="NICE" data-lieu="Église Saint-Philippe-de-Néri">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.700252,7.2486402" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.700252,7.2486402&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.700252,7.2486402" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Pierre-d'Arène</div>
+      <div class="card-adresse" itemprop="address">62 rue de France</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-pierre-d-arene" data-ville="NICE" data-lieu="Église Saint-Pierre-d'Arène">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6955314,7.2568102" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6955314,7.2568102&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6955314,7.2568102" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Pierre-de-l'Ariane</div>
+      <div class="card-adresse" itemprop="address">3 rue Pierre Séguran</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-pierre-de-l-ariane" data-ville="NICE" data-lieu="Église Saint-Pierre-de-l'Ariane">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.737968,7.3064674" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.737968,7.3064674&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.737968,7.3064674" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Roch</div>
+      <div class="card-adresse" itemprop="address">Place Saint Roch</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-roch" data-ville="NICE" data-lieu="Église Saint-Roch">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7124268,7.291991" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7124268,7.291991&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7124268,7.291991" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Roman-de-Bellet</div>
+      <div class="card-adresse" itemprop="address">Place Louis-Martin</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-roman-de-bellet" data-ville="NICE" data-lieu="Église Saint-Roman-de-Bellet">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.744383,7.2146281" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.744383,7.2146281&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.744383,7.2146281" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Sauveur</div>
+      <div class="card-adresse" itemprop="address">Place de l'église-de-Gairaut</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-sauveur" data-ville="NICE" data-lieu="Église Saint-Sauveur">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7373042,7.2587739" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7373042,7.2587739&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7373042,7.2587739" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Saint-Étienne</div>
+      <div class="card-adresse" itemprop="address">32 rue Vernier</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-saint-etienne" data-ville="NICE" data-lieu="Église Saint-Étienne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7074359,7.2588485" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7074359,7.2588485&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7074359,7.2588485" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Hélène</div>
+      <div class="card-adresse" itemprop="address">142 avenue de la Californie</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-sainte-helene" data-ville="NICE" data-lieu="Église Sainte-Hélène">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6853315,7.2348211" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6853315,7.2348211&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6853315,7.2348211" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Jeanne-d'Arc</div>
+      <div class="card-adresse" itemprop="address">86 avenue Saint Lambert</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-sainte-jeanne-d-arc" data-ville="NICE" data-lieu="Église Sainte-Jeanne-d'Arc">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.7133263,7.2626955" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.7133263,7.2626955&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.7133263,7.2626955" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Marie-Madeleine</div>
+      <div class="card-adresse" itemprop="address">2 chemin de la Costière</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-sainte-marie-madeleine" data-ville="NICE" data-lieu="Église Sainte-Marie-Madeleine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.708737,7.230807" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.708737,7.230807&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.708737,7.230807" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Monique</div>
+      <div class="card-adresse" itemprop="address">33 Bd Paul Montel</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-sainte-monique" data-ville="NICE" data-lieu="Église Sainte-Monique">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.67353,7.208372" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.67353,7.208372&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.67353,7.208372" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Thérèse-de-l'Enfant-Jésus</div>
+      <div class="card-adresse" itemprop="address">8 avenue Joseph Revelli</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-sainte-therese-de-l-enfant-jesus" data-ville="NICE" data-lieu="Église Sainte-Thérèse-de-l'Enfant-Jésus">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6943073,7.2445742" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6943073,7.2445742&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6943073,7.2445742" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">NICE</div>
+        <div class="card-dept">06</div>
+      </div>
+      <div class="card-lieu">Église de l'Annonciation (Sainte-Rita)</div>
+      <div class="card-adresse" itemprop="address">1 rue de la poissonnerie</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/06/nice/eglise-annonciation" data-ville="NICE" data-lieu="Église de l'Annonciation (Sainte-Rita)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6961708,7.2765357" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6961708,7.2765357&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6961708,7.2765357" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="../a-propos.html">À propos et sources</a>
+</footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>

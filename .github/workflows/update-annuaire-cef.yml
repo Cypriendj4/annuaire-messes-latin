@@ -66,6 +66,7 @@ jobs:
           cp output/messes-en-latin.html messes-en-latin.html
           cp output/rites-orientaux.html rites-orientaux.html
           cp output/a-propos.html a-propos.html
+          cp -r output/villes ./villes
           if [ -n "$CUSTOM_DOMAIN" ]; then
             echo "$CUSTOM_DOMAIN" > CNAME
             echo "CNAME écrit: $CUSTOM_DOMAIN"

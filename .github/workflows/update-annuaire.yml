@@ -68,6 +68,7 @@ jobs:
           cp output/messes-en-latin.html messes-en-latin.html
           cp output/rites-orientaux.html rites-orientaux.html
           cp output/a-propos.html a-propos.html
+          cp -r output/villes ./villes
           # Domaine personnalisé : si CUSTOM_DOMAIN est défini (secret/var GitHub),
           # écrit le fichier CNAME à la racine (requis par GitHub Pages).
           if [ -n "$CUSTOM_DOMAIN" ]; then

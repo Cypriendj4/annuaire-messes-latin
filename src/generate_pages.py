@@ -362,6 +362,79 @@ def build_a_propos(conn, last_update) -> str:
         canonical="a-propos.html")
 
 
+def build_ville_page(conn, ville: str, last_update: str) -> str | None:
+    """Page SEO par ville : 'messe à [ville]' — la requête locale dominante."""
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT ville, dept_code, dept_nom, lieu, adresse, rite, langue, communaute,
+               horaires, contact, url_detail, coord_lat, coord_lon
+        FROM lieux WHERE actif=1 AND UPPER(ville)=? AND dept_code != ''
+        ORDER BY lieu
+    """, (ville.upper(),))
+    lieux = cur.fetchall()
+    if not lieux:
+        return None
+    nb = len(lieux)
+    nb_trid = sum(1 for l in lieux if l[5] == 'tridentin')
+    dc = lieux[0][1]
+    dn = lieux[0][2] or DEPT_NAMES.get(dc, dc)
+
+    cards = ""
+    for l in lieux:
+        lville, ldc, ldn, lieu, adr, rite, lang, comm, hor, tel, url, lat, lon = l
+        dept = f"{ldc} – {ldn}" if ldn else ldc
+        rite_tag = {
+            "tridentin": "Tridentin · 1962",
+            "paulvi": "Paul VI",
+            "oriental": "Rite oriental",
+        }.get(rite, "Messe")
+        hor_html = f'<div class="row"><span class="label">Horaires</span> — {hor[:200]}</div>' if hor and "voir site" not in hor.lower() else ""
+        tel_html = ""
+        if tel:
+            m_tel = re.search(r'(\b0\d(?:\s?\d){8}\b)', tel)
+            if m_tel:
+                num = re.sub(r'\s+', '', m_tel.group(1))
+                tel_html = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
+        url_html = ""
+        if url:
+            url_html = f'<button class="messes-btn horaires-btn" data-url="{url}" data-ville="{lville}" data-lieu="{lieu}">Horaires sur messes.info</button>'
+        elif lat is not None and lon is not None:
+            url_html = (f'<button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/{lat}:{lon}" '
+                        f'data-ville="{lville}" data-lieu="{lieu}">Horaires à proximité</button>')
+        gps_html = ""
+        if lat is not None and lon is not None:
+            gps_html = (f'<a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query={lat},{lon}" target="_blank" rel="noopener">Google Maps</a>'
+                        f'<a class="messes-btn gps" href="https://waze.com/ul?ll={lat},{lon}&navigate=yes" target="_blank" rel="noopener">Waze</a>'
+                        f'<a class="messes-btn gps" href="https://maps.apple.com/?q={lat},{lon}" target="_blank" rel="noopener">Apple Maps</a>')
+        cards += f"""
+    <article class="card {rite or ''}" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">{lville}</div>
+        <div class="card-dept">{dept}</div>
+      </div>
+      <div class="card-lieu">{lieu}</div>
+      {f'<div class="card-adresse" itemprop="address">{adr}</div>' if adr else ''}
+      <div class="tags"><span class="tag {'rite-t' if rite=='tridentin' else 'rite-p' if rite=='paulvi' else 'rite-o' if rite=='oriental' else 'lang'}">{rite_tag}</span>{f'<span class="tag">{comm}</span>' if comm else ''}</div>
+      {f'<div class="card-detail">{hor_html}</div>' if hor_html else ''}
+      <div class="card-actions">{url_html}{gps_html}{tel_html}</div>
+    </article>"""
+
+    ville_norm = ville.title()
+    body = f"""
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · {dn} ({dc})</div>
+    <h1>Messe à {ville_norm}</h1>
+    <p class="subtitle">{nb} lieux de culte à {ville_norm}{f', dont {nb_trid} messes en latin (rite tridentin)' if nb_trid else ''}. Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">{cards}
+    </div>"""
+    slug = slugify(ville_norm)
+    return page_shell(
+        f"Messe à {ville_norm} ({dc}) — {nb} églises et lieux de culte — Annuaire",
+        f"Trouvez une messe à {ville_norm} ({dn}) : {nb} églises et lieux de culte{f', dont {nb_trid} messes en latin' if nb_trid else ''}. Adresses, horaires, GPS.",
+        body, prefix="../", last_update=last_update,
+        canonical=f"villes/{dc}-{slug}/")
+
+
 def build_dept_index(conn, last_update) -> str:
     cur = conn.cursor()
     cur.execute("""
@@ -394,6 +467,8 @@ def update_sitemap(extra_pages: list[str]) -> None:
     if not sitemap_path.exists():
         return
     xml = sitemap_path.read_text(encoding="utf-8")
+    # Purge les anciennes entrées /villes/ (les slugs changent au fil des runs)
+    xml = re.sub(r'<url><loc>%s/villes/[^<]*</loc></url>\n?' % re.escape(base), "", xml)
     additions = []
     for page in extra_pages:
         loc = f"{base}/{page}"
@@ -424,8 +499,43 @@ def main() -> int:
         dept_dir.mkdir(parents=True, exist_ok=True)
         (dept_dir / "index.html").write_text(build_dept_index(conn, last_update), encoding="utf-8")
 
+        # Pages villes (requête locale dominante 'messe à [ville]')
+        villes_dir = OUTPUT_DIR / "villes"
+        villes_dir.mkdir(parents=True, exist_ok=True)
+        cur2 = conn.cursor()
+        cur2.execute("""
+            SELECT UPPER(ville) FROM lieux
+            WHERE actif=1 AND ville != '' AND dept_code != ''
+            GROUP BY UPPER(ville) HAVING COUNT(*) >= 5
+            ORDER BY COUNT(*) DESC LIMIT 120
+        """)
+        ville_pages = 0
+        ville_urls = []
+        ville_slugs = set()
+        for (ville_upper,) in cur2.fetchall():
+            # Forme propre pour l'affichage et le slug (title case)
+            ville_norm = ville_upper.title()
+            page = build_ville_page(conn, ville_upper, last_update)
+            if not page:
+                continue
+            dc = None
+            cur3 = conn.cursor()
+            cur3.execute("SELECT dept_code FROM lieux WHERE actif=1 AND UPPER(ville)=? AND dept_code != '' LIMIT 1", (ville_upper,))
+            r3 = cur3.fetchone()
+            dc = r3[0] if r3 else "00"
+            slug = slugify(ville_norm)
+            if (dc, slug) in ville_slugs:
+                continue  # évite les collisions (ex. PARIS vs Paris)
+            ville_slugs.add((dc, slug))
+            vdir = villes_dir / f"{dc}-{slug}"
+            vdir.mkdir(parents=True, exist_ok=True)
+            (vdir / "index.html").write_text(page, encoding="utf-8")
+            ville_pages += 1
+            ville_urls.append(f"villes/{dc}-{slug}/")
+        logger.info(f"Pages villes générées: {ville_pages}")
+
         update_sitemap(["messes-en-latin.html", "rites-orientaux.html", "a-propos.html",
-                        "departements/index.html"])
+                        "departements/index.html"] + ville_urls)
         logger.info("Pages secondaires générées")
         print("PAGES_OK")
     finally:

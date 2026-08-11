@@ -150,10 +150,21 @@ Chaque nuit, vous recevez un résumé :
 
 ## 🌐 Domaine personnalisé gratuit
 
-### Option A : sous-domaine .github.io (défaut)
-Rien à faire.
+### Option A : organisation GitHub (recommandée — la plus simple)
+Une organisation GitHub donne un sous-domaine `[org].github.io` **sans pseudo**, gratuit et immédiat.
 
-### Option B : domaine eu.org (recommandé)
+1. Créez une organisation : github.com → `+` → **New organization** → nom `messes-france` → Free
+2. Transférez le repo : **Settings → Danger Zone → Transfer ownership** → `messes-france`
+3. Renommez le repo en `messes-france.github.io` (le site est alors servi à la racine)
+4. Activez GitHub Pages si nécessaire : Settings → Pages → branch `main` / `/`
+5. Vérifiez que les Actions sont autorisées dans l'org : Settings → Actions → Allow
+
+**Bascule automatisée** : `python3 src/switch_to_org.py messes-france` fait le renommage + Pages + BASE_URL d'un coup.
+
+### Option B : sous-domaine .github.io (défaut actuel)
+Rien à faire — le site reste sur `cypriendj4.github.io/annuaire-messes-latin`.
+
+### Option C : domaine eu.org (gratuit, hors GitHub)
 
 1. Allez sur [nic.eu.org](https://nic.eu.org) → `Register a domain`
 2. Choisissez un nom (ex: `messes-latin-france.eu.org`), type `Host`

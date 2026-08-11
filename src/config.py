@@ -80,7 +80,7 @@ SOURCES = {
 # ── URL de base du site ────────────────────────────────────────────────
 # Changez cette valeur quand un domaine personnalisé est en place
 # (ex: "https://messes-latin-france.eu.org" une fois eu.org approuvé).
-BASE_URL = "https://cypriendj4.github.io/annuaire-messes-latin"
+BASE_URL = "https://messes-france.github.io"
 
 # ── Grille géographique pour l'annuaire CEF ────────────────────────────
 # Points de la grille pour couvrir toute la France métropolitaine + DOM.

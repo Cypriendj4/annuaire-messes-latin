@@ -405,7 +405,7 @@ def build_ville_page(conn, ville: str, last_update: str) -> str | None:
 
     ville_norm = ville.title()
     body = f"""
-    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <a class="back" href="../../index.html">← Retour à l'annuaire interactif</a>
     <div class="eyebrow">Ville · {dn} ({dc})</div>
     <h1>Messe à {ville_norm}</h1>
     <p class="subtitle">{nb} lieux de culte à {ville_norm}{f', dont {nb_trid} messes en latin (rite tridentin)' if nb_trid else ''}. Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
@@ -415,7 +415,7 @@ def build_ville_page(conn, ville: str, last_update: str) -> str | None:
     return page_shell(
         f"Messe à {ville_norm} ({dc}) — {nb} églises et lieux de culte — Annuaire",
         f"Trouvez une messe à {ville_norm} ({dn}) : {nb} églises et lieux de culte{f', dont {nb_trid} messes en latin' if nb_trid else ''}. Adresses, horaires, GPS.",
-        body, prefix="../", last_update=last_update,
+        body, prefix="../../", last_update=last_update,
         canonical=f"villes/{dc}-{slug}/")
 
 

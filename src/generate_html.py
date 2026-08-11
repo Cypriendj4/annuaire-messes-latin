@@ -653,6 +653,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .share-btn:hover, .messes-btn:hover{background:var(--ink); color:var(--parchment);}
   .messes-btn{background:var(--burgundy); border-color:var(--burgundy); color:#fff;}
   .messes-btn:hover{background:var(--burgundy-deep); color:#fff;}
+  .messes-btn.gps{background:#2b5c8a; border-color:#2b5c8a;}
+  .messes-btn.gps:hover{background:#1e4266;}
   .card-distance{
     font-family:'Inter',sans-serif;
     font-size:0.68rem;
@@ -1059,6 +1061,10 @@ function render(){
     const diocTag = d.dioc ? `<span class="tag diocese">${d.dioc}</span>` : '';
     const srcTag = d.src ? `<span class="tag src">${d.src}</span>` : '';
     const messesBtn = d.url ? `<a class="messes-btn" href="${d.url}" target="_blank" rel="noopener">Horaires sur messes.info</a>` : '';
+    const gpsBtn = (d.lat!=null && d.lon!=null) ? `
+      <a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>
+      <a class="messes-btn gps" href="https://waze.com/ul?ll=${d.lat},${d.lon}&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a>
+      <a class="messes-btn gps" href="https://maps.apple.com/?q=${d.lat},${d.lon}" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a>` : '';
     return `
     <article class="card ${d.rite||''}" id="${cardId}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1081,6 +1087,7 @@ function render(){
       </div>
       <div class="card-actions">
         ${messesBtn}
+        ${gpsBtn}
         <button class="share-btn" data-share="${cardId}">🔗 Copier le lien</button>
       </div>
     </article>

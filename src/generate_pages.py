@@ -93,6 +93,8 @@ PAGE_CSS = """
   .card-actions{margin-top:0.6rem;}
   .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
   .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
   .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
   .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
   .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
@@ -148,7 +150,7 @@ def build_messes_latin(conn, last_update) -> str:
     cur = conn.cursor()
     cur.execute("""
         SELECT ville, dept_code, dept_nom, diocese, lieu, adresse, rite, langue,
-               communaute, celebrant, horaires, contact, url_detail
+               communaute, celebrant, horaires, contact, url_detail, coord_lat, coord_lon
         FROM lieux WHERE actif=1 AND rite IN ('tridentin','paulvi') AND langue='latin'
         ORDER BY dept_code, ville
     """)
@@ -159,7 +161,7 @@ def build_messes_latin(conn, last_update) -> str:
 
     cards = ""
     for l in lieux:
-        ville, dc, dn, dioc, lieu, adr, rite, lang, comm, cel, hor, tel, url = l
+        ville, dc, dn, dioc, lieu, adr, rite, lang, comm, cel, hor, tel, url, lat, lon = l
         dept = f"{dc} – {dn}" if dn else dc
         rite_tag = "Tridentin · 1962" if rite == 'tridentin' else "Paul VI · Latin"
         hor_html = f'<div class="row"><span class="label">Horaires</span> — {hor}</div>' if hor and "voir site" not in hor.lower() else ""
@@ -186,6 +188,14 @@ def build_messes_latin(conn, last_update) -> str:
                 url_html = f'<a class="messes-btn site" href="https://www.amdg.asso.fr/" target="_blank" rel="noopener">{src_label}</a>'
         # Communauté
         comm_tag = f'<span class="tag">{comm}</span>' if comm else ""
+        # Liens GPS (Google Maps / Waze / Apple Maps) — coord_lat/coord_lon en colonnes 14/15
+        lat = l[13] if len(l) > 13 else None
+        lon = l[14] if len(l) > 14 else None
+        gps_html = ""
+        if lat is not None and lon is not None:
+            gps_html = (f'<a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>'
+                        f'<a class="messes-btn gps" href="https://waze.com/ul?ll={lat},{lon}&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a>'
+                        f'<a class="messes-btn gps" href="https://maps.apple.com/?q={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a>')
         cards += f"""
     <article class="card {rite}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -196,7 +206,7 @@ def build_messes_latin(conn, last_update) -> str:
       {f'<div class="card-adresse">{adr}</div>' if adr else ''}
       <div class="tags"><span class="tag {'rite-t' if rite=='tridentin' else 'rite-p'}">{rite_tag}</span>{comm_tag}<span class="tag">{dioc or ''}</span></div>
       {f'<div class="card-detail">{hor_html}{cel_html}</div>' if (hor or cel) else ''}
-      <div class="card-actions">{url_html}{tel_link}</div>
+      <div class="card-actions">{url_html}{gps_html}{tel_link}</div>
     </article>"""
 
     body = f"""
@@ -216,16 +226,21 @@ def build_messes_latin(conn, last_update) -> str:
 def build_rites_orientaux(conn, last_update) -> str:
     cur = conn.cursor()
     cur.execute("""
-        SELECT ville, dept_code, dept_nom, lieu, adresse, communaute, url_detail
+        SELECT ville, dept_code, dept_nom, lieu, adresse, communaute, url_detail, coord_lat, coord_lon
         FROM lieux WHERE actif=1 AND rite='oriental' ORDER BY dept_code, ville
     """)
     lieux = cur.fetchall()
     nb = len(lieux)
     cards = ""
     for l in lieux:
-        ville, dc, dn, lieu, adr, comm, url = l
+        ville, dc, dn, lieu, adr, comm, url, lat, lon = l
         dept = f"{dc} – {dn}" if dn else dc
         url_html = f'<a class="messes-btn" href="{url}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if url else ""
+        gps_html = ""
+        if lat is not None and lon is not None:
+            gps_html = (f'<a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>'
+                        f'<a class="messes-btn gps" href="https://waze.com/ul?ll={lat},{lon}&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a>'
+                        f'<a class="messes-btn gps" href="https://maps.apple.com/?q={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a>')
         cards += f"""
     <article class="card">
       <div class="card-top">
@@ -235,7 +250,7 @@ def build_rites_orientaux(conn, last_update) -> str:
       <div class="card-lieu">{lieu}</div>
       {f'<div class="card-adresse">{adr}</div>' if adr else ''}
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions">{url_html}</div>
+      <div class="card-actions">{url_html}{gps_html}</div>
     </article>"""
 
     body = f"""

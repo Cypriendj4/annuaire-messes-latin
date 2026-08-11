@@ -101,6 +101,13 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
                 num = re.sub(r'\s+', '', m_tel.group(1))
                 tel_html = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
         url = f'<a class="messes-btn" href="{l["url_detail"]}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if l.get("url_detail") else ""
+        # Liens GPS (coord_lat/coord_lon)
+        gps_html = ""
+        if l.get("coord_lat") is not None and l.get("coord_lon") is not None:
+            lat, lon = l["coord_lat"], l["coord_lon"]
+            gps_html = (f'<a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>'
+                        f'<a class="messes-btn gps" href="https://waze.com/ul?ll={lat},{lon}&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a>'
+                        f'<a class="messes-btn gps" href="https://maps.apple.com/?q={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a>')
         cards += f"""
     <article class="card {l['rite'] or ''}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -114,7 +121,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
         {f'<span class="tag comm">{l["communaute"]}</span>' if l.get("communaute") else ''}
       </div>
       {f'<div class="card-detail">{hor}</div>' if hor else ''}
-      <div class="card-actions">{url}{tel_html}</div>
+      <div class="card-actions">{url}{gps_html}{tel_html}</div>
     </article>"""
 
     # Maillage interne : départements voisins (numéros proches)
@@ -178,6 +185,8 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
   .card-detail .label{{color:var(--burgundy);font-weight:600;}}
   .card-actions{{margin-top:0.6rem;}}
   .messes-btn{{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}}
+  .messes-btn.gps{{background:#2b5c8a;border-color:#2b5c8a;}}
+  .card-actions{{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}}
   .tel-link{{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}}
   .voisins{{margin-top:2rem;font-size:0.85rem;color:var(--slate);}}
   .voisins a{{color:var(--burgundy);}}
@@ -253,6 +262,7 @@ def generate_all(conn: sqlite3.Connection, last_update: str) -> int:
             "diocese": row[3] or "", "lieu": row[4], "adresse": row[5] or "",
             "rite": row[6], "langue": row[7], "communaute": row[8] or "",
             "horaires": row[9] or "", "contact": row[10] or "", "url_detail": row[11] or "",
+            "coord_lat": row[12] if len(row) > 12 else None, "coord_lon": row[13] if len(row) > 13 else None,
             "dept": f"{row[1]} – {row[2] or DEPT_NAMES.get(row[1], row[1])}",
         }
         by_dept.setdefault(row[1], []).append(d)

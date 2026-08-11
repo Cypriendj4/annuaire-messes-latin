@@ -48,9 +48,19 @@
   .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
   .card-detail .label{color:var(--burgundy);font-weight:600;}
   .card-actions{margin-top:0.6rem;}
-  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
   .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
   .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
   .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
   .voisins{margin-top:2rem;font-size:0.85rem;color:var(--slate);}
   .voisins a{color:var(--burgundy);}
@@ -89,7 +99,7 @@
     <div class="trust"><b>75</b> lieux de culte répertoriés, dont <b>1</b> messes en latin (rite tridentin) — mise à jour le 11/08/2026.</div>
   </header>
 
-  <div class="villes"><strong>Villes couvertes :</strong> AUXELLES BAS, AUXELLES HAUT, BANVILLARS, BAVILLIERS, BEAUCOURT, BELFORT, Belfort, BERMONT, BESSONCOURT, BOUROGNE, BREBOTTE, BUC, CHATENOIS LES FORGES, CHAUX, CHÈVREMONT, CRAVANCHE, CROIX, DANJOUTIN, DELLE, ESSERT, EVETTE SALBERT, FECHE L'EGLISE, FELON, FONTAINE, FROIDEFONTAINE, GIROMAGNY, GRANDVILLARS, GROSMAGNY, GROSNE, LA MADELEINE VAL DES ANGES, LACHAPELLE SOUS CHAUX, LARIVIERE, LEBETAIN, LEPUIX, Lepuix, LEPUIX NEUF, MEROUX, MEROUX-MOVAL, MEZIRÉ, MONTBOUTON</div>
+  <div class="villes"><strong>Villes couvertes :</strong> AUXELLES BAS, AUXELLES HAUT, BANVILLARS, BAVILLIERS, BEAUCOURT, BELFORT, Belfort, BERMONT, BESSONCOURT, BOUROGNE, BREBOTTE, BUC, CHATENOIS LES FORGES, CHAUX, CHÈVREMONT, CRAVANCHE, CROIX, DANJOUTIN, DELLE, ESSERT, EVETTE SALBERT, FECHE L'EGLISE, FELON, FONTAINE, FROIDEFONTAINE, GIROMAGNY, GRANDVILLARS, GROSMAGNY, GROSNE, LA MADELEINE VAL DES ANGES, LACHAPELLE SOUS CHAUX, LARIVIERE, LEBETAIN, Lepuix, LEPUIX, LEPUIX NEUF, MEROUX, MEROUX-MOVAL, MEZIRÉ, MONTBOUTON</div>
 
   <main class="grid">
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
@@ -104,7 +114,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/auxelles-bas/sainte-catherine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.734444,6.780978" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.734444,6.780978&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.734444,6.780978" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/auxelles-bas/sainte-catherine" data-ville="AUXELLES BAS" data-lieu="Sainte Catherine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.734444,6.780978" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.734444,6.780978&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.734444,6.780978" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -118,7 +128,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/auxelles-haut/notre-dame-auxiliatrice" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.742805,6.770542" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.742805,6.770542&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.742805,6.770542" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/auxelles-haut/notre-dame-auxiliatrice" data-ville="AUXELLES HAUT" data-lieu="Notre Dame Auxiliatrice">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.742805,6.770542" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.742805,6.770542&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.742805,6.770542" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -132,7 +142,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/banvillars/saint-ambroise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.591716,6.814636" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.591716,6.814636&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.591716,6.814636" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/banvillars/saint-ambroise" data-ville="BANVILLARS" data-lieu="Saint Ambroise">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.591716,6.814636" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.591716,6.814636&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.591716,6.814636" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -146,7 +156,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/bavilliers/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.61893797,6.83076293" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.61893797,6.83076293&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.61893797,6.83076293" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/bavilliers/eglise" data-ville="BAVILLIERS" data-lieu="Saint Ambroise (Bavilliers)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.61893797,6.83076293" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.61893797,6.83076293&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.61893797,6.83076293" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -160,7 +170,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/beaucourt/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.4843057,6.9263896" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.4843057,6.9263896&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.4843057,6.9263896" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/beaucourt/eglise" data-ville="BEAUCOURT" data-lieu="Saint François de Sales">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.4843057,6.9263896" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.4843057,6.9263896&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.4843057,6.9263896" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -174,7 +184,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/beaucourt/chapelle-st-joseph" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.4886771,6.9278603" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.4886771,6.9278603&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.4886771,6.9278603" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/beaucourt/chapelle-st-joseph" data-ville="BEAUCOURT" data-lieu="Chapelle St Joseph ( ou cure en hiver)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.4886771,6.9278603" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.4886771,6.9278603&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.4886771,6.9278603" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -188,7 +198,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/saint-odile" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.651099,6.863819" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.651099,6.863819&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.651099,6.863819" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/saint-odile" data-ville="BELFORT" data-lieu="Sainte Odile (Quartier des Forges de Belfort)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.651099,6.863819" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.651099,6.863819&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.651099,6.863819" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -202,7 +212,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/saint-joseph" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6447839,6.8504863" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6447839,6.8504863&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6447839,6.8504863" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/saint-joseph" data-ville="BELFORT" data-lieu="Saint-Joseph de Belfort">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6447839,6.8504863" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6447839,6.8504863&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6447839,6.8504863" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -216,7 +226,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/chapelle-saint-antoine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6444182,6.8539493" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6444182,6.8539493&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6444182,6.8539493" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/chapelle-saint-antoine" data-ville="BELFORT" data-lieu="Chapelle Saint-Antoine (Chapelle Saint-Antoine)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6444182,6.8539493" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6444182,6.8539493&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6444182,6.8539493" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -230,7 +240,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/sainte-therese" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6399013,6.8369339" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6399013,6.8369339&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6399013,6.8369339" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/sainte-therese" data-ville="BELFORT" data-lieu="Sainte Thérèse (Quartier du Mont)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6399013,6.8369339" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6399013,6.8369339&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6399013,6.8369339" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -244,7 +254,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/cathedrale-saint-christophe" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6384355,6.8627666" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6384355,6.8627666&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6384355,6.8627666" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/cathedrale-saint-christophe" data-ville="BELFORT" data-lieu="Cathédrale Saint-Christophe (Cathédrale)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6384355,6.8627666" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6384355,6.8627666&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6384355,6.8627666" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -258,7 +268,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/sainte-jeanne-antide" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.63201448,6.84510949" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.63201448,6.84510949&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.63201448,6.84510949" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/sainte-jeanne-antide" data-ville="BELFORT" data-lieu="Sainte Jeanne Antide (Quartier des Résidences)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.63201448,6.84510949" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.63201448,6.84510949&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.63201448,6.84510949" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -272,7 +282,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/saint-francois" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6335063,6.8688635" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6335063,6.8688635&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6335063,6.8688635" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/saint-francois" data-ville="BELFORT" data-lieu="Saint François (Quartier des Glacis)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6335063,6.8688635" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6335063,6.8688635&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6335063,6.8688635" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -286,7 +296,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/sainte-jeanne-d-arc" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.62438987,6.84926758" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.62438987,6.84926758&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.62438987,6.84926758" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/sainte-jeanne-d-arc" data-ville="BELFORT" data-lieu="Sainte Jeanne d'Arc (Quartier de la Pépinière)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.62438987,6.84926758" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.62438987,6.84926758&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.62438987,6.84926758" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -314,7 +324,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/notre-dame-de-brasse" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6449245,6.8574957" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6449245,6.8574957&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6449245,6.8574957" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/notre-dame-de-brasse" data-ville="Belfort" data-lieu="Notre-Dame-de-Brasse">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6449245,6.8574957" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6449245,6.8574957&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6449245,6.8574957" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -328,7 +338,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/belfort/chapelle-notre-dame-des-anges" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6335461,6.8563001" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6335461,6.8563001&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6335461,6.8563001" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/belfort/chapelle-notre-dame-des-anges" data-ville="Belfort" data-lieu="Chapelle Notre-Dame-des-Anges">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6335461,6.8563001" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6335461,6.8563001&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6335461,6.8563001" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -342,7 +352,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/bermont/saint-laurent" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.576483,6.852975" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.576483,6.852975&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.576483,6.852975" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/bermont/saint-laurent" data-ville="BERMONT" data-lieu="Saint Laurent">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.576483,6.852975" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.576483,6.852975&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.576483,6.852975" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -356,7 +366,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/bessoncourt/eglise-sainte-suzanne" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6456,6.9312499" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6456,6.9312499&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6456,6.9312499" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/bessoncourt/eglise-sainte-suzanne" data-ville="BESSONCOURT" data-lieu="Église Sainte-Suzanne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6456,6.9312499" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6456,6.9312499&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6456,6.9312499" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -370,7 +380,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/bourogne/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.562023,6.9191334" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.562023,6.9191334&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.562023,6.9191334" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/bourogne/eglise" data-ville="BOUROGNE" data-lieu="Saint Martin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.562023,6.9191334" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.562023,6.9191334&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.562023,6.9191334" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -384,7 +394,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/brebotte/saint-etienne" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.579501,6.976492" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.579501,6.976492&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.579501,6.976492" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/brebotte/saint-etienne" data-ville="BREBOTTE" data-lieu="Saint Etienne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.579501,6.976492" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.579501,6.976492&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.579501,6.976492" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -398,7 +408,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/buc/notre-dame-de-la-nativite" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.613861,6.785553" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.613861,6.785553&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.613861,6.785553" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/buc/notre-dame-de-la-nativite" data-ville="BUC" data-lieu="Notre Dame de la Nativité">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.613861,6.785553" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.613861,6.785553&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.613861,6.785553" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -412,7 +422,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/chatenois-les-forges/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.555419,6.8342729" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.555419,6.8342729&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.555419,6.8342729" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/chatenois-les-forges/eglise" data-ville="CHATENOIS LES FORGES" data-lieu="Saint Etienne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.555419,6.8342729" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.555419,6.8342729&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.555419,6.8342729" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -426,7 +436,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/chaux/saint-martin" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705624,6.837245" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705624,6.837245&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705624,6.837245" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/chaux/saint-martin" data-ville="CHAUX" data-lieu="Saint Martin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705624,6.837245" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705624,6.837245&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705624,6.837245" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -440,7 +450,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/chevremont/exaltation-de-la-sainte-croix" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.627866,6.92432" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.627866,6.92432&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.627866,6.92432" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/chevremont/exaltation-de-la-sainte-croix" data-ville="CHÈVREMONT" data-lieu="Exaltation de la Sainte Croix">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.627866,6.92432" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.627866,6.92432&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.627866,6.92432" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -454,7 +464,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/cravanche/notre-dame-du-perpetuel-secours" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/cravanche/notre-dame-du-perpetuel-secours" data-ville="CRAVANCHE" data-lieu="Chapelle Notre-Dame-du-Perpétuel-Secours (Cravanche)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -468,7 +478,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/croix/saint-nicolas" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.445704,6.954504" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.445704,6.954504&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.445704,6.954504" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/croix/saint-nicolas" data-ville="CROIX" data-lieu="Saint Nicolas">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.445704,6.954504" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.445704,6.954504&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.445704,6.954504" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -482,7 +492,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/danjoutin/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6180831,6.86275163" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6180831,6.86275163&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6180831,6.86275163" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/danjoutin/eglise" data-ville="DANJOUTIN" data-lieu="Saint Just">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6180831,6.86275163" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6180831,6.86275163&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6180831,6.86275163" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -496,7 +506,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/delle/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5061982,6.9965571" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5061982,6.9965571&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5061982,6.9965571" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/delle/eglise" data-ville="DELLE" data-lieu="Saint Léger">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5061982,6.9965571" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5061982,6.9965571&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5061982,6.9965571" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -510,7 +520,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/essert/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/essert/eglise" data-ville="ESSERT" data-lieu="Saint Léger (Essert)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -524,7 +534,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/evette-salbert/saint-claude" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6758,6.7989" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6758,6.7989&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6758,6.7989" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/evette-salbert/saint-claude" data-ville="EVETTE SALBERT" data-lieu="Saint Claude">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6758,6.7989" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6758,6.7989&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6758,6.7989" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -538,7 +548,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/feche-l-eglise/saint-valere" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.504594,6.950679" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.504594,6.950679&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.504594,6.950679" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/feche-l-eglise/saint-valere" data-ville="FECHE L'EGLISE" data-lieu="Saint Valère">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.504594,6.950679" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.504594,6.950679&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.504594,6.950679" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -552,7 +562,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/felon/saint-antoine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705437,6.976638" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705437,6.976638&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705437,6.976638" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/felon/saint-antoine" data-ville="FELON" data-lieu="Saint Antoine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705437,6.976638" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705437,6.976638&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705437,6.976638" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -566,7 +576,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/fontaine/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.192754,5.688211" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.192754,5.688211&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.192754,5.688211" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/fontaine/eglise" data-ville="FONTAINE" data-lieu="Exaltation de la Sainte Croix">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.192754,5.688211" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.192754,5.688211&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.192754,5.688211" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -580,7 +590,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/froidefontaine/saint-pierre" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.564497,6.94945" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.564497,6.94945&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.564497,6.94945" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/froidefontaine/saint-pierre" data-ville="FROIDEFONTAINE" data-lieu="Église Saint Pierre et Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.564497,6.94945" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.564497,6.94945&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.564497,6.94945" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -594,7 +604,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/giromagny/maison-de-retraite-saint-joseph" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7434118,6.8301677" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7434118,6.8301677&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7434118,6.8301677" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/giromagny/maison-de-retraite-saint-joseph" data-ville="GIROMAGNY" data-lieu="Maison de retraite Saint Joseph">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7434118,6.8301677" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7434118,6.8301677&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7434118,6.8301677" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -608,7 +618,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/giromagny/saint-jean-baptiste" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.741786,6.825333" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.741786,6.825333&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.741786,6.825333" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/giromagny/saint-jean-baptiste" data-ville="GIROMAGNY" data-lieu="Saint Jean Baptiste">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.741786,6.825333" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.741786,6.825333&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.741786,6.825333" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -622,7 +632,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/grandvillars/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.542466,6.967301" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.542466,6.967301&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.542466,6.967301" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/grandvillars/eglise" data-ville="GRANDVILLARS" data-lieu="Saint Martin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.542466,6.967301" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.542466,6.967301&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.542466,6.967301" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -636,7 +646,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/grosmagny/saint-georges" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.72160208,6.88206357" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.72160208,6.88206357&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.72160208,6.88206357" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/grosmagny/saint-georges" data-ville="GROSMAGNY" data-lieu="Saint Georges">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.72160208,6.88206357" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.72160208,6.88206357&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.72160208,6.88206357" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -650,7 +660,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/grosne/saint-paul" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.574466,6.999608" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.574466,6.999608&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.574466,6.999608" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/grosne/saint-paul" data-ville="GROSNE" data-lieu="Saint Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.574466,6.999608" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.574466,6.999608&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.574466,6.999608" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -664,7 +674,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/la-madeleine-val-des-anges/sainte-madeleine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7609393,6.91391329" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7609393,6.91391329&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7609393,6.91391329" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/la-madeleine-val-des-anges/sainte-madeleine" data-ville="LA MADELEINE VAL DES ANGES" data-lieu="Sainte Madeleine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7609393,6.91391329" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7609393,6.91391329&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7609393,6.91391329" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -678,7 +688,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lachapelle-sous-chaux/saint-vincent" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705207,6.820994" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705207,6.820994&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705207,6.820994" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lachapelle-sous-chaux/saint-vincent" data-ville="LACHAPELLE SOUS CHAUX" data-lieu="Saint Vincent">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.705207,6.820994" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.705207,6.820994&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.705207,6.820994" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -692,7 +702,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lariviere/saint-quirin" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.678189,6.992906" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.678189,6.992906&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.678189,6.992906" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lariviere/saint-quirin" data-ville="LARIVIERE" data-lieu="Saint Quirin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.678189,6.992906" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.678189,6.992906&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.678189,6.992906" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -706,7 +716,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lebetain/saint-gerard" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.487056,6.978736" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.487056,6.978736&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.487056,6.978736" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lebetain/saint-gerard" data-ville="LEBETAIN" data-lieu="Saint Gérard">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.487056,6.978736" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.487056,6.978736&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.487056,6.978736" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -720,7 +730,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lepuix/prieure-saint-benoit" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7635547,6.80957498" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7635547,6.80957498&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7635547,6.80957498" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lepuix/prieure-saint-benoit" data-ville="LEPUIX" data-lieu="Prieuré Saint Benoît (Chauveroche)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7635547,6.80957498" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7635547,6.80957498&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7635547,6.80957498" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -734,7 +744,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lepuis-gy/notre-dame-de-la-nativite" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7486466,6.8273844" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7486466,6.8273844&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7486466,6.8273844" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lepuis-gy/notre-dame-de-la-nativite" data-ville="LEPUIX" data-lieu="Notre Dame de la Nativité">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7486466,6.8273844" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7486466,6.8273844&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7486466,6.8273844" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -748,7 +758,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lepuix/chapelle-de-la-transfiguration-et-de-l-unite" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7635155,6.8093692" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7635155,6.8093692&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7635155,6.8093692" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lepuix/chapelle-de-la-transfiguration-et-de-l-unite" data-ville="Lepuix" data-lieu="Chapelle de la Transfiguration et de l'Unité (Communauté Saint-Benoît Chauveroche)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7635155,6.8093692" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7635155,6.8093692&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7635155,6.8093692" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -762,7 +772,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/lepuix-neuf/saint-nicolas" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.539745,7.100595" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.539745,7.100595&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.539745,7.100595" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/lepuix-neuf/saint-nicolas" data-ville="LEPUIX NEUF" data-lieu="Saint Nicolas">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.539745,7.100595" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.539745,7.100595&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.539745,7.100595" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -776,7 +786,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/meroux/saint-nicolas" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5938054,6.9049642" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5938054,6.9049642&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5938054,6.9049642" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/meroux/saint-nicolas" data-ville="MEROUX" data-lieu="Saint Nicolas">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5938054,6.9049642" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5938054,6.9049642&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5938054,6.9049642" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -790,7 +800,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/meroux-moval/eglise-saint-nicolas" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5937801,6.9049482" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5937801,6.9049482&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5937801,6.9049482" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/meroux-moval/eglise-saint-nicolas" data-ville="MEROUX-MOVAL" data-lieu="Église Saint-Nicolas">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5937801,6.9049482" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5937801,6.9049482&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5937801,6.9049482" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -804,7 +814,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/mezire/mezire" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.53778,6.9246493" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.53778,6.9246493&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.53778,6.9246493" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/mezire/mezire" data-ville="MEZIRÉ" data-lieu="Chapelle Saint-Étienne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.53778,6.9246493" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.53778,6.9246493&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.53778,6.9246493" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -818,7 +828,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/montbouton/saint-leger" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.472685,6.918758" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.472685,6.918758&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.472685,6.918758" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/montbouton/saint-leger" data-ville="MONTBOUTON" data-lieu="Saint léger">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.472685,6.918758" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.472685,6.918758&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.472685,6.918758" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -832,7 +842,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/montreux-chateau/notre-dame-de-la-paix" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.606353,6.992229" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.606353,6.992229&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.606353,6.992229" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/montreux-chateau/notre-dame-de-la-paix" data-ville="MONTREUX CHATEAU" data-lieu="Notre Dame de la Paix">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.606353,6.992229" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.606353,6.992229&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.606353,6.992229" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -846,7 +856,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/morvillars/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.545837,6.9329016" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.545837,6.9329016&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.545837,6.9329016" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/morvillars/eglise" data-ville="MORVILLARS" data-lieu="Saint Martin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.545837,6.9329016" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.545837,6.9329016&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.545837,6.9329016" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -860,7 +870,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/novillard/saint-julien" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.606345,6.970578" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.606345,6.970578&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.606345,6.970578" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/novillard/saint-julien" data-ville="NOVILLARD" data-lieu="Saint Julien">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.606345,6.970578" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.606345,6.970578&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.606345,6.970578" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -874,7 +884,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/offemont/saint-augustin" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6637118,6.8798549" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6637118,6.8798549&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6637118,6.8798549" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/offemont/saint-augustin" data-ville="OFFEMONT" data-lieu="Saint Augustin (Offemont)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6637118,6.8798549" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6637118,6.8798549&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6637118,6.8798549" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -888,7 +898,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/perouse/saint-mathieu" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.636297,6.892547" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.636297,6.892547&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.636297,6.892547" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/perouse/saint-mathieu" data-ville="PEROUSE" data-lieu="Saint Mathieu">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.636297,6.892547" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.636297,6.892547&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.636297,6.892547" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -902,7 +912,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/petitcroix/nativite-de-notre-dame" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.613991,6.972672" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.613991,6.972672&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.613991,6.972672" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/petitcroix/nativite-de-notre-dame" data-ville="PETITCROIX" data-lieu="Nativité de Notre Dame">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.613991,6.972672" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.613991,6.972672&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.613991,6.972672" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -916,7 +926,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/phaffans/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6596688,6.9350426" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6596688,6.9350426&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6596688,6.9350426" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/phaffans/eglise" data-ville="PHAFFANS" data-lieu="Notre Dame de l'Assomption">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6596688,6.9350426" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6596688,6.9350426&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6596688,6.9350426" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -930,7 +940,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rechesy/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5181739,7.1215002" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5181739,7.1215002&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5181739,7.1215002" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rechesy/eglise" data-ville="RECHESY" data-lieu="Saint Jean-Baptiste">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.5181739,7.1215002" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.5181739,7.1215002&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.5181739,7.1215002" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -944,7 +954,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rougegoutte/saint-georges" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.732144,6.851288" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.732144,6.851288&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.732144,6.851288" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rougegoutte/saint-georges" data-ville="ROUGEGOUTTE" data-lieu="Saint Georges">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.732144,6.851288" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.732144,6.851288&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.732144,6.851288" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -958,7 +968,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rougemont-le-chateau/maison-de-retraite" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.73284442,6.97453777" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.73284442,6.97453777&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.73284442,6.97453777" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rougemont-le-chateau/maison-de-retraite" data-ville="ROUGEMONT LE CHATEAU" data-lieu="Maison de retraite "Les Vergers"">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.73284442,6.97453777" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.73284442,6.97453777&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.73284442,6.97453777" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -972,7 +982,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rougemont-le-chateau/eglise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7356947,6.9672368" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7356947,6.9672368&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7356947,6.9672368" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rougemont-le-chateau/eglise" data-ville="ROUGEMONT LE CHATEAU" data-lieu="Saint Pierre">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7356947,6.9672368" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7356947,6.9672368&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7356947,6.9672368" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -986,7 +996,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rougemont-le-chateau/sainte-catherine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.75237965,6.96866146" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.75237965,6.96866146&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.75237965,6.96866146" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rougemont-le-chateau/sainte-catherine" data-ville="ROUGEMONT LE CHATEAU" data-lieu="Sainte Catherine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.75237965,6.96866146" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.75237965,6.96866146&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.75237965,6.96866146" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1000,7 +1010,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/rougemont-le-chateau/maison-religieuse-salle-du-cercle" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7315107,6.9682803" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7315107,6.9682803&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7315107,6.9682803" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/rougemont-le-chateau/maison-religieuse-salle-du-cercle" data-ville="Rougemont-le-Château" data-lieu="Maison paroissiale Salle du Cercle (Salle du Cercle)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.7315107,6.9682803" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.7315107,6.9682803&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.7315107,6.9682803" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1014,7 +1024,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/saint-dizier-l-eveque/saint-dizier" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.470284,6.962854&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/saint-dizier-l-eveque/saint-dizier" data-ville="SAINT DIZIER L'EVEQUE" data-lieu="Saint Dizier">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.470284,6.962854&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1028,7 +1038,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/saint-dizier-l-eveque/chapelle-val-st-dizier-l-eveque" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.470284,6.962854&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/saint-dizier-l-eveque/chapelle-val-st-dizier-l-eveque" data-ville="Saint Dizier l'Evêque" data-lieu="Chapelle Val St Dizier l'Evêque">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.470284,6.962854&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.470284,6.962854" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1042,7 +1052,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/saint-germain/saint-germain" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=44.554228,4.4503816" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=44.554228,4.4503816&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=44.554228,4.4503816" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/saint-germain/saint-germain" data-ville="SAINT GERMAIN" data-lieu="Saint Germain">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=44.554228,4.4503816" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=44.554228,4.4503816&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=44.554228,4.4503816" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1056,7 +1066,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/trevenans/sainte-marguerite" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.566574,6.86816" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.566574,6.86816&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.566574,6.86816" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/trevenans/sainte-marguerite" data-ville="TREVENANS" data-lieu="Sainte Marguerite">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.566574,6.86816" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.566574,6.86816&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.566574,6.86816" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1070,7 +1080,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/valdoie/saint-joseph" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6675039,6.8403657" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6675039,6.8403657&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6675039,6.8403657" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/valdoie/saint-joseph" data-ville="VALDOIE" data-lieu="Saint Joseph (Valdoie)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6675039,6.8403657" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6675039,6.8403657&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6675039,6.8403657" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1084,7 +1094,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/valdoie/chapelle-hopital-rosemontoise" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6746602,6.8439058" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6746602,6.8439058&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6746602,6.8439058" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/valdoie/chapelle-hopital-rosemontoise" data-ville="VALDOIE" data-lieu="Chapelle hôpital Rosemontoise (EHPAD - Résidence Rosemontoise)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6746602,6.8439058" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6746602,6.8439058&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6746602,6.8439058" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1098,7 +1108,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/valdoie/chapelle-hopital-residence-les-rubans" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6622556,6.8448919" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6622556,6.8448919&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6622556,6.8448919" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/valdoie/chapelle-hopital-residence-les-rubans" data-ville="Valdoie" data-lieu="Chapelle hôpital Résidence Les Rubans (Résidence Les Rubans)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6622556,6.8448919" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6622556,6.8448919&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6622556,6.8448919" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1112,7 +1122,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/valdoie/couvent-maison-sainte-jeanne-de-chantal" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6705425,6.842771" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6705425,6.842771&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6705425,6.842771" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/valdoie/couvent-maison-sainte-jeanne-de-chantal" data-ville="Valdoie" data-lieu="Couvent Maison Sainte Jeanne de Chantal (Maison Sainte Jeanne de Chantal)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6705425,6.842771" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6705425,6.842771&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6705425,6.842771" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1126,7 +1136,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/vezelois/saint-thiebaud" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6080089,6.9160371" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6080089,6.9160371&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6080089,6.9160371" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/vezelois/saint-thiebaud" data-ville="VEZELOIS" data-lieu="Saint Thiébaud">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.6080089,6.9160371" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.6080089,6.9160371&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.6080089,6.9160371" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1140,7 +1150,7 @@
         <span class="tag comm">Paroisse</span>
       </div>
       
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/90/villars-le-sec/nativite-de-notre-dame" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.456288,6.990335" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.456288,6.990335&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.456288,6.990335" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/90/villars-le-sec/nativite-de-notre-dame" data-ville="VILLARS LE SEC" data-lieu="Nativité de Notre Dame">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=47.456288,6.990335" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=47.456288,6.990335&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=47.456288,6.990335" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
   </main>
 
@@ -1160,5 +1170,48 @@
     Vérifiez toujours les horaires avant de vous déplacer.
   </footer>
 </div>
+
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+
 </body>
 </html>

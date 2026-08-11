@@ -235,9 +235,14 @@ def build_messes_latin(conn, last_update) -> str:
         if not url and site_link:
             url_html = site_link
         if not url and not site_link:
-            src_label = "Voir la source (AMDG)" if hor or tel else ""
-            if src_label:
-                url_html = f'<a class="messes-btn site" href="https://www.amdg.asso.fr/" target="_blank" rel="noopener">{src_label}</a>'
+            # Lieu sans page messes.info mais avec GPS : horaires à proximité
+            if lat is not None and lon is not None:
+                url_html = (f'<button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/{lat}:{lon}" '
+                            f'data-ville="{ville}" data-lieu="{lieu}">Horaires à proximité</button>')
+            else:
+                src_label = "Voir la source (AMDG)" if hor or tel else ""
+                if src_label:
+                    url_html = f'<a class="messes-btn site" href="https://www.amdg.asso.fr/" target="_blank" rel="noopener">{src_label}</a>'
         # Communauté
         comm_tag = f'<span class="tag">{comm}</span>' if comm else ""
         # Liens GPS (Google Maps / Waze / Apple Maps) — coord_lat/coord_lon en colonnes 14/15
@@ -348,7 +353,7 @@ def build_a_propos(conn, last_update) -> str:
       </ul>
 
       <h2>Une erreur, un lieu manquant ?</h2>
-      <p>Écrivez-nous à <a href="mailto:contact@exemple.fr?subject=Correction%20annuaire%20messes">contact@exemple.fr</a> — chaque correction est intégrée à la prochaine mise à jour automatique.</p>
+      <p>Utilisez le bouton « Signaler une erreur » sur la fiche concernée, ou écrivez-nous à <a href="mailto:contact@messes-france.fr?subject=Correction%20annuaire%20messes">contact@messes-france.fr</a> — chaque correction est intégrée à la prochaine mise à jour automatique.</p>
     </div>"""
     return page_shell(
         "À propos et sources — Annuaire des messes en France",

@@ -148,6 +148,10 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
                 num = re.sub(r'\s+', '', m_tel.group(1))
                 tel_html = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
         url = f'<button class="messes-btn horaires-btn" data-url="{l["url_detail"]}" data-ville="{l["ville"] or ""}" data-lieu="{l["lieu"] or ""}">Horaires sur messes.info</button>' if l.get("url_detail") else ""
+        if not l.get("url_detail") and l.get("coord_lat") is not None and l.get("coord_lon") is not None:
+            # Lieu sans page messes.info mais avec GPS : horaires à proximité
+            url = (f'<button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/{l["coord_lat"]}:{l["coord_lon"]}" '
+                   f'data-ville="{l["ville"] or ""}" data-lieu="{l["lieu"] or ""}">Horaires à proximité</button>')
         # Liens GPS (coord_lat/coord_lon)
         gps_html = ""
         if l.get("coord_lat") is not None and l.get("coord_lon") is not None:

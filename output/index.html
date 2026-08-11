@@ -515,9 +515,23 @@
     font-family:'Inter',sans-serif;
     font-size:0.68rem;
     font-weight:600;
-    color:var(--burgundy);
+    color:var(--slate);
     white-space:nowrap;
   }
+  .signal-btn{
+    font-family:'Inter',sans-serif;
+    font-size:0.66rem;
+    font-weight:600;
+    color:var(--slate);
+    background:none;
+    border:1px dashed var(--line);
+    padding:0.24rem 0.5rem;
+    border-radius:20px;
+    text-decoration:none;
+    display:inline-block;
+    margin-left:auto;
+  }
+  .signal-btn:hover{color:var(--burgundy); border-color:var(--burgundy);}
 
   /* ---------- pagination ---------- */
   .more-row{
@@ -864,11 +878,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-<<<<<<< HEAD
-// Dernière génération : 11/08/2026 15:46
-=======
-// Dernière génération : 11/08/2026 15:35
->>>>>>> origin/main
+// Dernière génération : 11/08/2026 17:44
 // ---------------------------------------------------------------
 let DATA = [];
 
@@ -1170,10 +1180,13 @@ function render(){
     const diocTag = d.dioc ? `<span class="tag diocese">${d.dioc}</span>` : '';
     const srcTag = d.src ? `<span class="tag src">${d.src}</span>` : '';
     const messesBtn = d.url ? `<button class="messes-btn horaires-btn" data-url="${d.url}" data-ville="${(d.ville||'').replace(/"/g,'&quot;')}" data-lieu="${(d.lieu||'').replace(/"/g,'&quot;')}">Horaires sur messes.info</button>` : '';
+    // Lieux sans page dédiée (ex. messes AMDG) mais avec GPS : lien vers les horaires à proximité
+    const proximiteBtn = (!d.url && d.lat!=null && d.lon!=null) ? `<button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/${d.lat}:${d.lon}" data-ville="${(d.ville||'').replace(/"/g,'&quot;')}" data-lieu="${(d.lieu||'').replace(/"/g,'&quot;')}">Horaires à proximité</button>` : '';
     const gpsBtn = (d.lat!=null && d.lon!=null) ? `
       <a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>
       <a class="messes-btn gps" href="https://waze.com/ul?ll=${d.lat},${d.lon}&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a>
       <a class="messes-btn gps" href="https://maps.apple.com/?q=${d.lat},${d.lon}" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a>` : '';
+    const signalBtn = `<a class="signal-btn" href="mailto:contact@messes-france.fr?subject=Correction%20annuaire%20—%20${encodeURIComponent((d.ville||'')+' '+(d.lieu||''))}&body=Lieu%20:${encodeURIComponent((d.ville||'')+' '+(d.lieu||''))}%0AErreur%20constatée%20:">Signaler une erreur</a>`;
     return `
     <article class="card ${d.rite||''}" id="${cardId}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -1196,8 +1209,10 @@ function render(){
       </div>
       <div class="card-actions">
         ${messesBtn}
+        ${proximiteBtn}
         ${gpsBtn}
         <button class="share-btn" data-share="${cardId}">🔗 Copier le lien</button>
+        ${signalBtn}
       </div>
     </article>
   `;}).join('');
@@ -1234,7 +1249,15 @@ document.getElementById('rite').addEventListener('change', e=>{state.rite=e.targ
 document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('diocese').addEventListener('change', e=>{state.diocese=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('communaute').addEventListener('change', e=>{state.communaute=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
-document.getElementById('q').addEventListener('input', e=>{state.q=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
+// Recherche : debounce 150ms pour éviter de filtrer 32k lieux à chaque frappe
+let searchTimer = null;
+document.getElementById('q').addEventListener('input', e=>{
+  state.q = e.target.value;
+  visibleCount = PAGE_SIZE;
+  urlFromState();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(()=>render(), 150);
+});
 document.getElementById('resetBtn').addEventListener('click', ()=>{
   state = {rite:"all", langue:"all", diocese:"all", communaute:"all", q:""};
   userPos = null;

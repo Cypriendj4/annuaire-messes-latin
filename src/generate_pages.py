@@ -91,11 +91,21 @@ PAGE_CSS = """
   .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
   .card-detail .label{color:var(--burgundy);font-weight:600;}
   .card-actions{margin-top:0.6rem;}
-  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
   .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
   .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
   .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
   .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
   .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
   .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
   .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
@@ -142,6 +152,47 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
   {body}
 </div>
 {footer}
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){{
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; }};
+  document.addEventListener('click', e=>{{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){{
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }}
+  }});
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{{ if(e.target===modal) closeModal(); }});
+  document.addEventListener('keydown', e=>{{ if(e.key==='Escape') closeModal(); }});
+}})();
+</script>
 </body>
 </html>"""
 
@@ -179,8 +230,8 @@ def build_messes_latin(conn, last_update) -> str:
         m_site = re.search(r'https?://[^\s\)]+', tel or "")
         if m_site:
             site_link = f'<a class="messes-btn site" href="{m_site.group(0)}" target="_blank" rel="noopener">🌐 Site du lieu</a>'
-        # Lien horaires à jour : messes.info si dispo, sinon source AMDG / Porte Latine
-        url_html = f'<a class="messes-btn" href="{url}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if url else ""
+        # Lien horaires à jour : bouton modal (reste dans le site)
+        url_html = f'<button class="messes-btn horaires-btn" data-url="{url}" data-ville="{ville}" data-lieu="{lieu}">Horaires sur messes.info</button>' if url else ""
         if not url and site_link:
             url_html = site_link
         if not url and not site_link:
@@ -236,7 +287,7 @@ def build_rites_orientaux(conn, last_update) -> str:
     for l in lieux:
         ville, dc, dn, lieu, adr, comm, url, lat, lon = l
         dept = f"{dc} – {dn}" if dn else dc
-        url_html = f'<a class="messes-btn" href="{url}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if url else ""
+        url_html = f'<button class="messes-btn horaires-btn" data-url="{url}" data-ville="{ville}" data-lieu="{lieu}">Horaires sur messes.info</button>' if url else ""
         gps_html = ""
         if lat is not None and lon is not None:
             gps_html = (f'<a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query={lat},{lon}" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a>'

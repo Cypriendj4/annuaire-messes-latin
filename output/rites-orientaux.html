@@ -38,11 +38,21 @@
   .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
   .card-detail .label{color:var(--burgundy);font-weight:600;}
   .card-actions{margin-top:0.6rem;}
-  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
   .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
   .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
   .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
   .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
   .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
   .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
   .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
@@ -82,7 +92,7 @@
       <div class="card-lieu">Eglise Byzantine Saint Irénée de Lyon</div>
       <div class="card-adresse">6 Place Saint Irénée</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/69/lyon/chapelle-byzantine" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.7549435,4.8127905" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.7549435,4.8127905&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.7549435,4.8127905" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/69/lyon/chapelle-byzantine" data-ville="LYON" data-lieu="Eglise Byzantine Saint Irénée de Lyon">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.7549435,4.8127905" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.7549435,4.8127905&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.7549435,4.8127905" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -92,7 +102,7 @@
       <div class="card-lieu">Saint Jean Apôtre (Rite Maronite) (Paroisse Notre-Dame du Liban)</div>
       <div class="card-adresse">29 rue Berty Albrecht</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/69/lyon-08/saint-jean-apotre" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.7267537,4.8652404" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.7267537,4.8652404&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.7267537,4.8652404" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/69/lyon-08/saint-jean-apotre" data-ville="LYON" data-lieu="Saint Jean Apôtre (Rite Maronite) (Paroisse Notre-Dame du Liban)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=45.7267537,4.8652404" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=45.7267537,4.8652404&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=45.7267537,4.8652404" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -102,7 +112,7 @@
       <div class="card-lieu">Saint-Ephrem le Syriaque (rite syriaque occidental)</div>
       <div class="card-adresse">17 rue des Carmes</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris-05/saint-ephrem-le-syriaque" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8483564,2.3475592" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8483564,2.3475592&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8483564,2.3475592" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris-05/saint-ephrem-le-syriaque" data-ville="Paris" data-lieu="Saint-Ephrem le Syriaque (rite syriaque occidental)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8483564,2.3475592" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8483564,2.3475592&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8483564,2.3475592" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -112,7 +122,7 @@
       <div class="card-lieu">Saint-Julien le Pauvre (rite byzantin)</div>
       <div class="card-adresse">1 rue Saint-Julien-le-Pauvre</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris-05/saint-julien-le-pauvre" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8520634,2.3466434" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8520634,2.3466434&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8520634,2.3466434" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris-05/saint-julien-le-pauvre" data-ville="Paris" data-lieu="Saint-Julien le Pauvre (rite byzantin)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8520634,2.3466434" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8520634,2.3466434&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8520634,2.3466434" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -122,7 +132,7 @@
       <div class="card-lieu">Notre-Dame du Liban (rite maronite)</div>
       <div class="card-adresse">17 rue d'Ulm</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris-05/notre-dame-du-liban" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.84391153,2.34508123" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.84391153,2.34508123&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.84391153,2.34508123" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris-05/notre-dame-du-liban" data-ville="Paris" data-lieu="Notre-Dame du Liban (rite maronite)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.84391153,2.34508123" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.84391153,2.34508123&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.84391153,2.34508123" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -132,7 +142,7 @@
       <div class="card-lieu">Église Sainte-Croix de Paris (rite arménien)</div>
       <div class="card-adresse">13 rue du Perche</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris/eglise-sainte-croix-de-paris-rite-armenien-" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8608949,2.3605265" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8608949,2.3605265&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8608949,2.3605265" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris/eglise-sainte-croix-de-paris-rite-armenien-" data-ville="Paris" data-lieu="Église Sainte-Croix de Paris (rite arménien)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8608949,2.3605265" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8608949,2.3605265&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8608949,2.3605265" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -142,7 +152,7 @@
       <div class="card-lieu">Notre-Dame de Chaldée (rite chaldéen - (syriaque oriental))</div>
       <div class="card-adresse">13-15 rue Pajol</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris/notre-dame-de-chaldee" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8857445,2.3605321" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8857445,2.3605321&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8857445,2.3605321" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris/notre-dame-de-chaldee" data-ville="Paris" data-lieu="Notre-Dame de Chaldée (rite chaldéen - (syriaque oriental))">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.8857445,2.3605321" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.8857445,2.3605321&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.8857445,2.3605321" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -152,7 +162,7 @@
       <div class="card-lieu">Sainte-Trinité (rite byzantin)</div>
       <div class="card-adresse">39 rue François-Gérard</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/75/paris/sainte-trinite-rite-byzantin-" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.84859967,2.27115552" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.84859967,2.27115552&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.84859967,2.27115552" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/75/paris/sainte-trinite-rite-byzantin-" data-ville="Paris" data-lieu="Sainte-Trinité (rite byzantin)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.84859967,2.27115552" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.84859967,2.27115552&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.84859967,2.27115552" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -162,7 +172,7 @@
       <div class="card-lieu">Église assyro-chaldéenne Saint-Jean-Apôtre (rite chaldéen)</div>
       <div class="card-adresse">Ter, 11 Rue Jean Jaurès</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/95/arnouville/eglise-assyro-chaldeenne-saint-jean-apotre" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.995152,2.419551" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.995152,2.419551&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.995152,2.419551" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/95/arnouville/eglise-assyro-chaldeenne-saint-jean-apotre" data-ville="Arnouville" data-lieu="Église assyro-chaldéenne Saint-Jean-Apôtre (rite chaldéen)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.995152,2.419551" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.995152,2.419551&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.995152,2.419551" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     <article class="card">
       <div class="card-top">
@@ -172,7 +182,7 @@
       <div class="card-lieu">Église assyro-chaldéenne Saint-Thomas Apôtre (rite chaldéen)</div>
       <div class="card-adresse">7-11 rue du Champ Gallois</div>
       <div class="tags"><span class="tag rite-o">Rite oriental</span></div>
-      <div class="card-actions"><a class="messes-btn" href="https://messes.info/lieu/95/sarcelles/eglise-assyro-chaldeenne-saint-thomas-apotre" target="_blank" rel="noopener">Horaires sur messes.info</a><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.9936917,2.3666857" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.9936917,2.3666857&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.9936917,2.3666857" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/95/sarcelles/eglise-assyro-chaldeenne-saint-thomas-apotre" data-ville="Sarcelles" data-lieu="Église assyro-chaldéenne Saint-Thomas Apôtre (rite chaldéen)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.9936917,2.3666857" target="_blank" rel="noopener" title="Ouvrir dans Google Maps">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.9936917,2.3666857&navigate=yes" target="_blank" rel="noopener" title="Ouvrir dans Waze">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.9936917,2.3666857" target="_blank" rel="noopener" title="Ouvrir dans Plans (Apple)">Apple Maps</a></div>
     </article>
     </div>
 </div>
@@ -182,5 +192,46 @@
   Dernière mise à jour : 2026/08/10.
   <a href="a-propos.html">À propos et sources</a>
 </footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
 </body>
 </html>

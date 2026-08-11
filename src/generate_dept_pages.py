@@ -34,6 +34,53 @@ DEPT_NAV = """<nav class="main-nav" aria-label="Navigation principale">
 </nav>"""
 
 
+# ── Modal horaires (HTML + JS) — injectée dans chaque page département ──
+# Constante NON f-string : les accolades JS restent simples.
+MODAL_BLOCK = """
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+"""
+
+
 # ── Noms des départements français (numéro → nom, pour les pages) ─────
 DEPT_NAMES = {
     "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence",
@@ -100,7 +147,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
             if m_tel:
                 num = re.sub(r'\s+', '', m_tel.group(1))
                 tel_html = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
-        url = f'<a class="messes-btn" href="{l["url_detail"]}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if l.get("url_detail") else ""
+        url = f'<button class="messes-btn horaires-btn" data-url="{l["url_detail"]}" data-ville="{l["ville"] or ""}" data-lieu="{l["lieu"] or ""}">Horaires sur messes.info</button>' if l.get("url_detail") else ""
         # Liens GPS (coord_lat/coord_lon)
         gps_html = ""
         if l.get("coord_lat") is not None and l.get("coord_lon") is not None:
@@ -184,9 +231,19 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
   .card-detail{{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}}
   .card-detail .label{{color:var(--burgundy);font-weight:600;}}
   .card-actions{{margin-top:0.6rem;}}
-  .messes-btn{{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}}
+  .messes-btn{{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}}
+  .messes-btn:hover{{background:var(--ink);color:var(--parchment);}}
   .messes-btn.gps{{background:#2b5c8a;border-color:#2b5c8a;}}
   .card-actions{{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}}
+  .modal-overlay{{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}}
+  .modal{{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}}
+  .modal h3{{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}}
+  .modal #modalMeta{{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}}
+  .modal-frame-wrap{{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}}
+  .modal-frame-wrap iframe{{width:100%;height:100%;min-height:300px;border:0;background:#fff;}}
+  .modal-actions{{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}}
+  .modal-close{{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}}
+  .modal-close:hover{{color:var(--burgundy);}}
   .tel-link{{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}}
   .voisins{{margin-top:2rem;font-size:0.85rem;color:var(--slate);}}
   .voisins a{{color:var(--burgundy);}}
@@ -238,9 +295,9 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
     Vérifiez toujours les horaires avant de vous déplacer.
   </footer>
 </div>
+{MODAL_BLOCK}
 </body>
-</html>
-"""
+</html>"""
     return html
 
 

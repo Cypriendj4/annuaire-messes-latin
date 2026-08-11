@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe à Strasbourg (67) — 33 églises et lieux de culte — Annuaire</title>
+<meta name="description" content="Trouvez une messe à Strasbourg (Bas-Rhin) : 33 églises et lieux de culte, dont 2 messes en latin. Adresses, horaires, GPS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://messes-france.github.io/villes/67-strasbourg/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
+  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
+  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
+  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
+  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="../index.html" class="brand">🕯️ Messes en France</a>
+  <div class="nav-links">
+    <a href="../messes-en-latin.html">Messes en latin</a>
+    <a href="../rites-orientaux.html">Rites orientaux</a>
+    <a href="../departements/index.html">Départements</a>
+    <a href="../a-propos.html">À propos</a>
+  </div>
+</nav>
+<div class="wrap">
+  
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · Bas-Rhin (67)</div>
+    <h1>Messe à Strasbourg</h1>
+    <p class="subtitle">33 lieux de culte à Strasbourg, dont 2 messes en latin (rite tridentin). Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Annexe de St Pierre le Jeune et Sacré Coeur (Cité du Wacken)</div>
+      <div class="card-adresse" itemprop="address">6 rue Léon Boll</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/cite-du-wacken" data-ville="STRASBOURG" data-lieu="Annexe de St Pierre le Jeune et Sacré Coeur (Cité du Wacken)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5946622,7.7634594" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5946622,7.7634594&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5946622,7.7634594" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Bon-Pasteur Cronenbourg</div>
+      <div class="card-adresse" itemprop="address">29 rue du Rieth</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/bon-pasteur-cronenbourg" data-ville="STRASBOURG" data-lieu="Bon-Pasteur Cronenbourg">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.6010447,7.7166639" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.6010447,7.7166639&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.6010447,7.7166639" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Chapelle hôpital Chu Hautepierre</div>
+      
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/chu--hautepierre" data-ville="STRASBOURG" data-lieu="Chapelle hôpital Chu Hautepierre">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.6019858,7.7835217" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.6019858,7.7835217&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.6019858,7.7835217" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Christ Ressuscité</div>
+      <div class="card-adresse" itemprop="address">4, rue de Palerme</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/christ-ressuscite" data-ville="STRASBOURG" data-lieu="Christ Ressuscité">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5772789,7.7645956" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5772789,7.7645956&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5772789,7.7645956" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Couvent Franciscains</div>
+      <div class="card-adresse" itemprop="address">3 rue Dotzinger</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/couvent-franciscains" data-ville="STRASBOURG" data-lieu="Couvent Franciscains">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5886057,7.7607929" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5886057,7.7607929&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5886057,7.7607929" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Couvent des Dominicains</div>
+      <div class="card-adresse" itemprop="address">41 boulevard de la Victoire</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/couvent-des-dominicains" data-ville="STRASBOURG" data-lieu="Couvent des Dominicains">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5820774,7.7668521" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5820774,7.7668521&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5820774,7.7668521" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67 – Rhin</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Louis : 2, quai Charles Frey</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes 9h00 (chantée), 10h30 (chantée) et 19h00 (sauf été, No&euml;l et Pâques) ; mardi à vendredi 18h30, samedi 9h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/48.5734:7.7521" data-ville="STRASBOURG" data-lieu="Eglise Saint Louis : 2, quai Charles Frey">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5734,7.7521" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5734,7.7521&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5734,7.7521" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0388360842">📞 03 88 36 08 42</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Strasbourg</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Grand Séminaire</div>
+      <div class="card-adresse" itemprop="address">2 Rue des Frères</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/chapelle-du-grand-seminaire" data-ville="Strasbourg" data-lieu="Grand Séminaire">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5825399,7.75199" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5825399,7.75199&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5825399,7.75199" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Hôpital Civil</div>
+      <div class="card-adresse" itemprop="address">1 Place de L Hôpital</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/hopital-civil" data-ville="STRASBOURG" data-lieu="Hôpital Civil">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.577308,7.7481005" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.577308,7.7481005&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.577308,7.7481005" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Notre Dame de Lourdes</div>
+      <div class="card-adresse" itemprop="address">9 rue du Howald</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/notre-dame-de-lourdes" data-ville="STRASBOURG" data-lieu="Notre Dame de Lourdes">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5765822,7.7307381" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5765822,7.7307381&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5765822,7.7307381" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Paroisse Catholique Militaire</div>
+      
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/paroisse-catholique-militaire" data-ville="STRASBOURG" data-lieu="Paroisse Catholique Militaire">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.6019858,7.7835217" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.6019858,7.7835217&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.6019858,7.7835217" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Sacré Coeur (Montagne Verte)</div>
+      <div class="card-adresse" itemprop="address">7 rue de Flexbourg</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/sacre-coeur-montagne-verte" data-ville="STRASBOURG" data-lieu="Sacré Coeur (Montagne Verte)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5631506,7.7079925" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5631506,7.7079925&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5631506,7.7079925" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Amand (St Amand )</div>
+      <div class="card-adresse" itemprop="address">5 rue Engelhardt</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-amand-la-meinau" data-ville="STRASBOURG" data-lieu="Saint Amand (St Amand )">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.554275,7.7469325" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.554275,7.7469325&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.554275,7.7469325" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Arbogast (Montagne Verte)</div>
+      <div class="card-adresse" itemprop="address">8 rue des Mérovingiens</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-arbogast-montagne-verte" data-ville="STRASBOURG" data-lieu="Saint Arbogast (Montagne Verte)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5722467,7.7191418" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5722467,7.7191418&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5722467,7.7191418" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Benoît</div>
+      <div class="card-adresse" itemprop="address">17 pl. André Maurois</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-benoit-cronenbourg-hautepierre" data-ville="STRASBOURG" data-lieu="Saint Benoît">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.586322,7.7170649" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.586322,7.7170649&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.586322,7.7170649" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Jean Baptiste</div>
+      <div class="card-adresse" itemprop="address">13 quai St Jean</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-jean-baptiste" data-ville="STRASBOURG" data-lieu="Saint Jean Baptiste">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5838639,7.7393803" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5838639,7.7393803&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5838639,7.7393803" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Laurent (Cathédrale Notre Dame de Strasbourg)</div>
+      <div class="card-adresse" itemprop="address">Place de la Cathédrale</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/cathedrale-notre-dame-de-strasbourg" data-ville="STRASBOURG" data-lieu="Saint Laurent (Cathédrale Notre Dame de Strasbourg)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Pierre le Jeune et Sacré Coeur</div>
+      <div class="card-adresse" itemprop="address">7 rue St Léon</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-pierre-le-jeune-et-sacre-coeur" data-ville="STRASBOURG" data-lieu="Saint Pierre le Jeune et Sacré Coeur">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5888938,7.7489592" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5888938,7.7489592&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5888938,7.7489592" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint Pierre le Vieux</div>
+      <div class="card-adresse" itemprop="address">Place Saint-Pierre-le-Vieux</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-pierre-le-vieux-et-saint-michel" data-ville="STRASBOURG" data-lieu="Saint Pierre le Vieux">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5828411,7.740956" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5828411,7.740956&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5828411,7.740956" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint-Aloyse</div>
+      <div class="card-adresse" itemprop="address">127 route du Polygone</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-aloyse-neudorf" data-ville="STRASBOURG" data-lieu="Saint-Aloyse">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5637597,7.7613086" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5637597,7.7613086&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5637597,7.7613086" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint-Antoine Cronenbourg</div>
+      <div class="card-adresse" itemprop="address">15 place Saint-Antoine</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-antoine-cronenbourg" data-ville="STRASBOURG" data-lieu="Saint-Antoine Cronenbourg">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5977686,7.7093078" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5977686,7.7093078&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5977686,7.7093078" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint-Florent Cronenbourg</div>
+      <div class="card-adresse" itemprop="address">2 place Saint-Florent</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-florent-cronenbourg" data-ville="STRASBOURG" data-lieu="Saint-Florent Cronenbourg">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5962822,7.7216575" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5962822,7.7216575&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5962822,7.7216575" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint-Léon / Sainte-Thérèse</div>
+      <div class="card-adresse" itemprop="address">96 rue de S.-Dié</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-leon-neudorf" data-ville="STRASBOURG" data-lieu="Saint-Léon / Sainte-Thérèse">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5674363,7.750725" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5674363,7.750725&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5674363,7.750725" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Saint-Urbain</div>
+      <div class="card-adresse" itemprop="address">28 rue de Lièpvre</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-urbain-neudorf" data-ville="STRASBOURG" data-lieu="Saint-Urbain">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5689784,7.7687724" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5689784,7.7687724&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5689784,7.7687724" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Sainte Madeleine</div>
+      <div class="card-adresse" itemprop="address">12 rue des Bateliers</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/sainte-madeleine" data-ville="STRASBOURG" data-lieu="Sainte Madeleine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5800675,7.7525182" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5800675,7.7525182&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5800675,7.7525182" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Sainte-Jeanne-d'Arc</div>
+      <div class="card-adresse" itemprop="address">20 rue de l'abbé-François-Xavier-Scherer</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/sainte-jeanne-d-arc-port-du-rhin" data-ville="STRASBOURG" data-lieu="Sainte-Jeanne-d'Arc">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.57184863,7.7946475" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.57184863,7.7946475&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.57184863,7.7946475" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Très-Sainte-Trinité</div>
+      <div class="card-adresse" itemprop="address">rue de Boston</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/tres-sainte-trinite" data-ville="STRASBOURG" data-lieu="Très-Sainte-Trinité">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5768339,7.7732089" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5768339,7.7732089&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5768339,7.7732089" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Église Antoine Chevrier / Elsau</div>
+      <div class="card-adresse" itemprop="address">36 rue Léonard de Vinci</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/eglise-antoine-chevrier-cite-elsau" data-ville="STRASBOURG" data-lieu="Église Antoine Chevrier / Elsau">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.56499803,7.72583036" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.56499803,7.72583036&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.56499803,7.72583036" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Église Saint Jean Baptiste (Saint Jean)</div>
+      <div class="card-adresse" itemprop="address">13 Quai Saint-Jean</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/eglise-saint-jean-baptiste" data-ville="STRASBOURG" data-lieu="Église Saint Jean Baptiste (Saint Jean)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5844183,7.7400806" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5844183,7.7400806&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5844183,7.7400806" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Église Saint Louis (La Croix glorieuse / Saint Louis)</div>
+      <div class="card-adresse" itemprop="address">11 rue Saint Louis</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-louis" data-ville="STRASBOURG" data-lieu="Église Saint Louis (La Croix glorieuse / Saint Louis)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5781583,7.7450754" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5781583,7.7450754&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5781583,7.7450754" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">STRASBOURG</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Église Saint Louis de la Robertsau</div>
+      <div class="card-adresse" itemprop="address">14 rue Jeanne d'Arc</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/saint-louis-robertsau" data-ville="STRASBOURG" data-lieu="Église Saint Louis de la Robertsau">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.6024845,7.7808302" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.6024845,7.7808302&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.6024845,7.7808302" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Strasbourg</div>
+        <div class="card-dept">67 – Bas-Rhin</div>
+      </div>
+      <div class="card-lieu">Église Saint-Louis</div>
+      <div class="card-adresse" itemprop="address">2 quai Charles-Frey</div>
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">MMD</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — Dim. 9h00, 10h30, 19h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/48.5785687:7.7459487" data-ville="Strasbourg" data-lieu="Église Saint-Louis">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5785687,7.7459487" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5785687,7.7459487&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5785687,7.7459487" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0388360842">📞 03 88 36 08 42</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Strasbourg</div>
+        <div class="card-dept">67</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Madeleine (Sainte-Madeleine)</div>
+      <div class="card-adresse" itemprop="address">12 rue des Bateliers</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/67/strasbourg/eglise-sainte-madeleine" data-ville="Strasbourg" data-lieu="Église Sainte-Madeleine (Sainte-Madeleine)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=48.5804641,7.7552335" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=48.5804641,7.7552335&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=48.5804641,7.7552335" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="../a-propos.html">À propos et sources</a>
+</footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>

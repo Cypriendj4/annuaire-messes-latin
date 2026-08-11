@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe à Marseille 08 (13) — 12 églises et lieux de culte — Annuaire</title>
+<meta name="description" content="Trouvez une messe à Marseille 08 (Bouches-du-Rhône) : 12 églises et lieux de culte. Adresses, horaires, GPS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://messes-france.github.io/villes/13-marseille-08/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
+  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
+  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
+  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
+  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="../index.html" class="brand">🕯️ Messes en France</a>
+  <div class="nav-links">
+    <a href="../messes-en-latin.html">Messes en latin</a>
+    <a href="../rites-orientaux.html">Rites orientaux</a>
+    <a href="../departements/index.html">Départements</a>
+    <a href="../a-propos.html">À propos</a>
+  </div>
+</nav>
+<div class="wrap">
+  
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · Bouches-du-Rhône (13)</div>
+    <h1>Messe à Marseille 08</h1>
+    <p class="subtitle">12 lieux de culte à Marseille 08. Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint Joseph Hôpital</div>
+      <div class="card-adresse" itemprop="address">26, boulevard de Louvain</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/chapelle-saint-joseph-hopital" data-ville="MARSEILLE 08" data-lieu="Chapelle Saint Joseph Hôpital">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2763104,5.3920084" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2763104,5.3920084&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2763104,5.3920084" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Coeur Immaculé de Marie (Paroisse de Langue Espagnole)</div>
+      <div class="card-adresse" itemprop="address">55, boulevard Rodoccanachi</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/coeur-immacule-de-marie" data-ville="MARSEILLE 08" data-lieu="Coeur Immaculé de Marie (Paroisse de Langue Espagnole)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.27442751,5.38635208" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.27442751,5.38635208&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.27442751,5.38635208" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">La Madrague</div>
+      <div class="card-adresse" itemprop="address">220, avenue de la Madrague</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/la-madrague" data-ville="MARSEILLE 08" data-lieu="La Madrague">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2312593,5.3550335" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2312593,5.3550335&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2312593,5.3550335" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Le Rouet</div>
+      <div class="card-adresse" itemprop="address">60, boulevard de Louvain</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/le-rouet" data-ville="MARSEILLE 08" data-lieu="Le Rouet">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2762819,5.3935167" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2762819,5.3935167&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2762819,5.3935167" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Monastère Sainte Claire (clarisses)</div>
+      <div class="card-adresse" itemprop="address">17 rue Wulfran-Puget</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/monastere-sainte-claire-clarisses" data-ville="MARSEILLE 08" data-lieu="Monastère Sainte Claire (clarisses)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2370789,5.3782513" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2370789,5.3782513&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2370789,5.3782513" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Montredon</div>
+      <div class="card-adresse" itemprop="address">6, place Engalière</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/montredon" data-ville="MARSEILLE 08" data-lieu="Montredon">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2384453,5.3658148" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2384453,5.3658148&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2384453,5.3658148" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Notre Dame des Neiges À Bonneveine</div>
+      <div class="card-adresse" itemprop="address">place Talabot</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/notre-dame-des-neiges-a-bonneveine" data-ville="MARSEILLE 08" data-lieu="Notre Dame des Neiges À Bonneveine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2370789,5.3782513" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2370789,5.3782513&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2370789,5.3782513" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Notre Dame du Liban</div>
+      <div class="card-adresse" itemprop="address">5, avenue du parc Borely</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/notre-dame-du-liban" data-ville="MARSEILLE 08" data-lieu="Notre Dame du Liban">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2631994,5.3785692" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2631994,5.3785692&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2631994,5.3785692" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Roy d'Espagne</div>
+      <div class="card-adresse" itemprop="address">allée Yvon Morandat</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/roy-d-espagne" data-ville="MARSEILLE 08" data-lieu="Roy d'Espagne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2390815,5.391789" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2390815,5.391789&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2390815,5.391789" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Saint Giniez</div>
+      <div class="card-adresse" itemprop="address">place louis lumière</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/saint-giniez" data-ville="MARSEILLE 08" data-lieu="Saint Giniez">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2725244,5.3844901" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2725244,5.3844901&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2725244,5.3844901" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Église Saint-François-Xavier</div>
+      <div class="card-adresse" itemprop="address">26, rue Raphaël-Ponson</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/saint-francois-xavier" data-ville="MARSEILLE 08" data-lieu="Église Saint-François-Xavier">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2662988,5.3880737" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2662988,5.3880737&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2662988,5.3880737" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MARSEILLE 08</div>
+        <div class="card-dept">13</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Anne</div>
+      <div class="card-adresse" itemprop="address">28, rue Thieux</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/13/marseille-08/sainte-anne" data-ville="MARSEILLE 08" data-lieu="Église Sainte-Anne">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2585365,5.3933771" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2585365,5.3933771&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2585365,5.3933771" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="../a-propos.html">À propos et sources</a>
+</footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>

@@ -92,6 +92,8 @@ PAGE_CSS = """
   .card-detail .label{color:var(--burgundy);font-weight:600;}
   .card-actions{margin-top:0.6rem;}
   .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
   .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
   .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
   .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
@@ -160,9 +162,30 @@ def build_messes_latin(conn, last_update) -> str:
         ville, dc, dn, dioc, lieu, adr, rite, lang, comm, cel, hor, tel, url = l
         dept = f"{dc} – {dn}" if dn else dc
         rite_tag = "Tridentin · 1962" if rite == 'tridentin' else "Paul VI · Latin"
-        hor_html = f'<div class="row"><span class="label">Horaires</span> — {hor[:150]}</div>' if hor else ""
-        cel_html = f'<div class="row"><span class="label">Célébrant</span> — {cel[:100]}</div>' if cel else ""
+        hor_html = f'<div class="row"><span class="label">Horaires</span> — {hor}</div>' if hor and "voir site" not in hor.lower() else ""
+        cel_html = f'<div class="row"><span class="label">Célébrant</span> — {cel[:120]}</div>' if cel else ""
+        # Téléphone : premier numéro du contact
+        tel_link = ""
+        if tel:
+            m_tel = re.search(r'(\b0\d(?:\s?\d){8}\b)', tel)
+            if m_tel:
+                num = re.sub(r'\s+', '', m_tel.group(1))
+                tel_link = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
+        # Site web du lieu (extrait du contact "Site : https://...")
+        site_link = ""
+        m_site = re.search(r'https?://[^\s\)]+', tel or "")
+        if m_site:
+            site_link = f'<a class="messes-btn site" href="{m_site.group(0)}" target="_blank" rel="noopener">🌐 Site du lieu</a>'
+        # Lien horaires à jour : messes.info si dispo, sinon source AMDG / Porte Latine
         url_html = f'<a class="messes-btn" href="{url}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if url else ""
+        if not url and site_link:
+            url_html = site_link
+        if not url and not site_link:
+            src_label = "Voir la source (AMDG)" if hor or tel else ""
+            if src_label:
+                url_html = f'<a class="messes-btn site" href="https://www.amdg.asso.fr/" target="_blank" rel="noopener">{src_label}</a>'
+        # Communauté
+        comm_tag = f'<span class="tag">{comm}</span>' if comm else ""
         cards += f"""
     <article class="card {rite}" itemscope itemtype="https://schema.org/Church">
       <div class="card-top">
@@ -171,9 +194,9 @@ def build_messes_latin(conn, last_update) -> str:
       </div>
       <div class="card-lieu">{lieu}</div>
       {f'<div class="card-adresse">{adr}</div>' if adr else ''}
-      <div class="tags"><span class="tag {'rite-t' if rite=='tridentin' else 'rite-p'}">{rite_tag}</span><span class="tag">{dioc or ''}</span></div>
+      <div class="tags"><span class="tag {'rite-t' if rite=='tridentin' else 'rite-p'}">{rite_tag}</span>{comm_tag}<span class="tag">{dioc or ''}</span></div>
       {f'<div class="card-detail">{hor_html}{cel_html}</div>' if (hor or cel) else ''}
-      <div class="card-actions">{url_html}</div>
+      <div class="card-actions">{url_html}{tel_link}</div>
     </article>"""
 
     body = f"""

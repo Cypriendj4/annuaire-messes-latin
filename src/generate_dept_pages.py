@@ -90,7 +90,16 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
             "oriental": "Rite oriental",
         }.get(l["rite"], "Messe")
         lang = f' · {l["langue"]}' if l.get("langue") else ""
-        hor = f'<div class="row"><span class="label">Horaires</span> — {l["horaires"]}</div>' if l.get("horaires") else ""
+        hor = ""
+        if l.get("horaires") and "voir site" not in l["horaires"].lower():
+            hor = f'<div class="row"><span class="label">Horaires</span> — {l["horaires"][:200]}</div>'
+        # Téléphone (premier numéro du contact)
+        tel_html = ""
+        if l.get("contact"):
+            m_tel = re.search(r'(\b0\d(?:\s?\d){8}\b)', l["contact"])
+            if m_tel:
+                num = re.sub(r'\s+', '', m_tel.group(1))
+                tel_html = f'<a class="tel-link" href="tel:{num}">📞 {m_tel.group(1)}</a>'
         url = f'<a class="messes-btn" href="{l["url_detail"]}" target="_blank" rel="noopener">Horaires sur messes.info</a>' if l.get("url_detail") else ""
         cards += f"""
     <article class="card {l['rite'] or ''}" itemscope itemtype="https://schema.org/Church">
@@ -105,7 +114,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
         {f'<span class="tag comm">{l["communaute"]}</span>' if l.get("communaute") else ''}
       </div>
       {f'<div class="card-detail">{hor}</div>' if hor else ''}
-      <div class="card-actions">{url}</div>
+      <div class="card-actions">{url}{tel_html}</div>
     </article>"""
 
     # Maillage interne : départements voisins (numéros proches)
@@ -169,6 +178,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
   .card-detail .label{{color:var(--burgundy);font-weight:600;}}
   .card-actions{{margin-top:0.6rem;}}
   .messes-btn{{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;}}
+  .tel-link{{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}}
   .voisins{{margin-top:2rem;font-size:0.85rem;color:var(--slate);}}
   .voisins a{{color:var(--burgundy);}}
   .affil{{margin-top:2.5rem;border:1px solid var(--ink);background:var(--card);padding:1.2rem;font-size:0.85rem;}}
@@ -231,7 +241,7 @@ def generate_all(conn: sqlite3.Connection, last_update: str) -> int:
     cur = conn.cursor()
     cur.execute("""
         SELECT ville, dept_code, dept_nom, diocese, lieu, adresse, rite,
-               langue, communaute, horaires, url_detail, coord_lat, coord_lon
+               langue, communaute, horaires, contact, url_detail, coord_lat, coord_lon
         FROM lieux
         WHERE actif = 1 AND dept_code != ''
         ORDER BY dept_code, ville
@@ -242,7 +252,7 @@ def generate_all(conn: sqlite3.Connection, last_update: str) -> int:
             "ville": row[0], "dept_code": row[1], "dept_nom": row[2] or DEPT_NAMES.get(row[1], row[1]),
             "diocese": row[3] or "", "lieu": row[4], "adresse": row[5] or "",
             "rite": row[6], "langue": row[7], "communaute": row[8] or "",
-            "horaires": row[9] or "", "url_detail": row[10] or "",
+            "horaires": row[9] or "", "contact": row[10] or "", "url_detail": row[11] or "",
             "dept": f"{row[1]} – {row[2] or DEPT_NAMES.get(row[1], row[1])}",
         }
         by_dept.setdefault(row[1], []).append(d)

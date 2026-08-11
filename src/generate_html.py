@@ -14,6 +14,7 @@ from pathlib import Path
 
 from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
 from utils import setup_logging, slugify
+from nav import build_nav, NAV_CSS
 
 logger = setup_logging("generate_html")
 
@@ -285,44 +286,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   .source-note strong{color:var(--ink);}
 
-  /* ---------- navigation principale sticky ---------- */
-  .main-nav{
-    position:sticky;
-    top:0;
-    z-index:20;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:1rem;
-    background:var(--parchment);
-    border-bottom:2px solid var(--ink);
-    padding:0.7rem 1.5rem;
-    max-width:1100px;
-    margin:0 auto;
-  }
-  .main-nav .brand{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    color:var(--burgundy);
-    text-decoration:none;
-    font-size:1.05rem;
-    white-space:nowrap;
-  }
-  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
-  .nav-links a{
-    font-size:0.8rem;
-    font-weight:600;
-    color:var(--ink);
-    text-decoration:none;
-    padding:0.35rem 0.7rem;
-    border:1px solid var(--ink);
-    background:var(--card);
-  }
-  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
-  @media (max-width:640px){
-    .main-nav{flex-direction:column;align-items:flex-start;}
-    .nav-links{width:100%;}
-  }
+  /* ---------- navigation principale sticky (nav.py) ---------- */
+{{NAV_CSS}}
 
   /* ---------- filters ---------- */
   .filters-wrap{
@@ -834,15 +799,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 
-<nav class="main-nav" aria-label="Navigation principale">
-  <a href="index.html" class="brand">🕯️ Messes en France</a>
-  <div class="nav-links">
-    <a href="messes-en-latin.html">Messes en latin</a>
-    <a href="rites-orientaux.html">Rites orientaux</a>
-    <a href="departements/index.html">Départements</a>
-    <a href="a-propos.html">À propos</a>
-  </div>
-</nav>
+{{MAIN_NAV}}
 
 <header>
   <div class="eyebrow">Annuaire national · France</div>
@@ -1353,6 +1310,8 @@ def main():
         html = html.replace("{{LAST_UPDATE}}", last_update)
         html = html.replace("{{DEPT_COUNT}}", str(depts))
         html = html.replace("{{DEPT_NAV}}", build_dept_nav(conn))
+        html = html.replace("{{MAIN_NAV}}", build_nav(""))
+        html = html.replace("{{NAV_CSS}}", NAV_CSS)
         html = html.replace("{{BASE_URL}}", BASE_URL)
         html = html.replace("{{GENERATED_AT}}", generated_at)
 

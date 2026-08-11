@@ -15,6 +15,7 @@ from pathlib import Path
 
 from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
 from utils import setup_logging, slugify
+from nav import build_nav, NAV_CSS
 
 logger = setup_logging("generate_pages")
 
@@ -48,29 +49,12 @@ DEPT_NAMES = {
 }
 
 
-# ── Menu sticky commun (préfixe = "" à la racine, "../" dans departements/) ──
-def build_nav(prefix: str = "") -> str:
-    """Menu sticky commun. prefix vaut "" à la racine ou "../" dans departements/."""
-    return f"""<nav class="main-nav" aria-label="Navigation principale">
-  <a href="{prefix}index.html" class="brand">🕯️ Messes en France</a>
-  <div class="nav-links">
-    <a href="{prefix}messes-en-latin.html">Messes en latin</a>
-    <a href="{prefix}rites-orientaux.html">Rites orientaux</a>
-    <a href="{prefix}departements/index.html">Départements</a>
-    <a href="{prefix}a-propos.html">À propos</a>
-  </div>
-</nav>"""
+# ── Menu sticky commun — voir nav.py (build_nav) ───────────────────────
 
-
-PAGE_CSS = """
+PAGE_CSS = NAV_CSS + """
   :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
-  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
-  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
-  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
-  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
-  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
   .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
   h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
   .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
@@ -435,6 +419,34 @@ def build_ville_page(conn, ville: str, last_update: str) -> str | None:
         canonical=f"villes/{dc}-{slug}/")
 
 
+def build_villes_index(conn, last_update) -> str:
+    """Page index des villes (maillage interne + navigation)."""
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT UPPER(ville), dept_code, COUNT(*) FROM lieux
+        WHERE actif=1 AND ville != '' AND dept_code != ''
+        GROUP BY UPPER(ville) HAVING COUNT(*) >= 3
+        ORDER BY COUNT(*) DESC
+    """)
+    rows = cur.fetchall()
+    items = []
+    for ville_upper, dc, count in rows:
+        ville_norm = ville_upper.title()
+        slug = slugify(ville_norm)
+        items.append(f'<li><a href="{dc}-{slug}/">{ville_norm} <small>({count} lieux)</small></a></li>')
+    body = f"""
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Navigation · Villes</div>
+    <h1>Messe à [ville] — les principales villes de France</h1>
+    <p class="subtitle">{len(items)} villes couvertes par une page dédiée. Cherchez « messe à [votre ville] » : adresses, horaires, GPS et téléphone pour chaque église.</p>
+    <ul class="dept-list">{''.join(items)}</ul>"""
+    return page_shell(
+        "Messe à [ville] — pages par ville : églises et horaires des messes en France",
+        "Pages dédiées par ville : messe à Paris, Lyon, Marseille, Toulouse… Adresses des églises, horaires des messes, GPS et téléphone.",
+        body, prefix="../", last_update=last_update,
+        canonical="villes/index.html")
+
+
 def build_dept_index(conn, last_update) -> str:
     cur = conn.cursor()
     cur.execute("""
@@ -502,6 +514,7 @@ def main() -> int:
         # Pages villes (requête locale dominante 'messe à [ville]')
         villes_dir = OUTPUT_DIR / "villes"
         villes_dir.mkdir(parents=True, exist_ok=True)
+        (villes_dir / "index.html").write_text(build_villes_index(conn, last_update), encoding="utf-8")
         cur2 = conn.cursor()
         cur2.execute("""
             SELECT UPPER(ville) FROM lieux
@@ -535,7 +548,7 @@ def main() -> int:
         logger.info(f"Pages villes générées: {ville_pages}")
 
         update_sitemap(["messes-en-latin.html", "rites-orientaux.html", "a-propos.html",
-                        "departements/index.html"] + ville_urls)
+                        "departements/index.html", "villes/index.html"] + ville_urls)
         logger.info("Pages secondaires générées")
         print("PAGES_OK")
     finally:

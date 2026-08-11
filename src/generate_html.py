@@ -325,17 +325,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---------- filters ---------- */
   .filters-wrap{
-    position:sticky;
-    top:0;
-    z-index:10;
     background:var(--parchment);
     padding-top:1.4rem;
-    border-bottom:1px solid transparent;
-    transition:border-color .2s ease, box-shadow .2s ease;
-  }
-  .filters-wrap.stuck{
-    border-bottom-color:var(--line);
-    box-shadow:0 4px 14px rgba(34,31,43,0.14);
   }
   .filters{
     max-width:1100px;
@@ -1121,21 +1112,7 @@ document.getElementById('moreBtn').addEventListener('click', ()=>{
 
 document.getElementById('geoBtn').addEventListener('click', locateMe);
 
-// Ombre du bandeau de filtres + calage sous le menu sticky
-(function(){
-  const nav = document.querySelector('.main-nav');
-  const wrap = document.querySelector('.filters-wrap');
-  if(!wrap) return;
-  const setTop = () => {
-    // Cale les filtres juste sous le menu sticky (hauteur dynamique)
-    wrap.style.top = (nav ? nav.offsetHeight : 0) + 'px';
-  };
-  setTop();
-  window.addEventListener('resize', setTop);
-  const update = () => wrap.classList.toggle('stuck', window.scrollY > 30);
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
+// Rien à caler : seul le menu principal est sticky, les filtres défilent.
 
 document.getElementById('rite').addEventListener('change', e=>{state.rite=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});
 document.getElementById('langue').addEventListener('change', e=>{state.langue=e.target.value; visibleCount=PAGE_SIZE; urlFromState(); render();});

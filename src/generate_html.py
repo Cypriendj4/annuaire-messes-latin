@@ -12,7 +12,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS
+from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
 from utils import setup_logging, slugify
 
 logger = setup_logging("generate_html")
@@ -199,6 +199,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta name="description" content="Annuaire national des églises et messes catholiques en France : messes en latin (rite tridentin 1962 &amp; Paul VI) et célébrations paroissiales. Filtrez par ville, rite, langue, diocèse et communauté. Horaires vérifiés, sources citées.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#6d2438">
+<link rel="canonical" href="{{BASE_URL}}/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -1189,6 +1190,7 @@ def main():
         html = html.replace("{{LAST_UPDATE}}", last_update)
         html = html.replace("{{DEPT_COUNT}}", str(depts))
         html = html.replace("{{DEPT_NAV}}", build_dept_nav(conn))
+        html = html.replace("{{BASE_URL}}", BASE_URL)
         html = html.replace("{{GENERATED_AT}}", generated_at)
 
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

@@ -17,7 +17,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS
+from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
 from utils import setup_logging, slugify
 
 logger = setup_logging("generate_dept_pages")
@@ -143,7 +143,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
-<link rel="canonical" href="https://cypriendj4.github.io/annuaire-messes-latin/departements/{dept_code}-{slugify(dept_nom)}/">
+<link rel="canonical" href="{BASE_URL}/departements/{dept_code}-{slugify(dept_nom)}/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
@@ -287,7 +287,7 @@ def generate_all(conn: sqlite3.Connection, last_update: str) -> int:
 
 def generate_sitemap(by_dept_codes: list[str]) -> None:
     """Génère sitemap.xml (index + toutes les pages départements)."""
-    base = "https://cypriendj4.github.io/annuaire-messes-latin"
+    base = BASE_URL
     urls = [f"<url><loc>{base}/</loc></url>", f"<url><loc>{base}/data.js</loc></url>"]
     for code in sorted(by_dept_codes, key=lambda c: (len(c), c)):
         nom = DEPT_NAMES.get(code, code)
@@ -300,9 +300,7 @@ def generate_sitemap(by_dept_codes: list[str]) -> None:
 
 
 def generate_robots() -> None:
-    robots = ("User-agent: *\n"
-              "Allow: /\n"
-              "Sitemap: https://cypriendj4.github.io/annuaire-messes-latin/sitemap.xml\n")
+    robots = f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n"
     (OUTPUT_DIR / "robots.txt").write_text(robots, encoding="utf-8")
     logger.info("robots.txt généré")
 

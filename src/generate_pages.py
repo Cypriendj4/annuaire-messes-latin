@@ -13,7 +13,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, OUTPUT_DIR, DEPT_COORDS
+from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
 from utils import setup_logging, slugify
 
 logger = setup_logging("generate_pages")
@@ -115,7 +115,8 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
                canonical: str = "") -> str:
     """Enveloppe HTML commune avec menu sticky + footer."""
     if not canonical:
-        canonical = "https://cypriendj4.github.io/annuaire-messes-latin/" + canonical
+        canonical = ""
+    canonical = BASE_URL + "/" + canonical
     footer = f"""
 <footer>
   Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
@@ -332,7 +333,7 @@ def build_dept_index(conn, last_update) -> str:
 
 def update_sitemap(extra_pages: list[str]) -> None:
     """Ajoute les pages secondaires au sitemap existant."""
-    base = "https://cypriendj4.github.io/annuaire-messes-latin"
+    base = BASE_URL
     sitemap_path = OUTPUT_DIR / "sitemap.xml"
     if not sitemap_path.exists():
         return

@@ -55,6 +55,8 @@ jobs:
           cd ..
 
       - name: Copie des fichiers statiques à la racine
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
         run: |
           cp output/index.html index.html
           cp output/data.js data.js
@@ -64,6 +66,12 @@ jobs:
           cp output/messes-en-latin.html messes-en-latin.html
           cp output/rites-orientaux.html rites-orientaux.html
           cp output/a-propos.html a-propos.html
+          if [ -n "$CUSTOM_DOMAIN" ]; then
+            echo "$CUSTOM_DOMAIN" > CNAME
+            echo "CNAME écrit: $CUSTOM_DOMAIN"
+          else
+            echo "Pas de domaine personnalisé configuré (CUSTOM_DOMAIN vide)"
+          fi
 
       - name: Commit et push automatique
         run: |

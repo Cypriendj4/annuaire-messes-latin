@@ -57,6 +57,8 @@ jobs:
           cd ..
 
       - name: Copie des fichiers statiques à la racine (pour GitHub Pages)
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
         run: |
           cp output/index.html index.html
           cp output/data.js data.js
@@ -66,6 +68,14 @@ jobs:
           cp output/messes-en-latin.html messes-en-latin.html
           cp output/rites-orientaux.html rites-orientaux.html
           cp output/a-propos.html a-propos.html
+          # Domaine personnalisé : si CUSTOM_DOMAIN est défini (secret/var GitHub),
+          # écrit le fichier CNAME à la racine (requis par GitHub Pages).
+          if [ -n "$CUSTOM_DOMAIN" ]; then
+            echo "$CUSTOM_DOMAIN" > CNAME
+            echo "CNAME écrit: $CUSTOM_DOMAIN"
+          else
+            echo "Pas de domaine personnalisé configuré (CUSTOM_DOMAIN vide)"
+          fi
           echo "index.html + data.js + pages départements + pages SEO + sitemap copiés"
 
       - name: Vérification du HTML généré

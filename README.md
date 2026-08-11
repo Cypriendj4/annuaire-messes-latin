@@ -157,18 +157,19 @@ Rien à faire.
 
 1. Allez sur [nic.eu.org](https://nic.eu.org) → `Register a domain`
 2. Choisissez un nom (ex: `messes-latin-france.eu.org`), type `Host`
-3. Ajoutez 2 enregistrements DNS A :
-   - `185.199.108.153`
-   - `185.199.109.153`
-   - `185.199.110.153`
-   - `185.199.111.153`
-   *(ou 4 enregistrements A, ou 1 CNAME `messes-latin-france.eu.org → [TOI].github.io`)*
+3. Ajoutez 4 enregistrements DNS A (IP de GitHub Pages) :
+   - `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   *(ou 1 CNAME `messes-latin-france.eu.org → [TOI].github.io`)*
 4. Validez : confirmation par email, activation sous quelques jours
 5. Dans le repo : `Settings → Pages → Custom domain` → `messes-latin-france.eu.org`
-6. (Optionnel) Créez `CNAME` avec `messes-latin-france.eu.org`
+6. **Activer le CNAME automatique** : dans les *Settings du repo → Secrets and variables → Actions → Variables*, créez `CUSTOM_DOMAIN = messes-latin-france.eu.org`. Le workflow écrira automatiquement le fichier `CNAME` à chaque mise à jour.
+7. **Mettre à jour les URLs canoniques** : dans `src/config.py`, remplacez `BASE_URL` par `https://messes-latin-france.eu.org`. Les canonical, sitemap et robots de toutes les pages suivront automatiquement.
+8. Activez le HTTPS dans `Settings → Pages` (GitHub l'active automatiquement après quelques minutes).
+
+> 💡 **Prêt à l'emploi** : toute la bascule technique est déjà en place (variable `BASE_URL` + support `CUSTOM_DOMAIN` dans les 2 workflows). Seule la valeur de `BASE_URL` reste à changer le jour J.
 
 ### Option C : domaine à prix coûtant
-Un `.fr` coûte ~8€/an — rentable si le projet prend de l'ampleur.
+Un `.fr` coûte ~8-12€/an — même procédure, remplacez `BASE_URL` et `CUSTOM_DOMAIN` par votre domaine.
 
 > ❌ **Éviter Freenom** (.tk/.ml/.ga/.cf/.gq) : instable, récupérations de domaines fréquentes.
 

@@ -77,6 +77,11 @@ SOURCES = {
     },
 }
 
+# ── URL de base du site ────────────────────────────────────────────────
+# Changez cette valeur quand un domaine personnalisé est en place
+# (ex: "https://messes-latin-france.eu.org" une fois eu.org approuvé).
+BASE_URL = "https://cypriendj4.github.io/annuaire-messes-latin"
+
 # ── Grille géographique pour l'annuaire CEF ────────────────────────────
 # Points de la grille pour couvrir toute la France métropolitaine + DOM.
 # Espacement ~0.35° lat / ~0.5° lon (~39 km) — le rayon utile par point

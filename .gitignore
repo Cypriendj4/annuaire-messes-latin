@@ -31,3 +31,5 @@ Thumbs.db
 
 # Backup temporaires (restauration via historique git de data/messes.db)
 backups/
+data/google_token.json
+client_secret.json

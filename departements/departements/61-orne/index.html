@@ -71,25 +71,146 @@
   .support{margin-top:1rem;}
   .support a{display:inline-block;background:var(--ink);color:var(--parchment);padding:0.6rem 1.2rem;text-decoration:none;font-weight:600;font-size:0.85rem;box-shadow:3px 3px 0 rgba(34,31,43,0.6);}
   footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.75rem;color:var(--slate);}
+  .villes{font-size:0.85rem;color:var(--slate);margin-top:1rem;}
+  
+  /* ---------- navigation principale sticky (menu) ---------- */
+  .main-nav{
+    position:sticky; top:0; z-index:30;
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    background:var(--parchment); border-bottom:2px solid var(--ink);
+    padding:0.7rem 1.5rem; max-width:1100px; margin:0 auto;
+  }
+  .main-nav .brand{
+    font-family:'Fraunces',serif; font-weight:600; color:var(--burgundy);
+    text-decoration:none; font-size:1.05rem; white-space:nowrap;
+  }
+  .nav-links{display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;}
+  .nav-links > a, .nav-links .nav-item > button{
+    font-size:0.8rem; font-weight:600; color:var(--ink); text-decoration:none;
+    padding:0.35rem 0.65rem; border:1px solid var(--ink); background:var(--card);
+    cursor:pointer; font-family:'Inter',sans-serif;
+  }
+  .nav-links > a:hover, .nav-links .nav-item > button:hover,
+  .nav-links > a.active{background:var(--ink); color:var(--parchment);}
+  .nav-item{position:relative;}
+  .nav-item > button{display:flex; align-items:center; gap:0.3rem;}
+  .nav-item > button::after{content:"▾"; font-size:0.65rem;}
+  .submenu{
+    position:absolute; top:100%; left:0; min-width:230px; z-index:40;
+    background:var(--card); border:1px solid var(--ink); box-shadow:4px 4px 0 rgba(34,31,43,0.25);
+    display:none; padding:0.35rem;
+  }
+  .nav-item.open .submenu{display:block;}
+  .submenu a{
+    display:block; font-size:0.78rem; color:var(--ink); text-decoration:none;
+    padding:0.4rem 0.6rem; border-bottom:1px dashed var(--line);
+  }
+  .submenu a:hover{background:var(--parchment); color:var(--burgundy);}
+  .submenu a.submenu-all{font-weight:600; color:var(--burgundy); border-bottom:2px solid var(--ink);}
+  .nav-toggle{
+    display:none; font-size:1.2rem; line-height:1; padding:0.3rem 0.6rem;
+    background:var(--card); border:1px solid var(--ink); cursor:pointer; color:var(--ink);
+  }
+  /* ---------- responsive mobile ---------- */
+  @media (max-width:800px){
+    .nav-toggle{display:block;}
+    .main-nav{flex-wrap:wrap; padding:0.6rem 1rem;}
+    .nav-links{
+      display:none; width:100%; flex-direction:column; gap:0.25rem;
+      border-top:1px solid var(--line); padding-top:0.5rem; margin-top:0.3rem;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links > a, .nav-links .nav-item > button{width:100%; text-align:left;}
+    .nav-item{width:100%;}
+    .submenu{position:static; box-shadow:none; width:100%; margin-left:0.8rem; border-left:2px solid var(--line);}
+    .nav-item > button::after{content:"+"; margin-left:auto;}
+    .nav-item.open > button::after{content:"–";}
+  }
+
   .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
-  .main-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--parchment);border-bottom:2px solid var(--ink);padding:0.7rem 1.5rem;max-width:1100px;margin:0 auto;}
-  .main-nav .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--burgundy);text-decoration:none;font-size:1.05rem;white-space:nowrap;}
-  .nav-links{display:flex;gap:0.4rem;flex-wrap:wrap;}
-  .nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink);text-decoration:none;padding:0.35rem 0.7rem;border:1px solid var(--ink);background:var(--card);}
-  .nav-links a:hover{background:var(--ink);color:var(--parchment);}
-  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
 </style>
 </head>
 <body>
 <nav class="main-nav" aria-label="Navigation principale">
   <a href="../../index.html" class="brand">🕯️ Messes en France</a>
-  <div class="nav-links">
-    <a href="../../messes-en-latin.html">Messes en latin</a>
-    <a href="../../rites-orientaux.html">Rites orientaux</a>
-    <a href="../../departements/index.html">Départements</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="../../index.html">Accueil</a>
+
+    <div class="nav-item">
+      <button type="button">Messes en latin</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../messes-en-latin.html">Toutes les messes en latin</a>
+        <a href="../../rites-orientaux.html">Rites orientaux catholiques</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par département</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../departements/index.html">Tous les départements (101)</a>
+      <a href="../../departements/75-paris/">Paris</a>
+      <a href="../../departements/13-bouches-du-rhone/">Bouches-du-Rhône</a>
+      <a href="../../departements/69-rhone/">Rhône</a>
+      <a href="../../departements/31-haute-garonne/">Haute-Garonne</a>
+      <a href="../../departements/33-gironde/">Gironde</a>
+      <a href="../../departements/59-nord/">Nord</a>
+      <a href="../../departements/06-alpes-maritimes/">Alpes-Maritimes</a>
+      <a href="../../departements/44-loire-atlantique/">Loire-Atlantique</a>
+      <a href="../../departements/67-bas-rhin/">Bas-Rhin</a>
+      <a href="../../departements/34-herault/">Hérault</a>
+      <a href="../../departements/35-ille-et-vilaine/">Ille-et-Vilaine</a>
+      <a href="../../departements/38-isere/">Isère</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par ville</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../villes/index.html">Toutes les villes</a>
+      <a href="../../villes/75-paris/">Paris</a>
+      <a href="../../villes/69-lyon/">Lyon</a>
+      <a href="../../villes/13-marseille/">Marseille</a>
+      <a href="../../villes/31-toulouse/">Toulouse</a>
+      <a href="../../villes/33-bordeaux/">Bordeaux</a>
+      <a href="../../villes/06-nice/">Nice</a>
+      <a href="../../villes/44-nantes/">Nantes</a>
+      <a href="../../villes/67-strasbourg/">Strasbourg</a>
+      <a href="../../villes/34-montpellier/">Montpellier</a>
+      <a href="../../villes/35-rennes/">Rennes</a>
+      <a href="../../villes/38-grenoble/">Grenoble</a>
+      <a href="../../villes/83-toulon/">Toulon</a>
+      </div>
+    </div>
+
     <a href="../../a-propos.html">À propos</a>
   </div>
 </nav>
+<script>
+(function(){
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if(!toggle || !links) return;
+  toggle.addEventListener('click', ()=>{
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-item > button').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.nav-item') && !e.target.closest('.nav-toggle')){
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+    }
+  });
+})();
+</script>
 <div class="wrap">
   <a class="back" href="../../">← Retour à l'annuaire interactif</a>
   <header>
@@ -99,7 +220,7 @@
     <div class="trust"><b>463</b> lieux de culte répertoriés, dont <b>7</b> messes en latin (rite tridentin) — mise à jour le 11/08/2026.</div>
   </header>
 
-  <div class="villes"><strong>Villes couvertes :</strong> ALENCON, Alencon, Alençon, ANTOIGNY, Argentan, ARGENTAN, ATHIS VAL DE ROUVRE, AUBUSSON, AULNAY-LES-BOIS, AUNOU SUR ORNE, AVERNES SAINT GOURGON, AVERNES-SAINT-GOURGON, AVOINE, AVRILLY, BAGNOLES DE L'ORNE, BAILLEUL, BANVOU, BATILLY, BAZOCHES-SUR-HOËNE, BEAULANDAIS, BEAUVAIN, BELFONDS, BERD HUIS, BIVILLIERS, BOECE, BOISSY MAUGIS, BOITRON, BOUCE, BREEL, BRESOLETTES, BRETONCELLES, BRIEUX, BRIOUZE, BRULLEMAIL, BRÉEL, BUBERTRE, BURE, BURES, BURSARD, CAMEMBERT</div>
+  <div class="villes"><strong>Villes couvertes :</strong> Alencon, ALENCON, Alençon, ANTOIGNY, Argentan, ARGENTAN, ATHIS VAL DE ROUVRE, AUBUSSON, AULNAY-LES-BOIS, AUNOU SUR ORNE, AVERNES SAINT GOURGON, AVERNES-SAINT-GOURGON, AVOINE, AVRILLY, BAGNOLES DE L'ORNE, BAILLEUL, BANVOU, BATILLY, BAZOCHES-SUR-HOËNE, BEAULANDAIS, BEAUVAIN, BELFONDS, BERD HUIS, BIVILLIERS, BOECE, BOISSY MAUGIS, BOITRON, BOUCE, BREEL, BRESOLETTES, BRETONCELLES, BRIEUX, BRIOUZE, BRULLEMAIL, BRÉEL, BUBERTRE, BURE, BURES, BURSARD, CAMEMBERT</div>
 
   <main class="grid">
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">

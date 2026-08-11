@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe à Montpellier (34) — 26 églises et lieux de culte — Annuaire</title>
+<meta name="description" content="Trouvez une messe à Montpellier (Hérault) : 26 églises et lieux de culte, dont 4 messes en latin. Adresses, horaires, GPS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://messes-france.github.io/villes/34-montpellier/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ---------- navigation principale sticky (menu) ---------- */
+  .main-nav{
+    position:sticky; top:0; z-index:30;
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    background:var(--parchment); border-bottom:2px solid var(--ink);
+    padding:0.7rem 1.5rem; max-width:1100px; margin:0 auto;
+  }
+  .main-nav .brand{
+    font-family:'Fraunces',serif; font-weight:600; color:var(--burgundy);
+    text-decoration:none; font-size:1.05rem; white-space:nowrap;
+  }
+  .nav-links{display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;}
+  .nav-links > a, .nav-links .nav-item > button{
+    font-size:0.8rem; font-weight:600; color:var(--ink); text-decoration:none;
+    padding:0.35rem 0.65rem; border:1px solid var(--ink); background:var(--card);
+    cursor:pointer; font-family:'Inter',sans-serif;
+  }
+  .nav-links > a:hover, .nav-links .nav-item > button:hover,
+  .nav-links > a.active{background:var(--ink); color:var(--parchment);}
+  .nav-item{position:relative;}
+  .nav-item > button{display:flex; align-items:center; gap:0.3rem;}
+  .nav-item > button::after{content:"▾"; font-size:0.65rem;}
+  .submenu{
+    position:absolute; top:100%; left:0; min-width:230px; z-index:40;
+    background:var(--card); border:1px solid var(--ink); box-shadow:4px 4px 0 rgba(34,31,43,0.25);
+    display:none; padding:0.35rem;
+  }
+  .nav-item.open .submenu{display:block;}
+  .submenu a{
+    display:block; font-size:0.78rem; color:var(--ink); text-decoration:none;
+    padding:0.4rem 0.6rem; border-bottom:1px dashed var(--line);
+  }
+  .submenu a:hover{background:var(--parchment); color:var(--burgundy);}
+  .submenu a.submenu-all{font-weight:600; color:var(--burgundy); border-bottom:2px solid var(--ink);}
+  .nav-toggle{
+    display:none; font-size:1.2rem; line-height:1; padding:0.3rem 0.6rem;
+    background:var(--card); border:1px solid var(--ink); cursor:pointer; color:var(--ink);
+  }
+  /* ---------- responsive mobile ---------- */
+  @media (max-width:800px){
+    .nav-toggle{display:block;}
+    .main-nav{flex-wrap:wrap; padding:0.6rem 1rem;}
+    .nav-links{
+      display:none; width:100%; flex-direction:column; gap:0.25rem;
+      border-top:1px solid var(--line); padding-top:0.5rem; margin-top:0.3rem;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links > a, .nav-links .nav-item > button{width:100%; text-align:left;}
+    .nav-item{width:100%;}
+    .submenu{position:static; box-shadow:none; width:100%; margin-left:0.8rem; border-left:2px solid var(--line);}
+    .nav-item > button::after{content:"+"; margin-left:auto;}
+    .nav-item.open > button::after{content:"–";}
+  }
+
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="../index.html" class="brand">🕯️ Messes en France</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html">Accueil</a>
+
+    <div class="nav-item">
+      <button type="button">Messes en latin</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../messes-en-latin.html">Toutes les messes en latin</a>
+        <a href="../rites-orientaux.html">Rites orientaux catholiques</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par département</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../departements/index.html">Tous les départements (101)</a>
+      <a href="../departements/75-paris/">Paris</a>
+      <a href="../departements/13-bouches-du-rhone/">Bouches-du-Rhône</a>
+      <a href="../departements/69-rhone/">Rhône</a>
+      <a href="../departements/31-haute-garonne/">Haute-Garonne</a>
+      <a href="../departements/33-gironde/">Gironde</a>
+      <a href="../departements/59-nord/">Nord</a>
+      <a href="../departements/06-alpes-maritimes/">Alpes-Maritimes</a>
+      <a href="../departements/44-loire-atlantique/">Loire-Atlantique</a>
+      <a href="../departements/67-bas-rhin/">Bas-Rhin</a>
+      <a href="../departements/34-herault/">Hérault</a>
+      <a href="../departements/35-ille-et-vilaine/">Ille-et-Vilaine</a>
+      <a href="../departements/38-isere/">Isère</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par ville</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../villes/index.html">Toutes les villes</a>
+      <a href="../villes/75-paris/">Paris</a>
+      <a href="../villes/69-lyon/">Lyon</a>
+      <a href="../villes/13-marseille/">Marseille</a>
+      <a href="../villes/31-toulouse/">Toulouse</a>
+      <a href="../villes/33-bordeaux/">Bordeaux</a>
+      <a href="../villes/06-nice/">Nice</a>
+      <a href="../villes/44-nantes/">Nantes</a>
+      <a href="../villes/67-strasbourg/">Strasbourg</a>
+      <a href="../villes/34-montpellier/">Montpellier</a>
+      <a href="../villes/35-rennes/">Rennes</a>
+      <a href="../villes/38-grenoble/">Grenoble</a>
+      <a href="../villes/83-toulon/">Toulon</a>
+      </div>
+    </div>
+
+    <a href="../a-propos.html">À propos</a>
+  </div>
+</nav>
+<script>
+(function(){
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if(!toggle || !links) return;
+  toggle.addEventListener('click', ()=>{
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-item > button').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.nav-item') && !e.target.closest('.nav-toggle')){
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+    }
+  });
+})();
+</script>
+<div class="wrap">
+  
+    <a class="back" href="../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · Hérault (34)</div>
+    <h1>Messe à Montpellier</h1>
+    <p class="subtitle">26 lieux de culte à Montpellier, dont 4 messes en latin (rite tridentin). Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Basilique Notre-Dame des Tables</div>
+      <div class="card-adresse" itemprop="address">2, place Notre-Dame</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/notre-dame-de-tables" data-ville="MONTPELLIER" data-lieu="Basilique Notre-Dame des Tables">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.612034,3.879324" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.612034,3.879324&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.612034,3.879324" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Cathédrale Saint Pierre</div>
+      <div class="card-adresse" itemprop="address">2 rue du Cardinal de Cabrières</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/cathedrale-saint-pierre" data-ville="MONTPELLIER" data-lieu="Cathédrale Saint Pierre">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6130748,3.8745175" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6130748,3.8745175&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6130748,3.8745175" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34 – Hérault</div>
+      </div>
+      <div class="card-lieu">Chapelle Sainte Foy (Confrérie des Pénitents Blancs) - 14, rue Jacques Coeur</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — 1 er lundi du mois 19h00 (pour la délivrance des âmes du purgatoire) Adoration du Saint-Sacrement : vendredi de 12h00 à 14h00</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.6108:3.8767" data-ville="MONTPELLIER" data-lieu="Chapelle Sainte Foy (Confrérie des Pénitents Blancs) - 14, rue Jacques Coeur">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6108,3.8767" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6108,3.8767&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6108,3.8767" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0467401028">📞 04 67 40 10 28</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Chapelle des Frères Prêcheurs (Dominicains)</div>
+      <div class="card-adresse" itemprop="address">8 rue Fabre</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/freres-precheurs" data-ville="MONTPELLIER" data-lieu="Chapelle des Frères Prêcheurs (Dominicains)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.610631,3.8799796" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.610631,3.8799796&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.610631,3.8799796" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Chapelle des Pénitents Blancs</div>
+      <div class="card-adresse" itemprop="address">14 rue Jacques Coeur</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/chapelle-des-penitents-blancs" data-ville="MONTPELLIER" data-lieu="Chapelle des Pénitents Blancs">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6096411,3.8794708" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6096411,3.8794708&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6096411,3.8794708" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Chapelle des Religieuses de l'Assomption</div>
+      <div class="card-adresse" itemprop="address">200 rue de la Portalière des Masques</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/chapelle-des-religieuses-de-l-assomption" data-ville="MONTPELLIER" data-lieu="Chapelle des Religieuses de l'Assomption">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6151279,3.8662653" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6151279,3.8662653&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6151279,3.8662653" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Chapelle du Carmel les Buissonnets</div>
+      <div class="card-adresse" itemprop="address">1133 rue du Pioch de Boutonnet</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/chapelle-du-carmel-les-buissonnets" data-ville="MONTPELLIER" data-lieu="Chapelle du Carmel les Buissonnets">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6307303,3.8771319" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6307303,3.8771319&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6307303,3.8771319" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Chapelle du Couvent des Carmes</div>
+      <div class="card-adresse" itemprop="address">10 bis rue Moquin-Tandon</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/chapelle-du-couvent-des-carmes" data-ville="MONTPELLIER" data-lieu="Chapelle du Couvent des Carmes">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6197474,3.8718464" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6197474,3.8718464&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6197474,3.8718464" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34 – Hérault</div>
+      </div>
+      <div class="card-lieu">Chapelle du Sacré-Coeur - Villa Sainte Christine et Cours Notre-Dame - 334 rue Pioch de Boutonnet</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes d'obligation 19h15 (sauf No&euml;l, Pâques, Pentecôte, Juillet et août) , lundi 8h30 à vendredi 8h20 ; mardi, jeudi et vendredi 18h30 (Vacances scolaires se renseigner) Vêpres : dima</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.6108:3.8767" data-ville="MONTPELLIER" data-lieu="Chapelle du Sacré-Coeur - Villa Sainte Christine et Cours Notre-Dame - 334 rue Pioch de Boutonnet">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6108,3.8767" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6108,3.8767&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6108,3.8767" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0467401028">📞 04 67 40 10 28</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise ND (Notre Dame)</div>
+      <div class="card-adresse" itemprop="address">4 rue de la Charité</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/eglise-des-saints" data-ville="MONTPELLIER" data-lieu="Eglise ND (Notre Dame)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=42.85472787,3.98346026" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=42.85472787,3.98346026&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=42.85472787,3.98346026" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Esprit</div>
+      <div class="card-adresse" itemprop="address">78 rue Sainte Geneviève</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/saint-esprit" data-ville="MONTPELLIER" data-lieu="Eglise Saint Esprit">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.62313161,3.84259292" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.62313161,3.84259292&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.62313161,3.84259292" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Léon</div>
+      <div class="card-adresse" itemprop="address">4 rue Ernest Castan</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/saint-leon" data-ville="MONTPELLIER" data-lieu="Eglise Saint Léon">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6192677,3.8812881" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6192677,3.8812881&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6192677,3.8812881" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Matthieu</div>
+      <div class="card-adresse" itemprop="address">rue Germain</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/eglise-saint-mathieu" data-ville="MONTPELLIER" data-lieu="Eglise Saint Matthieu">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.61242379,3.87795125" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.61242379,3.87795125&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.61242379,3.87795125" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Paul</div>
+      <div class="card-adresse" itemprop="address">Place Mimi AZAIS (avenue de Bologne)</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/saint-paul" data-ville="MONTPELLIER" data-lieu="Eglise Saint Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.63094258,3.81929765" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.63094258,3.81929765&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.63094258,3.81929765" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise Sainte Thérèse</div>
+      <div class="card-adresse" itemprop="address">42 avenue d’Assas</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/sainte-therese" data-ville="MONTPELLIER" data-lieu="Eglise Sainte Thérèse">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.61521792,3.8641688" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.61521792,3.8641688&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.61521792,3.8641688" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34 – Hérault</div>
+      </div>
+      <div class="card-lieu">Eglise Sainte-Eulalie - 12 rue de la Merci</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes d'obligation 10h30 (chantée) Activités : Schola grégorienne et polyphonique, catéchisme, scoutisme (garçons et filles : Europa-Scouts ), cours pour étudiants, groupes de foyer (Domus</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.6108:3.8767" data-ville="MONTPELLIER" data-lieu="Eglise Sainte-Eulalie - 12 rue de la Merci">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6108,3.8767" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6108,3.8767&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6108,3.8767" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0630707753">📞 06 30 70 77 53</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Eglise St N</div>
+      <div class="card-adresse" itemprop="address">12 rue de l'Hôpital</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/eglise-saint-nicolas" data-ville="MONTPELLIER" data-lieu="Eglise St N">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=46.657,2.485" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=46.657,2.485&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=46.657,2.485" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">montpellier</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Jésuites (Jésuites)</div>
+      <div class="card-adresse" itemprop="address">23 rue de la garenne</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/jesuites" data-ville="montpellier" data-lieu="Jésuites (Jésuites)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6204973,3.8700551" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6204973,3.8700551&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6204973,3.8700551" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Saint Jean Bosco (Don Bosco)</div>
+      <div class="card-adresse" itemprop="address">310 rue Léon Blum</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/saint-jean-bosco" data-ville="MONTPELLIER" data-lieu="Saint Jean Bosco (Don Bosco)">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6075308,3.8904311" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6075308,3.8904311&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6075308,3.8904311" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Sainte Jeanne d'Arc</div>
+      <div class="card-adresse" itemprop="address">55 rue des Colombes</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/sainte-jeanne-d-arc" data-ville="MONTPELLIER" data-lieu="Sainte Jeanne d'Arc">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6177027,3.8914375" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6177027,3.8914375&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6177027,3.8914375" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">montpellier</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">assomptionnistes</div>
+      <div class="card-adresse" itemprop="address">42 avenue d'assas</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/assomptionnistes" data-ville="montpellier" data-lieu="assomptionnistes">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.616251,3.8640937" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.616251,3.8640937&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.616251,3.8640937" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">MONTPELLIER</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Église Sainte Bernadette</div>
+      <div class="card-adresse" itemprop="address">250 rue du Truel</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/sainte-bernadette" data-ville="MONTPELLIER" data-lieu="Église Sainte Bernadette">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.62874874,3.86889741" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.62874874,3.86889741&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.62874874,3.86889741" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Montpellier</div>
+        <div class="card-dept">34 – Hérault</div>
+      </div>
+      <div class="card-lieu">Église Sainte-Eulalie</div>
+      <div class="card-adresse" itemprop="address">12 rue de la Merci</div>
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">ICRSP</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — Dim. et fêtes 10h30</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.6094103:3.8706607" data-ville="Montpellier" data-lieu="Église Sainte-Eulalie">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6094103,3.8706607" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6094103,3.8706607&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6094103,3.8706607" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0630707753">📞 06 30 70 77 53</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">montpellier</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Église fictive deux</div>
+      <div class="card-adresse" itemprop="address">rue de l'hirondelle</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/eglise-fictive-deux" data-ville="montpellier" data-lieu="Église fictive deux">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.625478,3.886427" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.625478,3.886427&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.625478,3.886427" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">montpellier</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Église fictive trois</div>
+      <div class="card-adresse" itemprop="address">avenue de reine helene d'italie</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpellier/eglise-fictive-trois" data-ville="montpellier" data-lieu="Église fictive trois">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6242474,3.8905383" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6242474,3.8905383&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6242474,3.8905383" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">montpellier</div>
+        <div class="card-dept">34</div>
+      </div>
+      <div class="card-lieu">Église fictive un</div>
+      <div class="card-adresse" itemprop="address">avenue de Castelnau</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/34/montpllier/eglise-fictive-un" data-ville="montpellier" data-lieu="Église fictive un">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.6186837,3.8792398" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.6186837,3.8792398&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.6186837,3.8792398" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="../a-propos.html">À propos et sources</a>
+</footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messe à Pau (64) — 19 églises et lieux de culte — Annuaire</title>
+<meta name="description" content="Trouvez une messe à Pau (Pyrénées-Atlantiques) : 19 églises et lieux de culte, dont 3 messes en latin. Adresses, horaires, GPS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://messes-france.github.io/villes/64-pau/">
+<meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ---------- navigation principale sticky (menu) ---------- */
+  .main-nav{
+    position:sticky; top:0; z-index:30;
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    background:var(--parchment); border-bottom:2px solid var(--ink);
+    padding:0.7rem 1.5rem; max-width:1100px; margin:0 auto;
+  }
+  .main-nav .brand{
+    font-family:'Fraunces',serif; font-weight:600; color:var(--burgundy);
+    text-decoration:none; font-size:1.05rem; white-space:nowrap;
+  }
+  .nav-links{display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;}
+  .nav-links > a, .nav-links .nav-item > button{
+    font-size:0.8rem; font-weight:600; color:var(--ink); text-decoration:none;
+    padding:0.35rem 0.65rem; border:1px solid var(--ink); background:var(--card);
+    cursor:pointer; font-family:'Inter',sans-serif;
+  }
+  .nav-links > a:hover, .nav-links .nav-item > button:hover,
+  .nav-links > a.active{background:var(--ink); color:var(--parchment);}
+  .nav-item{position:relative;}
+  .nav-item > button{display:flex; align-items:center; gap:0.3rem;}
+  .nav-item > button::after{content:"▾"; font-size:0.65rem;}
+  .submenu{
+    position:absolute; top:100%; left:0; min-width:230px; z-index:40;
+    background:var(--card); border:1px solid var(--ink); box-shadow:4px 4px 0 rgba(34,31,43,0.25);
+    display:none; padding:0.35rem;
+  }
+  .nav-item.open .submenu{display:block;}
+  .submenu a{
+    display:block; font-size:0.78rem; color:var(--ink); text-decoration:none;
+    padding:0.4rem 0.6rem; border-bottom:1px dashed var(--line);
+  }
+  .submenu a:hover{background:var(--parchment); color:var(--burgundy);}
+  .submenu a.submenu-all{font-weight:600; color:var(--burgundy); border-bottom:2px solid var(--ink);}
+  .nav-toggle{
+    display:none; font-size:1.2rem; line-height:1; padding:0.3rem 0.6rem;
+    background:var(--card); border:1px solid var(--ink); cursor:pointer; color:var(--ink);
+  }
+  /* ---------- responsive mobile ---------- */
+  @media (max-width:800px){
+    .nav-toggle{display:block;}
+    .main-nav{flex-wrap:wrap; padding:0.6rem 1rem;}
+    .nav-links{
+      display:none; width:100%; flex-direction:column; gap:0.25rem;
+      border-top:1px solid var(--line); padding-top:0.5rem; margin-top:0.3rem;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links > a, .nav-links .nav-item > button{width:100%; text-align:left;}
+    .nav-item{width:100%;}
+    .submenu{position:static; box-shadow:none; width:100%; margin-left:0.8rem; border-left:2px solid var(--line);}
+    .nav-item > button::after{content:"+"; margin-left:auto;}
+    .nav-item.open > button::after{content:"–";}
+  }
+
+  :root{--ink:#221f2b;--parchment:#efe7d6;--burgundy:#6d2438;--gold:#a9822f;--slate:#5b5847;--card:#faf6ec;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--parchment);background-image:radial-gradient(rgba(109,36,56,0.05) 1px,transparent 1px);background-size:22px 22px;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 0.5rem;}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--burgundy);font-weight:600;margin-bottom:0.5rem;}
+  .subtitle{color:var(--slate);max-width:760px;margin-bottom:1.5rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+  .card{background:var(--card);border:1px solid var(--ink);padding:1rem;border-left:6px solid var(--gold);}
+  .card.tridentin{border-left-color:var(--burgundy);}
+  .card-top{display:flex;justify-content:space-between;gap:0.6rem;}
+  .card-ville{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+  .card-dept{font-size:0.7rem;color:var(--slate);white-space:nowrap;padding-top:0.2rem;}
+  .card-lieu{font-size:0.85rem;margin:0.2rem 0;}
+  .card-adresse{font-size:0.78rem;color:var(--slate);}
+  .tags{margin:0.5rem 0;}
+  .tag{font-size:0.68rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:20px;border:1px solid var(--ink);margin-right:0.3rem;display:inline-block;}
+  .tag.rite-t{background:var(--burgundy);color:#fff;border-color:var(--burgundy);}
+  .tag.rite-p{background:var(--gold);color:#221f2b;border-color:var(--gold);}
+  .tag.rite-o{background:#3a5a40;color:#fff;border-color:#3a5a40;}
+  .card-detail{font-size:0.8rem;border-top:1px dashed var(--ink);padding-top:0.5rem;margin-top:0.5rem;}
+  .card-detail .label{color:var(--burgundy);font-weight:600;}
+  .card-actions{margin-top:0.6rem;}
+  .messes-btn{font-size:0.7rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;font-family:'Inter',sans-serif;cursor:pointer;}
+  .messes-btn:hover{background:var(--ink);color:var(--parchment);}
+  .messes-btn.site{background:#3a5a40;border-color:#3a5a40;}
+  .messes-btn.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;}
+  .tel-link{font-size:0.72rem;font-weight:600;color:var(--ink);border:1px solid var(--ink);background:#fff;padding:0.28rem 0.55rem;border-radius:20px;text-decoration:none;display:inline-block;margin-left:0.3rem;}
+  .modal-overlay{position:fixed;inset:0;z-index:50;background:rgba(34,31,43,0.55);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal{background:var(--card);border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(34,31,43,0.35);max-width:860px;width:100%;max-height:90vh;display:flex;flex-direction:column;position:relative;}
+  .modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;margin:1rem 1.2rem 0.2rem;padding-right:2.5rem;}
+  .modal #modalMeta{font-size:0.8rem;color:var(--slate);margin:0 1.2rem 0.6rem;}
+  .modal-frame-wrap{flex:1;min-height:300px;border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);}
+  .modal-frame-wrap iframe{width:100%;height:100%;min-height:300px;border:0;background:#fff;}
+  .modal-actions{display:flex;gap:0.5rem;align-items:center;padding:0.8rem 1.2rem;}
+  .modal-close{position:absolute;top:0.6rem;right:0.8rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0.3rem;}
+  .modal-close:hover{color:var(--burgundy);}
+  .back{display:inline-block;margin-bottom:1.2rem;color:var(--burgundy);font-weight:600;text-decoration:none;font-size:0.85rem;}
+  .prose{background:var(--card);border:1px solid var(--ink);padding:1.5rem;max-width:760px;}
+  .prose h2{font-family:'Fraunces',serif;font-size:1.3rem;margin:1.5rem 0 0.5rem;}
+  .prose h2:first-child{margin-top:0;}
+  .prose p,.prose li{font-size:0.92rem;color:var(--slate);}
+  .prose li{margin-bottom:0.3rem;}
+  .dept-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.4rem;list-style:none;padding:0;}
+  .dept-list a{color:var(--burgundy);text-decoration:none;font-size:0.85rem;border-bottom:1px solid var(--line,#ddd);padding:0.3rem 0.2rem;display:block;}
+  .dept-list a:hover{background:var(--card);text-decoration:underline;}
+  footer{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1rem;font-size:0.78rem;color:var(--slate);}
+  footer a{color:var(--burgundy);}
+  @media (max-width:640px){.main-nav{flex-direction:column;align-items:flex-start;}.nav-links{width:100%;}}
+</style>
+</head>
+<body>
+<nav class="main-nav" aria-label="Navigation principale">
+  <a href="../../index.html" class="brand">🕯️ Messes en France</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="../../index.html">Accueil</a>
+
+    <div class="nav-item">
+      <button type="button">Messes en latin</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../messes-en-latin.html">Toutes les messes en latin</a>
+        <a href="../../rites-orientaux.html">Rites orientaux catholiques</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par département</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../departements/index.html">Tous les départements (101)</a>
+      <a href="../../departements/75-paris/">Paris</a>
+      <a href="../../departements/13-bouches-du-rhone/">Bouches-du-Rhône</a>
+      <a href="../../departements/69-rhone/">Rhône</a>
+      <a href="../../departements/31-haute-garonne/">Haute-Garonne</a>
+      <a href="../../departements/33-gironde/">Gironde</a>
+      <a href="../../departements/59-nord/">Nord</a>
+      <a href="../../departements/06-alpes-maritimes/">Alpes-Maritimes</a>
+      <a href="../../departements/44-loire-atlantique/">Loire-Atlantique</a>
+      <a href="../../departements/67-bas-rhin/">Bas-Rhin</a>
+      <a href="../../departements/34-herault/">Hérault</a>
+      <a href="../../departements/35-ille-et-vilaine/">Ille-et-Vilaine</a>
+      <a href="../../departements/38-isere/">Isère</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <button type="button">Par ville</button>
+      <div class="submenu">
+        <a class="submenu-all" href="../../villes/index.html">Toutes les villes</a>
+      <a href="../../villes/75-paris/">Paris</a>
+      <a href="../../villes/69-lyon/">Lyon</a>
+      <a href="../../villes/13-marseille/">Marseille</a>
+      <a href="../../villes/31-toulouse/">Toulouse</a>
+      <a href="../../villes/33-bordeaux/">Bordeaux</a>
+      <a href="../../villes/06-nice/">Nice</a>
+      <a href="../../villes/44-nantes/">Nantes</a>
+      <a href="../../villes/67-strasbourg/">Strasbourg</a>
+      <a href="../../villes/34-montpellier/">Montpellier</a>
+      <a href="../../villes/35-rennes/">Rennes</a>
+      <a href="../../villes/38-grenoble/">Grenoble</a>
+      <a href="../../villes/83-toulon/">Toulon</a>
+      </div>
+    </div>
+
+    <a href="../../a-propos.html">À propos</a>
+  </div>
+</nav>
+<script>
+(function(){
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if(!toggle || !links) return;
+  toggle.addEventListener('click', ()=>{
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-item > button').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.nav-item') && !e.target.closest('.nav-toggle')){
+      document.querySelectorAll('.nav-item.open').forEach(i=>i.classList.remove('open'));
+    }
+  });
+})();
+</script>
+<div class="wrap">
+  
+    <a class="back" href="../../index.html">← Retour à l'annuaire interactif</a>
+    <div class="eyebrow">Ville · Pyrénées-Atlantiques (64)</div>
+    <h1>Messe à Pau</h1>
+    <p class="subtitle">19 lieux de culte à Pau, dont 3 messes en latin (rite tridentin). Recherchez une église, consultez les horaires et ouvrez l'itinéraire dans votre application.</p>
+    <div class="grid">
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Centre Hospitalier des Pyrénées</div>
+      <div class="card-adresse" itemprop="address">29 av Maréchal Leclerc</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/centre-hospitalier-des-pyrenees" data-ville="PAU" data-lieu="Centre Hospitalier des Pyrénées">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2821451,-0.3623998" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2821451,-0.3623998&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2821451,-0.3623998" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint Louis</div>
+      <div class="card-adresse" itemprop="address">place Saint Louis de Gonzague</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/chapelle-saint-louis" data-ville="PAU" data-lieu="Chapelle Saint Louis">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.295997,-0.3659072" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.295997,-0.3659072&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.295997,-0.3659072" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Chapelle Saint-Michel</div>
+      <div class="card-adresse" itemprop="address">101 av Trespoey</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/chapelle-saint-michel" data-ville="PAU" data-lieu="Chapelle Saint-Michel">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2985405,-0.3555674" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2985405,-0.3555674&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2985405,-0.3555674" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Chapelle de l'Hôpital François Mitterand</div>
+      <div class="card-adresse" itemprop="address">4 bd Hauterive</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/chapelle-de-l-hopital-francois-mitterand" data-ville="PAU" data-lieu="Chapelle de l'Hôpital François Mitterand">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.324849,-0.3575255" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.324849,-0.3575255&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.324849,-0.3575255" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64 – Atlantiques</div>
+      </div>
+      <div class="card-lieu">Chapelle de l'Immaculée Conception - 35 rue Montpensier</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes 10h00 ; lundi à samedi 9h00 Vêpres et Salut du Saint Sacrement : mardi à dimanche 18h30</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.2951:-0.3708" data-ville="PAU" data-lieu="Chapelle de l'Immaculée Conception - 35 rue Montpensier">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2951,-0.3708" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2951,-0.3708&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2951,-0.3708" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0685916513">📞 06 85 91 65 13</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Chapelle de la Maison diocésaine</div>
+      <div class="card-adresse" itemprop="address">35 Rue Montpensier</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/chapelle-des-peres-jesuites" data-ville="PAU" data-lieu="Chapelle de la Maison diocésaine">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3011457,-0.3729024" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3011457,-0.3729024&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3011457,-0.3729024" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64 – Atlantiques</div>
+      </div>
+      <div class="card-lieu">Eglise Saint Louis de Gonzague - place Saint Louis de Gonzague</div>
+      
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">Diocèse</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — dimanche et fêtes 8h45 ( basse, hors vacances scolaires ) et 10h30 ; lundi 18h30, mardi 11h00, mercredi, jeudi et vendredi 18h30, samedi 9h30</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.2951:-0.3708" data-ville="PAU" data-lieu="Eglise Saint Louis de Gonzague - place Saint Louis de Gonzague">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2951,-0.3708" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2951,-0.3708&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2951,-0.3708" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0661360013">📞 06 61 36 00 13</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Notre Dame</div>
+      <div class="card-adresse" itemprop="address">12 Boulevard Alsace Lorraine</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/notre-dame" data-ville="PAU" data-lieu="Notre Dame">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3023555,-0.3603393" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3023555,-0.3603393&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3023555,-0.3603393" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Notre Dame du Bout du Pont</div>
+      <div class="card-adresse" itemprop="address">24 rue du Colonel Gloxin</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/notre-dame-du-bout-du-pont" data-ville="PAU" data-lieu="Notre Dame du Bout du Pont">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2913176,-0.3804905" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2913176,-0.3804905&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2913176,-0.3804905" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Jacques</div>
+      <div class="card-adresse" itemprop="address">place de la Libération</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-jacques" data-ville="PAU" data-lieu="Saint Jacques">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2978364,-0.3711444" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2978364,-0.3711444&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2978364,-0.3711444" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Jean Baptiste</div>
+      <div class="card-adresse" itemprop="address">97 avenue de Buros</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-jean-baptiste" data-ville="PAU" data-lieu="Saint Jean Baptiste">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3186178,-0.3463262" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3186178,-0.3463262&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3186178,-0.3463262" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Joseph</div>
+      <div class="card-adresse" itemprop="address">36 av de l'église St-Joseph</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-joseph" data-ville="PAU" data-lieu="Saint Joseph">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3064565,-0.3739418" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3064565,-0.3739418&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3064565,-0.3739418" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Martin</div>
+      <div class="card-adresse" itemprop="address">Presbytère 3 Rue Gontaut</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-martin" data-ville="PAU" data-lieu="Saint Martin">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2944309,-0.3727511" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2944309,-0.3727511&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2944309,-0.3727511" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Paul</div>
+      <div class="card-adresse" itemprop="address">262 Boulevard de la Paix</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-paul" data-ville="PAU" data-lieu="Saint Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3216859,-0.3626406" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3216859,-0.3626406&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3216859,-0.3626406" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Pierre</div>
+      <div class="card-adresse" itemprop="address">2 avenue Schuman</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-pierre" data-ville="PAU" data-lieu="Saint Pierre">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3094575,-0.3643346" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3094575,-0.3643346&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3094575,-0.3643346" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Saint Vincent de Paul</div>
+      <div class="card-adresse" itemprop="address">77 Boulevard Tourasse</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/saint-vincent-de-paul" data-ville="PAU" data-lieu="Saint Vincent de Paul">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3109844,-0.3509067" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3109844,-0.3509067&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3109844,-0.3509067" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Sainte Bernadette</div>
+      <div class="card-adresse" itemprop="address">10 Avenue du Corps Franc-Pommiès</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/sainte-bernadette" data-ville="PAU" data-lieu="Sainte Bernadette">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.3070163,-0.3349153" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.3070163,-0.3349153&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.3070163,-0.3349153" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">PAU</div>
+        <div class="card-dept">64</div>
+      </div>
+      <div class="card-lieu">Sainte Thérèse de l'Enfant Jésus</div>
+      <div class="card-adresse" itemprop="address">79 avenue Trespoey</div>
+      <div class="tags"><span class="tag rite-p">Paul VI</span><span class="tag">Paroisse</span></div>
+      
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/lieu/64/pau/sainte-therese-de-l-enfant-jesus" data-ville="PAU" data-lieu="Sainte Thérèse de l'Enfant Jésus">Horaires sur messes.info</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2988512,-0.351666" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2988512,-0.351666&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2988512,-0.351666" target="_blank" rel="noopener">Apple Maps</a></div>
+    </article>
+    <article class="card tridentin" itemscope itemtype="https://schema.org/Church">
+      <div class="card-top">
+        <div class="card-ville" itemprop="name">Pau</div>
+        <div class="card-dept">64 – Pyrénées-Atlantiques</div>
+      </div>
+      <div class="card-lieu">Église Saint-Louis-de-Gonzague</div>
+      <div class="card-adresse" itemprop="address">Place Saint-Louis-de-Gonzague</div>
+      <div class="tags"><span class="tag rite-t">Tridentin · 1962</span><span class="tag">FSSP</span></div>
+      <div class="card-detail"><div class="row"><span class="label">Horaires</span> — Dim. 8h45 et 10h30</div></div>
+      <div class="card-actions"><button class="messes-btn horaires-btn" data-url="https://messes.info/horaires/43.2959435:-0.3659812" data-ville="Pau" data-lieu="Église Saint-Louis-de-Gonzague">Horaires à proximité</button><a class="messes-btn gps" href="https://www.google.com/maps/search/?api=1&query=43.2959435,-0.3659812" target="_blank" rel="noopener">Google Maps</a><a class="messes-btn gps" href="https://waze.com/ul?ll=43.2959435,-0.3659812&navigate=yes" target="_blank" rel="noopener">Waze</a><a class="messes-btn gps" href="https://maps.apple.com/?q=43.2959435,-0.3659812" target="_blank" rel="noopener">Apple Maps</a><a class="tel-link" href="tel:0661360013">📞 06 61 36 00 13</a></div>
+    </article>
+    </div>
+</div>
+
+<footer>
+  Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
+  Dernière mise à jour : 2026/08/10.
+  <a href="../../a-propos.html">À propos et sources</a>
+</footer>
+<!-- Modal horaires : garde l'utilisateur dans le site -->
+<div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalMeta"></div>
+    <div class="modal-frame-wrap">
+      <iframe id="modalFrame" src="" loading="lazy" title="Horaires sur messes.info"></iframe>
+    </div>
+    <div class="modal-actions">
+      <a id="modalOpen" href="#" target="_blank" rel="noopener" class="messes-btn">Ouvrir dans messes.info</a>
+      <button id="modalCloseBtn" class="share-btn">Fermer</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('horairesModal');
+  if(!modal) return;
+  const frame = document.getElementById('modalFrame');
+  const open = document.getElementById('modalOpen');
+  const title = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const closeModal = ()=>{ modal.style.display='none'; frame.src=''; document.body.style.overflow=''; };
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('.horaires-btn');
+    if(btn){
+      title.textContent = btn.dataset.lieu ? btn.dataset.ville + ' — ' + btn.dataset.lieu : btn.dataset.ville;
+      meta.textContent = 'Horaires et célébrations — source messes.info (Conférence des Évêques de France).';
+      frame.src = btn.dataset.url;
+      open.href = btn.dataset.url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+</script>
+</body>
+</html>

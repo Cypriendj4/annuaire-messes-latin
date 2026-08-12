@@ -339,7 +339,7 @@ def generate_all(conn: sqlite3.Connection, last_update: str) -> int:
 def generate_sitemap(by_dept_codes: list[str]) -> None:
     """Génère sitemap.xml (index + toutes les pages départements)."""
     base = BASE_URL
-    urls = [f"<url><loc>{base}/</loc></url>", f"<url><loc>{base}/data.js</loc></url>"]
+    urls = [f"<url><loc>{base}/</loc></url>"]
     for code in sorted(by_dept_codes, key=lambda c: (len(c), c)):
         nom = DEPT_NAMES.get(code, code)
         urls.append(f"<url><loc>{base}/departements/{code}-{slugify(nom)}/</loc></url>")

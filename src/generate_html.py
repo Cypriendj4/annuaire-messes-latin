@@ -12,7 +12,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
+from config import DB_PATH, HTML_OUTPUT, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL, GOOGLE_SITE_VERIFICATION
 from utils import setup_logging, slugify
 from nav import build_nav, NAV_CSS
 
@@ -201,6 +201,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#6d2438">
 <link rel="canonical" href="{{BASE_URL}}/">
+{{VERIFICATION}}
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -1313,6 +1314,8 @@ def main():
         html = html.replace("{{MAIN_NAV}}", build_nav(""))
         html = html.replace("{{NAV_CSS}}", NAV_CSS)
         html = html.replace("{{BASE_URL}}", BASE_URL)
+        html = html.replace("{{VERIFICATION}}",
+                            GOOGLE_SITE_VERIFICATION if GOOGLE_SITE_VERIFICATION else "")
         html = html.replace("{{GENERATED_AT}}", generated_at)
 
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

@@ -13,7 +13,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
+from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL, GOOGLE_SITE_VERIFICATION
 from utils import setup_logging, slugify
 from nav import build_nav, NAV_CSS
 
@@ -111,6 +111,7 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
     if not canonical:
         canonical = ""
     canonical = BASE_URL + "/" + canonical
+    verification = GOOGLE_SITE_VERIFICATION if GOOGLE_SITE_VERIFICATION else ""
     footer = f"""
 <footer>
   Annuaire des messes en France — données sources : messes.info (CEF), AMDG, La Porte Latine.
@@ -126,6 +127,7 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="{canonical}">
+{verification}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>{PAGE_CSS}</style>

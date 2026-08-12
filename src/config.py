@@ -82,6 +82,11 @@ SOURCES = {
 # (ex: "https://messes-latin-france.eu.org" une fois eu.org approuvé).
 BASE_URL = "https://messes-france.github.io"
 
+# ── Vérification Google Search Console ─────────────────────────────────
+# Collez ici la balise meta fournie par Google (ex: google-site-verification).
+# Les générateurs l'injectent dans le <head> de toutes les pages.
+GOOGLE_SITE_VERIFICATION = '<meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />'
+
 # ── Grille géographique pour l'annuaire CEF ────────────────────────────
 # Points de la grille pour couvrir toute la France métropolitaine + DOM.
 # Espacement ~0.35° lat / ~0.5° lon (~39 km) — le rayon utile par point

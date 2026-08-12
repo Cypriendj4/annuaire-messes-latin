@@ -17,7 +17,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL
+from config import DB_PATH, OUTPUT_DIR, COMMUNE_LABELS, DEPT_COORDS, BASE_URL, GOOGLE_SITE_VERIFICATION
 from utils import setup_logging, slugify
 from nav import build_nav, NAV_CSS
 
@@ -188,6 +188,7 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
 <link rel="canonical" href="{BASE_URL}/departements/{dept_code}-{slugify(dept_nom)}/">
+{GOOGLE_SITE_VERIFICATION}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">

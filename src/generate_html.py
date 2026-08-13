@@ -432,11 +432,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .map-marker-t{background:var(--burgundy);}
   .map-marker-p{background:var(--gold);}
   .map-marker-o{background:#3a5a40;}
-  /* clusters : lisibilité maximale — gros chiffres blancs, pastilles larges */
-  .leaflet-marker-cluster{background-clip:padding-box;border-radius:50%;}
-  .leaflet-marker-cluster div{width:46px;height:46px;margin-left:5px;margin-top:5px;text-align:center;border-radius:50%;font:800 20px/46px 'Inter',sans-serif;background:var(--burgundy);color:#fff;border:3px solid #fff;box-shadow:0 2px 8px rgba(34,31,43,0.3);}
-  .leaflet-marker-cluster-large div{width:58px;height:58px;margin-left:5px;margin-top:5px;font:800 23px/58px 'Inter',sans-serif;background:var(--burgundy-deep);color:#fff;border:3.5px solid #fff;border-radius:50%;box-shadow:0 3px 10px rgba(34,31,43,0.35);}
-  .leaflet-marker-cluster-medium div{background:#8a6a1f;color:#fff;border:3px solid #fff;}
+  /* clusters : lisibilité maximale — gros chiffres blancs, pastilles adaptatives */
+  .map-cluster{text-align:center;border-radius:50%;background:var(--burgundy);color:#fff;font-family:'Inter',sans-serif;border:3px solid #fff;box-shadow:0 3px 10px rgba(34,31,43,0.35);letter-spacing:-0.5px;}
 
   /* ---------- results ---------- */
   main{
@@ -1333,7 +1330,23 @@ function initMap(){
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap &copy; CARTO'
   }).addTo(map);
-  markerGroup = L.markerClusterGroup({showCoverageOnHover:false, maxClusterRadius:45});
+  markerGroup = L.markerClusterGroup({
+    showCoverageOnHover:false,
+    maxClusterRadius:45,
+    iconCreateFunction: function(cluster){
+      var count = cluster.getChildCount();
+      var s = String(count);
+      var digits = s.length;
+      // Pastille adaptative : plus le nombre a de chiffres, plus la pastille grandit
+      var size = digits <= 1 ? 44 : digits === 2 ? 52 : digits === 3 ? 62 : 72;
+      var fs = Math.round(size * 0.48);
+      return L.divIcon({
+        html: '<div class="map-cluster" style="width:'+size+'px;height:'+size+'px;line-height:'+size+'px;font-size:'+fs+'px;font-weight:800;">'+s+'</div>',
+        className: '',
+        iconSize: [size, size]
+      });
+    }
+  });
   map.addLayer(markerGroup);
   renderMap();
 }

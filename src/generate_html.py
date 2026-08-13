@@ -398,6 +398,22 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   }
   .legend b{color:var(--ink);}
 
+  /* ---------- carte interactive ---------- */
+  .map-toggle{display:inline-block;margin:0.4rem 0 0.8rem;font-size:0.8rem;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--ink);padding:0.4rem 0.8rem;cursor:pointer;font-family:'Inter',sans-serif;}
+  .map-toggle:hover{background:var(--ink);color:var(--parchment);}
+  #map{height:480px;width:100%;border:1px solid var(--ink);display:none;z-index:1;}
+  #map .leaflet-popup-content{font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--ink);}
+  #map .leaflet-popup-content b{font-family:'Fraunces',serif;}
+  #map .popup-lieu{font-size:0.95rem;}
+  #map .popup-btns{margin-top:0.4rem;display:flex;gap:0.3rem;flex-wrap:wrap;}
+  #map .popup-btns a{font-size:0.68rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.2rem 0.45rem;border-radius:20px;text-decoration:none;display:inline-block;}
+  #map .popup-btns a.gps{background:#2b5c8a;border-color:#2b5c8a;}
+  #map .popup-btns button{font-size:0.68rem;font-weight:600;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);padding:0.2rem 0.45rem;border-radius:20px;cursor:pointer;font-family:'Inter',sans-serif;}
+  .map-marker-t{background:var(--burgundy);}
+  .map-marker-p{background:var(--gold);}
+  .map-marker-o{background:#3a5a40;}
+  .map-pin{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 4px rgba(0,0,0,0.5);}
+
   /* ---------- results ---------- */
   main{
     max-width:1100px;
@@ -869,6 +885,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <div class="legend" id="legend"></div>
 </div>
 
+<!-- Carte interactive -->
+<div class="map-section" style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+  <button class="map-toggle" id="mapToggle" type="button">🗺️ Afficher la carte</button>
+  <div id="map" aria-label="Carte des lieux de culte"></div>
+</div>
+
 <!-- Modal horaires : garde l'utilisateur dans le site -->
 <div class="modal-overlay" id="horairesModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
@@ -942,6 +964,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <!-- Données : fichier séparé pour éviter un HTML de plusieurs Mo.
      async = la page s'affiche immédiatement, les données arrivent en arrière-plan -->
 <script src="data.js" async></script>
+<script src="assets/leaflet/leaflet.js"></script>
+<script src="assets/leaflet/leaflet.markercluster.js"></script>
+<link rel="stylesheet" href="assets/leaflet/leaflet.css">
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
@@ -1258,6 +1283,79 @@ document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
 modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
+// ---------------------------------------------------------------
+// Carte interactive (Leaflet + clusters) — chargée au clic
+// ---------------------------------------------------------------
+let map = null, markerGroup = null, mapVisible = false;
+
+function mapRiteClass(rite){
+  if(rite==='tridentin') return 'map-marker-t';
+  if(rite==='oriental')  return 'map-marker-o';
+  return 'map-marker-p';
+}
+
+function initMap(){
+  if(!window.L || map) return;
+  map = L.map('map').setView([46.6, 2.5], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+  markerGroup = L.markerClusterGroup({showCoverageOnHover:false, maxClusterRadius:45});
+  map.addLayer(markerGroup);
+  renderMap();
+}
+
+function renderMap(){
+  if(!map || !markerGroup || !DATA.length) return;
+  markerGroup.clearLayers();
+  const results = DATA.filter(matches);
+  const markers = [];
+  for(const d of results){
+    if(d.lat==null || d.lon==null) continue;
+    const icon = L.divIcon({className:'', html:'<div class="map-pin '+mapRiteClass(d.rite)+'"></div>',
+      iconSize:[14,14], iconAnchor:[7,7]});
+    const m = L.marker([d.lat, d.lon], {icon});
+    const gps = (d.lat!=null && d.lon!=null) ?
+      `<a class="gps" href="https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lon}" target="_blank" rel="noopener">Google Maps</a>
+       <a class="gps" href="https://waze.com/ul?ll=${d.lat},${d.lon}&navigate=yes" target="_blank" rel="noopener">Waze</a>
+       <a class="gps" href="https://maps.apple.com/?q=${d.lat},${d.lon}" target="_blank" rel="noopener">Apple Maps</a>` : '';
+    const hor = d.url ? `<button class="horaires-btn map-hor" data-url="${d.url}" data-ville="${(d.ville||'').replace(/"/g,'&quot;')}" data-lieu="${(d.lieu||'').replace(/"/g,'&quot;')}">Horaires</button>` : '';
+    m.bindPopup(`<b class="popup-lieu">${d.lieu||d.ville||''}</b><br>${d.ville||''}${d.comm?' — '+d.comm:''}<div class="popup-btns">${hor}${gps}</div>`);
+    markers.push(m);
+  }
+  markerGroup.addLayers(markers);
+}
+
+// Toggle carte
+document.getElementById('mapToggle').addEventListener('click', ()=>{
+  mapVisible = !mapVisible;
+  const mapEl = document.getElementById('map');
+  const btn = document.getElementById('mapToggle');
+  if(mapVisible){
+    mapEl.style.display = 'block';
+    btn.textContent = '📋 Afficher la liste';
+    setTimeout(()=>{ initMap(); if(map) map.invalidateSize(); }, 50);
+  } else {
+    mapEl.style.display = 'none';
+    btn.textContent = '🗺️ Afficher la carte';
+  }
+});
+
+// Popups horaires depuis la carte → même modal
+document.getElementById('map').addEventListener('click', e=>{
+  const btn = e.target.closest('.horaires-btn');
+  if(btn) openModal(btn.dataset.url, btn.dataset.ville, btn.dataset.lieu);
+});
+
+// Synchronisation : les filtres mettent à jour la carte si elle est visible
+const mapSync = () => { if(mapVisible) renderMap(); };
+document.getElementById('q').addEventListener('input', mapSync);
+document.getElementById('rite').addEventListener('change', mapSync);
+document.getElementById('langue').addEventListener('change', mapSync);
+document.getElementById('diocese').addEventListener('change', mapSync);
+document.getElementById('communaute').addEventListener('change', mapSync);
+
 // Initialisation complète dès que les données sont prêtes
 whenDataReady(()=>{
   populateSelects();
@@ -1265,8 +1363,7 @@ whenDataReady(()=>{
   stateFromURL();
   document.getElementById('q').value = state.q;
   document.getElementById('rite').value = state.rite;
-  document.getElementById('langue').value = state.langue;
-  document.getElementById('diocese').value = state.diocese;
+  document.getElementById('langue').value = state.langue;  document.getElementById('diocese').value = state.diocese;
   document.getElementById('communaute').value = state.communaute;
   render();
 

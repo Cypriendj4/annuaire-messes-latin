@@ -262,42 +262,42 @@
 
   /* ---------- carte interactive ---------- */
   .map-section{max-width:1100px;margin:0 auto;padding:0 1.5rem;}
-  .map-toggle{display:inline-block;margin:0.4rem 0 0.8rem;font-size:0.8rem;font-weight:600;color:#fff;background:#0a3568;border:none;border-radius:24px;padding:0.5rem 1.1rem;cursor:pointer;font-family:'Quicksand','Hanken Grotesk','Inter',sans-serif;box-shadow:0 2px 8px rgba(10,53,104,0.25);transition:background 0.2s;}
-  .map-toggle:hover{background:#0096ff;}
-  #map{height:480px;width:100%;border-radius:14px;border:1px solid #e1e6ee;box-shadow:0 4px 16px rgba(10,53,104,0.08);display:none;z-index:1;background:#f3f5f9;}
-  /* contrôles de zoom arrondis bleus */
-  #map .leaflet-control-zoom{border:none;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(10,53,104,0.15);}
-  #map .leaflet-control-zoom a{width:32px;height:32px;line-height:32px;font-size:18px;color:#0a3568;background:#fff;border-bottom:1px solid #e8eef7;}
-  #map .leaflet-control-zoom a:hover{background:#e8eef7;color:#0096ff;}
-  #map .leaflet-control-zoom a.leaflet-disabled{color:#c5cede;}
+  .map-toggle{display:inline-block;margin:0.4rem 0 0.8rem;font-size:0.8rem;font-weight:600;color:var(--parchment);background:var(--burgundy);border:1px solid var(--burgundy);border-radius:24px;padding:0.5rem 1.1rem;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 2px 8px rgba(109,36,56,0.25);transition:background 0.2s;}
+  .map-toggle:hover{background:var(--burgundy-deep);}
+  #map{height:480px;width:100%;border-radius:14px;border:1px solid var(--ink);box-shadow:0 4px 16px rgba(34,31,43,0.10);display:none;z-index:1;background:var(--card);}
+  /* contrôles de zoom arrondis */
+  #map .leaflet-control-zoom{border:none;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(34,31,43,0.15);}
+  #map .leaflet-control-zoom a{width:32px;height:32px;line-height:32px;font-size:18px;color:var(--burgundy);background:#fff;border-bottom:1px solid var(--line,#e6ded0);}
+  #map .leaflet-control-zoom a:hover{background:var(--parchment);color:var(--burgundy-deep);}
+  #map .leaflet-control-zoom a.leaflet-disabled{color:#c9c2b2;}
   /* bouton me localiser (overlay en haut à droite) */
-  .map-locate{position:absolute;top:10px;right:44px;z-index:1000;width:32px;height:32px;background:#fff;border:none;border-radius:12px;cursor:pointer;box-shadow:0 2px 10px rgba(10,53,104,0.15);display:flex;align-items:center;justify-content:center;font-size:15px;color:#0a3568;}
-  .map-locate:hover{background:#e8eef7;color:#0096ff;}
-  .map-locate.locating{color:#0096ff;}
+  .map-locate{position:absolute;top:10px;right:44px;z-index:1000;width:32px;height:32px;background:#fff;border:none;border-radius:12px;cursor:pointer;box-shadow:0 2px 10px rgba(34,31,43,0.15);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--burgundy);}
+  .map-locate:hover{background:var(--parchment);color:var(--burgundy-deep);}
+  .map-locate.locating{color:var(--gold);}
   /* légende overlay */
-  .map-legend-overlay{position:absolute;bottom:12px;left:12px;z-index:1000;background:rgba(255,255,255,0.92);border-radius:10px;padding:6px 10px;font-family:'Hanken Grotesk','Inter',sans-serif;font-size:0.66rem;color:#5f6b7d;display:flex;gap:10px;box-shadow:0 2px 8px rgba(10,53,104,0.12);}
+  .map-legend-overlay{position:absolute;bottom:12px;left:12px;z-index:1000;background:rgba(250,246,236,0.94);border:1px solid var(--line,#e6ded0);border-radius:10px;padding:6px 10px;font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--slate);display:flex;gap:10px;box-shadow:0 2px 8px rgba(34,31,43,0.12);}
   .map-legend-overlay span{display:flex;align-items:center;gap:4px;}
-  .map-legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:1.5px solid #fff;box-shadow:0 0 3px rgba(10,53,104,0.3);}
-  #map .leaflet-popup-content{font-family:'Hanken Grotesk','Inter',sans-serif;font-size:0.8rem;color:#202020;margin:10px 14px;}
-  #map .leaflet-popup-content-wrapper{border-radius:12px;box-shadow:0 6px 20px rgba(10,53,104,0.15);}
-  #map .leaflet-popup-tip{box-shadow:0 4px 10px rgba(10,53,104,0.1);}
-  #map .popup-lieu{font-family:'Quicksand','Hanken Grotesk','Inter',sans-serif;font-size:0.95rem;font-weight:700;color:#0a3568;line-height:1.25;margin-bottom:2px;}
-  #map .popup-ville{color:#5f6b7d;font-size:0.78rem;margin-bottom:6px;}
+  .map-legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:1.5px solid #fff;box-shadow:0 0 3px rgba(34,31,43,0.3);}
+  #map .leaflet-popup-content{font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--ink);margin:10px 14px;}
+  #map .leaflet-popup-content-wrapper{border-radius:12px;background:var(--card);box-shadow:0 6px 20px rgba(34,31,43,0.15);}
+  #map .leaflet-popup-tip{background:var(--card);box-shadow:0 4px 10px rgba(34,31,43,0.1);}
+  #map .popup-lieu{font-family:'Fraunces',serif;font-size:0.98rem;font-weight:600;color:var(--burgundy);line-height:1.25;margin-bottom:2px;}
+  #map .popup-ville{color:var(--slate);font-size:0.78rem;margin-bottom:6px;}
   #map .popup-btns{margin-top:0.4rem;display:flex;gap:0.3rem;flex-wrap:wrap;}
-  #map .popup-btns a,#map .popup-btns button{font-size:0.68rem;font-weight:600;background:#0a3568;color:#fff;border:none;padding:0.28rem 0.55rem;border-radius:16px;text-decoration:none;display:inline-block;cursor:pointer;font-family:'Hanken Grotesk','Inter',sans-serif;}
-  #map .popup-btns a:hover,#map .popup-btns button:hover{background:#0096ff;}
-  #map .popup-btns a.gps{background:#e8eef7;color:#0a3568;}
-  #map .popup-btns a.gps:hover{background:#0096ff;color:#fff;}
-  /* marqueurs : pastille avec halo blanc */
-  .map-pin{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(10,53,104,0.45),0 0 0 1px rgba(10,53,104,0.1);}
-  .map-marker-t{background:#0a3568;}
-  .map-marker-p{background:#0096ff;}
-  .map-marker-o{background:#dda732;}
-  /* clusters : pastilles bleues arrondies avec halo */
+  #map .popup-btns a,#map .popup-btns button{font-size:0.68rem;font-weight:600;background:var(--burgundy);color:var(--parchment);border:none;padding:0.28rem 0.55rem;border-radius:16px;text-decoration:none;display:inline-block;cursor:pointer;font-family:'Inter',sans-serif;}
+  #map .popup-btns a:hover,#map .popup-btns button:hover{background:var(--burgundy-deep);}
+  #map .popup-btns a.gps{background:var(--parchment);color:var(--burgundy);border:1px solid var(--burgundy);}
+  #map .popup-btns a.gps:hover{background:var(--burgundy);color:var(--parchment);}
+  /* marqueurs : pastille avec halo */
+  .map-pin{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(34,31,43,0.4),0 0 0 1px rgba(34,31,43,0.12);}
+  .map-marker-t{background:var(--burgundy);}
+  .map-marker-p{background:var(--gold);}
+  .map-marker-o{background:#3a5a40;}
+  /* clusters : lisibilité maximale — chiffres blancs sur fond foncé */
   .leaflet-marker-cluster{background-clip:padding-box;border-radius:50%;}
-  .leaflet-marker-cluster div{width:32px;height:32px;margin-left:5px;margin-top:5px;text-align:center;border-radius:50%;font:600 12px/32px 'Hanken Grotesk','Inter',sans-serif;background:#e8eef7;color:#0a3568;border:2px solid #0a3568;box-shadow:0 2px 8px rgba(10,53,104,0.2);}
-  .leaflet-marker-cluster-large div{width:42px;height:42px;margin-left:5px;margin-top:5px;font:600 13px/42px 'Hanken Grotesk','Inter',sans-serif;background:#0a3568;color:#fff;border:none;border-radius:50%;box-shadow:0 3px 10px rgba(10,53,104,0.3);}
-  .leaflet-marker-cluster-medium div{background:#0096ff;color:#fff;border:2px solid #fff;}
+  .leaflet-marker-cluster div{width:36px;height:36px;margin-left:5px;margin-top:5px;text-align:center;border-radius:50%;font:700 15px/36px 'Inter',sans-serif;background:var(--burgundy);color:#fff;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(34,31,43,0.3);}
+  .leaflet-marker-cluster-large div{width:48px;height:48px;margin-left:5px;margin-top:5px;font:700 17px/48px 'Inter',sans-serif;background:var(--burgundy-deep);color:#fff;border:3px solid #fff;border-radius:50%;box-shadow:0 3px 10px rgba(34,31,43,0.35);}
+  .leaflet-marker-cluster-medium div{background:#8a6a1f;color:#fff;border:2.5px solid #fff;}
 
   /* ---------- results ---------- */
   main{
@@ -1041,7 +1041,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 13/08/2026 11:06
+// Dernière génération : 13/08/2026 11:40
 // ---------------------------------------------------------------
 let DATA = [];
 

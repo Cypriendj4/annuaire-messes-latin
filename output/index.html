@@ -289,12 +289,12 @@
   #map .popup-btns a.gps{background:var(--parchment);color:var(--burgundy);border:1px solid var(--burgundy);}
   #map .popup-btns a.gps:hover{background:var(--burgundy);color:var(--parchment);}
   /* marqueurs : pastille avec halo */
-  .map-pin{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(34,31,43,0.4),0 0 0 1px rgba(34,31,43,0.12);}
+  .map-pin{width:10px;height:10px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(34,31,43,0.4),0 0 0 1px rgba(34,31,43,0.12);}
   .map-marker-t{background:var(--burgundy);}
   .map-marker-p{background:var(--gold);}
   .map-marker-o{background:#3a5a40;}
   /* clusters : lisibilité maximale — gros chiffres blancs, pastilles adaptatives */
-  .map-cluster{text-align:center;border-radius:50%;background:var(--burgundy);color:#fff;font-family:'Inter',sans-serif;border:3px solid #fff;box-shadow:0 3px 10px rgba(34,31,43,0.35);letter-spacing:-0.5px;}
+  .map-cluster{text-align:center;border-radius:50%;background:var(--burgundy);color:#fff;font-family:'Inter',sans-serif;border:2px solid #fff;box-shadow:0 2px 6px rgba(34,31,43,0.35);letter-spacing:-0.5px;}
 
   /* ---------- results ---------- */
   main{
@@ -1038,7 +1038,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 13/08/2026 13:29
+// Dernière génération : 13/08/2026 14:56
 // ---------------------------------------------------------------
 let DATA = [];
 
@@ -1495,7 +1495,7 @@ function initMap(){
       var s = String(count);
       var digits = s.length;
       // Pastille adaptative : plus le nombre a de chiffres, plus la pastille grandit
-      var size = digits <= 1 ? 44 : digits === 2 ? 52 : digits === 3 ? 62 : 72;
+      var size = digits <= 1 ? 26 : digits === 2 ? 32 : digits === 3 ? 38 : 44;
       var fs = Math.round(size * 0.48);
       return L.divIcon({
         html: '<div class="map-cluster" style="width:'+size+'px;height:'+size+'px;line-height:'+size+'px;font-size:'+fs+'px;font-weight:800;">'+s+'</div>',
@@ -1536,7 +1536,7 @@ function renderMap(){
   for(const d of results){
     if(d.lat==null || d.lon==null) continue;
     const icon = L.divIcon({className:'', html:'<div class="map-pin '+mapRiteClass(d.rite)+'"></div>',
-      iconSize:[14,14], iconAnchor:[7,7]});
+      iconSize:[10,10], iconAnchor:[5,5]});
     const m = L.marker([d.lat, d.lon], {icon});
     const gps = (d.lat!=null && d.lon!=null) ?
       `<a class="gps" href="https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lon}" target="_blank" rel="noopener">Google Maps</a>

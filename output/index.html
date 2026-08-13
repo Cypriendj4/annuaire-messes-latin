@@ -1041,7 +1041,7 @@
 <script>
 // ---------------------------------------------------------------
 // Données générées automatiquement depuis la base SQLite
-// Dernière génération : 13/08/2026 11:40
+// Dernière génération : 13/08/2026 11:53
 // ---------------------------------------------------------------
 let DATA = [];
 
@@ -1485,8 +1485,8 @@ function mapRiteClass(rite){
 function initMap(){
   if(!window.L || map) return;
   map = L.map('map').setView([46.6, 2.5], 6);
-  // Fonds clairs et épurés type Mapbox/MapLibre (comme genial-ma-messe.fr)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  // Fonds clairs et épurés, numéros de départements/routes lisibles (Voyager)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap &copy; CARTO'
   }).addTo(map);

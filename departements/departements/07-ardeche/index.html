@@ -7,6 +7,13 @@
 <meta name="description" content="Trouvez une messe en Ardèche : 286 églises et lieux de culte. Horaires, adresses, GPS. Annuaire mis à jour quotidiennement.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="https://messes-france.github.io/departements/07-ardeche/">
 <meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,7 +228,7 @@
     <div class="trust"><b>286</b> lieux de culte répertoriés — mise à jour le 14/08/2026.</div>
   </header>
 
-  <div class="villes"><strong>Villes couvertes :</strong> ACCONS, Ailhon, AIZAC, AJOUX, ALBA LA ROMAINE, ALBOUSSIERE, ALISSAS, ANDANCE, ANTRAIGUES SUR VOLANE, ARCENS, ARDOIX, ARLEBOSC, ARRAS SUR RHONE, ASPERJOC, AUBENAS, AUBIGNAS, BAIX, BALAZUC, BANNE, BARNAS, Beauchastel, BEAUCHASTEL, BERRIAS ET CASTELJAU, BERZEME, BESSAS, BOFFRES, BOGY, BOREE, BOUCIEU LE ROI, BOURG SAINT ANDEOL, BOZAS, BRAHIC, BROSSAINC, BURZET, CASTELJAU, CHAMBONAS, CHAMPAGNE, CHAMPIS, CHANDOLAS, CHANEAC</div>
+  <div class="villes"><strong>Villes couvertes :</strong> ACCONS, Ailhon, AIZAC, AJOUX, ALBA LA ROMAINE, ALBOUSSIERE, ALISSAS, ANDANCE, ANTRAIGUES SUR VOLANE, ARCENS, ARDOIX, ARLEBOSC, ARRAS SUR RHONE, ASPERJOC, AUBENAS, AUBIGNAS, BAIX, BALAZUC, BANNE, BARNAS, BEAUCHASTEL, Beauchastel, BERRIAS ET CASTELJAU, BERZEME, BESSAS, BOFFRES, BOGY, BOREE, BOUCIEU LE ROI, BOURG SAINT ANDEOL, BOZAS, BRAHIC, BROSSAINC, BURZET, CASTELJAU, CHAMBONAS, CHAMPAGNE, CHAMPIS, CHANDOLAS, CHANEAC</div>
 
   <main class="grid">
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
@@ -4289,5 +4296,14 @@
 })();
 </script>
 
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){
+        console.warn('Service worker non enregistré:', e);
+      });
+    });
+  }
+</script>
 </body>
 </html>

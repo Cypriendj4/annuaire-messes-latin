@@ -351,7 +351,7 @@ def generate_sitemap(by_dept_codes: list[str]) -> None:
 
 
 def generate_robots() -> None:
-    robots = f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n"
+    robots = f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap_v2.xml\n"
     (OUTPUT_DIR / "robots.txt").write_text(robots, encoding="utf-8")
     logger.info("robots.txt généré")
 

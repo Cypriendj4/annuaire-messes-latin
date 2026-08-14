@@ -551,6 +551,13 @@ def main() -> int:
 
         update_sitemap(["messes-en-latin.html", "rites-orientaux.html", "a-propos.html",
                         "departements/index.html", "villes/index.html"] + ville_urls)
+        # Sitemap v2 : copie du sitemap final, nom distinct pour forcer une
+        # relecture propre côté Search Console (l'ancien /sitemap.xml est
+        # figé en erreur "Impossible de récupérer" dans GSC).
+        sitemap_final = OUTPUT_DIR / "sitemap.xml"
+        if sitemap_final.exists():
+            (OUTPUT_DIR / "sitemap_v2.xml").write_text(
+                sitemap_final.read_text(encoding="utf-8"), encoding="utf-8")
         logger.info("Pages secondaires générées")
         print("PAGES_OK")
     finally:

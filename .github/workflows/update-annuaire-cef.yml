@@ -62,6 +62,7 @@ jobs:
           cp output/data.js data.js
           cp -r output/departements ./departements
           cp output/sitemap.xml sitemap.xml
+          cp output/sitemap_v2.xml sitemap_v2.xml
           cp output/robots.txt robots.txt
           cp output/messes-en-latin.html messes-en-latin.html
           cp output/rites-orientaux.html rites-orientaux.html

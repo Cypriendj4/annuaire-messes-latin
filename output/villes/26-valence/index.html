@@ -6,6 +6,13 @@
 <title>Messe à Valence (26) — 10 églises et lieux de culte — Annuaire</title>
 <meta name="description" content="Trouvez une messe à Valence (Drôme) : 10 églises et lieux de culte, dont 2 messes en latin. Adresses, horaires, GPS.">
 <meta name="robots" content="index, follow">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="https://messes-france.github.io/villes/26-valence/">
 <meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -363,6 +370,15 @@
   modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 })();
+</script>
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){
+        console.warn('Service worker non enregistré:', e);
+      });
+    });
+  }
 </script>
 </body>
 </html>

@@ -187,6 +187,13 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="{BASE_URL}/departements/{dept_code}-{slugify(dept_nom)}/">
 {GOOGLE_SITE_VERIFICATION}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -290,6 +297,15 @@ def build_dept_page(dept_code: str, lieux: list[dict], voisins: list[str],
   </footer>
 </div>
 {MODAL_BLOCK}
+<script>
+  if('serviceWorker' in navigator){{
+    window.addEventListener('load', function(){{
+      navigator.serviceWorker.register('/sw.js').catch(function(e){{
+        console.warn('Service worker non enregistré:', e);
+      }});
+    }});
+  }}
+</script>
 </body>
 </html>"""
     return html

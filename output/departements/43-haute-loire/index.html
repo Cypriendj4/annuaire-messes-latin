@@ -7,6 +7,13 @@
 <meta name="description" content="Trouvez une messe en Haute-Loire : 187 églises et lieux de culte, dont 2 messes en latin (rite tridentin). Horaires, adresses, GPS. Annuaire mis à jour quotidiennement.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="https://messes-france.github.io/departements/43-haute-loire/">
 <meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,7 +228,7 @@
     <div class="trust"><b>187</b> lieux de culte répertoriés, dont <b>2</b> messes en latin (rite tridentin) — mise à jour le 14/08/2026.</div>
   </header>
 
-  <div class="villes"><strong>Villes couvertes :</strong> AGNAT, Aiguilhe, ALLEGRE, ALLEYRAS, ALLY, ARAULES, ARLEMPDES, AUREC SUR LOIRE, AUREC-SUR-LOIRE, AUTRAC, AUZON, AZERAT, BAINS, BARGES, Bas en Basset, BAS EN BASSET, BEAULIEU, BEAUMONT, BEAUNE SUR ARZON, BELLEVUE LA MONTAGNE, BLAVOZY, BONNEVAL, BORNE, BOURNONCLE SAINT PIERRE, BRIOUDE, BRIVES-CHARENSAC, CAYRES, CEAUX D'ALLEGRE, CERZAT, CHADRAC, CHAMBEZON, CHAMBON SUR LIGNON, CHAMPCLAUSE, CHANIAT, CHASPINHAC, CHASPUZAC, CHASSIGNOLLES, CHASTEL, CHAUDEYROLLES, CHAZELLES</div>
+  <div class="villes"><strong>Villes couvertes :</strong> AGNAT, Aiguilhe, ALLEGRE, ALLEYRAS, ALLY, ARAULES, ARLEMPDES, AUREC SUR LOIRE, AUREC-SUR-LOIRE, AUTRAC, AUZON, AZERAT, BAINS, BARGES, BAS EN BASSET, Bas en Basset, BEAULIEU, BEAUMONT, BEAUNE SUR ARZON, BELLEVUE LA MONTAGNE, BLAVOZY, BONNEVAL, BORNE, BOURNONCLE SAINT PIERRE, BRIOUDE, BRIVES-CHARENSAC, CAYRES, CEAUX D'ALLEGRE, CERZAT, CHADRAC, CHAMBEZON, CHAMBON SUR LIGNON, CHAMPCLAUSE, CHANIAT, CHASPINHAC, CHASPUZAC, CHASSIGNOLLES, CHASTEL, CHAUDEYROLLES, CHAZELLES</div>
 
   <main class="grid">
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
@@ -2903,5 +2910,14 @@
 })();
 </script>
 
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){
+        console.warn('Service worker non enregistré:', e);
+      });
+    });
+  }
+</script>
 </body>
 </html>

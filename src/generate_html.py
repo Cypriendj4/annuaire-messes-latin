@@ -200,6 +200,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta name="description" content="Annuaire national des églises et messes catholiques en France : messes en latin (rite tridentin 1962 &amp; Paul VI) et célébrations paroissiales. Filtrez par ville, rite, langue, diocèse et communauté. Horaires vérifiés, sources citées.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#6d2438">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="{{BASE_URL}}/">
 {{VERIFICATION}}
 
@@ -1437,6 +1444,16 @@ whenDataReady(()=>{
     if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 300);
   }
 });
+</script>
+<script>
+  // PWA : enregistrement du service worker (mode hors-ligne + installation)
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){
+        console.warn('Service worker non enregistré:', e);
+      });
+    });
+  }
 </script>
 </body>
 </html>

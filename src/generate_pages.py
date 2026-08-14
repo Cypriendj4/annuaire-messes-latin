@@ -126,6 +126,13 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="{canonical}">
 {verification}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +185,15 @@ def page_shell(title: str, desc: str, body: str, prefix: str = "", last_update: 
   modal.addEventListener('click', e=>{{ if(e.target===modal) closeModal(); }});
   document.addEventListener('keydown', e=>{{ if(e.key==='Escape') closeModal(); }});
 }})();
+</script>
+<script>
+  if('serviceWorker' in navigator){{
+    window.addEventListener('load', function(){{
+      navigator.serviceWorker.register('/sw.js').catch(function(e){{
+        console.warn('Service worker non enregistré:', e);
+      }});
+    }});
+  }}
 </script>
 </body>
 </html>"""

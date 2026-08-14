@@ -7,6 +7,13 @@
 <meta name="description" content="Trouvez une messe en Finistère : 303 églises et lieux de culte, dont 3 messes en latin (rite tridentin). Horaires, adresses, GPS. Annuaire mis à jour quotidiennement.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d2438">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Messes FR">
 <link rel="canonical" href="https://messes-france.github.io/departements/29-finistere/">
 <meta name="google-site-verification" content="aAsqJOY0BcjRljSnVk15jeDM_2Rf2ZvxJ-89v2xgrV4" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,7 +228,7 @@
     <div class="trust"><b>303</b> lieux de culte répertoriés, dont <b>3</b> messes en latin (rite tridentin) — mise à jour le 14/08/2026.</div>
   </header>
 
-  <div class="villes"><strong>Villes couvertes :</strong> ARGOL, audierne, Bannalec, Baye, BENODET, BERRIEN, BEUZEC CAP SIZUN, BODILIS, BOLAZEC, BOTSORHEL, BRELES, BRENNILIS, Brest, BREST, BRIGNOGAN PLAGE, CARANTEC, CHATEAULIN, Cleden, CLEDER, CLOHARS CARNOET, CLOHARS-FOUESNANT, COLLOREC, COMBRIT, Combrit, COMMANA, Concarneau, CONCARNEAU, CORAY, DAOULAS, DINEAULT, DIRINON, ELLIANT, ESQUIBIEN, FOUESNANT, GOUESNAC'H, GOULIEN, GOULVEN, GOURLIZON, GUENGAT, GUERLESQUIN</div>
+  <div class="villes"><strong>Villes couvertes :</strong> ARGOL, audierne, Bannalec, Baye, BENODET, BERRIEN, BEUZEC CAP SIZUN, BODILIS, BOLAZEC, BOTSORHEL, BRELES, BRENNILIS, BREST, Brest, BRIGNOGAN PLAGE, CARANTEC, CHATEAULIN, Cleden, CLEDER, CLOHARS CARNOET, CLOHARS-FOUESNANT, COLLOREC, Combrit, COMBRIT, COMMANA, CONCARNEAU, Concarneau, CORAY, DAOULAS, DINEAULT, DIRINON, ELLIANT, ESQUIBIEN, FOUESNANT, GOUESNAC'H, GOULIEN, GOULVEN, GOURLIZON, GUENGAT, GUERLESQUIN</div>
 
   <main class="grid">
     <article class="card paulvi" itemscope itemtype="https://schema.org/Church">
@@ -4527,5 +4534,14 @@
 })();
 </script>
 
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){
+        console.warn('Service worker non enregistré:', e);
+      });
+    });
+  }
+</script>
 </body>
 </html>

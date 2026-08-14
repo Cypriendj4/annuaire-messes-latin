@@ -102,6 +102,7 @@ DEPT_NAMES = {
     "971": "Guadeloupe", "972": "Martinique", "973": "Guyane", "974": "La Réunion", "976": "Mayotte",
     "20": "Corse", "97": "Outre-mer", "98": "Outre-mer", "987": "Polynésie française",
     "988": "Nouvelle-Calédonie", "975": "Saint-Pierre-et-Miquelon", "986": "Wallis-et-Futuna",
+    "999": "Étranger",
 }
 
 

@@ -99,12 +99,33 @@ def merge_sources(existing: Optional[Dict], new_candidates: List[Dict]) -> Dict:
                 break
         # Sinon garde la valeur existante
 
-    # Coordonnées GPS : préfère non-null
+    # Coordonnées GPS : préfère non-null, mais ignore les coordonnées
+    # manifestement fausses que messes.info renvoie en fallback quand un
+    # lieu n'a pas de GPS (le point de requête de la grille, souvent le
+    # centre de la France 46.657,2.485, ou des valeurs héritées d'une
+    # autre zone). Garde la valeur existante si elle est meilleure.
+    def _coord_is_bogus(c) -> bool:
+        if not c.get("coord_lat") or not c.get("coord_lon"):
+            return True
+        lat, lon = float(c["coord_lat"]), float(c["coord_lon"])
+        # Point fallback centre-France (messes.info renvoie ce point
+        # quand il n'a pas les coordonnées réelles du lieu).
+        if abs(lat - 46.657) < 0.01 and abs(lon - 2.485) < 0.01:
+            return True
+        # Hors des bornes France métropolitaine + DOM (outre-mer inclus)
+        if not (-21.5 <= lat <= 51.5 and -62.0 <= lon <= 56.0):
+            return True
+        return False
+
+    best_coord = None
     for c in new_candidates:
-        if c.get("coord_lat") and c.get("coord_lon"):
-            merged["coord_lat"] = c["coord_lat"]
-            merged["coord_lon"] = c["coord_lon"]
-            break
+        if _coord_is_bogus(c):
+            continue
+        best_coord = c
+        break
+    if best_coord is not None:
+        merged["coord_lat"] = best_coord["coord_lat"]
+        merged["coord_lon"] = best_coord["coord_lon"]
 
     # Sources
     merged["source_secondaire"] = json.dumps(
